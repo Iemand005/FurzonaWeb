@@ -14,10 +14,14 @@ class Furzona {
 			email,
 			password
 		};
-		return await fetch("https://api.furzona.app/login", {
+
+		const response = await fetch("https://api.furzona.app/login", {
 			method: "POST",
 			body: requestBody
-		}).catch(console.error).then(r => r.json());
+		});
 
+		if (response.ok) return response.catch(console.error).then(r => r.json());
+
+		return response.text();
 	}
 }
