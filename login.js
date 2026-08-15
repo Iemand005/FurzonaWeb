@@ -11,5 +11,7 @@ if (loginForm instanceof HTMLFormElement) {
 		const password = formData.get('password');
 		
 		console.log(email, password);
+
+		furzona.login(email, password);
 	};
 }
