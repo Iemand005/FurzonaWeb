@@ -95,7 +95,7 @@ class Furzona extends RequestService {
 	}
 
 	isLoggedIn() {
-		return Boolean(this.token);
+		return !!this.token;
 	}
 }
 
