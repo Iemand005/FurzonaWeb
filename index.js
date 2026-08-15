@@ -26,6 +26,7 @@ if (postList instanceof HTMLUListElement) {
 			username.textContent = post.u.username;
 
 			// profileCard.appendChild(listItem);
+			profileCard.appendChild(username);
 
 			listItem.appendChild(profileCard);
 
