@@ -17,7 +17,7 @@ class Furzona {
 
 		const response = await fetch("https://api.furzona.app/login", {
 			method: "POST",
-			body: requestBody
+			body: JSON.stringify(requestBody)
 		});
 
 		if (response.ok) return response.catch(console.error).then(r => r.json());
