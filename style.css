@@ -1,52 +1,36 @@
 
 * { box-sizing: border-box; }
 
-:root {
-  --scroll-track: #16181D;
-  --scroll-track-2: #1C1C24;
-  --scroll-thumb: #0073FF;
-  --scroll-thumb-2: #969AE7;
-  --scroll-thumb-hover: #3D88E3;
-  --scroll-thumb-active: #FF4141;
-  --scroll-border: #2D2F3A;
-  --scroll-shadow: rgba(0, 115, 255, 0.35);
-}
-
-/* Firefox */
 html, body, * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+  scrollbar-color: #2d3240 #16181D;
 }
 
-/* Chrome / Edge / Safari */
 *::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 *::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, var(--scroll-track), var(--scroll-track-2));
-  border-radius: 999px;
+  background: #16181D;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--scroll-thumb) 0%, var(--scroll-thumb-2) 100%);
-  border: 2px solid var(--scroll-track);
+  background: #2d3240;
+  border: 2px solid #16181D;
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--scroll-thumb-hover) 0%, var(--scroll-thumb) 100%);
-  box-shadow: 0 0 10px var(--scroll-shadow);
+  background: #3a4154;
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: linear-gradient(180deg, var(--scroll-thumb-active) 0%, #C52F2F 100%);
+  background: #FF4141;
 }
 
 *::-webkit-scrollbar-corner {
-  background: var(--scroll-track);
+  background: #16181D;
 }
 
 html, body {
