@@ -10,8 +10,10 @@ if (postList instanceof HTMLUListElement) {
 		posts.forEach(post => {
 
 			const listItem = document.createElement("li");
+			listItem.className = "post";
 
 			const pfp = document.createElement("img");
+			pfp.classList.add("pfp");
 			pfp.src = furzona.getMediaUrl(post.u.i);
 
 			listItem.appendChild(pfp);

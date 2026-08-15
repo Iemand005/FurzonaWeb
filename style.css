@@ -43,9 +43,13 @@ ul {
     padding: 0;
 }
 
-li {
+.post {
 	margin: 10px;
 
 	width: 30%;
 
+}
+
+.post .pfp {
+	
 }
