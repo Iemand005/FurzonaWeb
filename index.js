@@ -17,7 +17,7 @@ if (postList instanceof HTMLUListElement) {
 
 			if (post.m.length > 0) {
 				const image = document.createElement("img");
-				image.src = post.m[0];
+				image.src = furzona.getMediaUrl(post.m[0]);
 
 				listItem.appendChild(image);
 			}
