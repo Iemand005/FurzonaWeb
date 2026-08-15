@@ -12,13 +12,17 @@ if (postList instanceof HTMLUListElement) {
 			const listItem = document.createElement("li");
 			listItem.className = "post";
 
-			// Uh the user
+			// Uh the user card part
+
+			const profileCard = document.createElement("section");
 
 			const pfp = document.createElement("img");
 			pfp.classList.add("pfp");
 			pfp.src = furzona.getMediaUrl(post.u.i);
 
-			listItem.appendChild(pfp);
+			profileCard.appendChild(pfp);
+
+			listItem.appendChild(profileCard);
 
 			const title = document.createElement("h2");
 
