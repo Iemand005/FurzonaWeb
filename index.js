@@ -7,7 +7,8 @@ if (postList instanceof HTMLUListElement) {
 	const createPostElement = (post) => {
 		const listItem = document.createElement("li");
 		listItem.className = "post";
-		listItem.dataset.date = post.createdAt || post.updatedAt || "";
+		const timestamp = Math.round(Date.parse(post.createdAt || post.updatedAt || "0") / 1000);
+		listItem.dataset.date = String(timestamp);
 
 		const profileCard = document.createElement("section");
 		profileCard.className = "profile";
@@ -70,7 +71,7 @@ if (postList instanceof HTMLUListElement) {
 		if (!reachedBottom) return;
 
 		const lastPost = postList.lastElementChild;
-		const lastDate = lastPost instanceof HTMLElement ? lastPost.dataset.date : null;
+		const lastDate = lastPost instanceof HTMLElement ? Number(lastPost.dataset.date) : null;
 		if (lastDate) {
 			loadPosts(lastDate);
 		} else {
