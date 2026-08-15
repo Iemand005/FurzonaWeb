@@ -16,3 +16,10 @@ header {
 header > section {
 	display: flex;
 }
+
+
+img {
+	max-height: 70%;
+
+	    border-radius: 20px;
+}
