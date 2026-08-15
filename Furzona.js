@@ -48,7 +48,7 @@ class RequestService {
 class Furzona extends RequestService {
 
 	constructor() {
-		
+		super();
 	}
 
 	/**
