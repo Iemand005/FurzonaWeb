@@ -59,7 +59,7 @@ class Furzona extends RequestService {
 	 */
 	async getSettings() {
 		/** @type { FurzonaConfigResponse} */
-		const response = await this.get("settings")
+		const response = await this.get("settings");
 		return response.result;
 	}
 
@@ -92,6 +92,11 @@ class Furzona extends RequestService {
 		const response = await this.post("posts");
 
 		return response.result;
+	}
+
+	async getProfile(id) {
+		// const response = await this.get("profile");
+		const response = await this.post("profile", { id });
 	}
 
 	set token(token) {
