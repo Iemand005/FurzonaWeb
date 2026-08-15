@@ -7,7 +7,7 @@ if (postList instanceof HTMLUListElement) {
 	const createPostElement = (post) => {
 		const listItem = document.createElement("li");
 		listItem.className = "post";
-		const timestamp = Math.round(Date.parse(post.createdAt || post.updatedAt || "0") / 1000);
+		const timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
 		listItem.dataset.date = String(timestamp);
 
 		const profileCard = document.createElement("section");
