@@ -30,12 +30,21 @@ class RequestService {
 			headers
 		});
 
-		if (response.ok) {
-			return response.json();
-		}
+		if (response.ok) return response.json();
 
 		const respTxt = await response.text();
-		document.getElementById('error-container').innerHTML = respTxt;
+
+		let errorContainer = document.getElementById('error-container');
+
+		if (!errorContainer) {
+			errorContainer = document.createElement("div");
+			errorContainer.id = "error-container";
+			document.body.appendChild(errorContainer);
+		}
+
+
+		errorContainer.innerHTML = respTxt;
+
 		throw respTxt;
 	}
 }
