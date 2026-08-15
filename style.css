@@ -95,6 +95,7 @@ main {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 20px;
 	width: min(1200px, 100%);
 	margin: 0 auto;
