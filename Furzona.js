@@ -5,7 +5,7 @@ class RequestService {
 
 	constructor() {
 		/** @type {string?} */
-		this.token = null;
+		this._token = null;
 	}
 
 	async get(endpoint) {
@@ -22,7 +22,7 @@ class RequestService {
 		
 		const headers = {};
 
-		if (this.token) headers["Authorization"] = this.token;
+		if (this._token) headers["Authorization"] = this._token;
 
 		const response = await fetch(apiUrl + endpoint, {
 			method: "POST",
@@ -31,12 +31,7 @@ class RequestService {
 		});
 
 		if (response.ok) {
-			/** @type {LoginResponse} */
-			const jsonBody = await response.json();
-
-			this.token = jsonBody.result.s;
-
-			return jsonBody;
+			return response.json();
 		}
 
 		const respTxt = await response.text();
@@ -86,6 +81,17 @@ class Furzona extends RequestService {
 	 */
 	async getPosts() {
 		return this.post("posts");
+	}
+
+	set token(token) {
+		this._token = token;
+
+		localStorage.setItem("token", token);
+	}
+
+	get token() {
+		if (!this._token) this._token = localStorage.getItem("token");
+		return this._token;
 	}
 }
 
