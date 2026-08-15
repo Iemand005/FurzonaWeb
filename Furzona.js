@@ -8,6 +8,12 @@ class Furzona {
 		return await fetch("https://api.furzona.app/settings").then(r => r.json());
 	}
 
+	/**
+	 * 
+	 * @param {string} email 
+	 * @param {string} password 
+	 * @returns {LoginResponse}
+	 */
 	async login(email, password) {
 		/** @type {LoginRequest} */
 		const requestBody = {
