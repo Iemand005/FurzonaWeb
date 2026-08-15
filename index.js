@@ -14,6 +14,8 @@ if (postList instanceof HTMLUListElement) {
 			const pfp = document.createElement("img");
 			pfp.src = furzona.getMediaUrl(post.u.i);
 
+			listItem.appendChild(pfp);
+
 			const title = document.createElement("h2");
 
 			title.textContent = post.t;
