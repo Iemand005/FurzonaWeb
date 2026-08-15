@@ -93,6 +93,10 @@ class Furzona extends RequestService {
 		if (!this._token) this._token = localStorage.getItem("token");
 		return this._token;
 	}
+
+	isLoggedIn() {
+		return this.token;
+	}
 }
 
 const furzona = new Furzona;
