@@ -67,6 +67,7 @@ class Furzona extends RequestService {
 			password
 		};
 
+		/** @type {LoginResponse} */
 		const response = await this.post("login", requestBody);
 
 		this.token = jsonBody.result.s;

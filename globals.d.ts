@@ -96,3 +96,7 @@ interface FurzonaUser {
 interface LoginResponse {
 	result: FurzonaUser;
 }
+
+interface FurzonaResponse<T> {
+	result: T;
+}
