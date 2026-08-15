@@ -1,6 +1,13 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+const backButton = document.getElementById("back-to-home");
+if (backButton) {
+	backButton.addEventListener("click", () => {
+		window.location.href = "index.html";
+	});
+}
+
 const bannerEl = document.getElementById("profile-banner");
 const avatarEl = document.getElementById("profile-avatar");
 const nameEl = document.getElementById("profile-name");
