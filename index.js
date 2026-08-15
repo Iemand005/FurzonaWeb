@@ -19,7 +19,7 @@ if (postList instanceof HTMLUListElement) {
 			profileCard.style.cursor = "pointer";
 
 			profileCard.onclick = () => {
-				window.location.href = "/profile.html?id=" + encodeURIComponent(post.u.id);
+				window.location.href = "profile.html?id=" + encodeURIComponent(post.u.id);
 			};
 
 			const pfp = document.createElement("img");

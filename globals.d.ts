@@ -150,3 +150,28 @@ interface FurzonaPost {
 interface FurzonaPostsResponse {
 	result: FurzonaPost[];
 }
+
+
+interface FurzonaProfileStats {
+	posts: number;
+	liked: number;
+	likes: number;
+	commented: number;
+	comments: number;
+	followed: number;
+	followers: number;
+}
+
+interface FurzonaProfile {
+	user: FurzonaPostAuthor;
+	following: boolean;
+	stats: FurzonaProfileStats;
+	/** Unknown shape, seen only as null — likely ban details/reason when present */
+	ban: unknown | null;
+	blocked: boolean;
+	/** Unknown shape, seen only as null */
+	featured: unknown | null;
+	online: boolean;
+}
+
+type ProfileResponse = FurzonaResponse<FurzonaProfile>;
