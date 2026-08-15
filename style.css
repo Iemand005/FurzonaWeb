@@ -28,7 +28,6 @@ img {
 
 	border-radius: 20px;
 
-	width: 30%;
 }
 
 
@@ -46,4 +45,7 @@ ul {
 
 li {
 	margin: 10px;
+
+	width: 30%;
+
 }
