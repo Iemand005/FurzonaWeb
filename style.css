@@ -134,6 +134,11 @@ main {
 	object-fit: cover;
 	border-radius: 14px;
 	background: #131721;
+	transition: filter 1s linear;
+}
+
+.post img:hover {
+	filter: brightness(0.5);
 }
 
 .post .pfp, .avatar {
