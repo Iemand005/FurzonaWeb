@@ -1,0 +1,3 @@
+const furzona = new Furzona
+
+
