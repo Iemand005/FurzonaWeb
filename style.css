@@ -1,28 +1,18 @@
 
-:root {
-	--bg: #16181d;
-	--bg-2: #1d212a;
-	--panel: #202330;
-	--panel-2: #161b22;
-	--line: rgba(255,255,255,.08);
-	--text: #f3f6fb;
-	--muted: #b9c3d4;
-}
-
 * { box-sizing: border-box; }
 
 html, body {
 	margin: 0;
 	height: 100%;
 	background: radial-gradient(circle at top, #1d212b 0%, #171a22 38%, #10141a 100%);
-	color: var(--text);
+	color: #f3f6fb;
 	font-family: "Varela Round", sans-serif;
 }
 
 body { min-height: 100vh; }
 
 header, .profile-card, .stat, .post, .banner, .avatar {
-	border: 1px solid var(--line);
+	border: 1px solid rgba(255,255,255,.08);
 }
 
 header {
@@ -50,7 +40,7 @@ header h1 {
 header button {
 	background: #2d3240;
 	border-radius: 12px;
-	color: var(--text);
+	color: #f3f6fb;
 	padding: 10px 14px;
 	font: inherit;
 	cursor: pointer;
@@ -79,7 +69,7 @@ main {
 	flex-direction: column;
 	margin: 0;
 	padding: 14px;
-	background: linear-gradient(180deg, var(--panel) 0%, #1a1d27 100%);
+	background: linear-gradient(180deg, #202330 0%, #1a1d27 100%);
 	border-radius: 20px;
 	box-shadow: 0 10px 24px rgba(0,0,0,.18);
 	height: 100%;
@@ -133,7 +123,7 @@ main {
 }
 
 .profile-card {
-	background: var(--bg-2);
+	background: #1d212a;
 	border-radius: 18px;
 	overflow: hidden;
 }
@@ -148,7 +138,7 @@ main {
 	width: 88px;
 	height: 88px;
 	border-radius: 18px;
-	border: 4px solid var(--bg-2);
+	border: 4px solid #1d212a;
 	background: #2d3240;
 }
 
@@ -159,7 +149,7 @@ main {
 
 .meta {
 	margin-top: 6px;
-	color: var(--muted);
+	color: #b9c3d4;
 	font-weight: 400;
 }
 
@@ -181,13 +171,13 @@ main {
 .stat {
 	display: flex;
 	flex-direction: column;
-	background: var(--panel-2);
+	background: #161b22;
 	padding: 14px 12px;
 	border-radius: 12px;
 }
 
 .stat strong { font-size: 1.3rem; }
-.stat span { color: var(--muted); font-size: 0.9rem; }
+.stat span { color: #b9c3d4; font-size: 0.9rem; }
 
 @media (max-width: 640px) {
 	main, .profile-page { padding-left: 12px; padding-right: 12px; }
