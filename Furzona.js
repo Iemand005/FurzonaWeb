@@ -44,6 +44,8 @@ class Furzona extends RequestService {
 
 	constructor() {
 		super();
+
+		this.contentUrl = "https://content.furzona.app/";
 	}
 
 	/**
