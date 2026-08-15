@@ -12,6 +12,8 @@ if (postList instanceof HTMLUListElement) {
 			const listItem = document.createElement("li");
 			listItem.className = "post";
 
+			// Uh the user
+
 			const pfp = document.createElement("img");
 			pfp.classList.add("pfp");
 			pfp.src = furzona.getMediaUrl(post.u.i);
