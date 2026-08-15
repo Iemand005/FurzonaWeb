@@ -9,7 +9,10 @@ html, body {
 	font-family: "Varela Round", sans-serif;
 }
 
-body { min-height: 100vh; }
+body {
+	height: 100vh;
+	overflow: auto;
+}
 
 header, button, .profile-card, .stat, .post, .banner, .avatar {
 	border: 1px solid rgba(255,255,255,.08);
