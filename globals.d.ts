@@ -63,17 +63,27 @@ interface LoginRequest {
 	password: string;
 }
 
-interface FurzonaUser {
+interface FurzonaUserBase {
 	id: string;
 	username: string;
 	/** Bio/description, may contain \n */
 	d: string;
-	/** Icon image path */
-	i: string;
+	/** Icon image path, null if not set */
+	i: string | null;
 	/** Banner image path, null if not set */
 	b: string | null;
 	/** Priority/rank */
 	p: number;
+	m: boolean;
+	/** Tag string, null if unset */
+	t: string | null;
+	h: number;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
+}
+
+/** Full user object, e.g. from /login */
+interface FurzonaUser extends FurzonaUserBase {
 	/** Token */
 	s: string;
 	/** Email address */
@@ -81,16 +91,15 @@ interface FurzonaUser {
 	/** Account type/age? */
 	a: number;
 	n: boolean;
-	m: boolean;
 	/** Verified flag */
 	v: boolean;
 	/** Warnings array — likely indices matching FurzonaWarning.pos */
 	w: number[];
-	/** Tag string, null if unset (see FurzonaStaffMember.t) */
-	t: string | null;
-	h: number;
-	createdAt: string; // ISO date string
-	updatedAt: string; // ISO date string
+}
+
+/** Author summary embedded in a post — subset of FurzonaUser fields, plus `o` */
+interface FurzonaPostAuthor extends FurzonaUserBase {
+	o: boolean;
 }
 
 type LoginResponse = FurzonaResponse<FurzonaUser>;
@@ -134,22 +143,6 @@ interface FurzonaPost {
 	/** Group/GC invite code, seen on "New GC" style posts */
 	j?: string;
 	q: unknown[];
-	createdAt: string; // ISO date string
-	updatedAt: string; // ISO date string
-}
-
-/** Author summary embedded in a post — subset of FurzonaUser fields */
-interface FurzonaPostAuthor {
-	id: string;
-	username: string;
-	d: string;
-	i: string | null;
-	b: string | null;
-	p: number;
-	m: boolean;
-	t: string | null;
-	h: number;
-	o: boolean;
 	createdAt: string; // ISO date string
 	updatedAt: string; // ISO date string
 }
