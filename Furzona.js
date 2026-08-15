@@ -88,3 +88,5 @@ class Furzona extends RequestService {
 		return this.post("posts");
 	}
 }
+
+const furzona = new Furzona;
