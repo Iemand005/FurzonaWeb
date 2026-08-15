@@ -15,6 +15,7 @@ if (postList instanceof HTMLUListElement) {
 			// Uh the user card part
 
 			const profileCard = document.createElement("section");
+			profileCard.className = "profile";
 
 			const pfp = document.createElement("img");
 			pfp.classList.add("pfp");

@@ -37,6 +37,7 @@ ul {
 	display: flex;
     flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: space-around;
 
 	width: 100%;
     margin: 0;
@@ -52,4 +53,12 @@ ul {
 
 .post .pfp {
 	width: 5rem;
+}
+
+.profile {
+	display: flex;
+}
+
+.profile p {
+	margin-left: 10px;
 }
