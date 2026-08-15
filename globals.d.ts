@@ -56,3 +56,9 @@ interface FurzonaResult {
 interface FurzonaConfigResponse {
   result: FurzonaResult;
 }
+
+
+interface LoginRequest {
+  email: string;
+  password: string;
+}
