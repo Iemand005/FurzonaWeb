@@ -22,7 +22,7 @@ class Furzona {
 
 		if (response.ok) return response.catch(console.error).then(r => r.json());
 
-		const respTxt = response.text();
+		const respTxt = await response.text();
 		document.getElementById('error-container').innerHTML = respTxt;
 		return respTxt;
 	}
