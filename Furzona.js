@@ -93,9 +93,11 @@ class Furzona extends RequestService {
 		return response;
 	}
 
-	async getPosts() {
+	async getPosts(date = 0) {
+		const body = {};
+		if (date) body.date = date;
 		/** @type {FurzonaPostsResponse} */
-		const response = await this.post("posts");
+		const response = await this.post("posts", body);
 
 		return response.result;
 	}
