@@ -20,8 +20,9 @@ header > section {
 
 img {
 	max-height: 70%;
+	max-width: 100%;
 
-	    border-radius: 20px;
+	border-radius: 20px;
 }
 
 
@@ -34,4 +35,8 @@ ul {
 	width: 100%;
     margin: 0;
     padding: 0;
+}
+
+li {
+	margin: 10px;
 }

@@ -14,6 +14,7 @@ if (postList instanceof HTMLUListElement) {
 			const title = document.createElement("h2");
 
 			title.textContent = post.t;
+			listItem.appendChild(title);
 
 			if (post.m.length > 0) {
 				const image = document.createElement("img");
@@ -22,7 +23,6 @@ if (postList instanceof HTMLUListElement) {
 				listItem.appendChild(image);
 			}
 
-			listItem.appendChild(title);
 		
 			postList.appendChild(listItem);
 		});
