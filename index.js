@@ -1,56 +1,82 @@
-
 const postList = document.getElementById("posts-list");
 
 if (postList instanceof HTMLUListElement) {
+	let isLoading = false;
+	let hasMorePosts = true;
 
-	furzona.getPosts().then(posts => {
+	const createPostElement = (post) => {
+		const listItem = document.createElement("li");
+		listItem.className = "post";
+		listItem.dataset.date = post.createdAt || post.updatedAt || "";
 
-		console.log(posts);
+		const profileCard = document.createElement("section");
+		profileCard.className = "profile";
+		profileCard.style.cursor = "pointer";
+		profileCard.onclick = () => {
+			window.location.href = "profile.html?id=" + encodeURIComponent(post.u.id);
+		};
 
-		posts.forEach(post => {
+		const pfp = document.createElement("img");
+		pfp.classList.add("pfp");
+		pfp.src = furzona.getMediaUrl(post.u.i);
+		profileCard.appendChild(pfp);
 
-			const listItem = document.createElement("li");
-			listItem.className = "post";
+		const username = document.createElement("p");
+		username.textContent = post.u.username;
+		profileCard.appendChild(username);
+		listItem.appendChild(profileCard);
 
-			// Uh the user card part
+		const title = document.createElement("h2");
+		title.textContent = post.t || "";
+		listItem.appendChild(title);
 
-			const profileCard = document.createElement("section");
-			profileCard.className = "profile";
-			profileCard.style.cursor = "pointer";
+		if (post.m && post.m.length > 0) {
+			const image = document.createElement("img");
+			image.src = furzona.getMediaUrl(post.m[0]);
+			listItem.appendChild(image);
+		}
 
-			profileCard.onclick = () => {
-				window.location.href = "profile.html?id=" + encodeURIComponent(post.u.id);
-			};
+		return listItem;
+	};
 
-			const pfp = document.createElement("img");
-			pfp.classList.add("pfp");
-			pfp.src = furzona.getMediaUrl(post.u.i);
+	const loadPosts = (date) => {
+		if (isLoading || !hasMorePosts) return;
+		isLoading = true;
 
-			profileCard.appendChild(pfp);
-
-			const username = document.createElement("p");
-			username.textContent = post.u.username;
-
-			// profileCard.appendChild(listItem);
-			profileCard.appendChild(username);
-
-			listItem.appendChild(profileCard);
-
-			const title = document.createElement("h2");
-
-			title.textContent = post.t;
-			listItem.appendChild(title);
-
-			if (post.m.length > 0) {
-				const image = document.createElement("img");
-				image.src = furzona.getMediaUrl(post.m[0]);
-
-				listItem.appendChild(image);
+		furzona.getPosts(date).then(posts => {
+			if (!posts || posts.length === 0) {
+				hasMorePosts = false;
+				isLoading = false;
+				return;
 			}
 
-		
-			postList.appendChild(listItem);
-		});
+			posts.forEach(post => {
+				postList.appendChild(createPostElement(post));
+			});
 
+			const lastPost = posts[posts.length - 1];
+			const lastDate = lastPost?.createdAt || lastPost?.updatedAt || null;
+			if (!lastDate) hasMorePosts = false;
+			isLoading = false;
+		}).catch(error => {
+			console.error("Failed to load posts:", error);
+			hasMorePosts = false;
+			isLoading = false;
+		});
+	};
+
+	window.addEventListener("scroll", () => {
+		const reachedBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 200;
+		if (!reachedBottom) return;
+
+		const lastPost = postList.lastElementChild;
+		const lastDate = lastPost instanceof HTMLElement ? lastPost.dataset.date : null;
+		if (lastDate) {
+			loadPosts(lastDate);
+		} else {
+			loadPosts();
+		}
 	});
+
+	loadPosts();
 }
