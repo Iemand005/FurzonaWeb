@@ -49,7 +49,9 @@ class Furzona extends RequestService {
 	}
 
 	async loadSettings() {
-		this.getSettings();
+		const settings = this.getSettings();
+
+		this.contentUrl = (await settings).contentUrl;
 	}
 
 	/**
