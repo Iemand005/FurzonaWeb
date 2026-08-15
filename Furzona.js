@@ -105,8 +105,9 @@ class Furzona extends RequestService {
 	}
 
 	async getProfile(id) {
+		/** @type {ProfileResponse} */
 		const response = await this.get("profile/" + id);
-		return response;
+		return response.result;
 	}
 
 	set token(token) {
