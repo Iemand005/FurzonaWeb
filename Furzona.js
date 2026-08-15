@@ -4,16 +4,17 @@ const apiUrl = "https://api.furzona.app/";
 class RequestService {
 
 	constructor() {
-
+		/** @type {string?} */
+		this.token = null;
 	}
 
 	async get(endpoint) {
-
+		return await fetch(apiUrl + endpoint).then(r => r.json());
 	}
 
 	async post(endpoint, body) {
 
-		const response = await fetch("https://api.furzona.app/" + endpoint, {
+		const response = await fetch(apiUrl + endpoint, {
 			method: "POST",
 			body: JSON.stringify(body)
 		});
@@ -36,8 +37,7 @@ class RequestService {
 class Furzona extends RequestService {
 
 	constructor() {
-		/** @type {string?} */
-		this.token = null;
+		
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Furzona extends RequestService {
 	 * @returns {FurzonaConfigResponse}
 	 */
 	async getSettings() {
-		return await fetch("https://api.furzona.app/settings").then(r => r.json());
+		return this.get("settings");
 	}
 
 	/**
@@ -61,22 +61,6 @@ class Furzona extends RequestService {
 			password
 		};
 
-		const response = await fetch("https://api.furzona.app/login", {
-			method: "POST",
-			body: JSON.stringify(requestBody)
-		});
-
-		if (response.ok) {
-			/** @type {LoginResponse} */
-			const jsonBody = await response.json();
-
-			this.token = jsonBody.result.s;
-
-			return jsonBody;
-		}
-
-		const respTxt = await response.text();
-		document.getElementById('error-container').innerHTML = respTxt;
-		return respTxt;
+		return this.post("login", requestBody);
 	}
 }
