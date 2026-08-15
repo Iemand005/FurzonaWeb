@@ -80,7 +80,10 @@ class Furzona extends RequestService {
 	 * @returns {FurzonaPostsResponse}
 	 */
 	async getPosts() {
-		return this.post("posts");
+		/** @type {FurzonaPostsResponse} */
+		const response = this.post("posts");
+
+		return response.result;
 	}
 
 	set token(token) {
