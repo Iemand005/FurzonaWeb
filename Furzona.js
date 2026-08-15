@@ -18,7 +18,7 @@ class RequestService {
 	 * @param {*} body 
 	 * @returns {T}
 	 */
-	async post(endpoint, body) {
+	async post(endpoint, body = {}) {
 		
 		const headers = {};
 
@@ -78,5 +78,9 @@ class Furzona extends RequestService {
 		this.token = response.result.s;
 
 		return response;
+	}
+
+	async getPosts() {
+		return this.post("posts");
 	}
 }
