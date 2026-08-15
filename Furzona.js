@@ -48,12 +48,16 @@ class Furzona extends RequestService {
 		this.contentUrl = "https://content.furzona.app/";
 	}
 
+	async loadSettings() {
+		this.getSettings();
+	}
+
 	/**
 	 * 
-	 * @returns {FurzonaConfigResponse}
+	 * @returns {Promise<FurzonaConfigResponse>}
 	 */
 	async getSettings() {
-		return this.get("settings");
+		return this.get("settings").then(response => response.result);
 	}
 
 	/**
