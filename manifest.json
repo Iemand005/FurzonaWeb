@@ -12,7 +12,7 @@
 			"type": "image/png"
 		}
 	],
-  "display_override": [
-    "window-controls-overlay"
-  ]
+	"display_override": [
+		"window-controls-overlay"
+	]
 }
