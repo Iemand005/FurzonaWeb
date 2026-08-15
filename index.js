@@ -13,7 +13,7 @@ if (postList instanceof HTMLUListElement) {
 
 			const title = document.createElement("h2");
 
-			title.textContent = post.a;
+			title.textContent = post.t;
 
 			listItem.appendChild(title);
 		
