@@ -80,6 +80,10 @@ class Furzona extends RequestService {
 		return response;
 	}
 
+	/**
+	 * 
+	 * @returns {FurzonaPostsResponse}
+	 */
 	async getPosts() {
 		return this.post("posts");
 	}
