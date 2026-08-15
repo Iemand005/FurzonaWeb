@@ -14,3 +14,5 @@ if (loginForm instanceof HTMLFormElement) {
 		furzona.login(email, password);
 	};
 }
+
+if (furzona.isLoggedIn()) location.href = "index.html";
