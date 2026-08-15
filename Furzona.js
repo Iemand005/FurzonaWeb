@@ -1,5 +1,11 @@
 
 class Furzona {
+
+	constructor() {
+		/** @type {string?} */
+		this.token = null;
+	}
+
 	/**
 	 * 
 	 * @returns {FurzonaConfigResponse}
