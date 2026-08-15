@@ -54,10 +54,11 @@ class Furzona extends RequestService {
 
 	/**
 	 * 
-	 * @returns {Promise<FurzonaConfigResponse>}
 	 */
 	async getSettings() {
-		return this.get("settings").then(response => response.result);
+		/** @type { FurzonaConfigResponse} */
+		const response = await this.get("settings")
+		return response.result;
 	}
 
 	/**
