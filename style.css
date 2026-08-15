@@ -36,7 +36,7 @@ html, body, * {
 html, body {
 	margin: 0;
 	/* height: 100%; */
-	background: radial-gradient(circle at top, #1d212b 0%, #171a22 38%, #10141a 100%);
+	background: #16181D;
 	color: #f3f6fb;
 	font-family: "Varela Round", sans-serif;
 }
