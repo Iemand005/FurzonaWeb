@@ -32,7 +32,14 @@ class Furzona {
 			body: JSON.stringify(requestBody)
 		});
 
-		if (response.ok) return response.json();
+		if (response.ok) {
+			/** @type {LoginResponse} */
+			const jsonBody = await response.json();
+
+			this.token = jsonBody.result.s;
+
+			return jsonBody;
+		}
 
 		const respTxt = await response.text();
 		document.getElementById('error-container').innerHTML = respTxt;

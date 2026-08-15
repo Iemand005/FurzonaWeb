@@ -74,7 +74,7 @@ interface FurzonaUser {
 	b: string | null;
 	/** Priority/rank */
 	p: number;
-	/** Social/status string, empty string if unset */
+	/** Token */
 	s: string;
 	/** Email address */
 	e: string;
