@@ -15,6 +15,7 @@ class Furzona {
 			password
 		};
 		return await fetch("https://api.furzona.app/settings", {
+			method: "POST",
 			body: requestBody
 		}).then(r => r.json());
 
