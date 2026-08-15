@@ -10,6 +10,12 @@ if (postList instanceof HTMLUListElement) {
 		posts.forEach(post => {
 
 			const listItem = document.createElement("li");
+
+			const title = document.createElement("h2");
+
+			title.textContent = post.a;
+
+			listItem.appendChild(title);
 		
 			postList.appendChild(listItem);
 		});
