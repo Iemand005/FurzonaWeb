@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "es2025",
-		"lib": ["ES2015", "DOM"],
+		"target": "es6",
+		"lib": ["ES6", "DOM"],
 		"checkJs": true,
 		"allowJs": true,
 		"strict": true,
