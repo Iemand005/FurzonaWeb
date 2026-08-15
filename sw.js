@@ -4,7 +4,8 @@ const ASSETS = [
   '/index.html',
   '/login.html',
   '/profile.html',
-  '/search.html'
+  '/search.html',
+  '/style.css'
 ];
 
 self.addEventListener('install', event => {
