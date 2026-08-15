@@ -1,7 +1,8 @@
-const CACHE_NAME = 'app-cache-v1.1';
+const CACHE_NAME = 'app-cache-v1.0';
 const ASSETS = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/search.html'
 ];
 
 self.addEventListener('install', event => {
