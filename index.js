@@ -7,8 +7,12 @@ if (postList instanceof HTMLUListElement) {
 
 		console.log(posts);
 
-		const listItem = document.createElement("li");
-	
-		postList.appendChild(listItem);
+		posts.forEach(post => {
+
+			const listItem = document.createElement("li");
+		
+			postList.appendChild(listItem);
+		});
+
 	});
 }

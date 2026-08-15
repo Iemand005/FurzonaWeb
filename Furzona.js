@@ -77,7 +77,6 @@ class Furzona extends RequestService {
 
 	/**
 	 * 
-	 * @returns {FurzonaPostsResponse}
 	 */
 	async getPosts() {
 		/** @type {FurzonaPostsResponse} */
