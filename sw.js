@@ -2,6 +2,8 @@ const CACHE_NAME = 'app-cache-v1.0';
 const ASSETS = [
   '/',
   '/index.html',
+  '/login.html',
+  '/profile.html',
   '/search.html'
 ];
 
