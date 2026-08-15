@@ -45,13 +45,13 @@ class Furzona extends RequestService {
 	constructor() {
 		super();
 
-		this.contentUrl = "https://content.furzona.app/";
+		this._contentUrl = "https://content.furzona.app/";
 	}
 
 	async loadSettings() {
 		const settings = await this.getSettings();
 
-		this.contentUrl = settings.contentUrl;
+		this._contentUrl = settings.contentUrl;
 	}
 
 	/**
@@ -103,6 +103,10 @@ class Furzona extends RequestService {
 	get token() {
 		if (!this._token) this._token = localStorage.getItem("token");
 		return this._token;
+	}
+
+	get contentUrl() {
+		return this._contentUrl;
 	}
 
 	isLoggedIn() {
