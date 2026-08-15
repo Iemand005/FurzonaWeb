@@ -15,6 +15,13 @@ if (postList instanceof HTMLUListElement) {
 
 			title.textContent = post.t;
 
+			if (post.m.length > 0) {
+				const image = document.createElement("img");
+				image.src = post.m[0];
+
+				listItem.appendChild(image);
+			}
+
 			listItem.appendChild(title);
 		
 			postList.appendChild(listItem);
