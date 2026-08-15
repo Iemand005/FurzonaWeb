@@ -22,6 +22,8 @@ class Furzona {
 
 		if (response.ok) return response.catch(console.error).then(r => r.json());
 
-		return response.text();
+		const respTxt = response.text();
+		document.getElementById('error-container').innerHTML = errorHtml;
+		return respTxt;
 	}
 }
