@@ -11,6 +11,9 @@ if (postList instanceof HTMLUListElement) {
 
 			const listItem = document.createElement("li");
 
+			const pfp = document.createElement("img");
+			pfp.src = furzona.getMediaUrl(post.u.i);
+
 			const title = document.createElement("h2");
 
 			title.textContent = post.t;
