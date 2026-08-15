@@ -3,16 +3,16 @@
 	"editor.indentSize": "tabSize",
 	"editor.insertSpaces": false,
     "workbench.colorCustomizations": {
-        "activityBar.background": "#594905",
-        "titleBar.activeBackground": "#7D6607",
+        "activityBar.background": "#23232c",
+        "titleBar.activeBackground": "#252544",
         "titleBar.activeForeground": "#FEFBEC",
-        "titleBar.inactiveBackground": "#594905",
+        "titleBar.inactiveBackground": "#23232c",
         "titleBar.inactiveForeground": "#FEFBEC",
-        "statusBar.background": "#594905",
+        "statusBar.background": "#23232c",
         "statusBar.foreground": "#FEFBEC",
-        "statusBar.debuggingBackground": "#594905",
+        "statusBar.debuggingBackground": "#23232c",
         "statusBar.debuggingForeground": "#FEFBEC",
-        "statusBar.noFolderBackground": "#594905",
+        "statusBar.noFolderBackground": "#23232c",
         "statusBar.noFolderForeground": "#FEFBEC"
     }
 }
