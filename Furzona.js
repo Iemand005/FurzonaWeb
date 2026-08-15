@@ -93,9 +93,6 @@ class Furzona extends RequestService {
 		return response;
 	}
 
-	/**
-	 * 
-	 */
 	async getPosts() {
 		/** @type {FurzonaPostsResponse} */
 		const response = await this.post("posts");

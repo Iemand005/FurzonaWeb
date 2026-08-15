@@ -16,9 +16,10 @@ if (postList instanceof HTMLUListElement) {
 
 			const profileCard = document.createElement("section");
 			profileCard.className = "profile";
+			profileCard.style.cursor = "pointer";
 
 			profileCard.onclick = () => {
-
+				window.location.href = "/profile.html?id=" + encodeURIComponent(post.u.id);
 			};
 
 			const pfp = document.createElement("img");
