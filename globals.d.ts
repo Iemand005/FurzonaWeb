@@ -93,9 +93,7 @@ interface FurzonaUser {
 	updatedAt: string; // ISO date string
 }
 
-interface LoginResponse {
-	result: FurzonaUser;
-}
+type LoginResponse = FurzonaResponse<FurzonaUser>;
 
 interface FurzonaResponse<T> {
 	result: T;
