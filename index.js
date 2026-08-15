@@ -17,6 +17,10 @@ if (postList instanceof HTMLUListElement) {
 			const profileCard = document.createElement("section");
 			profileCard.className = "profile";
 
+			profileCard.onclick = () => {
+
+			};
+
 			const pfp = document.createElement("img");
 			pfp.classList.add("pfp");
 			pfp.src = furzona.getMediaUrl(post.u.i);
