@@ -12,6 +12,12 @@ class RequestService {
 		return await fetch(apiUrl + endpoint).then(r => r.json());
 	}
 
+	/**
+	 * @template T
+	 * @param {*} endpoint 
+	 * @param {*} body 
+	 * @returns {T}
+	 */
 	async post(endpoint, body) {
 
 		const response = await fetch(apiUrl + endpoint, {
@@ -30,7 +36,7 @@ class RequestService {
 
 		const respTxt = await response.text();
 		document.getElementById('error-container').innerHTML = respTxt;
-		return respTxt;
+		throw respTxt;
 	}
 }
 
@@ -61,6 +67,10 @@ class Furzona extends RequestService {
 			password
 		};
 
-		return this.post("login", requestBody);
+		const response = this.post("login", requestBody);
+
+		this.token = jsonBody.result.s;
+
+		return response;
 	}
 }
