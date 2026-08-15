@@ -5,4 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			window.location.href = "search.html";
 		});
 	});
+	
+	if ('serviceWorker' in navigator) {
+	  navigator.serviceWorker.register('./sw.js');
+	}
 });
