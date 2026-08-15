@@ -2,9 +2,13 @@
 const postList = document.getElementById("posts-list");
 
 if (postList instanceof HTMLUListElement) {
-	const listItem = document.createElement("li");
 
+	furzona.getPosts().then(posts => {
 
-
-	postList.appendChild(listItem);
+		const listItem = document.createElement("li");
+	
+	
+	
+		postList.appendChild(listItem);
+	});
 }
