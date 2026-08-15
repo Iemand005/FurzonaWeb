@@ -19,10 +19,15 @@ class RequestService {
 	 * @returns {T}
 	 */
 	async post(endpoint, body) {
+		
+		const headers = {};
+
+		if (this.token) headers["Authorization"] = this.token;
 
 		const response = await fetch(apiUrl + endpoint, {
 			method: "POST",
-			body: JSON.stringify(body)
+			body: JSON.stringify(body),
+			headers
 		});
 
 		if (response.ok) {
