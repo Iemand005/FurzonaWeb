@@ -11,7 +11,11 @@ if (loginForm instanceof HTMLFormElement) {
 		
 		console.log(email, password);
 
-		furzona.login(email, password);
+		furzona.login(email, password).then(() => {
+			if (furzona.isLoggedIn()) location.href = "index.html";
+		});
+
+		
 	};
 }
 
