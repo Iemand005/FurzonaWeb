@@ -12,13 +12,8 @@ class RequestService {
 	}
 
 	async post(endpoint, body) {
-		/** @type {LoginRequest} */
-		const requestBody = {
-			email,
-			password
-		};
 
-		const response = await fetch("https://api.furzona.app/login", {
+		const response = await fetch("https://api.furzona.app/" + endpoint, {
 			method: "POST",
 			body: JSON.stringify(body)
 		});
