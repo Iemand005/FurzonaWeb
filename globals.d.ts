@@ -98,3 +98,62 @@ type LoginResponse = FurzonaResponse<FurzonaUser>;
 interface FurzonaResponse<T> {
 	result: T;
 }
+
+interface FurzonaPost {
+	id: string;
+	/** Title, optional — some posts omit it */
+	t?: string;
+	/** Description/caption text */
+	d?: string;
+	/** Content/body text, used for longer text posts */
+	c?: string;
+	/** Attribution/credit text (e.g. "written by me", source name) */
+	a?: string;
+	/** Category positions, matching FurzonaCategory.pos */
+	e: number[];
+	/** Warning positions, matching FurzonaWarning.pos */
+	w: number[];
+	/** NSFW warning positions, matching FurzonaNsfwWarning.pos */
+	n: number[];
+	/** Media image paths */
+	m: string[];
+	l: number;
+	o: number;
+	h: boolean;
+	f: boolean;
+	z: boolean;
+	y: number;
+	u: FurzonaPostAuthor;
+	k: boolean;
+	/** Unknown, seen only as null */
+	i: string | null;
+	/** Image width, present only on posts with media */
+	b?: number;
+	/** Image height, present only on posts with media */
+	g?: number;
+	/** Group/GC invite code, seen on "New GC" style posts */
+	j?: string;
+	q: unknown[];
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
+}
+
+/** Author summary embedded in a post — subset of FurzonaUser fields */
+interface FurzonaPostAuthor {
+	id: string;
+	username: string;
+	d: string;
+	i: string | null;
+	b: string | null;
+	p: number;
+	m: boolean;
+	t: string | null;
+	h: number;
+	o: boolean;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
+}
+
+interface FurzonaPostsResponse {
+	result: FurzonaPost[];
+}
