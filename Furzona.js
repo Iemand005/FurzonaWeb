@@ -107,6 +107,10 @@ class Furzona extends RequestService {
 		const response = await this.post("user", { email, password, gte16: true });
 	}
 
+	async getProfile(id) {
+		const response = await this.get("profile/" + id);
+	}
+
 	set token(token) {
 		this._token = token;
 
