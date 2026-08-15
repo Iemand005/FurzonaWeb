@@ -22,6 +22,11 @@ if (postList instanceof HTMLUListElement) {
 
 			profileCard.appendChild(pfp);
 
+			const username = document.createElement("p");
+			username.textContent = post.u.username;
+
+			// profileCard.appendChild(listItem);
+
 			listItem.appendChild(profileCard);
 
 			const title = document.createElement("h2");
