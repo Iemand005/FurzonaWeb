@@ -132,7 +132,7 @@ main {
 	width: 100%;
 	height: 220px;
 	object-fit: cover;
-	border-radius: 16px;
+	border-radius: 14px;
 	background: #131721;
 }
 
@@ -140,7 +140,6 @@ main {
 	width: 48px;
 	height: 48px;
 	object-fit: cover;
-	border-radius: 12px;
 }
 
 .profile, .profile-top {
