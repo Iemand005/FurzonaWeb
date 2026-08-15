@@ -8,4 +8,6 @@ body, html {
 header {
 	display: flex;
 	justify-content: space-between;
+
+	background-color: #20212B;
 }
