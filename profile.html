@@ -8,36 +8,14 @@
 	<title>Profile</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="manifest" href="manifest.json">
-	<script>
-		window.addEventListener('pagereveal', (e) => {
-  console.log('pagereveal fired', e.viewTransition);
-  if (e.viewTransition) {
-    e.viewTransition.ready.catch(err => console.log('ready rejected:', err));
-  }
-});
-	</script>
 	<script src="Furzona.js"></script>
 	<script src="nav.js" defer></script>
+	<script src="profile-preload.js" defer></script>
 	<script src="profile.js" defer></script>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-
-	<script>
-		(function () {
-			const params = new URLSearchParams(window.location.search);
-			for (const key of ["avatar", "banner"]) {
-				const url = params.get(key);
-				if (!url) continue;
-				const link = document.createElement("link");
-				link.rel = "preload";
-				link.as = "image";
-				link.href = url;
-				document.head.appendChild(link);
-			}
-		})();
-	</script>
 </head>
 <body>
 	<header>
