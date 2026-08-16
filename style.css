@@ -239,6 +239,18 @@ header button {
 
 header button:hover { background: #3a4154; transform: translateY(-1px); }
 
+header button:disabled {
+	background: #22262f;
+	color: #7a8094;
+	cursor: not-allowed;
+	transform: none;
+}
+
+header button:disabled:hover {
+	background: #22262f;
+	transform: none;
+}
+
 main {
 	box-shadow: inset 0 0 10px rgba(11,12,16,.9);
 	padding: 20px 18px 32px;
