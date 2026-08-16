@@ -1,12 +1,15 @@
 {
 	"scripts": {
-		"build": "babel . --out-dir dist --ignore \"dist/**,node_modules/**\""
+		"build:js": "babel src -d dist",
+		"build:assets": "cpy \"src/**/*.{html,css}\" dist --parents",
+		"build": "npm run build:js && npm run build:assets"
 	},
 	"devDependencies": {
 		"@babel/cli": "^8.0.4",
 		"@babel/core": "^8.0.1",
 		"@babel/preset-env": "^8.0.2",
 		"babel-plugin-polyfill-corejs3": "^1.0.0",
-		"core-js": "^3.50.0"
+		"core-js": "^3.50.0",
+		"cpy-cli": "^7.0.0"
 	}
 }
