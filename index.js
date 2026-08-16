@@ -65,7 +65,7 @@ if (postList instanceof HTMLUListElement) {
 		profileCard.style.cursor = "pointer";
 		const pfp = document.createElement("img");
 		pfp.classList.add("pfp");
-		pfp.src = furzona.getMediaUrl(post.u.i);
+		pfp.src = furzona.getProfilePictureUrl(post.u);
 		pfp.alt = post.u.username;
 		pfp.dataset.transitionId = post.u.id;
 		profileCard.appendChild(pfp);
