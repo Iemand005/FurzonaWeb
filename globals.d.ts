@@ -176,3 +176,10 @@ interface FurzonaProfile {
 }
 
 type ProfileResponse = FurzonaResponse<FurzonaProfile>;
+
+interface LikeToggleResult {
+	liked: boolean;
+	likes: number;
+}
+
+type LikeToggleResponse = FurzonaResponse<LikeToggleResult>;
