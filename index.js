@@ -2,6 +2,7 @@ const postList = document.getElementById("posts-list");
 
 let clickedPfp = null;
 let clickedName = null;
+let clickedPost = null;
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !clickedPfp) return;
@@ -50,6 +51,55 @@ window.addEventListener("pagereveal", (e) => {
   e.viewTransition.ready.then(cleanup, cleanup);
 });
 
+window.addEventListener("pageswap", (event) => {
+  if (!event.viewTransition || !clickedPost) return;
+  const { id, pfp, username, title, image } = clickedPost;
+  document.querySelectorAll(".pfp").forEach(img => {
+    img.style.viewTransitionName = "";
+  });
+  document.querySelectorAll(".profile p").forEach(p => {
+    p.style.viewTransitionName = "";
+  });
+  pfp.style.viewTransitionName = `post-avatar-${id}`;
+  username.style.viewTransitionName = `post-name-${id}`;
+  if (title) title.style.viewTransitionName = `post-title-${id}`;
+  if (image) image.style.viewTransitionName = `post-image-${id}`;
+  const cleanup = () => {
+    pfp.style.viewTransitionName = "";
+    username.style.viewTransitionName = "";
+    if (title) title.style.viewTransitionName = "";
+    if (image) image.style.viewTransitionName = "";
+  };
+  event.viewTransition.ready.then(cleanup, cleanup);
+});
+
+window.addEventListener("pagereveal", (e) => {
+  if (!e.viewTransition) return;
+  const fromURL = window.navigation?.activation?.from?.url;
+  if (!fromURL) return;
+  const url = new URL(fromURL);
+  if (!url.pathname.endsWith("post.html")) return;
+  const postId = url.searchParams.get("id");
+  if (!postId) return;
+  const item = document.querySelector(`[data-post-id="${postId}"]`);
+  if (!item) return;
+  const pfp = item.querySelector(".pfp");
+  const username = item.querySelector(".profile p");
+  const title = item.querySelector("h2");
+  const image = item.querySelector(":scope > img");
+  if (pfp) pfp.style.viewTransitionName = `post-avatar-${postId}`;
+  if (username) username.style.viewTransitionName = `post-name-${postId}`;
+  if (title) title.style.viewTransitionName = `post-title-${postId}`;
+  if (image) image.style.viewTransitionName = `post-image-${postId}`;
+  const cleanup = () => {
+    if (pfp) pfp.style.viewTransitionName = "";
+    if (username) username.style.viewTransitionName = "";
+    if (title) title.style.viewTransitionName = "";
+    if (image) image.style.viewTransitionName = "";
+  };
+  e.viewTransition.ready.then(cleanup, cleanup);
+});
+
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;
@@ -57,6 +107,7 @@ if (postList instanceof HTMLUListElement) {
 	const createPostElement = (/** @type {FurzonaPost} */post) => {
 		const listItem = document.createElement("li");
 		listItem.className = "post";
+		listItem.dataset.postId = post.id;
 		const timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
 		listItem.dataset.date = String(timestamp);
 
@@ -74,6 +125,7 @@ if (postList instanceof HTMLUListElement) {
 			event.stopPropagation();
 			clickedPfp = pfp;
 			clickedName = username;
+			clickedPost = null;
 			const params = new URLSearchParams({ id: post.u.id });
 			if (post.u.i) params.set("avatar", furzona.getProfilePictureUrl(post.u));
 			if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
@@ -90,8 +142,9 @@ if (postList instanceof HTMLUListElement) {
 		title.textContent = post.t || "";
 		listItem.appendChild(title);
 
+		let image = null;
 		if (post.m && post.m.length > 0) {
-			const image = document.createElement("img");
+			image = document.createElement("img");
 			image.src = furzona.getMediaUrl(post.m[0]);
 			image.alt = post.t || post.u.username || "Post image";
 			listItem.appendChild(image);
@@ -99,7 +152,15 @@ if (postList instanceof HTMLUListElement) {
 
 		listItem.style.cursor = "pointer";
 		listItem.onclick = () => {
-			window.location.href = "post.html?id=" + encodeURIComponent(post.id);
+			clickedPfp = null;
+			clickedName = null;
+			clickedPost = { id: post.id, pfp, username, title, image };
+			const postParams = new URLSearchParams({ id: post.id });
+			if (post.u.i) postParams.set("avatar", furzona.getProfilePictureUrl(post.u));
+			if (post.u.username) postParams.set("username", post.u.username);
+			if (post.t) postParams.set("title", post.t);
+			if (image) postParams.set("img", image.src);
+			window.location.href = "post.html?" + postParams.toString();
 		};
 
 		return listItem;

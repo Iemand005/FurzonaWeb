@@ -1,11 +1,14 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+const authorEl = document.getElementById("post-author");
+const pfpEl = document.getElementById("post-author-pfp");
+const nameEl = document.getElementById("post-author-name");
 const titleEl = document.getElementById("post-title");
 const metaEl = document.getElementById("post-meta");
-const textEl = document.getElementById("post-text");
 const mediaEl = document.getElementById("post-media");
-const authorEl = document.getElementById("post-author");
+const firstImageEl = document.getElementById("post-first-image");
+const textEl = document.getElementById("post-text");
 
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
@@ -17,6 +20,16 @@ if (backButton) {
 		}
 	});
 }
+
+window.addEventListener("pageswap", (event) => {
+	if (!event.viewTransition || !id) return;
+	authorEl.style.viewTransitionName = `post-author-${id}`;
+	if (pfpEl) pfpEl.style.viewTransitionName = `post-avatar-${id}`;
+	if (nameEl) nameEl.style.viewTransitionName = `post-name-${id}`;
+	if (titleEl) titleEl.style.viewTransitionName = `post-title-${id}`;
+	const firstImg = firstImageEl && !firstImageEl.hidden ? firstImageEl : null;
+	if (firstImg) firstImg.style.viewTransitionName = `post-image-${id}`;
+});
 
 /**
  * @param {FurzonaPost} post
@@ -30,15 +43,9 @@ function renderPost(post) {
 
 	textEl.textContent = [post.c, post.d].filter(Boolean).join("\n\n");
 
-	const pfp = document.createElement("img");
-	pfp.classList.add("pfp");
-	pfp.src = furzona.getProfilePictureUrl(user);
-	pfp.alt = user.username;
-	authorEl.appendChild(pfp);
-
-	const name = document.createElement("p");
-	name.textContent = user.username;
-	authorEl.appendChild(name);
+	pfpEl.src = furzona.getProfilePictureUrl(user);
+	pfpEl.alt = user.username;
+	nameEl.textContent = user.username;
 
 	authorEl.style.cursor = "pointer";
 	authorEl.onclick = () => {
@@ -50,12 +57,18 @@ function renderPost(post) {
 	};
 
 	if (post.m && post.m.length > 0) {
-		post.m.forEach(path => {
-			const img = document.createElement("img");
-			img.src = furzona.getMediaUrl(path);
-			img.alt = post.t || user.username || "Post media";
-			img.loading = "lazy";
-			mediaEl.appendChild(img);
+		post.m.forEach((path, index) => {
+			if (index === 0) {
+				firstImageEl.src = furzona.getMediaUrl(path);
+				firstImageEl.alt = post.t || user.username || "Post media";
+				firstImageEl.hidden = false;
+			} else {
+				const img = document.createElement("img");
+				img.src = furzona.getMediaUrl(path);
+				img.alt = post.t || user.username || "Post media";
+				img.loading = "lazy";
+				mediaEl.appendChild(img);
+			}
 		});
 	}
 }
