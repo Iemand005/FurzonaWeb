@@ -67,6 +67,10 @@ header {
 	z-index: 100;
 }
 
+header img {
+	display: none;
+}
+
 @media (display-mode: window-controls-overlay) {
 
 	header {
@@ -89,6 +93,11 @@ header {
 	header button {
 		-webkit-app-region: no-drag;
 		app-region: no-drag;
+	}
+
+	header img {
+		height: calc(env(titlebar-area-height, 0) - 4px);
+		border-radius: 5px;
 	}
 }
 
