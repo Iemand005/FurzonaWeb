@@ -11,6 +11,7 @@ class RequestService {
 	/**
 	 * @template T
 	 * @param {string} endpoint 
+	 * @param {string} method 
 	 * @param {*} body 
 	 * @returns {Promise<T>}
 	 */
@@ -18,6 +19,11 @@ class RequestService {
 
 	}
 
+	/**
+	 * @template T
+	 * @param {string} endpoint
+	 * @returns {Promise<T>}
+	 */
 	async get(endpoint) {
 		return await fetch(apiUrl + endpoint).then(r => r.json());
 	}
