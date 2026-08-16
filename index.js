@@ -1,5 +1,12 @@
 const postList = document.getElementById("posts-list");
 
+let clickedPfp = null;
+
+window.addEventListener("pageswap", (event) => {
+	if (!event.viewTransition || !clickedPfp) return;
+	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
+});
+
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;
@@ -13,17 +20,17 @@ if (postList instanceof HTMLUListElement) {
 		const profileCard = document.createElement("section");
 		profileCard.className = "profile";
 		profileCard.style.cursor = "pointer";
-		profileCard.onclick = () => {
-			const target = "profile.html?id=" + encodeURIComponent(post.u.id);
-			window.location.href = target;
-		};
-
 		const pfp = document.createElement("img");
 		pfp.classList.add("pfp");
 		pfp.src = furzona.getMediaUrl(post.u.i);
-		pfp.style.viewTransitionName = `profile-avatar-${post.u.id}`;
-		pfp.style.viewTransitionClass = "profile-image";
+		pfp.dataset.transitionId = post.u.id;
 		profileCard.appendChild(pfp);
+
+		profileCard.onclick = () => {
+			clickedPfp = pfp;
+			const target = "profile.html?id=" + encodeURIComponent(post.u.id);
+			window.location.href = target;
+		};
 
 		const username = document.createElement("p");
 		username.textContent = post.u.username;
