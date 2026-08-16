@@ -151,6 +151,7 @@ interface FurzonaPostsResponse {
 	result: FurzonaPost[];
 }
 
+type FurzonaPostResponse = FurzonaResponse<FurzonaPost>;
 
 interface FurzonaProfileStats {
 	posts: number;

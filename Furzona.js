@@ -113,6 +113,13 @@ class Furzona extends RequestService {
 		return response.result;
 	}
 
+	/** @param {string} id  */
+	async getPost(id) {
+		/** @type {ProfileResponse} */
+		const response = await this.get("post/" + id);
+		return response.result;
+	}
+
 	set token(token) {
 		if (!token) throw new Error("Tried to assing an empty token.");
 		this._token = token;
