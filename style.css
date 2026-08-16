@@ -118,6 +118,8 @@ header img {
 header > section {
 	display: flex;
 	gap: 10px;
+«	    align-items: center;
+
 }
 
 header h1 {
