@@ -16,7 +16,6 @@ class RequestService {
 	 * @template T
 	 * @param {*} endpoint 
 	 * @param {*} body 
-	 * @returns {Promise<T>}
 	 */
 	async post(endpoint, body = {}) {
 		
@@ -30,7 +29,11 @@ class RequestService {
 			headers
 		});
 
-		if (response.ok) [return] response.json();
+		if (response.ok) {
+			/** @type {FurzonaResponse<T>} */
+			const result = await response.json();
+			return result.result;
+		}
 
 		const respTxt = await response.text();
 
