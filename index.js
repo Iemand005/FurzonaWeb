@@ -27,6 +27,8 @@ if (postList instanceof HTMLUListElement) {
 		const pfp = document.createElement("img");
 		pfp.classList.add("pfp");
 		pfp.src = furzona.getMediaUrl(post.u.i);
+		pfp.style.viewTransitionName = `profile-avatar-${post.u.id}`;
+		pfp.style.viewTransitionClass = "profile-image";
 		profileCard.appendChild(pfp);
 
 		const username = document.createElement("p");

@@ -1,5 +1,20 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
+const bannerEl = document.getElementById("profile-banner");
+const avatarEl = document.getElementById("profile-avatar");
+const nameEl = document.getElementById("profile-name");
+const metaEl = document.getElementById("profile-meta");
+const bioEl = document.getElementById("profile-bio");
+const statsEl = document.getElementById("profile-stats");
+const transitionName = id ? `profile-avatar-${id}` : "profile-avatar";
+
+if (bannerEl) {
+	bannerEl.style.viewTransitionName = id ? `profile-banner-${id}` : "profile-banner";
+}
+
+if (avatarEl) {
+	avatarEl.style.viewTransitionName = transitionName;
+}
 
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
@@ -13,13 +28,6 @@ if (backButton) {
 		window.location.href = "index.html";
 	});
 }
-
-const bannerEl = document.getElementById("profile-banner");
-const avatarEl = document.getElementById("profile-avatar");
-const nameEl = document.getElementById("profile-name");
-const metaEl = document.getElementById("profile-meta");
-const bioEl = document.getElementById("profile-bio");
-const statsEl = document.getElementById("profile-stats");
 
 const renderProfile = (profile) => {
 	const user = profile.user;
