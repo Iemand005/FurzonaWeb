@@ -211,4 +211,7 @@ interface ApiEndpoints {
 		body: { post: string };
 		response: LikeToggleResult;
 	};
+	settings: {
+		response: FurzonaResult
+	}
 }

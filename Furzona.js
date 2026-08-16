@@ -11,8 +11,8 @@ class RequestService {
 	/**
 	 * @template {keyof ApiEndpoints} K
 	 * @param {K} endpoint 
-	 * @param {Method} method 
-	 * @param {ApiEndpoints[K]["body"]} body 
+	 * @param {Method} [method] 
+	 * @param {ApiEndpoints[K]["body"]} [body] 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async request(endpoint, method = "GET", body) {
@@ -49,12 +49,12 @@ class RequestService {
 	}
 
 	/**
-	 * @template T
-	 * @param {string} endpoint
-	 * @returns {Promise<T>}
+	 * @template {keyof ApiEndpoints} K
+	 * @param {K} endpoint
+	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async get(endpoint) {
-		return /** @type {typeof this.request<T>} */ (this.request)(endpoint);
+		return this.request(endpoint);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class RequestService {
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async post(endpoint, body) {
-		return /** @type {typeof this.request<T>} */ (this.request)(endpoint, "POST", body);
+		return this.request(endpoint, "POST", body);
 	}
 }
 
@@ -84,9 +84,7 @@ class Furzona extends RequestService {
 	}
 
 	async getSettings() {
-		/** @type { FurzonaConfigResponse} */
-		const response = await this.get("settings");
-		return response.result;
+		return await this.get("settings");
 	}
 
 	/**
