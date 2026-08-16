@@ -177,6 +177,15 @@ interface FurzonaProfile {
 	online: boolean;
 }
 
+interface FurzonaCredentials {
+	email: string;
+	password: string;
+}
+
+interface FurzonaSignupRequest extends FurzonaCredentials {
+	gte16: boolean;
+}
+
 type ProfileResponse = FurzonaResponse<FurzonaProfile>;
 
 interface LikeToggleResult {
@@ -196,7 +205,7 @@ interface ApiEndpoints {
 		response: FurzonaUser;
 	};
 	user: {
-		body: { email: string, password: string, gte16: boolean };
+		body: FurzonaSignupRequest;
 		response: FurzonaUser;
 	};
 	profile: {
