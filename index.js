@@ -1,19 +1,25 @@
 const postList = document.getElementById("posts-list");
 
 let clickedPfp = null;
+let clickedName = null;
 
 window.addEventListener("pageswap", async (event) => {
 	if (!event.viewTransition || !clickedPfp) return;
 	document.querySelectorAll(".pfp").forEach(img => {
 		img.style.viewTransitionName = "";
 	});
+	document.querySelectorAll(".profile p").forEach(p => {
+		p.style.viewTransitionName = "";
+	});
 	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
+	if (clickedName) clickedName.style.viewTransitionName = `profile-name-${clickedPfp.dataset.transitionId}`;
 	try {
 		await event.viewTransition.finished;
 	} catch {
 		// ignore
 	}
 	clickedPfp.style.viewTransitionName = "";
+	if (clickedName) clickedName.style.viewTransitionName = "";
 });
 
 window.addEventListener('pageswap', (e) => {
@@ -49,9 +55,11 @@ if (postList instanceof HTMLUListElement) {
 
 		profileCard.onclick = () => {
 			clickedPfp = pfp;
+			clickedName = username;
 			const params = new URLSearchParams({ id: post.u.id });
 			if (post.u.i) params.set("avatar", furzona.getMediaUrl(post.u.i));
 			if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
+			if (post.u.username) params.set("username", post.u.username);
 			window.location.href = "profile.html?" + params.toString();
 		};
 
