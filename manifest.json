@@ -19,5 +19,11 @@
 	],
 	"display_override": [
 		"window-controls-overlay"
+	],
+	"protocol_handlers": [
+		{
+			"protocol": "web+furzona",
+			"url": "/handle?uri=%s"
+		}
 	]
 }

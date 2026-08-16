@@ -6,6 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
+	const homeButtons = document.querySelectorAll("[data-nav-home]");
+	homeButtons.forEach(img => {
+		img.addEventListener("click", () => {
+			window.location.href = "index.html";
+		});
+		img.style.cursor = "pointer";
+	});
+
 	const backButtons = document.querySelectorAll("[data-nav-back]");
 	backButtons.forEach(button => {
 		button.addEventListener("click", () => {
