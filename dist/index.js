@@ -159,7 +159,8 @@ if (postList instanceof HTMLUListElement) {
     var likeCount = document.createElement("span");
     likeCount.className = "like-count";
     likeCount.textContent = String((_post$l = post.l) !== null && _post$l !== void 0 ? _post$l : 0);
-    // likeButton.append(heart, likeCount);
+    likeButton.appendChild(heart);
+    likeButton.appendChild(likeCount);
     likeButton.addEventListener("click", function (event) {
       event.stopPropagation();
     });
