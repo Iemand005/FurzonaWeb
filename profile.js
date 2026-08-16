@@ -6,6 +6,12 @@ const nameEl = document.getElementById("profile-name");
 const metaEl = document.getElementById("profile-meta");
 const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
+const avatarParam = params.get("avatar");
+const bannerParam = params.get("banner");
+
+if (bannerEl && bannerParam) bannerEl.src = bannerParam;
+if (avatarEl && avatarParam) avatarEl.src = avatarParam;
+
 const transitionName = id ? `profile-avatar-${id}` : "profile-avatar";
 
 if (bannerEl) {

@@ -7,6 +7,13 @@ window.addEventListener("pageswap", (event) => {
 	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
 });
 
+window.addEventListener('pageswap', (e) => {
+  console.log('pageswap', e.viewTransition);
+});
+window.addEventListener('pagereveal', (e) => {
+  console.log('pagereveal', e.viewTransition);
+});
+
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;
@@ -28,8 +35,10 @@ if (postList instanceof HTMLUListElement) {
 
 		profileCard.onclick = () => {
 			clickedPfp = pfp;
-			const target = "profile.html?id=" + encodeURIComponent(post.u.id);
-			window.location.href = target;
+			const params = new URLSearchParams({ id: post.u.id });
+			if (post.u.i) params.set("avatar", furzona.getMediaUrl(post.u.i));
+			if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
+			window.location.href = "profile.html?" + params.toString();
 		};
 
 		const username = document.createElement("p");
