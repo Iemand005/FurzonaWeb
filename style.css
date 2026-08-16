@@ -285,9 +285,12 @@ main {
 	width: 100%;
 	height: 220px;
 	object-fit: cover;
-	border-radius: 14px;
 	background: #131721;
 	transition: filter 100ms linear;
+}
+
+.post img, .banner, .profile {
+	border-radius: 14px;
 }
 
 .post img:hover {
@@ -306,7 +309,9 @@ main {
 	gap: 10px;
 }
 
-.profile {/* padding-bottom: 6px; */background: black;border-radius: 14px;}
+.profile:hover {
+	background: black;
+}
 
 .profile p, .meta {
 	margin: 0;
