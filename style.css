@@ -83,7 +83,7 @@ header img {
 		background:
 			linear-gradient(
 				to right,
-				transparent calc(100% - (100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)) - 40px),
+				transparent calc(100% - (100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)) - 60px),
 				rgba(32,33,43,1) calc(100% - (100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)))
 			),
 			rgba(32, 33, 43, 0.805);
