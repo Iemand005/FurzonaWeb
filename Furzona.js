@@ -120,8 +120,9 @@ class Furzona extends RequestService {
 		return response.result;
 	}
 
-	async likePost(id) {
-		const response = furzona.post("favorite", {post: "5wpKIF2P5J"}).then((/** @type {LikeToggleResponse}*/response) => response.result);
+	/** @param {string} post  */
+	async likePost(post) {
+		const response = await furzona.post("favorite", { post }).then((/** @type {LikeToggleResponse}*/response) => response.result);
 	}
 
 	set token(token) {
