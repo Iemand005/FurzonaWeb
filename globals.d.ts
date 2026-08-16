@@ -41,7 +41,7 @@ interface FurzonaStaffMember {
 	updatedAt: string; // ISO date string
 }
 
-interface FurzonaResult {
+interface FurzonaSettings {
 	categories: FurzonaCategory[];
 	warnings: FurzonaWarning[];
 	nsfwWarnings: FurzonaNsfwWarning[];
@@ -56,7 +56,7 @@ interface FurzonaResult {
 }
 
 interface FurzonaConfigResponse {
-	result: FurzonaResult;
+	result: FurzonaSettings;
 }
 
 
@@ -214,6 +214,6 @@ interface ApiEndpoints {
 		response: LikeToggleResult;
 	};
 	settings: {
-		response: FurzonaResult
+		response: FurzonaSettings
 	}
 }

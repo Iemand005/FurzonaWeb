@@ -84,7 +84,7 @@ class Furzona extends RequestService {
 	}
 
 	async getSettings() {
-		return await this.get("settings");
+		return this.get("settings");
 	}
 
 	/**
