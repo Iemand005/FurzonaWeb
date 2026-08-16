@@ -9,11 +9,11 @@ class RequestService {
 	}
 
 	/**
-	 * @template T
-	 * @param {string} endpoint 
-	 * @param {string} method 
-	 * @param {*} body 
-	 * @returns {Promise<T>}
+	 * @template {keyof ApiEndpoints} K
+	 * @param {K} endpoint 
+	 * @param {Method} method 
+	 * @param {ApiEndpoints[K]["body"]} body 
+	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async request(endpoint, method = "GET", body = null) {
 		/** @type {RequestInit} */

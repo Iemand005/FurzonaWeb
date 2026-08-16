@@ -1,5 +1,7 @@
 // global.d.ts
 
+type Method = "GET" | "POST";
+
 interface FurzonaCategory {
 	pos: number;
 	icon: string;
