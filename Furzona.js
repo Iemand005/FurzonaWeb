@@ -127,16 +127,12 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} id  */
 	async getProfile(id) {
-		/** @type {ProfileResponse} */
-		const response = await this.get("profile/" + id);
-		return response.result;
+		return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("profile/" + id);
 	}
 
 	/** @param {string} id  */
 	async getPost(id) {
-		/** @type {ProfileResponse} */
-		const response = await this.get("post/" + id);
-		return response.result;
+		return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("post/" + id);
 	}
 
 	/** @param {string} post  */
