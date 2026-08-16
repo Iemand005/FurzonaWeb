@@ -23,7 +23,6 @@ if (backButton) {
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
-	authorEl.style.viewTransitionName = `post-author-${id}`;
 	if (pfpEl) pfpEl.style.viewTransitionName = `post-avatar-${id}`;
 	if (nameEl) nameEl.style.viewTransitionName = `post-name-${id}`;
 	if (titleEl) titleEl.style.viewTransitionName = `post-title-${id}`;
