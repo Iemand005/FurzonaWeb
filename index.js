@@ -34,6 +34,24 @@ window.addEventListener('pagereveal', (e) => {
   console.log('pagereveal', e.viewTransition ? 'OK' : 'NONE');
 });
 
+window.addEventListener("pagereveal", (e) => {
+  if (!e.viewTransition) return;
+  const fromURL = window.navigation?.activation?.from?.url;
+  if (!fromURL) return;
+  const id = new URL(fromURL).searchParams.get("id");
+  if (!id) return;
+  const pfp = document.querySelector(`[data-transition-id="${id}"]`);
+  if (!pfp) return;
+  const nameEl = pfp.closest(".profile")?.querySelector("p");
+  pfp.style.viewTransitionName = `profile-avatar-${id}`;
+  if (nameEl) nameEl.style.viewTransitionName = `profile-name-${id}`;
+  const cleanup = () => {
+    pfp.style.viewTransitionName = "";
+    if (nameEl) nameEl.style.viewTransitionName = "";
+  };
+  e.viewTransition.finished.then(cleanup, cleanup);
+});
+
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;

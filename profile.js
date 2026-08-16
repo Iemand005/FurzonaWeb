@@ -10,7 +10,11 @@ const statsEl = document.getElementById("profile-stats");
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
 	backButton.addEventListener("click", () => {
-		window.location.href = "index.html";
+		if (window.navigation?.canGoBack && window.navigation.activation?.from?.sameOrigin) {
+			history.back();
+		} else {
+			window.location.href = "index.html";
+		}
 	});
 }
 
