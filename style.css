@@ -64,6 +64,7 @@ html, body, * {
 	scrollbar-color: #2d3240 #16181D;
 
     overscroll-behavior-x: auto;
+	overscroll-behavior-y: contain;
 }
 
 *::-webkit-scrollbar {
@@ -224,10 +225,20 @@ header button {
 	background: #2d3240;
 	border-radius: 12px;
 	color: #f3f6fb;
-	/* padding: 10px 14px; */
+	padding: 8px 10px;
 	font: inherit;
 	cursor: pointer;
 	transition: transform .2s ease, background .2s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+header button img {
+	width: 16px;
+	height: 16px;
+	display: block;
+	pointer-events: none;
 }
 
 @supports (top: env(titlebar-area-y)) {
