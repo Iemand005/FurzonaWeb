@@ -1,12 +1,15 @@
-const CACHE_NAME = 'app-cache-v1.0';
+const CACHE_NAME = 'app-cache-v2.0';
 const ASSETS = [
 	'./',
 	'./index.html',
+	'./post.html',
 	'./login.html',
 	'./profile.html',
 	'./search.html',
 	'./style.css',
 	'./index.js',
+	'./post.js',
+	'./post-preload.js',
 	'./profile.js',
 	'./login.js',
 	'./search.js',
