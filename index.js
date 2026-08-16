@@ -74,7 +74,7 @@ if (postList instanceof HTMLUListElement) {
 			clickedPfp = pfp;
 			clickedName = username;
 			const params = new URLSearchParams({ id: post.u.id });
-			if (post.u.i) params.set("avatar", furzona.getProfilePicture(post.u));
+			if (post.u.i) params.set("avatar", furzona.getProfilePictureUrl(post.u));
 			if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
 			if (post.u.username) params.set("username", post.u.username);
 			window.location.href = "profile.html?" + params.toString();
