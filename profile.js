@@ -18,12 +18,16 @@ if (backButton) {
 	});
 }
 
-const renderProfile = (profile) => {
+/**
+ * 
+ * @param {FurzonaProfile} profile 
+ */
+function renderProfile(profile) {
 	const user = profile.user;
 	const stats = profile.stats || {};
 
 	const bannerUrl = user.b ? furzona.getMediaUrl(user.b) : "https://placehold.co/1200x260/20212B/ffffff?text=" + encodeURIComponent(user.username);
-	const avatarUrl = user.i ? furzona.getMediaUrl(user.i) : "https://placehold.co/160x160/2d3240/ffffff?text=" + encodeURIComponent(user.username.slice(0, 1).toUpperCase());
+	const avatarUrl = furzona.getProfilePictureUrl(user);
 
 	bannerEl.src = bannerUrl;
 	bannerEl.alt = `${user.username} banner`;
