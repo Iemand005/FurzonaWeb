@@ -155,7 +155,7 @@ header {
 
 	z-index: 100;
 
-	transition: all 100ms linear;
+	transition: all 200ms linear;
 }
 
 header img {
