@@ -3,7 +3,7 @@
 		"clean": "rimraf dist",
 		"build:js": "babel . -d dist --ignore \"node_modules/**\",\"dist/**\"",
 		"build:assets": "cpy \"**/*.{html,css}\" dist --parents --ignore=\"node_modules/**\" --ignore=\"dist/**\"",
-		"build:polyfill": "cpy \"node_modules/core-js-bundle/minified.js\" dist --rename=polyfill.js",
+		"build:polyfill": "cpy \"node_modules/core-js-bundle/minified.js\" dist --flat --rename=polyfill.js",
 		"build": "npm run clean && npm run build:js && npm run build:assets && npm run build:polyfill"
 	},
 	"devDependencies": {
