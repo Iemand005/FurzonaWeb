@@ -123,12 +123,8 @@ class Furzona extends RequestService {
 		return this._token;
 	}
 
-	get contentUrl() {
-		return this._contentUrl;
-	}
-
 	getMediaUrl(path) {
-		return this.contentUrl + path;
+		return this._contentUrl + path;
 	}
 	/** @param {FurzonaPostAuthor} user */
 	getProfilePictureUrl(user) {
