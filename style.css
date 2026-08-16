@@ -59,6 +59,10 @@ header {
 	position: sticky;
 	top: 0;
 	backdrop-filter: blur(10px);
+
+	border-top: none;
+	border-right: none;
+	border-left: none;
 }
 
 @supports (top: env(titlebar-area-y)) {
