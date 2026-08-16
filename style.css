@@ -310,7 +310,7 @@ main {
 }
 
 .profile:hover {
-	background: black;
+	background: #00000042;
 }
 
 .profile p, .meta {
