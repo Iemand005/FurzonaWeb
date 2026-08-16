@@ -1,7 +1,10 @@
 {
-  "devDependencies": {
-    "@babel/cli": "^8.0.4",
-    "@babel/core": "^8.0.1",
-    "@babel/preset-env": "^8.0.2"
-  }
+	"scripts": {
+		"build": "babel . --out-dir dist --ignore \"dist/**,node_modules/**\""
+	},
+	"devDependencies": {
+		"@babel/cli": "^8.0.4",
+		"@babel/core": "^8.0.1",
+		"@babel/preset-env": "^8.0.2"
+	}
 }
