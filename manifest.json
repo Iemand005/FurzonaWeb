@@ -18,8 +18,14 @@
 		}
 	],
 	"display_override": [
-		"window-controls-overlay"
+		"window-controls-overlay",
+		"tabbed"
 	],
+	"tab_strip": {
+		"new_tab_button": {
+			"url": "index.htm",
+		}
+	},
 	"protocol_handlers": [
 		{
 			"protocol": "web+furzona",
