@@ -19,12 +19,6 @@ if (avatarEl) {
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
 	backButton.addEventListener("click", () => {
-		if (document.startViewTransition) {
-			document.startViewTransition(() => {
-				window.location.href = "index.html";
-			});
-			return;
-		}
 		window.location.href = "index.html";
 	});
 }

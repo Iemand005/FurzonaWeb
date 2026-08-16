@@ -15,12 +15,6 @@ if (postList instanceof HTMLUListElement) {
 		profileCard.style.cursor = "pointer";
 		profileCard.onclick = () => {
 			const target = "profile.html?id=" + encodeURIComponent(post.u.id);
-			if (document.startViewTransition) {
-				document.startViewTransition(() => {
-					window.location.href = target;
-				});
-				return;
-			}
 			window.location.href = target;
 		};
 
