@@ -10,6 +10,7 @@
 		"@babel/preset-env": "^8.0.2",
 		"babel-plugin-polyfill-corejs3": "^1.0.0",
 		"core-js": "^3.50.0",
+		"core-js-bundle": "^3.50.0",
 		"cpy-cli": "^7.0.0"
 	}
 }
