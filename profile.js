@@ -14,10 +14,6 @@ if (avatarEl && avatarParam) avatarEl.src = avatarParam;
 
 const transitionName = id ? `profile-avatar-${id}` : "profile-avatar";
 
-if (bannerEl) {
-	bannerEl.style.viewTransitionName = id ? `profile-banner-${id}` : "profile-banner";
-}
-
 if (avatarEl) {
 	avatarEl.style.viewTransitionName = transitionName;
 }
