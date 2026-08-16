@@ -66,6 +66,7 @@ if (postList instanceof HTMLUListElement) {
 		const pfp = document.createElement("img");
 		pfp.classList.add("pfp");
 		pfp.src = furzona.getMediaUrl(post.u.i);
+		pfp.alt = post.u.username;
 		pfp.dataset.transitionId = post.u.id;
 		profileCard.appendChild(pfp);
 
@@ -91,6 +92,7 @@ if (postList instanceof HTMLUListElement) {
 		if (post.m && post.m.length > 0) {
 			const image = document.createElement("img");
 			image.src = furzona.getMediaUrl(post.m[0]);
+			image.alt = post.t || post.u.username || "Post image";
 			listItem.appendChild(image);
 		}
 
