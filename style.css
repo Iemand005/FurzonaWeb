@@ -67,7 +67,8 @@ header {
 	z-index: 100;
 }
 
-@supports (top: env(titlebar-area-y)) {
+@media (display-mode: window-controls-overlay) {
+
 	header {
 		top: env(titlebar-area-y, 0);
 		left: env(titlebar-area-x, 0);
@@ -76,6 +77,14 @@ header {
 		min-height: env(titlebar-area-height, auto);
 		-webkit-app-region: drag;
 		app-region: drag;
+
+		background:
+			linear-gradient(
+				to right,
+				transparent calc(100% - 80px),
+				rgba(32,33,43,1) 100%
+			),
+			rgba(32,33,43,.96);
 	}
 }
 
