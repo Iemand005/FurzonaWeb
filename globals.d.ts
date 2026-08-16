@@ -197,4 +197,16 @@ interface ApiEndpoints {
 		body: { userId: number };
 		response: User;
 	};
+	profile: {
+		body: undefined;
+		response: FurzonaProfile;
+	};
+	post: {
+		body: undefined;
+		response: FurzonaPost;
+	};
+	favorite: {
+		body: { post: string };
+		response: LikeToggleResult;
+	};
 }
