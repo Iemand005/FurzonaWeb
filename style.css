@@ -100,6 +100,7 @@ header img {
 	header img {
 		height: calc(env(titlebar-area-height, 0) - 8px);
 		border-radius: 5px;
+		display: block;
 	}
 }
 
