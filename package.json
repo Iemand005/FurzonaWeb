@@ -1,10 +1,10 @@
 {
 	"scripts": {
-		"build:js": "babel . -d dist",
-		"build:assets": "cpy \"**/*.{html,css}\" dist --parents",
+		"clean": "rimraf dist",
+		"build:js": "babel . -d dist --ignore \"node_modules/**\",\"dist/**\"",
+		"build:assets": "cpy \"**/*.{html,css}\" dist --parents --ignore=\"node_modules/**\" --ignore=\"dist/**\"",
 		"build:polyfill": "cpy \"node_modules/core-js-bundle/minified.js\" dist --rename=polyfill.js",
-
-		"build": "npm run build:js && npm run build:assets && npm run build:polyfill"
+		"build": "npm run clean && npm run build:js && npm run build:assets && npm run build:polyfill"
 	},
 	"devDependencies": {
 		"@babel/cli": "^8.0.4",
@@ -13,6 +13,7 @@
 		"babel-plugin-polyfill-corejs3": "^1.0.0",
 		"core-js": "^3.50.0",
 		"core-js-bundle": "^3.50.0",
-		"cpy-cli": "^7.0.0"
+		"cpy-cli": "^7.0.0",
+		"rimraf": "^6.1.3"
 	}
 }
