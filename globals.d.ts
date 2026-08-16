@@ -188,7 +188,7 @@ type LikeToggleResponse = FurzonaResponse<LikeToggleResult>;
 
 interface ApiEndpoints {
 	login: {
-		body: { username: string; password: string };
+		body: LoginRequest;
 		response: { token: string };
 	};
 	user: {

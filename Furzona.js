@@ -101,7 +101,7 @@ class Furzona extends RequestService {
 			password
 		};
 
-		const response = await /** @type {typeof this.post<FurzonaUser>} */ (this.post)("login", requestBody);
+		const response = await this.post("login", requestBody);
 
 		this.token = response.s;
 
