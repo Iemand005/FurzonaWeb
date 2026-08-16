@@ -22,7 +22,7 @@ class RequestService {
 		if (this._token) headers["Authorization"] = this._token;
 
 		const response = await fetch(apiUrl + endpoint, {
-			method: "POST",
+			method,
 			body: JSON.stringify(body),
 			headers
 		});
@@ -55,7 +55,7 @@ class RequestService {
 	 * @returns {Promise<T>}
 	 */
 	async get(endpoint) {
-		return await fetch(apiUrl + endpoint).then(r => r.json());
+		return /** @type {typeof this.request<T>} */ (this.request)(endpoint);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class RequestService {
 	 * @returns {Promise<T>}
 	 */
 	async post(endpoint, body = {}) {
-		return /** @type {typeof this.request<T>} */ (this.request)("favorite", "POST", body);
+		return /** @type {typeof this.request<T>} */ (this.request)(endpoint, "POST", body);
 	}
 }
 
