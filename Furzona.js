@@ -130,6 +130,10 @@ class Furzona extends RequestService {
 	getMediaUrl(path) {
 		return this.contentUrl + path;
 	}
+	/** @param {FurzonaPostAuthor} user */
+	getProfilePicture(user) {
+		return  furzona.getMediaUrl(user.i);
+	}
 
 	isLoggedIn() {
 		return !!this.token;

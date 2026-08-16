@@ -54,7 +54,7 @@ if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;
 
-	const createPostElement = (post) => {
+	const createPostElement = (/** @type {FurzonaPost} */post) => {
 		const listItem = document.createElement("li");
 		listItem.className = "post";
 		const timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
@@ -74,7 +74,7 @@ if (postList instanceof HTMLUListElement) {
 			clickedPfp = pfp;
 			clickedName = username;
 			const params = new URLSearchParams({ id: post.u.id });
-			if (post.u.i) params.set("avatar", furzona.getMediaUrl(post.u.i));
+			if (post.u.i) params.set("avatar", furzona.getProfilePicture(post.u));
 			if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
 			if (post.u.username) params.set("username", post.u.username);
 			window.location.href = "profile.html?" + params.toString();
