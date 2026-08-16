@@ -16,10 +16,11 @@ class RequestService {
 	 * @returns {Promise<T>}
 	 */
 	async request(endpoint, method = "GET", body = {}) {
-		/** @type {HeadersInit} */
-		const headers = {};
+		/** @type {RequestInit} */
+		const init = {};
 
-		if (this._token) headers["Authorization"] = this._token;
+		init.headers = {};
+		if (this._token) init.headers["Authorization"] = this._token;
 
 		const response = await fetch(apiUrl + endpoint, {
 			method,
