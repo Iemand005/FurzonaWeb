@@ -6,15 +6,6 @@
 	const titleParam = params.get("title");
 	const imgParam = params.get("img");
 
-	for (const url of [avatarParam, imgParam]) {
-		if (!url) continue;
-		const link = document.createElement("link");
-		link.rel = "preload";
-		link.as = "image";
-		link.href = url;
-		document.head.appendChild(link);
-	}
-
 	window.addEventListener("pagereveal", () => {
 		const pfpEl = document.getElementById("post-author-pfp");
 		const nameEl = document.getElementById("post-author-name");
