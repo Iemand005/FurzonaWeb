@@ -61,11 +61,9 @@ class Furzona extends RequestService {
 		const settings = await this.getSettings();
 
 		this._contentUrl = settings.contentUrl;
+		return settings;
 	}
 
-	/**
-	 * 
-	 */
 	async getSettings() {
 		/** @type { FurzonaConfigResponse} */
 		const response = await this.get("settings");
@@ -76,7 +74,6 @@ class Furzona extends RequestService {
 	 * 
 	 * @param {string} email 
 	 * @param {string} password 
-	 * @returns {LoginResponse}
 	 */
 	async login(email, password) {
 		/** @type {LoginRequest} */
@@ -101,11 +98,14 @@ class Furzona extends RequestService {
 
 		return response.result;
 	}
-
+	/**
+	 * @param {string} email
+	 * @param {string} password
+	 */
 	async createUser(email, password) {
 		const response = await this.post("user", { email, password, gte16: true });
 	}
-
+	/** @param {string} id  */
 	async getProfile(id) {
 		/** @type {ProfileResponse} */
 		const response = await this.get("profile/" + id);
