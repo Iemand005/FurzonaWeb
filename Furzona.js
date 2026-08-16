@@ -126,7 +126,7 @@ class Furzona extends RequestService {
 	getMediaUrl(path) {
 		return this._contentUrl + path;
 	}
-	/** @param {FurzonaPostAuthor} user */
+	/** @param {FurzonaUserBase} user */
 	getProfilePictureUrl(user) {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
