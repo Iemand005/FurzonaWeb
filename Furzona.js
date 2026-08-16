@@ -132,8 +132,7 @@ class Furzona extends RequestService {
 	}
 	/** @param {FurzonaPostAuthor} user */
 	getProfilePictureUrl(user) {
-		if (!user.i) return "Assets/profile_default.png";
-		return furzona.getMediaUrl(user.i);
+		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
 	isLoggedIn() {
