@@ -328,6 +328,33 @@ main {
 	object-fit: cover;
 }
 
+.post .like-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	align-self: flex-start;
+	margin-top: 12px;
+	background: #2d3240;
+	border: 1px solid rgba(255,255,255,.08);
+	border-radius: 12px;
+	color: #f3f6fb;
+	padding: 8px 12px;
+	font: inherit;
+	cursor: pointer;
+}
+
+.post .like-btn img {
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-radius: 0;
+	pointer-events: none;
+}
+
+.post .like-btn img:hover {
+	filter: none;
+}
+
 .profile, .profile-top {
 	display: flex;
 	align-items: center;

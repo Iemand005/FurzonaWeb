@@ -7,17 +7,6 @@ const metaEl = document.getElementById("profile-meta");
 const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
 
-const backButton = document.getElementById("back-to-home");
-if (backButton) {
-	backButton.addEventListener("click", () => {
-		if (history.length > 1 || window.navigation?.canGoBack) {
-			history.back();
-		} else {
-			location.replace("index.html");
-		}
-	});
-}
-
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
 	const destination = new URL(event.activation.entry.url);

@@ -150,6 +150,21 @@ if (postList instanceof HTMLUListElement) {
 			listItem.appendChild(image);
 		}
 
+		const likeButton = document.createElement("button");
+		likeButton.type = "button";
+		likeButton.className = "like-btn";
+		const heart = document.createElement("img");
+		heart.src = "Assets/heart.svg";
+		heart.alt = "";
+		const likeCount = document.createElement("span");
+		likeCount.className = "like-count";
+		likeCount.textContent = String(post.l ?? 0);
+		likeButton.append(heart, likeCount);
+		likeButton.addEventListener("click", (event) => {
+			event.stopPropagation();
+		});
+		listItem.appendChild(likeButton);
+
 		listItem.style.cursor = "pointer";
 		listItem.onclick = () => {
 			clickedPfp = null;

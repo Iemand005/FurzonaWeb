@@ -10,17 +10,6 @@ const mediaEl = document.getElementById("post-media");
 const firstImageEl = document.getElementById("post-first-image");
 const textEl = document.getElementById("post-text");
 
-const backButton = document.getElementById("back-to-home");
-if (backButton) {
-	backButton.addEventListener("click", () => {
-		if (history.length > 1 || window.navigation?.canGoBack) {
-			history.back();
-		} else {
-			location.replace("index.html");
-		}
-	});
-}
-
 let authorId = null;
 
 window.addEventListener("pageswap", (event) => {

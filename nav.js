@@ -6,6 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
+	const backButtons = document.querySelectorAll("[data-nav-back]");
+	backButtons.forEach(button => {
+		button.addEventListener("click", () => {
+			if (history.length > 1 || window.navigation?.canGoBack) {
+				history.back();
+			} else {
+				location.replace("index.html");
+			}
+		});
+	});
+
 	const forwardButtons = document.querySelectorAll("[data-nav-forward]");
 	const syncForwardState = () => {
 		const canGoForward = window.navigation ? window.navigation.canGoForward : true;
