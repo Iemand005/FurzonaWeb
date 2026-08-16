@@ -17,10 +17,15 @@ window.addEventListener("pageswap", async (event) => {
 });
 
 window.addEventListener('pageswap', (e) => {
-  console.log('pageswap', e.viewTransition);
+  if (e.viewTransition) {
+    console.log('pageswap OK:', e.activation.entry.url);
+    e.viewTransition.finished.catch(err => console.warn('pageswap aborted:', err.name));
+  } else {
+    console.log('pageswap: NO transition. from:', location.href, '->', e.activation.entry.url);
+  }
 });
 window.addEventListener('pagereveal', (e) => {
-  console.log('pagereveal', e.viewTransition);
+  console.log('pagereveal', e.viewTransition ? 'OK' : 'NONE');
 });
 
 if (postList instanceof HTMLUListElement) {
