@@ -101,21 +101,15 @@ class Furzona extends RequestService {
 			password
 		};
 
-		/** @type {LoginResponse} */
-		const response = await this.post("login", requestBody);
+		const response = await /** @type {typeof this.post<FurzonaUser>} */ (this.post)("login", requestBody);
 
-		this.token = response.result.s;
+		this.token = response.s;
 
-		return response.result;
+		return response;
 	}
 
 	async getPosts(date = 0) {
-		const body = {};
-		if (date) body.date = date;
-		/** @type {FurzonaPostsResponse} */
-		const response = await this.post("posts", body);
-
-		return response.result;
+		return /** @type {typeof this.post<FurzonaPost[]>} */ (this.get)("posts", date ? { date } : {});
 	}
 	/**
 	 * @param {string} email
@@ -123,12 +117,12 @@ class Furzona extends RequestService {
 	 */
 	async createUser(email, password) {
 		const response = await this.post("user", { email, password, gte16: true });
-		return response.result;
+		return response;
 	}
 	/** @param {string} id  */
 	async getProfile(id) { return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("profile/" + id); }
 	/** @param {string} id  */
-	async getPost(id) { return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("post/" + id); }
+	async getPost(id) { return /** @type {typeof this.post<FurzonaPost>} */ (this.get)("post/" + id); }
 	/** @param {string} post  */
 	async likePost(post) { return /** @type {typeof this.post<LikeToggleResult>} */ (this.post)("favorite", { post }); }
 
