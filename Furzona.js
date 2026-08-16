@@ -109,7 +109,7 @@ class Furzona extends RequestService {
 	}
 
 	async getPosts(date = 0) {
-		return /** @type {typeof this.post<FurzonaPost[]>} */ (this.get)("posts", date ? { date } : {});
+		return this.post("posts", date ? { date } : {});
 	}
 	/**
 	 * @param {string} email

@@ -187,10 +187,6 @@ interface LikeToggleResult {
 type LikeToggleResponse = FurzonaResponse<LikeToggleResult>;
 
 interface ApiEndpoints {
-	posts: {
-		body: { title: string; content: string };
-		response: Post[];
-	};
 	login: {
 		body: { username: string; password: string };
 		response: { token: string };
@@ -206,6 +202,10 @@ interface ApiEndpoints {
 	post: {
 		body: undefined;
 		response: FurzonaPost;
+	};
+	posts: {
+		body: { date?: number };
+		response: FurzonaPost[];
 	};
 	favorite: {
 		body: { post: string };
