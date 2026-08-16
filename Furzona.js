@@ -63,7 +63,7 @@ class RequestService {
 	 * @param {ApiEndpoints[K]["body"]} body 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
-	async post(endpoint, body = {}) {
+	async post(endpoint, body) {
 		return /** @type {typeof this.request<T>} */ (this.request)(endpoint, "POST", body);
 	}
 }
