@@ -15,7 +15,7 @@ class RequestService {
 	 * @param {*} body 
 	 * @returns {Promise<T>}
 	 */
-	async request(endpoint, method = "GET", body = {}) {}
+	async request(endpoint, method = "GET", body = {}) {
 
 	}
 
