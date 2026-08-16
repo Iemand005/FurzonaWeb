@@ -15,18 +15,16 @@ class RequestService {
 	 * @param {*} body 
 	 * @returns {Promise<T>}
 	 */
-	async request(endpoint, method = "GET", body = {}) {
+	async request(endpoint, method = "GET", body = null) {
 		/** @type {RequestInit} */
-		const init = {};
+		const init = { method };
 
 		init.headers = {};
 		if (this._token) init.headers["Authorization"] = this._token;
 
-		const response = await fetch(apiUrl + endpoint, {
-			method,
-			body: JSON.stringify(body),
-			headers
-		});
+		if (body) init.body = JSON.stringify(body);
+
+		const response = await fetch(apiUrl + endpoint, init);
 
 		if (response.ok) {
 			/** @type {FurzonaResponse<T>} */
