@@ -87,7 +87,7 @@ header button {
 	background: #2d3240;
 	border-radius: 12px;
 	color: #f3f6fb;
-	padding: 10px 14px;
+	/* padding: 10px 14px; */
 	font: inherit;
 	cursor: pointer;
 	transition: transform .2s ease, background .2s ease;
