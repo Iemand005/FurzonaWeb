@@ -93,10 +93,7 @@ class Furzona extends RequestService {
 	 */
 	async login(email, password) {
 
-		const response = await this.post("login", {
-			email,
-			password
-		});
+		const response = await this.post("login", { email, password });
 
 		this.token = response.s;
 

@@ -55,11 +55,6 @@ interface FurzonaSettings {
 	maxImages: number;
 }
 
-interface FurzonaConfigResponse {
-	result: FurzonaSettings;
-}
-
-
 interface LoginRequest {
 	email: string;
 	password: string;
@@ -104,8 +99,6 @@ interface FurzonaPostAuthor extends FurzonaUserBase {
 	o: boolean;
 }
 
-type LoginResponse = FurzonaResponse<FurzonaUser>;
-
 interface FurzonaResponse<T> {
 	result: T;
 }
@@ -149,12 +142,6 @@ interface FurzonaPost {
 	updatedAt: string; // ISO date string
 }
 
-interface FurzonaPostsResponse {
-	result: FurzonaPost[];
-}
-
-type FurzonaPostResponse = FurzonaResponse<FurzonaPost>;
-
 interface FurzonaProfileStats {
 	posts: number;
 	liked: number;
@@ -186,14 +173,10 @@ interface FurzonaSignupRequest extends FurzonaCredentials {
 	gte16: boolean;
 }
 
-type ProfileResponse = FurzonaResponse<FurzonaProfile>;
-
 interface LikeToggleResult {
 	liked: boolean;
 	likes: number;
 }
-
-type LikeToggleResponse = FurzonaResponse<LikeToggleResult>;
 
 interface ApiEndpoints {
 	[endpoint: string]: {
