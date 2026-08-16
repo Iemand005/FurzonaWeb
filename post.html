@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Posts</title>
+	<title>Post</title>
 	<meta name="view-transition" content="same-origin">
 	<style>@view-transition { navigation: auto; }</style>
 
-	<meta name="description" content="View a Furzona Lite profile.">
+	<meta name="description" content="View a Furzona Lite post.">
 	<meta property="og:site_name" content="Furzona Lite">
-	<meta property="og:title" content="Profile — Furzona Lite">
-	<meta property="og:description" content="View a Furzona Lite profile.">
-	<meta property="og:type" content="profile">
-	<meta property="og:url" content="https://iemand005.github.io/FurzonaWeb/profile.html">
+	<meta property="og:title" content="Post — Furzona Lite">
+	<meta property="og:description" content="View a Furzona Lite post.">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="https://iemand005.github.io/FurzonaWeb/post.html">
 	<meta property="og:image" content="https://iemand005.github.io/FurzonaWeb/Logo.png">
 	<meta name="twitter:card" content="summary_large_image">
 
@@ -27,6 +27,25 @@
 	<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 <body>
-	
+	<header>
+		<section>
+			<img src="Logo.png" alt="Furzona logo" srcset="">
+			<h1>Post</h1>
+		</section>
+		<section>
+			<button type="button" id="back-to-home">Back</button>
+			<button type="button" data-nav-search>Search</button>
+			<button type="button">Menu</button>
+		</section>
+	</header>
+	<main>
+		<article class="post-card" id="post-card">
+			<section class="profile" id="post-author"></section>
+			<h2 id="post-title">Loading...</h2>
+			<p id="post-meta" class="meta"></p>
+			<div id="post-media"></div>
+			<p id="post-text"></p>
+		</article>
+	</main>
 </body>
 </html>

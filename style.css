@@ -128,7 +128,7 @@ body {
 	overflow: auto;
 }
 
-header, button, .profile-card, .stat, .post, .banner, .avatar {
+header, button, .profile-card, .post-card, .stat, .post, .banner, .avatar {
 	border: 1px solid rgba(255,255,255,.08);
 }
 
@@ -381,6 +381,51 @@ main {
 
 .stat strong { font-size: 1.3rem; }
 .stat span { color: #b9c3d4; font-size: 0.9rem; }
+
+.post-card {
+	background: #1d212a;
+	border-radius: 18px;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.post-card .pfp {
+	width: 48px;
+	height: 48px;
+	object-fit: cover;
+	border-radius: 14px;
+}
+
+.post-card h2 {
+	margin: 14px 0 0;
+	font-size: 1.6rem;
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+.post-card .meta {
+	margin-top: 8px;
+}
+
+.post-card #post-text {
+	margin: 16px 0 0;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	color: #edf3ff;
+}
+
+#post-media {
+	margin-top: 16px;
+	display: grid;
+	gap: 12px;
+}
+
+#post-media img {
+	width: 100%;
+	border-radius: 14px;
+	background: #131721;
+}
 
 @media (max-width: 640px) {
 	main, .profile-page { padding-left: 12px; padding-right: 12px; }

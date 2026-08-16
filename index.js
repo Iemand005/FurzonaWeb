@@ -70,7 +70,8 @@ if (postList instanceof HTMLUListElement) {
 		pfp.dataset.transitionId = post.u.id;
 		profileCard.appendChild(pfp);
 
-		profileCard.onclick = () => {
+		profileCard.onclick = (event) => {
+			event.stopPropagation();
 			clickedPfp = pfp;
 			clickedName = username;
 			const params = new URLSearchParams({ id: post.u.id });
@@ -95,6 +96,11 @@ if (postList instanceof HTMLUListElement) {
 			image.alt = post.t || post.u.username || "Post image";
 			listItem.appendChild(image);
 		}
+
+		listItem.style.cursor = "pointer";
+		listItem.onclick = () => {
+			window.location.href = "post.html?id=" + encodeURIComponent(post.id);
+		};
 
 		return listItem;
 	};
