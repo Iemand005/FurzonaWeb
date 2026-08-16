@@ -16,7 +16,7 @@ class RequestService {
 	 * @template T
 	 * @param {*} endpoint 
 	 * @param {*} body 
-	 * @returns {T}
+	 * @returns {Promise<T>}
 	 */
 	async post(endpoint, body = {}) {
 		
@@ -122,8 +122,7 @@ class Furzona extends RequestService {
 
 	/** @param {string} post  */
 	async likePost(post) {
-		/** @type {LikeToggleResponse}*/
-		const response = await furzona.post("favorite", { post });
+		const response = await /** @type {typeof this.post<LikeToggleResponse>} */ (this.post)("favorite", { post });
 		return response.result;
 
 	}

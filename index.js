@@ -150,7 +150,7 @@ if (postList instanceof HTMLUListElement) {
 			listItem.appendChild(image);
 		}
 
-		const likeButton = document.createElement("button");
+const likeButton = document.createElement("button");
 		likeButton.type = "button";
 		likeButton.className = "like-btn";
 		const heart = document.createElement("img");
@@ -159,10 +159,22 @@ if (postList instanceof HTMLUListElement) {
 		const likeCount = document.createElement("span");
 		likeCount.className = "like-count";
 		likeCount.textContent = String(post.l ?? 0);
-		likeButton.appendChild(heart);
-		likeButton.appendChild(likeCount);
-		likeButton.addEventListener("click", (event) => {
+		likeButton.append(heart, likeCount);
+		let liking = false;
+		likeButton.addEventListener("click", async (event) => {
 			event.stopPropagation();
+			if (liking) return;
+			liking = true;
+			try {
+				const result = await furzona.likePost(post.id);
+				likeButton.classList.toggle("liked", !!result.liked);
+				heart.src = result.liked ? "Assets/heart-liked.svg" : "Assets/heart.svg";
+				likeCount.textContent = String(result.likes);
+			} catch (error) {
+				console.error("Failed to like post:", error);
+			} finally {
+				liking = false;
+			}
 		});
 		listItem.appendChild(likeButton);
 

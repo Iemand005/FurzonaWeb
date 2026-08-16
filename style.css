@@ -355,6 +355,12 @@ main {
 	filter: none;
 }
 
+.post .like-btn.liked {
+	color: #ff8aac;
+	background: #33222b;
+	border-color: #ff5c8a55;
+}
+
 .profile, .profile-top {
 	display: flex;
 	align-items: center;
