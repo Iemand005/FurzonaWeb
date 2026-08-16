@@ -1,8 +1,5 @@
-import "core-js/modules/esnext.iterator.constructor.js";
-import "core-js/modules/esnext.iterator.for-each.js";
-import "core-js/modules/web.url-search-params.delete.js";
-import "core-js/modules/web.url-search-params.has.js";
-import "core-js/modules/web.url-search-params.size.js";
+"use strict";
+
 var params = new URLSearchParams(window.location.search);
 var id = params.get("id");
 var authorEl = document.getElementById("post-author");

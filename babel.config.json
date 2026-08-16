@@ -10,15 +10,6 @@
 			}
 		]
 	],
-	"plugins": [
-		[
-			"babel-plugin-polyfill-corejs3",
-			{
-				"method": "usage-global",
-				"version": "3.38"
-			}
-		]
-	],
 	"ignore": [
 		"dist",
 		"node_modules"

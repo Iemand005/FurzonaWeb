@@ -1,5 +1,5 @@
-import "core-js/modules/esnext.iterator.constructor.js";
-import "core-js/modules/esnext.iterator.for-each.js";
+"use strict";
+
 document.addEventListener("DOMContentLoaded", function () {
   var _window$navigation2;
   var searchButtons = document.querySelectorAll("[data-nav-search]");

@@ -1,3 +1,5 @@
+"use strict";
+
 var loginForm = document.getElementById("login-form");
 function redirectIfLoggedIn() {
   if (furzona.isLoggedIn()) location.href = "index.html";

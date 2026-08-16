@@ -1,6 +1,5 @@
-import "core-js/modules/web.url-search-params.delete.js";
-import "core-js/modules/web.url-search-params.has.js";
-import "core-js/modules/web.url-search-params.size.js";
+"use strict";
+
 (function () {
   var pageName = function pageName(url) {
     var path = new URL(url).pathname;
