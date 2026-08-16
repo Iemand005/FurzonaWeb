@@ -192,7 +192,7 @@ interface ApiEndpoints {
 		response: FurzonaUser;
 	};
 	user: {
-		body: { userId: number };
+		body: { email: string, password: string, gte16: boolean };
 		response: FurzonaUser;
 	};
 	profile: {
