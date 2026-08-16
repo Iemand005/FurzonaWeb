@@ -6,23 +6,6 @@ const nameEl = document.getElementById("profile-name");
 const metaEl = document.getElementById("profile-meta");
 const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
-const avatarParam = params.get("avatar");
-const bannerParam = params.get("banner");
-const nameParam = params.get("username");
-
-if (bannerEl && bannerParam) bannerEl.src = bannerParam;
-if (avatarEl && avatarParam) avatarEl.src = avatarParam;
-if (nameEl && nameParam) nameEl.textContent = nameParam;
-
-const transitionName = id ? `profile-avatar-${id}` : "profile-avatar";
-const nameTransitionName = id ? `profile-name-${id}` : "profile-name";
-
-if (avatarEl) {
-	avatarEl.style.viewTransitionName = transitionName;
-}
-if (nameEl) {
-	nameEl.style.viewTransitionName = nameTransitionName;
-}
 
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
