@@ -3,7 +3,7 @@ const postList = document.getElementById("posts-list");
 let clickedPfp = null;
 let clickedName = null;
 
-window.addEventListener("pageswap", async (event) => {
+window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !clickedPfp) return;
 	document.querySelectorAll(".pfp").forEach(img => {
 		img.style.viewTransitionName = "";
@@ -13,13 +13,11 @@ window.addEventListener("pageswap", async (event) => {
 	});
 	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
 	if (clickedName) clickedName.style.viewTransitionName = `profile-name-${clickedPfp.dataset.transitionId}`;
-	try {
-		await event.viewTransition.finished;
-	} catch {
-		// ignore
-	}
-	clickedPfp.style.viewTransitionName = "";
-	if (clickedName) clickedName.style.viewTransitionName = "";
+	const cleanup = () => {
+		clickedPfp.style.viewTransitionName = "";
+		if (clickedName) clickedName.style.viewTransitionName = "";
+	};
+	event.viewTransition.ready.then(cleanup, cleanup);
 });
 
 window.addEventListener('pageswap', (e) => {
@@ -49,7 +47,7 @@ window.addEventListener("pagereveal", (e) => {
     pfp.style.viewTransitionName = "";
     if (nameEl) nameEl.style.viewTransitionName = "";
   };
-  e.viewTransition.finished.then(cleanup, cleanup);
+  e.viewTransition.ready.then(cleanup, cleanup);
 });
 
 if (postList instanceof HTMLUListElement) {

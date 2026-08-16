@@ -154,6 +154,8 @@ header {
 	border-right: none;
 
 	z-index: 100;
+
+	transition: all 100ms linear;
 }
 
 header img {
