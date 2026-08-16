@@ -15,7 +15,7 @@ class RequestService {
 	 * @param {ApiEndpoints[K]["body"]} body 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
-	async request(endpoint, method = "GET", body = null) {
+	async request(endpoint, method = "GET", body) {
 		/** @type {RequestInit} */
 		const init = { method };
 
@@ -27,7 +27,7 @@ class RequestService {
 		const response = await fetch(apiUrl + endpoint, init);
 
 		if (response.ok) {
-			/** @type {FurzonaResponse<T>} */
+			/** @type {FurzonaResponse<ApiEndpoints[K]["response"]>} */
 			const result = await response.json();
 			return result.result;
 		}
