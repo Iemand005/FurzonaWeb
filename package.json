@@ -2,7 +2,9 @@
 	"scripts": {
 		"build:js": "babel . -d dist",
 		"build:assets": "cpy \"**/*.{html,css}\" dist --parents",
-		"build": "npm run build:js && npm run build:assets"
+		"build:polyfill": "cpy \"node_modules/core-js-bundle/minified.js\" dist --rename=polyfill.js",
+
+		"build": "npm run build:js && npm run build:assets && npm run build:polyfill"
 	},
 	"devDependencies": {
 		"@babel/cli": "^8.0.4",
