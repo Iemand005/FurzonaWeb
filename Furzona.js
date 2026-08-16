@@ -16,25 +16,6 @@ class RequestService {
 	 * @returns {Promise<T>}
 	 */
 	async request(endpoint, method = "GET", body = {}) {
-
-	}
-
-	/**
-	 * @template T
-	 * @param {string} endpoint
-	 * @returns {Promise<T>}
-	 */
-	async get(endpoint) {
-		return await fetch(apiUrl + endpoint).then(r => r.json());
-	}
-
-	/**
-	 * @template T
-	 * @param {string} endpoint 
-	 * @param {*} body 
-	 * @returns {Promise<T>}
-	 */
-	async post(endpoint, body = {}) {
 		/** @type {HeadersInit} */
 		const headers = {};
 
@@ -66,6 +47,25 @@ class RequestService {
 		errorContainer.innerHTML = respTxt;
 
 		throw respTxt;
+	}
+
+	/**
+	 * @template T
+	 * @param {string} endpoint
+	 * @returns {Promise<T>}
+	 */
+	async get(endpoint) {
+		return await fetch(apiUrl + endpoint).then(r => r.json());
+	}
+
+	/**
+	 * @template T
+	 * @param {string} endpoint 
+	 * @param {*} body 
+	 * @returns {Promise<T>}
+	 */
+	async post(endpoint, body = {}) {
+		return /** @type {typeof this.request<T>} */ (this.request)("favorite", "POST", body);
 	}
 }
 
