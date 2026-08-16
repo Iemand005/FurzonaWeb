@@ -10,16 +10,7 @@ const statsEl = document.getElementById("profile-stats");
 const backButton = document.getElementById("back-to-home");
 if (backButton) {
 	backButton.addEventListener("click", () => {
-		const nav = window.navigation;
-		const idx = nav?.currentEntry?.index ?? -1;
-		const prev = idx > 0 ? nav.entries()[idx - 1] : null;
-		const referrerOrigin = document.referrer ? new URL(document.referrer).origin : null;
-		const canGoBackInApp = (prev && new URL(prev.url).origin === location.origin) || referrerOrigin === location.origin;
-		if (canGoBackInApp) {
-			history.back();
-		} else {
-			location.replace("index.html");
-		}
+		history.back();
 	});
 }
 
