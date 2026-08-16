@@ -20,9 +20,18 @@
 			imgEl.hidden = false;
 		}
 
-		if (pfpEl) pfpEl.style.viewTransitionName = id ? `post-avatar-${id}` : "post-avatar";
-		if (nameEl) nameEl.style.viewTransitionName = id ? `post-name-${id}` : "post-name";
-		if (titleEl) titleEl.style.viewTransitionName = id ? `post-title-${id}` : "post-title";
-		if (imgEl && imgParam) imgEl.style.viewTransitionName = id ? `post-image-${id}` : "post-image";
+		const fromURL = window.navigation?.activation?.from?.url;
+		const from = fromURL ? new URL(fromURL) : null;
+		const fromProfileId = from && from.pathname.endsWith("profile.html") ? from.searchParams.get("id") : null;
+
+		if (fromProfileId) {
+			if (pfpEl) pfpEl.style.viewTransitionName = `profile-avatar-${fromProfileId}`;
+			if (nameEl) nameEl.style.viewTransitionName = `profile-name-${fromProfileId}`;
+		} else {
+			if (pfpEl) pfpEl.style.viewTransitionName = id ? `post-avatar-${id}` : "post-avatar";
+			if (nameEl) nameEl.style.viewTransitionName = id ? `post-name-${id}` : "post-name";
+			if (titleEl) titleEl.style.viewTransitionName = id ? `post-title-${id}` : "post-title";
+			if (imgEl && imgParam) imgEl.style.viewTransitionName = id ? `post-image-${id}` : "post-image";
+		}
 	});
 })();
