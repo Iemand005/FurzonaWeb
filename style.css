@@ -132,6 +132,11 @@ header, button, .profile-card, .stat, .post, .banner, .avatar {
 	border: 1px solid rgba(255,255,255,.08);
 }
 
+@keyframes reveal-border {
+  from { border-bottom-color: transparent; }
+  to   { border-bottom-color: #ddd; }
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -154,6 +159,10 @@ header {
 	border-right: none;
 
 	z-index: 100;
+
+	animation: reveal-border linear both;
+	animation-timeline: scroll(root block);
+	animation-range: 0 40px;
 
 	/* transition: all 300ms linear, margin 100ms ease-out; */
 }
