@@ -60,8 +60,10 @@
 }
 
 html, body, * {
-  scrollbar-width: thin;
-  scrollbar-color: #2d3240 #16181D;
+	scrollbar-width: thin;
+	scrollbar-color: #2d3240 #16181D;
+
+    overscroll-behavior-x: none;
 }
 
 *::-webkit-scrollbar {
