@@ -187,6 +187,10 @@ interface LikeToggleResult {
 type LikeToggleResponse = FurzonaResponse<LikeToggleResult>;
 
 interface ApiEndpoints {
+	[endpoint: string]: {
+		body?: unknown;
+		response: unknown;
+	};
 	login: {
 		body: LoginRequest;
 		response: FurzonaUser;
@@ -196,11 +200,9 @@ interface ApiEndpoints {
 		response: FurzonaUser;
 	};
 	profile: {
-		body: undefined;
 		response: FurzonaProfile;
 	};
 	post: {
-		body: undefined;
 		response: FurzonaPost;
 	};
 	posts: {
