@@ -30,7 +30,7 @@ class RequestService {
 			headers
 		});
 
-		if (response.ok) return response.json();
+		if (response.ok) [return] response.json();
 
 		const respTxt = await response.text();
 
@@ -122,7 +122,7 @@ class Furzona extends RequestService {
 
 	/** @param {string} post  */
 	async likePost(post) {
-		const response = await /** @type {typeof this.post<LikeToggleResponse>} */ (this.post)("favorite", { post });
+		const response = await /** @type {typeof this.post<LikeToggleResult>} */ (this.post)("favorite", { post });
 		return response.result;
 
 	}
