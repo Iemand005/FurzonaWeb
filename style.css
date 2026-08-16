@@ -45,7 +45,6 @@ body {
 	/* height: 100vh; */
 	overflow: auto;
 }
-
 header, button, .profile-card, .stat, .post, .banner, .avatar {
 	border: 1px solid rgba(255,255,255,.08);
 }
@@ -60,6 +59,18 @@ header {
 	position: sticky;
 	top: 0;
 	backdrop-filter: blur(10px);
+}
+
+@supports (top: env(titlebar-area-y)) {
+	header {
+		top: env(titlebar-area-y, 0);
+		left: env(titlebar-area-x, 0);
+		width: env(titlebar-area-width, 100%);
+		height: env(titlebar-area-height, auto);
+		min-height: env(titlebar-area-height, auto);
+		-webkit-app-region: drag;
+		app-region: drag;
+	}
 }
 
 header > section {
@@ -80,6 +91,13 @@ header button {
 	font: inherit;
 	cursor: pointer;
 	transition: transform .2s ease, background .2s ease;
+}
+
+@supports (top: env(titlebar-area-y)) {
+	header button {
+		-webkit-app-region: no-drag;
+		app-region: no-drag;
+	}
 }
 
 header button:hover { background: #3a4154; transform: translateY(-1px); }
