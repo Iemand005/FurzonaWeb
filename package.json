@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build:js": "babel src -d dist",
+		"build:js": "babel . -d dist",
 		"build:assets": "cpy \"**/*.{html,css}\" dist --parents",
 		"build": "npm run build:js && npm run build:assets"
 	},
