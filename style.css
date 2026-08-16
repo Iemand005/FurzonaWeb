@@ -63,6 +63,8 @@ header {
 	border-top: none;
 	border-left: none;
 	border-right: none;
+
+	z-index: 100;
 }
 
 @supports (top: env(titlebar-area-y)) {
