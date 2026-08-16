@@ -58,10 +58,10 @@ class RequestService {
 	}
 
 	/**
-	 * @template T
-	 * @param {string} endpoint 
-	 * @param {*} body 
-	 * @returns {Promise<T>}
+	 * @template {keyof ApiEndpoints} K
+	 * @param {K} endpoint 
+	 * @param {ApiEndpoints[K]["body"]} body 
+	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async post(endpoint, body = {}) {
 		return /** @type {typeof this.request<T>} */ (this.request)(endpoint, "POST", body);
