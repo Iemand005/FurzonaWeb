@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"build:js": "babel src -d dist",
-		"build:assets": "cpy \"src/**/*.{html,css}\" dist --parents",
+		"build:assets": "cpy \"**/*.{html,css}\" dist --parents",
 		"build": "npm run build:js && npm run build:assets"
 	},
 	"devDependencies": {
