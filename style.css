@@ -306,7 +306,7 @@ main {
 	gap: 10px;
 }
 
-.profile { padding-bottom: 6px; }
+.profile {/* padding-bottom: 6px; */background: black;border-radius: 14px;}
 
 .profile p, .meta {
 	margin: 0;
