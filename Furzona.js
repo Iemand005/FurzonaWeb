@@ -126,21 +126,11 @@ class Furzona extends RequestService {
 		return response.result;
 	}
 	/** @param {string} id  */
-	async getProfile(id) {
-		return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("profile/" + id);
-	}
-
+	async getProfile(id) { return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("profile/" + id); }
 	/** @param {string} id  */
-	async getPost(id) {
-		return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("post/" + id);
-	}
-
+	async getPost(id) { return /** @type {typeof this.post<FurzonaProfile>} */ (this.get)("post/" + id); }
 	/** @param {string} post  */
-	async likePost(post) {
-		const response = await /** @type {typeof this.post<LikeToggleResult>} */ (this.post)("favorite", { post });
-		return response;
-
-	}
+	async likePost(post) { return /** @type {typeof this.post<LikeToggleResult>} */ (this.post)("favorite", { post }); }
 
 	set token(token) {
 		if (!token) throw new Error("Tried to assing an empty token.");
