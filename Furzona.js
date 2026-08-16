@@ -8,6 +8,16 @@ class RequestService {
 		this._token = null;
 	}
 
+	/**
+	 * @template T
+	 * @param {string} endpoint 
+	 * @param {*} body 
+	 * @returns {Promise<T>}
+	 */
+	async request(endpoint, method = "GET", body = {}) {}
+
+	}
+
 	async get(endpoint) {
 		return await fetch(apiUrl + endpoint).then(r => r.json());
 	}
@@ -15,11 +25,11 @@ class RequestService {
 	/**
 	 * @template T
 	 * @param {string} endpoint 
-	 * @param {objectW} body 
+	 * @param {*} body 
 	 * @returns {Promise<T>}
 	 */
 	async post(endpoint, body = {}) {
-		
+		/** @type {HeadersInit} */
 		const headers = {};
 
 		if (this._token) headers["Authorization"] = this._token;
@@ -127,7 +137,7 @@ class Furzona extends RequestService {
 	/** @param {string} post  */
 	async likePost(post) {
 		const response = await /** @type {typeof this.post<LikeToggleResult>} */ (this.post)("favorite", { post });
-		return response.result;
+		return response;
 
 	}
 
