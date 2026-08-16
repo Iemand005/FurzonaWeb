@@ -1,71 +1,78 @@
-const postList = document.getElementById("posts-list");
-let clickedPfp = null;
-let clickedName = null;
-let clickedPost = null;
-window.addEventListener("pageswap", event => {
+import "core-js/modules/esnext.iterator.constructor.js";
+import "core-js/modules/esnext.iterator.for-each.js";
+import "core-js/modules/web.url-search-params.delete.js";
+import "core-js/modules/web.url-search-params.has.js";
+import "core-js/modules/web.url-search-params.size.js";
+var postList = document.getElementById("posts-list");
+var clickedPfp = null;
+var clickedName = null;
+var clickedPost = null;
+window.addEventListener("pageswap", function (event) {
   if (!event.viewTransition || !clickedPfp) return;
-  document.querySelectorAll(".pfp").forEach(img => {
+  document.querySelectorAll(".pfp").forEach(function (img) {
     img.style.viewTransitionName = "";
   });
-  document.querySelectorAll(".profile p").forEach(p => {
+  document.querySelectorAll(".profile p").forEach(function (p) {
     p.style.viewTransitionName = "";
   });
-  clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
-  if (clickedName) clickedName.style.viewTransitionName = `profile-name-${clickedPfp.dataset.transitionId}`;
-  const cleanup = () => {
+  clickedPfp.style.viewTransitionName = "profile-avatar-".concat(clickedPfp.dataset.transitionId);
+  if (clickedName) clickedName.style.viewTransitionName = "profile-name-".concat(clickedPfp.dataset.transitionId);
+  var cleanup = function cleanup() {
     clickedPfp.style.viewTransitionName = "";
     if (clickedName) clickedName.style.viewTransitionName = "";
   };
   event.viewTransition.ready.then(cleanup, cleanup);
 });
-window.addEventListener('pageswap', e => {
+window.addEventListener('pageswap', function (e) {
   if (e.viewTransition) {
     console.log('pageswap OK:', e.activation.entry.url);
-    e.viewTransition.finished.catch(err => console.warn('pageswap aborted:', err.name));
+    e.viewTransition.finished.catch(function (err) {
+      return console.warn('pageswap aborted:', err.name);
+    });
   } else {
     console.log('pageswap: NO transition. from:', location.href, '->', e.activation.entry.url);
   }
 });
-window.addEventListener('pagereveal', e => {
+window.addEventListener('pagereveal', function (e) {
   console.log('pagereveal', e.viewTransition ? 'OK' : 'NONE');
 });
-window.addEventListener("pagereveal", e => {
+window.addEventListener("pagereveal", function (e) {
+  var _window$navigation, _pfp$closest;
   if (!e.viewTransition) return;
-  const fromURL = window.navigation?.activation?.from?.url;
+  var fromURL = (_window$navigation = window.navigation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.activation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.from) === null || _window$navigation === void 0 ? void 0 : _window$navigation.url;
   if (!fromURL) return;
-  const id = new URL(fromURL).searchParams.get("id");
+  var id = new URL(fromURL).searchParams.get("id");
   if (!id) return;
-  const pfp = document.querySelector(`[data-transition-id="${id}"]`);
+  var pfp = document.querySelector("[data-transition-id=\"".concat(id, "\"]"));
   if (!pfp) return;
-  const nameEl = pfp.closest(".profile")?.querySelector("p");
-  pfp.style.viewTransitionName = `profile-avatar-${id}`;
-  if (nameEl) nameEl.style.viewTransitionName = `profile-name-${id}`;
-  const cleanup = () => {
+  var nameEl = (_pfp$closest = pfp.closest(".profile")) === null || _pfp$closest === void 0 ? void 0 : _pfp$closest.querySelector("p");
+  pfp.style.viewTransitionName = "profile-avatar-".concat(id);
+  if (nameEl) nameEl.style.viewTransitionName = "profile-name-".concat(id);
+  var cleanup = function cleanup() {
     pfp.style.viewTransitionName = "";
     if (nameEl) nameEl.style.viewTransitionName = "";
   };
   e.viewTransition.ready.then(cleanup, cleanup);
 });
-window.addEventListener("pageswap", event => {
+window.addEventListener("pageswap", function (event) {
   if (!event.viewTransition || !clickedPost) return;
-  const {
-    id,
-    pfp,
-    username,
-    title,
-    image
-  } = clickedPost;
-  document.querySelectorAll(".pfp").forEach(img => {
+  var _clickedPost = clickedPost,
+    id = _clickedPost.id,
+    pfp = _clickedPost.pfp,
+    username = _clickedPost.username,
+    title = _clickedPost.title,
+    image = _clickedPost.image;
+  document.querySelectorAll(".pfp").forEach(function (img) {
     img.style.viewTransitionName = "";
   });
-  document.querySelectorAll(".profile p").forEach(p => {
+  document.querySelectorAll(".profile p").forEach(function (p) {
     p.style.viewTransitionName = "";
   });
-  pfp.style.viewTransitionName = `post-avatar-${id}`;
-  username.style.viewTransitionName = `post-name-${id}`;
-  if (title) title.style.viewTransitionName = `post-title-${id}`;
-  if (image) image.style.viewTransitionName = `post-image-${id}`;
-  const cleanup = () => {
+  pfp.style.viewTransitionName = "post-avatar-".concat(id);
+  username.style.viewTransitionName = "post-name-".concat(id);
+  if (title) title.style.viewTransitionName = "post-title-".concat(id);
+  if (image) image.style.viewTransitionName = "post-image-".concat(id);
+  var cleanup = function cleanup() {
     pfp.style.viewTransitionName = "";
     username.style.viewTransitionName = "";
     if (title) title.style.viewTransitionName = "";
@@ -73,25 +80,26 @@ window.addEventListener("pageswap", event => {
   };
   event.viewTransition.ready.then(cleanup, cleanup);
 });
-window.addEventListener("pagereveal", e => {
+window.addEventListener("pagereveal", function (e) {
+  var _window$navigation2;
   if (!e.viewTransition) return;
-  const fromURL = window.navigation?.activation?.from?.url;
+  var fromURL = (_window$navigation2 = window.navigation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.activation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.from) === null || _window$navigation2 === void 0 ? void 0 : _window$navigation2.url;
   if (!fromURL) return;
-  const url = new URL(fromURL);
+  var url = new URL(fromURL);
   if (!url.pathname.endsWith("post.html")) return;
-  const postId = url.searchParams.get("id");
+  var postId = url.searchParams.get("id");
   if (!postId) return;
-  const item = document.querySelector(`[data-post-id="${postId}"]`);
+  var item = document.querySelector("[data-post-id=\"".concat(postId, "\"]"));
   if (!item) return;
-  const pfp = item.querySelector(".pfp");
-  const username = item.querySelector(".profile p");
-  const title = item.querySelector("h2");
-  const image = item.querySelector(":scope > img");
-  if (pfp) pfp.style.viewTransitionName = `post-avatar-${postId}`;
-  if (username) username.style.viewTransitionName = `post-name-${postId}`;
-  if (title) title.style.viewTransitionName = `post-title-${postId}`;
-  if (image) image.style.viewTransitionName = `post-image-${postId}`;
-  const cleanup = () => {
+  var pfp = item.querySelector(".pfp");
+  var username = item.querySelector(".profile p");
+  var title = item.querySelector("h2");
+  var image = item.querySelector(":scope > img");
+  if (pfp) pfp.style.viewTransitionName = "post-avatar-".concat(postId);
+  if (username) username.style.viewTransitionName = "post-name-".concat(postId);
+  if (title) title.style.viewTransitionName = "post-title-".concat(postId);
+  if (image) image.style.viewTransitionName = "post-image-".concat(postId);
+  var cleanup = function cleanup() {
     if (pfp) pfp.style.viewTransitionName = "";
     if (username) username.style.viewTransitionName = "";
     if (title) title.style.viewTransitionName = "";
@@ -100,29 +108,30 @@ window.addEventListener("pagereveal", e => {
   e.viewTransition.ready.then(cleanup, cleanup);
 });
 if (postList instanceof HTMLUListElement) {
-  let isLoading = false;
-  let hasMorePosts = true;
-  const createPostElement = (/** @type {FurzonaPost} */post) => {
-    const listItem = document.createElement("li");
+  var isLoading = false;
+  var hasMorePosts = true;
+  var createPostElement = function createPostElement(/** @type {FurzonaPost} */post) {
+    var _post$l;
+    var listItem = document.createElement("li");
     listItem.className = "post";
     listItem.dataset.postId = post.id;
-    const timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
+    var timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
     listItem.dataset.date = String(timestamp);
-    const profileCard = document.createElement("section");
+    var profileCard = document.createElement("section");
     profileCard.className = "profile";
     profileCard.style.cursor = "pointer";
-    const pfp = document.createElement("img");
+    var pfp = document.createElement("img");
     pfp.classList.add("pfp");
     pfp.src = furzona.getProfilePictureUrl(post.u);
     pfp.alt = post.u.username;
     pfp.dataset.transitionId = post.u.id;
     profileCard.appendChild(pfp);
-    profileCard.onclick = event => {
+    profileCard.onclick = function (event) {
       event.stopPropagation();
       clickedPfp = pfp;
       clickedName = username;
       clickedPost = null;
-      const params = new URLSearchParams({
+      var params = new URLSearchParams({
         id: post.u.id
       });
       if (post.u.i) params.set("avatar", furzona.getProfilePictureUrl(post.u));
@@ -130,46 +139,46 @@ if (postList instanceof HTMLUListElement) {
       if (post.u.username) params.set("username", post.u.username);
       window.location.href = "profile.html?" + params.toString();
     };
-    const username = document.createElement("p");
+    var username = document.createElement("p");
     username.textContent = post.u.username;
     profileCard.appendChild(username);
     listItem.appendChild(profileCard);
-    const title = document.createElement("h2");
+    var title = document.createElement("h2");
     title.textContent = post.t || "";
     listItem.appendChild(title);
-    let image = null;
+    var image = null;
     if (post.m && post.m.length > 0) {
       image = document.createElement("img");
       image.src = furzona.getMediaUrl(post.m[0]);
       image.alt = post.t || post.u.username || "Post image";
       listItem.appendChild(image);
     }
-    const likeButton = document.createElement("button");
+    var likeButton = document.createElement("button");
     likeButton.type = "button";
     likeButton.className = "like-btn";
-    const heart = document.createElement("img");
+    var heart = document.createElement("img");
     heart.src = "Assets/heart.svg";
     heart.alt = "";
-    const likeCount = document.createElement("span");
+    var likeCount = document.createElement("span");
     likeCount.className = "like-count";
-    likeCount.textContent = String(post.l ?? 0);
+    likeCount.textContent = String((_post$l = post.l) !== null && _post$l !== void 0 ? _post$l : 0);
     likeButton.append(heart, likeCount);
-    likeButton.addEventListener("click", event => {
+    likeButton.addEventListener("click", function (event) {
       event.stopPropagation();
     });
     listItem.appendChild(likeButton);
     listItem.style.cursor = "pointer";
-    listItem.onclick = () => {
+    listItem.onclick = function () {
       clickedPfp = null;
       clickedName = null;
       clickedPost = {
         id: post.id,
-        pfp,
-        username,
-        title,
-        image
+        pfp: pfp,
+        username: username,
+        title: title,
+        image: image
       };
-      const postParams = new URLSearchParams({
+      var postParams = new URLSearchParams({
         id: post.id
       });
       if (post.u.i) postParams.set("avatar", furzona.getProfilePictureUrl(post.u));
@@ -180,33 +189,33 @@ if (postList instanceof HTMLUListElement) {
     };
     return listItem;
   };
-  const loadPosts = date => {
+  var loadPosts = function loadPosts(date) {
     if (isLoading || !hasMorePosts) return;
     isLoading = true;
-    furzona.getPosts(date).then(posts => {
+    furzona.getPosts(date).then(function (posts) {
       if (!posts || posts.length === 0) {
         hasMorePosts = false;
         isLoading = false;
         return;
       }
-      posts.forEach(post => {
+      posts.forEach(function (post) {
         postList.appendChild(createPostElement(post));
       });
-      const lastPost = posts[posts.length - 1];
-      const lastDate = lastPost?.createdAt || lastPost?.updatedAt || null;
+      var lastPost = posts[posts.length - 1];
+      var lastDate = (lastPost === null || lastPost === void 0 ? void 0 : lastPost.createdAt) || (lastPost === null || lastPost === void 0 ? void 0 : lastPost.updatedAt) || null;
       if (!lastDate) hasMorePosts = false;
       isLoading = false;
-    }).catch(error => {
+    }).catch(function (error) {
       console.error("Failed to load posts:", error);
       hasMorePosts = false;
       isLoading = false;
     });
   };
-  window.addEventListener("scroll", () => {
-    const reachedBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 200;
+  window.addEventListener("scroll", function () {
+    var reachedBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 200;
     if (!reachedBottom) return;
-    const lastPost = postList.lastElementChild;
-    const lastDate = lastPost instanceof HTMLElement ? Number(lastPost.dataset.date) : null;
+    var lastPost = postList.lastElementChild;
+    var lastDate = lastPost instanceof HTMLElement ? Number(lastPost.dataset.date) : null;
     if (lastDate) {
       loadPosts(lastDate);
     } else {

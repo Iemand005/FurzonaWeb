@@ -1,15 +1,15 @@
-const loginForm = document.getElementById("login-form");
+var loginForm = document.getElementById("login-form");
 function redirectIfLoggedIn() {
   if (furzona.isLoggedIn()) location.href = "index.html";
 }
 if (loginForm instanceof HTMLFormElement) {
-  loginForm.onsubmit = ev => {
+  loginForm.onsubmit = function (ev) {
     ev.preventDefault();
-    const formData = new FormData(ev.target);
-    const email = formData.get('email');
-    const password = formData.get('password');
+    var formData = new FormData(ev.target);
+    var email = formData.get('email');
+    var password = formData.get('password');
     console.log(email, password);
-    furzona.login(email, password).then(() => {
+    furzona.login(email, password).then(function () {
       redirectIfLoggedIn();
     });
   };
