@@ -14,8 +14,8 @@ class RequestService {
 
 	/**
 	 * @template T
-	 * @param {*} endpoint 
-	 * @param {*} body 
+	 * @param {string} endpoint 
+	 * @param {objectW} body 
 	 * @returns {Promise<T>}
 	 */
 	async post(endpoint, body = {}) {
