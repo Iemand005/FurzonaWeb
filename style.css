@@ -85,7 +85,7 @@ header img {
 				transparent calc(100% - (100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)) - 40px),
 				rgba(32,33,43,1) calc(100% - (100% - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100%)))
 			),
-			rgba(32,33,43,.96);
+			rgba(32, 33, 43, 0.805);
 		-webkit-app-region: drag;
 		app-region: drag;
 	}
