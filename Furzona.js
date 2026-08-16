@@ -87,7 +87,7 @@ class Furzona extends RequestService {
 
 		this.token = response.result.s;
 
-		return response;
+		return response.result;
 	}
 
 	async getPosts(date = 0) {
@@ -104,6 +104,7 @@ class Furzona extends RequestService {
 	 */
 	async createUser(email, password) {
 		const response = await this.post("user", { email, password, gte16: true });
+		return response.result;
 	}
 	/** @param {string} id  */
 	async getProfile(id) {
@@ -113,6 +114,7 @@ class Furzona extends RequestService {
 	}
 
 	set token(token) {
+		if (!token) throw new Error("Tried to assing an empty token.");
 		this._token = token;
 
 		localStorage.setItem("token", token);
@@ -122,7 +124,7 @@ class Furzona extends RequestService {
 		if (!this._token) this._token = localStorage.getItem("token");
 		return this._token;
 	}
-
+	/** @param {string} path */
 	getMediaUrl(path) {
 		return this._contentUrl + path;
 	}
