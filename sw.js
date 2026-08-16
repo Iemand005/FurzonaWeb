@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v4.0';
+const CACHE_NAME = 'app-cache-v1.0';
 const ASSETS = [
 	'./',
 	'./index.html',
@@ -37,23 +37,17 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
 	const request = event.request;
-
-	if (request.mode === 'navigate') {
-		event.respondWith(
-			fetch(request)
-				.then(response => {
-					const copy = response.clone();
-					caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-					return response;
-				})
-				.catch(() =>
-					caches.match(request).then(cached => cached || caches.match('./index.html'))
-				)
-		);
-		return;
-	}
+	if (request.method !== 'GET') return;
 
 	event.respondWith(
-		caches.match(request).then(response => response || fetch(request))
+		fetch(request)
+			.then(response => {
+				if (response.ok && new URL(request.url).origin === self.location.origin) {
+					const copy = response.clone();
+					caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+				}
+				return response;
+			})
+			.catch(() => caches.match(request))
 	);
 });

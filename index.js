@@ -2,9 +2,18 @@ const postList = document.getElementById("posts-list");
 
 let clickedPfp = null;
 
-window.addEventListener("pageswap", (event) => {
+window.addEventListener("pageswap", async (event) => {
 	if (!event.viewTransition || !clickedPfp) return;
+	document.querySelectorAll(".pfp").forEach(img => {
+		img.style.viewTransitionName = "";
+	});
 	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
+	try {
+		await event.viewTransition.finished;
+	} catch {
+		// ignore
+	}
+	clickedPfp.style.viewTransitionName = "";
 });
 
 window.addEventListener('pageswap', (e) => {
