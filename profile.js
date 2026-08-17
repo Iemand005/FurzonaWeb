@@ -20,7 +20,7 @@ window.addEventListener("pageswap", (event) => {
  * @param {FurzonaProfile} profile 
  */
 function renderProfile(profile) {
-	if (!(bannerEl instanceof HTMLImageElement) ) return;
+	if (!(bannerEl instanceof HTMLImageElement) || !(avatarEl instanceof HTMLImageElement)) return;
 
 	const user = profile.user;
 	const stats = profile.stats || {};
