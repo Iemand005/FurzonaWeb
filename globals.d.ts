@@ -69,8 +69,8 @@ interface FurzonaUserBase {
 	i: string | null;
 	/** Banner image path, null if not set */
 	b: string | null;
-	/** Priority/rank */
-	p: number;
+	/** Permission level */
+	p: PermissionLevel;
 	m: boolean;
 	/** Tag string, null if unset */
 	t: string | null;
