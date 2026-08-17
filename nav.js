@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (isLoginPage) return;
 
 	const addLoginLink = () => {
-		if (isLoginPage) return;
 		if (furzona.isLoggedIn) return;
 		if (!navSection) return;
 		const link = document.createElement("a");
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	const addProfileButton = () => {
-		if (isLoginPage) return;
 		const me = furzona.user;
 		if (!me || !furzona.isLoggedIn) return;
 		if (!navSection) return;
@@ -73,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	const addNewPostButton = () => {
-		if (window.location.pathname.endsWith("login.html")) return;
 		if (window.location.pathname.endsWith("create-post.html")) return;
 		if (!furzona.isLoggedIn) return;
 		if (!navSection || document.getElementById("nav-new-post")) return;
@@ -105,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const forwardButton = document.getElementById("nav-forward");
 	const syncForwardState = () => {
-		if (!forwardButton) return;
+		if (!(forwardButton instanceof HTMLButtonElement)) return;
 		const canGoForward = window.navigation ? window.navigation.canGoForward : true;
 		forwardButton.disabled = !canGoForward;
 	};
