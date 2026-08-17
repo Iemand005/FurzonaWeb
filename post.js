@@ -10,7 +10,7 @@ const mediaEl = document.getElementById("post-media");
 const firstImageEl = document.getElementById("post-first-image");
 const textEl = document.getElementById("post-text");
 const actionsEl = document.getElementById("post-actions");
-const commentsEl = document.getElementById("post-comments");
+const commentsEl = document.getElementById("post-comment-list");
 const commentForm = document.getElementById("comment-form");
 const commentInput = document.getElementById("comment-input");
 
