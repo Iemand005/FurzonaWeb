@@ -82,7 +82,7 @@ class RequestService {
 	 * @param {K | [K, ...string[]]} endpoint
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
-	gete = async endpoint => this.request(endpoint);
+	get = async endpoint => this.request(endpoint);
 	// async get(endpoint) { return this.request(endpoint); }
 
 	/**
