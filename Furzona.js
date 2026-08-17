@@ -209,6 +209,14 @@ class Furzona extends RequestService {
 	async getNotifications() {
 		return this.post("notifications", {});
 	}
+	/**
+	 * Fetch a single notification's data by id.
+	 * @param {string} id
+	 * @returns {Promise<FurzonaNotificationResponse>}
+	 */
+	async getNotificationData(id) {
+		return this.get(["data", id]);
+	}
 	/** @returns {Promise<FurzonaChat[]>} */
 	async getChats() {
 		return this.post("chats", {});
@@ -249,9 +257,17 @@ class Furzona extends RequestService {
 		return this.request("upload", "POST", formData);
 	}
 
-	async newSearch() {
-		return this.post("newSearch", {
-		});
+	/**
+	 * @param {string} query
+	 * @returns {Promise<FurzonaNewSearchResult>}
+	 */
+	async newSearch(query) {
+		return this.post("newSearch", { query });
+	}
+
+	/** @returns {Promise<FurzonaNotificationResponse>} */
+	async getNotificationData(id) {
+		return this.get(["data", id]);
 	}
 
 	set token(token) {
