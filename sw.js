@@ -26,7 +26,9 @@ const ASSETS = [
 	'./Assets/menu.svg',
 	'./Assets/search.svg',
 	'./Assets/heart.svg',
-	'./Assets/heart-liked.svg'
+	'./Assets/heart-liked.svg',
+	'./Logo.png',
+	'./Logo-192.png'
 ];
 
 const LONG_TTL = 'public, max-age=31536000, immutable';
