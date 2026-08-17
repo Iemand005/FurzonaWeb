@@ -125,9 +125,9 @@ class Furzona extends RequestService {
 		return response;
 	}
 	/** @param {string} id  */
-	async getProfile(id) { return this.get("profile/" + id); }
+	async getProfile(id) { return this.get(["profile", id]); }
 	/** @param {string} id  */
-	async getPost(id) { return this.get("post/" + id); }
+	async getPost(id) { return this.get(["post", id]); }
 	/** @param {string} post  */
 	async likePost(post) { return this.post("favorite", { post }); }
 	/** @param {string} post  */
