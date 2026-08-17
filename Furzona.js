@@ -35,18 +35,20 @@ class RequestService {
 			const respObj = JSON.parse(respTxt);
 			console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
 			throw new Error(respObj.error);
-		} catch(ex) { console.error(ex); }
-
-		let errorContainer = document.getElementById('error-container');
-
-		if (!errorContainer) {
-			errorContainer = document.createElement("div");
-			errorContainer.id = "error-container";
-			document.body.appendChild(errorContainer);
+		} catch(ex) {
+			console.error(ex);
+			
+			let errorContainer = document.getElementById('error-container');
+			
+			if (!errorContainer) {
+				errorContainer = document.createElement("div");
+				errorContainer.id = "error-container";
+				document.body.appendChild(errorContainer);
+			}
+			
+			
+			errorContainer.innerHTML = respTxt;
 		}
-
-
-		errorContainer.innerHTML = respTxt;
 
 		throw respTxt;
 	}
