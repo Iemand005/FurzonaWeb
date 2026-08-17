@@ -369,10 +369,9 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} endpoint */
 	async probe(endpoint) {
-		this.get(endpoint);
-		this.post(endpoint);
-		this.put(endpoint);
-		this.delete(endpoint);
+		const requests = [this.get(endpoint), this.post(endpoint)];
+		// [this.get(endpoint), this.post(endpoint), this.put(endpoint), this.delete(endpoint)]
+		Promise.all(requests).then(console.log)
 	}
 
 	set user(user) {
