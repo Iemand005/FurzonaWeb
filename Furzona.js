@@ -11,14 +11,32 @@ function goHome() {
 	window.location.href = "index.html"
 }
 
+function displayError(error) {
+	console.error(ex);
+			
+			let errorContainer = document.getElementById('error-container');
+			
+			if (!errorContainer) {
+				errorContainer = document.createElement("div");
+				errorContainer.id = "error-container";
+				document.body.appendChild(errorContainer);
+			}
+			
+			errorContainer.innerHTML = respTxt;
+
+			return;
+}
+
 const apiUrl = "https://api.furzona.app/";
 
 class RequestService {
 
 	constructor() {
+		/** @type {string?} */
 		this._token = null;
 	}
 
+	/** @type {ApiRequestFn} */
 	async request(endpoint, method = "GET", body) {
 
 		/** @type {RequestInit} */
@@ -44,20 +62,7 @@ class RequestService {
 		try {
 			respObj = JSON.parse(respTxt);
 		} catch(ex) {
-			console.error(ex);
 			
-			let errorContainer = document.getElementById('error-container');
-			
-			if (!errorContainer) {
-				errorContainer = document.createElement("div");
-				errorContainer.id = "error-container";
-				document.body.appendChild(errorContainer);
-			}
-			
-			
-			errorContainer.innerHTML = respTxt;
-
-			return;
 		}
 		
 		if (!respObj) return;
@@ -69,12 +74,14 @@ class RequestService {
 		throw new Error(respObj.error);
 	}
 
+	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
 
+	/** @type {WriteEndpointFn} */
 	async put(endpoint, body) { return this.request(endpoint, "PUT", body); }
-
+	/** @type {WriteEndpointFn} */
 	async post(endpoint, body) { return this.request(endpoint, "POST", body); }
-
+	/** @type {ReadEndpointFn} */
 	async delete(endpoint) { return this.request(endpoint, "DELETE"); }
 }
 
