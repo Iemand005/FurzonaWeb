@@ -124,7 +124,7 @@ html, body {
 	font-family: "Varela Round", sans-serif;
 }
 
-:root {
+/* :root {
 	--bg: #16181D;
 	--bg-raised: #1d212a;
 	--bg-sunken: #161b22;
@@ -136,7 +136,7 @@ html, body {
 	--text-faint: #7a8094;
 	--border: rgba(255,255,255,.08);
 	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
-}
+} */
 
 /* Background Color */
 html, body {

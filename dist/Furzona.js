@@ -109,6 +109,9 @@ var RequestService = /*#__PURE__*/function () {
               };
               console.error("Error: ".concat(respObj.error, " (Code: ").concat(respObj.errorCode, ")"));
               alert((_respObj = respObj) === null || _respObj === void 0 ? void 0 : _respObj.error);
+              if (respObj.errorCode === 5 && this._token) {
+                this.logout();
+              }
               throw new Error(respObj.error);
             case 4:
               return _context.a(2);
@@ -184,6 +187,23 @@ var RequestService = /*#__PURE__*/function () {
       }
       return _delete;
     }())
+  }, {
+    key: "token",
+    get: function get() {
+      if (!this._token && localStorage) this._token = localStorage.getItem("token");
+      return this._token;
+    },
+    set: function set(token) {
+      if (!token) throw new Error("Tried to assign an empty token.");
+      this._token = token;
+      if (localStorage) localStorage.setItem("token", token);
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      if (localStorage) localStorage.removeItem("token");
+      this._token = null;
+    }
   }]);
 }();
 var Furzona = /*#__PURE__*/function (_RequestService) {
@@ -1151,17 +1171,6 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
       }
       return verifyEmail;
     }())
-  }, {
-    key: "token",
-    get: function get() {
-      if (!this._token && localStorage) this._token = localStorage.getItem("token");
-      return this._token;
-    },
-    set: function set(token) {
-      if (!token) throw new Error("Tried to assign an empty token.");
-      this._token = token;
-      if (localStorage) localStorage.setItem("token", token);
-    }
   }, {
     key: "user",
     get: /** The signed-in Furzona user (from /login), or null when logged out. */
