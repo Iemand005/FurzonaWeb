@@ -10,7 +10,7 @@ class RequestService {
 
 	/**
 	 * @template {keyof ApiEndpoints} K
-	 * @param {K} endpoint 
+	 * @param {K | [K, ...string[]]} endpoint 
 	 * @param {Method} [method] 
 	 * @param {ApiEndpoints[K]["body"]} [body] 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
@@ -58,7 +58,7 @@ class RequestService {
 
 	/**
 	 * @template {keyof ApiEndpoints} K
-	 * @param {K} endpoint
+	 * @param {K | [K, ...string[]]} endpoint
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async get(endpoint) {
@@ -67,7 +67,7 @@ class RequestService {
 
 	/**
 	 * @template {keyof ApiEndpoints} K
-	 * @param {K} endpoint 
+	 * @param {K | [K, ...string[]]} endpoint 
 	 * @param {ApiEndpoints[K]["body"]} [body] 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
@@ -131,7 +131,7 @@ class Furzona extends RequestService {
 	async unlikePost(post) { return this.post("unfavorite", { post }); }
 	/** @param {string} post  */
 	async getComments(post) {
-		return this.post("commentLevels/" + post);
+		return this.post(["commentLevels", post]);
 	}
 
 	set token(token) {
