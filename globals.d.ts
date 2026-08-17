@@ -250,9 +250,14 @@ interface LikeToggleResult {
 	likes: number;
 }
 
+enum ErrorCode {
+	[number]
+	NogLoggedIn = 5
+}
+
 interface FurzonaError {
 	error: string;
-	errorCode: number;
+	errorCode: ErrorCode;
 }
 
 type FavoritePost = { post: string };
