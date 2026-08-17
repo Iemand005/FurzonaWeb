@@ -67,7 +67,7 @@ class RequestService {
 
 		alert(respObj?.error);
 
-		if (respObj.errorCode === 5) {
+		if (respObj.errorCode === 5 && this._token) {
 			this.logout();
 		}
 		
@@ -98,6 +98,7 @@ class RequestService {
 
 	logout() {
 		if (localStorage) localStorage.removeItem("token");
+		this._token = null;
 	}
 }
 
