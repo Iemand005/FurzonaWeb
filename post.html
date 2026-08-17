@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="style.css">
 	<link rel="manifest" href="manifest.json">
 	<script src="Furzona.js"></script>
-	<script src="post-preload.js"></script>
+	<script src="preload.js"></script>
 	<script src="like.js" defer></script>
 	<script src="nav.js" defer></script>
 	<script src="post.js" defer></script>
@@ -44,13 +44,13 @@
 	<main>
 		<article class="post-card card" id="post-card">
 			<section class="profile" id="post-author">
-				<img class="pfp" id="post-author-pfp" alt="Author avatar">
-				<p id="post-author-name">Loading...</p>
+				<img class="pfp" id="post-author-pfp" alt="Author avatar" data-transition="avatar">
+				<p id="post-author-name" data-transition="name">Loading...</p>
 			</section>
-			<h2 id="post-title">Loading...</h2>
+			<h2 id="post-title" data-transition="title">Loading...</h2>
 			<p id="post-meta" class="meta"></p>
 			<div id="post-media">
-				<img id="post-first-image" alt="Post media" hidden>
+				<img id="post-first-image" alt="Post media" data-transition="image" hidden>
 			</div>
 			<p id="post-text"></p>
 			<div id="post-actions"></div>

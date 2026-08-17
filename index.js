@@ -12,8 +12,8 @@ window.addEventListener("pageswap", (event) => {
 	document.querySelectorAll(".profile p").forEach(p => {
 		p.style.viewTransitionName = "";
 	});
-	clickedPfp.style.viewTransitionName = `profile-avatar-${clickedPfp.dataset.transitionId}`;
-	if (clickedName) clickedName.style.viewTransitionName = `profile-name-${clickedPfp.dataset.transitionId}`;
+	clickedPfp.style.viewTransitionName = `avatar-${clickedPfp.dataset.transitionId}`;
+	if (clickedName) clickedName.style.viewTransitionName = `name-${clickedPfp.dataset.transitionId}`;
 	const cleanup = () => {
 		clickedPfp.style.viewTransitionName = "";
 		if (clickedName) clickedName.style.viewTransitionName = "";
@@ -42,8 +42,8 @@ window.addEventListener("pagereveal", (e) => {
   const pfp = document.querySelector(`[data-transition-id="${id}"]`);
   if (!pfp) return;
   const nameEl = pfp.closest(".profile")?.querySelector("p");
-  pfp.style.viewTransitionName = `profile-avatar-${id}`;
-  if (nameEl) nameEl.style.viewTransitionName = `profile-name-${id}`;
+  pfp.style.viewTransitionName = `avatar-${id}`;
+  if (nameEl) nameEl.style.viewTransitionName = `name-${id}`;
   const cleanup = () => {
     pfp.style.viewTransitionName = "";
     if (nameEl) nameEl.style.viewTransitionName = "";
@@ -53,17 +53,17 @@ window.addEventListener("pagereveal", (e) => {
 
 window.addEventListener("pageswap", (event) => {
   if (!event.viewTransition || !clickedPost) return;
-  const { id, pfp, username, title, image } = clickedPost;
+  const { id, authorId, pfp, username, title, image } = clickedPost;
   document.querySelectorAll(".pfp").forEach(img => {
     img.style.viewTransitionName = "";
   });
   document.querySelectorAll(".profile p").forEach(p => {
     p.style.viewTransitionName = "";
   });
-  pfp.style.viewTransitionName = `post-avatar-${id}`;
-  username.style.viewTransitionName = `post-name-${id}`;
-  if (title) title.style.viewTransitionName = `post-title-${id}`;
-  if (image) image.style.viewTransitionName = `post-image-${id}`;
+  pfp.style.viewTransitionName = `avatar-${authorId}`;
+  username.style.viewTransitionName = `name-${authorId}`;
+  if (title) title.style.viewTransitionName = `title-${id}`;
+  if (image) image.style.viewTransitionName = `image-${id}`;
   const cleanup = () => {
     pfp.style.viewTransitionName = "";
     username.style.viewTransitionName = "";
@@ -87,10 +87,11 @@ window.addEventListener("pagereveal", (e) => {
   const username = item.querySelector(".profile p");
   const title = item.querySelector("h2");
   const image = item.querySelector(":scope > img");
-  if (pfp) pfp.style.viewTransitionName = `post-avatar-${postId}`;
-  if (username) username.style.viewTransitionName = `post-name-${postId}`;
-  if (title) title.style.viewTransitionName = `post-title-${postId}`;
-  if (image) image.style.viewTransitionName = `post-image-${postId}`;
+  const authorId = pfp?.dataset.transitionId;
+  if (pfp && authorId) pfp.style.viewTransitionName = `avatar-${authorId}`;
+  if (username && authorId) username.style.viewTransitionName = `name-${authorId}`;
+  if (title) title.style.viewTransitionName = `title-${postId}`;
+  if (image) image.style.viewTransitionName = `image-${postId}`;
   const cleanup = () => {
     if (pfp) pfp.style.viewTransitionName = "";
     if (username) username.style.viewTransitionName = "";
@@ -157,8 +158,9 @@ const likeButton = createLikeButton(post, { liked: !!post.z });
 		listItem.onclick = () => {
 			clickedPfp = null;
 			clickedName = null;
-			clickedPost = { id: post.id, pfp, username, title, image };
+			clickedPost = { id: post.id, authorId: post.u.id, pfp, username, title, image };
 			const postParams = new URLSearchParams({ id: post.id });
+			if (post.u.id) postParams.set("author", post.u.id);
 			if (post.u.i) postParams.set("avatar", furzona.getProfilePictureUrl(post.u));
 			if (post.u.username) postParams.set("username", post.u.username);
 			if (post.t) postParams.set("title", post.t);

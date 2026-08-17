@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v2.2';
+const CACHE_NAME = 'app-cache-v2.4';
 const ASSETS = [
 	'./',
 	'./index.html',
@@ -9,14 +9,13 @@ const ASSETS = [
 	'./style.css',
 	'./index.js',
 	'./post.js',
-	'./post-preload.js',
+	'./preload.js',
 	'./profile.js',
 	'./login.js',
 	'./search.js',
 	'./nav.js',
 	'./like.js',
 	'./Furzona.js',
-	'./profile-preload.js',
 	'./vt-types.js',
 	'./Assets/arrow-left.svg',
 	'./Assets/arrow-right.svg',

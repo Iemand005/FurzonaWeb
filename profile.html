@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="style.css">
 	<link rel="manifest" href="manifest.json">
 	<script src="Furzona.js"></script>
-	<script src="profile-preload.js"></script>
+	<script src="preload.js"></script>
 	<script src="nav.js" defer></script>
 	<script src="profile.js" defer></script>
 
@@ -42,11 +42,11 @@
 	</header>
 	<main>
 		<section class="profile-card card" id="profile-card">
-			<img id="profile-banner" class="banner" alt="Profile banner">
+			<img id="profile-banner" class="banner" alt="Profile banner" data-transition="banner">
 			<div class="profile-top">
-				<img id="profile-avatar" class="avatar" alt="Profile avatar">
+				<img id="profile-avatar" class="avatar" alt="Profile avatar" data-transition="avatar">
 				<div>
-					<h1 id="profile-name" class="name">Loading...</h1>
+					<h1 id="profile-name" class="name" data-transition="name">Loading...</h1>
 					<p id="profile-meta" class="meta"></p>
 				</div>
 			</div>

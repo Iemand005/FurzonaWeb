@@ -9,10 +9,8 @@ const statsEl = document.getElementById("profile-stats");
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
-	const destination = new URL(event.activation.entry.url);
-	if (!destination.pathname.endsWith("post.html")) return;
-	if (avatarEl) avatarEl.style.viewTransitionName = `profile-avatar-${id}`;
-	if (nameEl) nameEl.style.viewTransitionName = `profile-name-${id}`;
+	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${id}`;
+	if (nameEl) nameEl.style.viewTransitionName = `name-${id}`;
 });
 
 /**

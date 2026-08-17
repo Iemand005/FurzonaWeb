@@ -16,20 +16,11 @@ let authorId = null;
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
-	const destination = new URL(event.activation.entry.url);
-	if (destination.pathname.endsWith("profile.html")) {
-		if (!authorId) return;
-		if (pfpEl) pfpEl.style.viewTransitionName = `profile-avatar-${authorId}`;
-		if (nameEl) nameEl.style.viewTransitionName = `profile-name-${authorId}`;
-		return;
-	}
-	if (destination.pathname.endsWith("index.html")) {
-		if (pfpEl) pfpEl.style.viewTransitionName = `post-avatar-${id}`;
-		if (nameEl) nameEl.style.viewTransitionName = `post-name-${id}`;
-		if (titleEl) titleEl.style.viewTransitionName = `post-title-${id}`;
-		const firstImg = firstImageEl && !firstImageEl.hidden ? firstImageEl : null;
-		if (firstImg) firstImg.style.viewTransitionName = `post-image-${id}`;
-	}
+	if (pfpEl && authorId) pfpEl.style.viewTransitionName = `avatar-${authorId}`;
+	if (nameEl && authorId) nameEl.style.viewTransitionName = `name-${authorId}`;
+	if (titleEl) titleEl.style.viewTransitionName = `title-${id}`;
+	const firstImg = firstImageEl && !firstImageEl.hidden ? firstImageEl : null;
+	if (firstImg) firstImg.style.viewTransitionName = `image-${id}`;
 });
 
 /**
