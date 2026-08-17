@@ -7,6 +7,7 @@ const metaEl = document.getElementById("profile-meta");
 const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
 const followEl = document.getElementById("profile-follow");
+const badgeEl = document.getElementById("profile-badge");
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
@@ -32,6 +33,16 @@ function renderProfile(profile) {
 	avatarEl.alt = user.username;
 
 	nameEl.textContent = user.username;
+
+	if (badgeEl) {
+		furzona.getSettings().then(settings => {
+			const isStaff = (settings.admins || []).some(member => member.id === user.id)
+				|| (settings.mods || []).some(member => member.id === user.id);
+			if (isStaff) badgeEl.hidden = false;
+		}).catch(error => {
+			console.error("Failed to check staff status:", error);
+		});
+	}
 
 	const renderMeta = () => {
 		metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
