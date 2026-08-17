@@ -1,4 +1,12 @@
 
+/**
+ * @param {string} str 
+ * @param {string} suffix 
+ */
+function endsWith(str, suffix) {
+  return str.slice(-suffix.length) === suffix;
+}
+
 const apiUrl = "https://api.furzona.app/";
 
 class RequestService {
