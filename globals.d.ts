@@ -178,6 +178,11 @@ interface LikeToggleResult {
 	likes: number;
 }
 
+interface FurzonaError {
+	error: string;
+	errorCode: number;
+}
+
 interface ApiEndpoints {
 	[endpoint: string]: {
 		body?: unknown;

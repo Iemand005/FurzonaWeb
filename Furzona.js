@@ -30,6 +30,13 @@ class RequestService {
 
 		const respTxt = await response.text();
 
+		try {
+			/** @type {FurzonaError} */
+			const respObj = JSON.parse(respTxt);
+			console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
+			throw new Error(respObj.error);
+		} catch(ex) { console.error(ex); }
+
 		let errorContainer = document.getElementById('error-container');
 
 		if (!errorContainer) {
