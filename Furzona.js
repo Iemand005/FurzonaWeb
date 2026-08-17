@@ -277,7 +277,7 @@ class Furzona extends RequestService {
 	 * @returns {Promise<FurzonaPost>}
 	 */
 	async editPost(id, fields) {
-		return this.request(["post", id], "PUT", fields);
+		return this.put(["post", id], fields);
 	}
 	/** @param {string} id */
 	async deleteComment(id) {
