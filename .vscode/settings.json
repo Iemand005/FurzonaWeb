@@ -18,5 +18,6 @@
     "files.associations": {
 		"*.hta": "html"
 	},
-    "terminal.integrated.shellIntegration.enabled": false
+    "terminal.integrated.shellIntegration.enabled": false,
+    "git.autofetch": false
 }
