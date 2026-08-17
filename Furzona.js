@@ -148,7 +148,7 @@ class Furzona extends RequestService {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
-	isLoggedIn() {
+	get isLoggedIn() {
 		return !!this.token;
 	}
 }
