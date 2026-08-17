@@ -727,9 +727,13 @@ img, .banner, .profile, button, .stat, .input {
 
 .comment {
 	background: var(--bg-sunken);
-	border: 1px solid var(--border);
 	border-radius: 14px;
 	padding: 12px 14px;
+}
+
+.comment {
+	border: 1px solid rgba(255,255,255,.08);
+
 }
 
 #post-comments .comment + .comment {
