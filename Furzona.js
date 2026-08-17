@@ -17,7 +17,8 @@ class RequestService {
 	 */
 	async request(endpoint, method = "GET", body) {
 
-		if (typeof endpoint !== "string" && endpoint instanceof Array) endpoint.join("/"); 
+		let end = endpoint;
+		if (endpoint instanceof Array) endpoint = endpoint.join("/"); 
 
 		/** @type {RequestInit} */
 		const init = { method };
