@@ -429,6 +429,7 @@ main {
 	flex: 1 1 350px;
     max-width: 100rem;
 	margin: 10px;
+	cursor: pointer;
 }
 
 .post {
@@ -642,10 +643,8 @@ img, .banner, .profile, button, .stat, .input {
 	text-decoration: underline;
 }
 
-.admin-badge {
+.admin-badge, .moderator-badge {
 	display: inline-block;
-	background: #c0392b;
-	color: #fff;
 	font-size: 0.75rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
@@ -656,7 +655,17 @@ img, .banner, .profile, button, .stat, .input {
 	text-transform: uppercase;
 }
 
-.admin-badge[hidden] {
+.admin-badge {
+	background: #c0392b;
+	color: #fff;
+}
+
+.moderator-badge {
+	background: #e67e22;
+	color: #fff;
+}
+
+.admin-badge[hidden], .moderator-badge[hidden] {
 	display: none;
 }
 

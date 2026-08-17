@@ -34,7 +34,20 @@ function renderProfile(profile) {
 
 	nameEl.textContent = user.username;
 
-	if (badgeEl && user.p) badgeEl.hidden = false;
+	if (badgeEl) {
+		const roles = {
+			1: { cls: "moderator-badge", text: "Moderator" },
+			2: { cls: "admin-badge", text: "Admin" }
+		};
+		const role = roles[user.p];
+		if (role) {
+			badgeEl.className = role.cls;
+			badgeEl.textContent = role.text;
+			badgeEl.hidden = false;
+		} else {
+			badgeEl.hidden = true;
+		}
+	}
 
 	const renderMeta = () => {
 		metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;

@@ -146,7 +146,6 @@ if (postList instanceof HTMLUListElement) {
 
 		listItem.appendChild(createLikeButton(post, { liked: !!post.z }));
 
-		listItem.style.cursor = "pointer";
 		listItem.onclick = () => {
 			clickedOwner = null;
 			clickedPost = { id: post.id, authorId: post.u.id, pfp, username, title, image };
