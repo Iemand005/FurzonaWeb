@@ -261,6 +261,7 @@ interface LikeToggleResult {
 }
 
 enum ErrorCode {
+	Unknown = -1,
 	NogLoggedIn = 5
 }
 

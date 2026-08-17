@@ -60,13 +60,8 @@ class RequestService {
 
 		/** @type {FurzonaError?} */
 		let respObj = null;
-		try {
-			respObj = JSON.parse(respTxt);
-		} catch(ex) {
-			
-		}
-		
-		if (!respObj) return;
+		try { respObj = JSON.parse(respTxt); } catch(ex) { displayError(ex, respTxt); }
+		if (!respObj) respObj = { error: "Empty JSON response from server, unkown error!", errorCode: -1 };
 
 		console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
 
