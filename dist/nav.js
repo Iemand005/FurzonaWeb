@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var sections = document.querySelectorAll("header > section");
     return sections[sections.length - 1] || null;
   }();
+  var isLoginPage = endsWith(window.location.pathname, "login.html");
+  if (isLoginPage) return;
   var addLoginLink = function addLoginLink() {
-    if (window.location.pathname.endsWith("login.html")) return;
     if (furzona.isLoggedIn) return;
     if (!navSection) return;
     var link = document.createElement("a");
@@ -17,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     navSection.appendChild(link);
   };
   var addProfileButton = function addProfileButton() {
-    if (window.location.pathname.endsWith("login.html")) return;
     var me = furzona.user;
     if (!me || !furzona.isLoggedIn) return;
     if (!navSection) return;
@@ -63,13 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
     img.src = "Assets/home.svg";
     img.alt = "Home";
     button.appendChild(img);
-    button.addEventListener("click", function () {
-      window.location.href = "index.html";
-    });
+    button.onclick = goHome;
+    button.addEventListener("click", goHome);
     navSection.appendChild(button);
   };
   var addNewPostButton = function addNewPostButton() {
-    if (window.location.pathname.endsWith("login.html")) return;
     if (window.location.pathname.endsWith("create-post.html")) return;
     if (!furzona.isLoggedIn) return;
     if (!navSection || document.getElementById("nav-new-post")) return;
@@ -100,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   var forwardButton = document.getElementById("nav-forward");
   var syncForwardState = function syncForwardState() {
-    if (!forwardButton) return;
+    if (!(forwardButton instanceof HTMLButtonElement)) return;
     var canGoForward = window.navigation ? window.navigation.canGoForward : true;
     forwardButton.disabled = !canGoForward;
   };

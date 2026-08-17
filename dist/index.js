@@ -84,7 +84,7 @@ window.addEventListener("pagereveal", function (e) {
   var fromURL = (_window$navigation2 = window.navigation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.activation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.from) === null || _window$navigation2 === void 0 ? void 0 : _window$navigation2.url;
   if (!fromURL) return;
   var url = new URL(fromURL);
-  if (!url.pathname.endsWith("post.html")) return;
+  if (!endsWith(url.pathname, "post.html")) return;
   var postId = url.searchParams.get("id");
   if (!postId) return;
   var item = document.querySelector("[data-post-id=\"".concat(postId, "\"]"));

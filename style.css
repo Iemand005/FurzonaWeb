@@ -121,7 +121,6 @@ html {
 
 html, body {
 	margin: 0;
-	color: #f3f6fb;
 	font-family: "Varela Round", sans-serif;
 }
 
@@ -139,8 +138,14 @@ html, body {
 	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
 }
 
+/* Background Colour */
 html, body {
 	background-color: #16181D;
+}
+
+/* Text Colour */
+html, body, button {
+	color: #f3f6fb;
 }
 
 body {
@@ -519,7 +524,6 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 
 .login-card {
 	max-width: 420px;
-	margin: 32px auto;
 	padding: 24px;
 }
 

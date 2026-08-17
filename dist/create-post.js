@@ -8,7 +8,7 @@ function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present,
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-var form = document.getElementById("new-post-form");
+var postForm = document.getElementById("new-post-form");
 var typeSelect = document.getElementById("post-type");
 var titleInput = document.getElementById("post-title");
 var descriptionInput = document.getElementById("post-description");
@@ -57,8 +57,8 @@ var toMediaPath = function toMediaPath(result) {
   }
   return null;
 };
-if (form instanceof HTMLFormElement) {
-  form.addEventListener("submit", /*#__PURE__*/function () {
+if (searchForm instanceof HTMLFormElement) {
+  searchForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(event) {
       var submitButton, type, t, d, files, isText, media, _iterator, _step, file, uploaded, path, fields, post, _t, _t2;
       return _regenerator().w(function (_context2) {
@@ -72,7 +72,7 @@ if (form instanceof HTMLFormElement) {
             statusEl.textContent = "Log in to create a post.";
             return _context2.a(2);
           case 1:
-            submitButton = form.querySelector('button[type="submit"]');
+            submitButton = searchForm.querySelector('button[type="submit"]');
             submitButton.disabled = true;
             statusEl.textContent = "Posting…";
             _context2.p = 2;

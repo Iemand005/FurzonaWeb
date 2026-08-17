@@ -1,6 +1,6 @@
 "use strict";
 
-var form = document.getElementById("search-form");
+var searchForm = document.getElementById("search-form");
 var input = document.getElementById("search-input");
 var resultsEl = document.getElementById("search-results");
 var emptyEl = document.getElementById("search-empty");
@@ -155,8 +155,8 @@ var createdUser = function createdUser(item) {
   };
   return card;
 };
-if (form) {
-  form.addEventListener("submit", function (event) {
+if (searchForm) {
+  searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     var q = input.value.trim();
     if (!q) return;
