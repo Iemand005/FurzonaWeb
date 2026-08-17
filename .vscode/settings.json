@@ -19,8 +19,9 @@
 		"*.hta": "html"
 	},
 	"terminal.integrated.shellIntegration.enabled": false,
-	"git.autofetch": false
+	"git.autofetch": false,
 
 	"typescript.inlayHints.parameterNames.enabled": "all",
-	"javascript.inlayHints.parameterNames.enabled": "all"
+	"javascript.inlayHints.parameterNames.enabled": "all",
+	"js/ts.inlayHints.parameterTypes.enabled": true
 }
