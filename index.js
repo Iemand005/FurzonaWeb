@@ -106,7 +106,7 @@ if (postList instanceof HTMLUListElement) {
 
 	const createPostElement = (/** @type {FurzonaPost} */post) => {
 		const listItem = document.createElement("li");
-		listItem.className = "post";
+		listItem.className = "post card";
 		listItem.dataset.postId = post.id;
 		const timestamp = Date.parse(post.createdAt || post.updatedAt || "0");
 		listItem.dataset.date = String(timestamp);

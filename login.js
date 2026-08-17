@@ -1,7 +1,7 @@
 
 
 function redirectIfLoggedIn() {
-	if (furzona.isLoggedIn) location.href = "index.html";
+	if (furzona.isLoggedIn()) location.href = "index.html";
 };
 
 redirectIfLoggedIn();

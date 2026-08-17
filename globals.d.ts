@@ -269,6 +269,8 @@ interface FurzonaError {
 	errorCode: number;
 }
 
+type FavoritePost = { post: string };
+
 interface ApiEndpoints {
 	[endpoint: string]: {
 		body?: unknown;
@@ -293,7 +295,11 @@ interface ApiEndpoints {
 		response: FurzonaPost[];
 	};
 	favorite: {
-		body: { post: string };
+		body: FavoritePost;
+		response: LikeToggleResult;
+	};
+	unfavorite: {
+		body: FavoritePost;
 		response: LikeToggleResult;
 	};
 	settings: {

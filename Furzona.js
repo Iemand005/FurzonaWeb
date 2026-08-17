@@ -127,6 +127,8 @@ class Furzona extends RequestService {
 	async getPost(id) { return this.get("post/" + id); }
 	/** @param {string} post  */
 	async likePost(post) { return this.post("favorite", { post }); }
+	/** @param {string} post  */
+	async unlikePost(post) { return this.post("unfavorite", { post }); }
 
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");

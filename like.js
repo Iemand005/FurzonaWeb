@@ -5,7 +5,7 @@
 	window.createLikeButton = (post, { liked = false } = {}) => {
 		const button = document.createElement("button");
 		button.type = "button";
-		button.className = "like-btn";
+		button.className = "like-btn btn";
 
 		const heart = document.createElement("img");
 		heart.src = liked ? HEART_LIKED : HEART_UNLIKED;
