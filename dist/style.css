@@ -789,7 +789,8 @@ img, .banner, .profile, button, .stat, .input {
 	}
 
 	.profile p,
-	.meta {
-		color: var(--text-dim);
+	.meta,
+	.post .post-desc {
+		color: #55606e;
 	}
 }
