@@ -92,6 +92,16 @@ class RequestService {
 	 * @param {ApiEndpoints[K]["body"]} [body] 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
+	async popust(endpoint, body) {
+		return this.request(endpoint, "POST", body);
+	}
+
+	/**
+	 * @template {keyof ApiEndpoints} K
+	 * @param {K | [K, ...string[]]} endpoint 
+	 * @param {ApiEndpoints[K]["body"]} [body] 
+	 * @returns {Promise<ApiEndpoints[K]["response"]>}
+	 */
 	async post(endpoint, body) {
 		return this.request(endpoint, "POST", body);
 	}
