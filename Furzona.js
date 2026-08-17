@@ -80,27 +80,13 @@ class RequestService {
 	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
 
-	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K | [K, ...string[]]} endpoint 
-	 * @param {ApiEndpoints[K]["body"]} [body] 
-	 * @returns {Promise<ApiEndpoints[K]["response"]>}
-	 */
+	/** @type {WriteEndpointFn} */
 	async put(endpoint, body) { return this.request(endpoint, "PUT", body); }
 
-	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K | [K, ...string[]]} endpoint 
-	 * @param {ApiEndpoints[K]["body"]} [body] 
-	 * @returns {Promise<ApiEndpoints[K]["response"]>}
-	 */
+	/** @type {WriteEndpointFn} */
 	async post(endpoint, body) { return this.request(endpoint, "POST", body); }
 
-	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K | [K, ...string[]]} endpoint
-	 * @returns {Promise<ApiEndpoints[K]["response"]>}
-	 */
+	/** @type {ReadEndpointFn} */
 	async delete(endpoint) { return this.request(endpoint, "DELETE"); }
 }
 
