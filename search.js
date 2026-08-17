@@ -74,14 +74,17 @@ if (form) {
 		resultsEl.innerHTML = "";
 		emptyEl.hidden = true;
 
-		furzona.search(q)
-			.then(results => {
-				if (!results || results.length === 0) {
+		furzona.newSearch(q)
+			.then(({ p, u }) => {
+				const posts = p || [];
+				const users = u || [];
+				if (posts.length === 0 && users.length === 0) {
 					emptyEl.textContent = "No results.";
 					emptyEl.hidden = false;
 					return;
 				}
-				results.forEach(item => resultsEl.appendChild(createResultCard(item)));
+				posts.forEach(item => resultsEl.appendChild(createdPost(item)));
+				users.forEach(item => resultsEl.appendChild(createdUser(item)));
 			})
 			.catch(error => {
 				console.error("Search failed:", error);
