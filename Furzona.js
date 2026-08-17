@@ -178,6 +178,11 @@ class Furzona extends RequestService {
 		});
 	}
 
+	async newSearch() {
+		return this.post("newSearch", {
+		});
+	}
+
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");
 		this._token = token;
