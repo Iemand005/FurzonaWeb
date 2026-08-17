@@ -79,6 +79,67 @@ function renderPost(post) {
 	}
 }
 
+/**
+ * @param {FurzonaComment} comment
+ */
+function createCommentElement(comment) {
+	const card = document.createElement("div");
+	card.className = "comment";
+
+	const author = document.createElement("section");
+	author.className = "profile";
+	const pfp = document.createElement("img");
+	pfp.className = "pfp";
+	pfp.src = furzona.getProfilePictureUrl(comment.u);
+	pfp.alt = comment.u.username;
+	const name = document.createElement("p");
+	name.textContent = comment.u.username;
+	author.append(pfp, name);
+	author.style.cursor = "pointer";
+	author.onclick = () => {
+		const profileParams = new URLSearchParams({ id: comment.u.id });
+		if (comment.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(comment.u));
+		if (comment.u.b) profileParams.set("banner", furzona.getMediaUrl(comment.u.b));
+		if (comment.u.username) profileParams.set("username", comment.u.username);
+		window.location.href = "profile.html?" + profileParams.toString();
+	};
+	card.appendChild(author);
+
+	const content = document.createElement("p");
+	content.className = "comment-text";
+	content.textContent = comment.c || "";
+	card.appendChild(content);
+
+	const meta = document.createElement("p");
+	meta.className = "meta";
+	const date = new Date(comment.createdAt || comment.updatedAt);
+	const metaParts = [];
+	if (comment.l) metaParts.push(`${comment.l} likes`);
+	if (comment.s) metaParts.push(`${comment.s} replies`);
+	metaParts.push(date.toLocaleString());
+	meta.textContent = metaParts.join(" • ");
+	card.appendChild(meta);
+
+	return card;
+}
+
+/**
+ * @param {FurzonaComment[]} comments
+ */
+function renderComments(comments) {
+	if (!commentsEl) return;
+	if (!comments || comments.length === 0) {
+		const empty = document.createElement("p");
+		empty.className = "meta";
+		empty.textContent = "No comments yet.";
+		commentsEl.appendChild(empty);
+		return;
+	}
+	comments.forEach(comment => {
+		commentsEl.appendChild(createCommentElement(comment));
+	});
+}
+
 if (id) {
 	furzona.getPost(id)
 		.then(renderPost)
