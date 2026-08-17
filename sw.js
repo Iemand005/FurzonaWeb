@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v2.4';
+const CACHE_NAME = 'app-cache-v2.6';
 const ASSETS = [
 	'./',
 	'./index.html',
@@ -6,9 +6,11 @@ const ASSETS = [
 	'./login.html',
 	'./profile.html',
 	'./search.html',
+	'./posts.html',
 	'./style.css',
 	'./index.js',
 	'./post.js',
+	'./posts.js',
 	'./preload.js',
 	'./profile.js',
 	'./login.js',

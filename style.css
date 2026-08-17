@@ -515,6 +515,15 @@ img, .banner, .profile, button, .stat, .input {
 .stat strong { font-size: 1.3rem; }
 .stat span { color: var(--text-dim); font-size: 0.9rem; }
 
+.stat.clickable {
+	cursor: pointer;
+}
+
+.stat.clickable:hover strong,
+.stat.clickable:focus-visible strong {
+	text-decoration: underline;
+}
+
 .post-card {
 	max-width: 900px;
 	margin: 0 auto;

@@ -61,7 +61,7 @@
 
 html, body, * {
 	scrollbar-width: thin;
-	scrollbar-color: #2d3240 #16181D;
+	scrollbar-color: var(--bg-btn) var(--bg);
 
     overscroll-behavior-x: auto;
 	overscroll-behavior-y: contain;
@@ -73,17 +73,17 @@ html, body, * {
 }
 
 *::-webkit-scrollbar-track {
-  background: #16181D;
+  background: var(--bg);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #2d3240;
-  border: 2px solid #16181D;
+  background: var(--bg-btn);
+  border: 2px solid var(--bg);
   border-radius: 999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #3a4154;
+  background: var(--bg-btn-hover);
 }
 
 *::-webkit-scrollbar-thumb:active {
@@ -91,7 +91,7 @@ html, body, * {
 }
 
 *::-webkit-scrollbar-corner {
-  background: #16181D;
+  background: var(--bg);
 }
 
 ::view-transition-old(root),
@@ -122,17 +122,31 @@ html {
 html, body {
 	margin: 0;
 	/* height: 100%; */
-	background: #16181D;
-	color: #f3f6fb;
+	background: var(--bg);
+	color: var(--text);
 	font-family: "Varela Round", sans-serif;
+}
+
+:root {
+	--bg: #16181D;
+	--bg-raised: #1d212a;
+	--bg-sunken: #161b22;
+	--bg-btn: #2d3240;
+	--bg-btn-hover: #3a4154;
+	--bg-btn-disabled: #22262f;
+	--text: #f3f6fb;
+	--text-dim: #b9c3d4;
+	--text-faint: #7a8094;
+	--border: rgba(255,255,255,.08);
+	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
 }
 
 body {
 	overflow: auto;
 }
 
-header, button, .profile-card, .post-card, .stat, .post, .banner, .avatar {
-	border: 1px solid rgba(255,255,255,.08);
+header, .stat, .banner, .avatar {
+	border: 1px solid var(--border);
 }
 
 @keyframes reveal-border {
@@ -221,17 +235,24 @@ header h1 {
 	font-size: clamp(1.5rem, 2vw, 2.25rem);
 }
 
-header button {
-	background: #2d3240;
-	border-radius: 12px;
-	color: #f3f6fb;
-	padding: 8px 10px;
-	font: inherit;
-	cursor: pointer;
-	transition: transform .2s ease, background .2s ease;
+button, a.login-link {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 6px;
+	background: var(--bg-btn);
+	border: 1px solid var(--border);
+	color: var(--text);
+	padding: 8px 12px;
+	font: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform .2s ease, background .2s ease;
+}
+
+button:hover, a.login-link:hover {
+	background: var(--bg-btn-hover);
+	transform: translateY(-1px);
 }
 
 header button img {
@@ -241,25 +262,63 @@ header button img {
 	pointer-events: none;
 }
 
+button:disabled {
+	background: var(--bg-btn-disabled);
+	color: var(--text-faint);
+	cursor: not-allowed;
+	transform: none;
+}
+
+button:disabled:hover {
+	background: var(--bg-btn-disabled);
+	transform: none;
+}
+
+#login-form button[type="submit"] {
+	background: var(--bg-btn-hover);
+}
+
+#login-form button[type="submit"]:hover {
+	background: #525e7a;
+	transform: translateY(-1px);
+}
+
+.card {
+	background: var(--bg-raised);
+	border: 1px solid var(--border);
+	border-radius: 18px;
+	box-shadow: var(--shadow-card);
+}
+
+.input {
+	width: 100%;
+	background: var(--bg-sunken);
+	border: 1px solid var(--border);
+	color: var(--text);
+	padding: 12px 14px;
+	font: inherit;
+}
+
+.input::placeholder {
+	color: var(--text-faint);
+}
+
+.input:focus {
+	outline: 2px solid var(--bg-btn-hover);
+	outline-offset: 1px;
+}
+
+.field {
+	font-size: 0.9rem;
+	color: var(--text-dim);
+	font-weight: 600;
+}
+
 @supports (top: env(titlebar-area-y)) {
 	header button {
 		-webkit-app-region: no-drag;
 		app-region: no-drag;
 	}
-}
-
-header button:hover { background: #3a4154; transform: translateY(-1px); }
-
-header button:disabled {
-	background: #22262f;
-	color: #7a8094;
-	cursor: not-allowed;
-	transform: none;
-}
-
-header button:disabled:hover {
-	background: #22262f;
-	transform: none;
 }
 
 main {
@@ -273,7 +332,7 @@ main {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: center;
 	gap: 20px;
 	width: min(1200px, 100%);
 	margin: 0 auto;
@@ -292,7 +351,6 @@ main {
 	padding: 10px;
 	background: linear-gradient(180deg, #202330 0%, #1a1d27 100%);
 	border-radius: 24px;
-	box-shadow: 0 10px 24px rgba(0,0,0,.18);
 	min-height: 420px;
 }
 
@@ -310,11 +368,10 @@ main {
 	width: 100%;
 	height: 220px;
 	object-fit: cover;
-	background: #131721;
 	transition: filter 100ms linear;
 }
 
-.post img, .banner, .profile {
+img, .banner, .profile, button, .stat, .input {
 	border-radius: 14px;
 }
 
@@ -328,22 +385,7 @@ main {
 	object-fit: cover;
 }
 
-.post .like-btn {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	align-self: flex-start;
-	margin-top: 12px;
-	background: #2d3240;
-	border: 1px solid rgba(255,255,255,.08);
-	border-radius: 12px;
-	color: #f3f6fb;
-	padding: 8px 12px;
-	font: inherit;
-	cursor: pointer;
-}
-
-.post .like-btn img {
+.like-btn img {
 	width: 16px;
 	height: 16px;
 	display: block;
@@ -351,8 +393,45 @@ main {
 	pointer-events: none;
 }
 
-.post .like-btn img:hover {
+.like-btn img:hover {
 	filter: none;
+}
+
+.post .like-btn {
+	align-self: flex-start;
+	margin-top: 12px;
+}
+
+.post-card .like-btn {
+	margin-top: 16px;
+}
+
+.like-btn.liked {
+	color: #ff8aac;
+	background: #33222b;
+	border-color: #ff5c8a55;
+}
+
+.login-card {
+	max-width: 420px;
+	margin: 32px auto;
+	padding: 24px;
+}
+
+.login-card h1 {
+	margin: 0 0 16px;
+	font-size: 1.6rem;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#login-form button {
+	width: 100%;
+	margin-top: 6px;
 }
 
 .profile, .profile-top {
@@ -379,8 +458,6 @@ main {
 }
 
 .profile-card {
-	background: #1d212a;
-	border-radius: 18px;
 	overflow: hidden;
 }
 
@@ -394,8 +471,8 @@ main {
 	width: 88px;
 	height: 88px;
 	border-radius: 18px;
-	border: 4px solid #1d212a;
-	background: #2d3240;
+	border: 4px solid var(--bg-raised);
+	background: var(--bg-btn);
 }
 
 .name {
@@ -431,17 +508,23 @@ main {
 .stat {
 	display: flex;
 	flex-direction: column;
-	background: #161b22;
+	background: var(--bg-sunken);
 	padding: 14px 12px;
-	border-radius: 12px;
 }
 
 .stat strong { font-size: 1.3rem; }
-.stat span { color: #b9c3d4; font-size: 0.9rem; }
+.stat span { color: var(--text-dim); font-size: 0.9rem; }
+
+.stat.clickable {
+	cursor: pointer;
+}
+
+.stat.clickable:hover strong,
+.stat.clickable:focus-visible strong {
+	text-decoration: underline;
+}
 
 .post-card {
-	background: #1d212a;
-	border-radius: 18px;
 	max-width: 900px;
 	margin: 0 auto;
 	padding: 20px;
@@ -451,7 +534,6 @@ main {
 	width: 48px;
 	height: 48px;
 	object-fit: cover;
-	border-radius: 14px;
 }
 
 .post-card h2 {
@@ -480,8 +562,130 @@ main {
 
 #post-media img {
 	width: 100%;
-	border-radius: 14px;
 	background: #131721;
+}
+
+#post-comments {
+	margin-top: 24px;
+	border-top: 1px solid var(--border);
+	padding-top: 16px;
+}
+
+#post-comments h3 {
+	margin: 0 0 12px;
+	font-size: 1.1rem;
+	color: var(--text-dim);
+}
+
+.comment {
+	background: var(--bg-sunken);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	padding: 12px 14px;
+}
+
+#post-comments .comment + .comment {
+	margin-top: 10px;
+}
+
+.comment .profile {
+	gap: 8px;
+}
+
+.comment .pfp {
+	width: 32px;
+	height: 32px;
+	border-radius: 10px;
+	object-fit: cover;
+	background: var(--bg-btn);
+}
+
+.comment-text {
+	margin: 8px 0 0;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-word;
+	color: var(--text);
+}
+
+.comment .meta {
+	margin-top: 8px;
+	font-size: 0.8rem;
+	color: var(--text-dim);
+	font-weight: 400;
+}
+
+.comment .like-btn {
+	align-self: flex-start;
+	margin-top: 10px;
+	padding: 6px 10px;
+}
+
+.search-form,
+.comment-form {
+	display: flex;
+	gap: 10px;
+	max-width: 640px;
+	margin: 0 auto 24px;
+}
+
+.search-form .input,
+.comment-form .input {
+	flex: 1;
+}
+
+.comment-form {
+	margin-bottom: 16px;
+}
+
+#search-results {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: min(1200px, 100%);
+	margin: 0 auto;
+	padding: 0;
+}
+
+#search-results > li {
+	flex: 1 1 250px;
+	max-width: 320px;
+}
+
+#search-results .profile-row {
+	flex: 1 1 auto;
+	max-width: 640px;
+}
+
+.profile-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px;
+}
+
+#profile-follow {
+	display: flex;
+	margin-top: 12px;
+}
+
+#profile-follow button {
+	flex: 1;
+}
+
+.profile-row .pfp {
+	width: 48px;
+	height: 48px;
+	object-fit: cover;
+	border-radius: 14px;
+	background: var(--bg-btn);
+}
+
+#search-empty {
+	max-width: 640px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 @media (max-width: 640px) {

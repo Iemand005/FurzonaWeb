@@ -6,22 +6,28 @@
 	<meta name="view-transition" content="same-origin">
 	<style>@view-transition { navigation: auto; }</style>
 
-	<meta name="description" content="View a Furzona Lite profile.">
+	<meta name="description" content="Browse Furzona Lite posts.">
 	<meta property="og:site_name" content="Furzona Lite">
-	<meta property="og:title" content="Profile — Furzona Lite">
-	<meta property="og:description" content="View a Furzona Lite profile.">
-	<meta property="og:type" content="profile">
-	<meta property="og:url" content="https://iemand005.github.io/FurzonaWeb/profile.html">
+	<meta property="og:title" content="Posts — Furzona Lite">
+	<meta property="og:description" content="Browse Furzona Lite posts.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://iemand005.github.io/FurzonaWeb/posts.html">
 	<meta property="og:image" content="https://iemand005.github.io/FurzonaWeb/Logo.png">
 	<meta name="twitter:card" content="summary_large_image">
 
-	<title>Profile</title>
+	<title>Posts</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="manifest" href="manifest.json">
-	<script src="Furzona.js"></script>
+
+	<script nomodule src="polyfill.js"></script>
+	<script nomodule src="fetch-polyfill.js"></script>
+	<script nomodule src="url-polyfill.js"></script>
+
+	<script src="Furzona.js" defer></script>
 	<script src="preload.js"></script>
 	<script src="nav.js" defer></script>
-	<script src="profile.js" defer></script>
+	<script src="like.js" defer></script>
+	<script src="posts.js" defer></script>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +37,7 @@
 	<header>
 		<section>
 			<img src="Logo.png" alt="Furzona logo" srcset="" data-nav-home>
-			<h1>Profile</h1>
+			<h1 id="page-title">Posts</h1>
 		</section>
 		<section>
 			<button type="button" data-nav-back><img src="Assets/arrow-left.svg" alt="Back"></button>
@@ -41,19 +47,16 @@
 		</section>
 	</header>
 	<main>
-		<section class="profile-card card" id="profile-card">
-			<img id="profile-banner" class="banner" alt="Profile banner" data-transition="banner">
-			<div class="profile-top">
-				<img id="profile-avatar" class="avatar" alt="Profile avatar" data-transition="avatar">
-				<div>
-					<h1 id="profile-name" class="name" data-transition="name">Loading...</h1>
-					<p id="profile-meta" class="meta"></p>
-				</div>
-			</div>
-			<div id="profile-follow"></div>
-			<p id="profile-bio" class="bio"></p>
-			<div id="profile-stats" class="stats"></div>
+		<section class="profile-card card" id="posts-header" hidden>
+			<img class="pfp" id="posts-owner-avatar" alt="Owner avatar" data-transition="avatar">
+			<p id="posts-owner-name" class="name" data-transition="name"></p>
 		</section>
+
+		<div id="error-container"></div>
+
+		<ul id="posts-list">
+
+		</ul>
 	</main>
 </body>
 </html>

@@ -38,10 +38,17 @@
 			<button type="button"><img src="Assets/menu.svg" alt="Menu"></button>
 		</section>
 	</header>
-	<form id="login-form">
-		<input type="email" name="email" id="email-input">
-		<input type="password" name="password" id="password-input">
-		<button type="submit">Log in</button>
-	</form>
+	<main>
+		<section class="card login-card">
+			<h1>Log in</h1>
+			<form id="login-form">
+				<label class="field" for="email-input">Email</label>
+				<input class="input" type="email" name="email" id="email-input" autocomplete="email" required>
+				<label class="field" for="password-input">Password</label>
+				<input class="input" type="password" name="password" id="password-input" autocomplete="current-password" required>
+				<button type="submit" >Log in</button>
+			</form>
+		</section>
+	</main>
 </body>
 </html>

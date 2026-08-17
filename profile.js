@@ -47,11 +47,22 @@ function renderProfile(profile) {
 		["Followers", stats.followers],
 		["Following", stats.followed]
 	].map(([label, value]) => `
-		<div class="stat">
+		<div class="stat${label === "Posts" ? " clickable" : ""}"${label === "Posts" ? ` data-user-posts="${user.id}"` : ""}>
 			<strong>${value ?? 0}</strong>
 			<span>${label}</span>
 		</div>
 	`).join("");
+
+	const postsStat = statsEl.querySelector(".stat.clickable");
+	if (postsStat) {
+		postsStat.onclick = () => {
+			const profileParams = new URLSearchParams({ id: user.id });
+			if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
+			if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
+			if (user.username) profileParams.set("username", user.username);
+			window.location.href = "posts.html?" + profileParams.toString();
+		};
+	}
 
 	if (followEl) {
 		const btn = document.createElement("button");

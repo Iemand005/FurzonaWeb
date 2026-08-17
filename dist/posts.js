@@ -1,58 +1,48 @@
 "use strict";
 
+var params = new URLSearchParams(window.location.search);
+var userId = params.get("id");
 var postList = document.getElementById("posts-list");
-var clickedPfp = null;
-var clickedName = null;
+var postsHeader = document.getElementById("posts-header");
+var postsOwnerAvatar = document.getElementById("posts-owner-avatar");
+var postsOwnerName = document.getElementById("posts-owner-name");
+var pageTitle = document.getElementById("page-title");
+var clickedOwner = null;
 var clickedPost = null;
-window.addEventListener("pageswap", function (event) {
-  if (!event.viewTransition || !clickedPfp) return;
-  document.querySelectorAll(".pfp").forEach(function (img) {
-    img.style.viewTransitionName = "";
-  });
-  document.querySelectorAll(".profile p").forEach(function (p) {
-    p.style.viewTransitionName = "";
-  });
-  clickedPfp.style.viewTransitionName = "avatar-".concat(clickedPfp.dataset.transitionId);
-  if (clickedName) clickedName.style.viewTransitionName = "name-".concat(clickedPfp.dataset.transitionId);
-  var cleanup = function cleanup() {
-    clickedPfp.style.viewTransitionName = "";
-    if (clickedName) clickedName.style.viewTransitionName = "";
-  };
-  event.viewTransition.ready.then(cleanup, cleanup);
-});
-window.addEventListener('pageswap', function (e) {
-  if (e.viewTransition) {
-    console.log('pageswap OK:', e.activation.entry.url);
-    e.viewTransition.finished.catch(function (err) {
-      return console.warn('pageswap aborted:', err.name);
+if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
+  var avatar = params.get("avatar");
+  var username = params.get("username");
+  if (avatar) postsOwnerAvatar.src = avatar;
+  postsOwnerAvatar.alt = username || "Owner avatar";
+  postsOwnerName.textContent = username ? "".concat(username, "'s posts") : "Posts";
+  postsHeader.hidden = false;
+  postsHeader.style.cursor = "pointer";
+  postsHeader.onclick = function () {
+    clickedOwner = postsOwnerAvatar;
+    var profileParams = new URLSearchParams({
+      id: userId
     });
-  } else {
-    console.log('pageswap: NO transition. from:', location.href, '->', e.activation.entry.url);
-  }
-});
-window.addEventListener('pagereveal', function (e) {
-  console.log('pagereveal', e.viewTransition ? 'OK' : 'NONE');
-});
-window.addEventListener("pagereveal", function (e) {
-  var _window$navigation, _pfp$closest;
-  if (!e.viewTransition) return;
-  var fromURL = (_window$navigation = window.navigation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.activation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.from) === null || _window$navigation === void 0 ? void 0 : _window$navigation.url;
-  if (!fromURL) return;
-  var id = new URL(fromURL).searchParams.get("id");
-  if (!id) return;
-  var pfp = document.querySelector("[data-transition-id=\"".concat(id, "\"]"));
-  if (!pfp) return;
-  var nameEl = (_pfp$closest = pfp.closest(".profile")) === null || _pfp$closest === void 0 ? void 0 : _pfp$closest.querySelector("p");
-  pfp.style.viewTransitionName = "avatar-".concat(id);
-  if (nameEl) nameEl.style.viewTransitionName = "name-".concat(id);
-  var cleanup = function cleanup() {
-    pfp.style.viewTransitionName = "";
-    if (nameEl) nameEl.style.viewTransitionName = "";
+    if (avatar) profileParams.set("avatar", avatar);
+    if (params.get("banner")) profileParams.set("banner", params.get("banner"));
+    if (username) profileParams.set("username", username);
+    window.location.href = "profile.html?" + profileParams.toString();
   };
-  e.viewTransition.ready.then(cleanup, cleanup);
-});
+  if (pageTitle) pageTitle.textContent = username ? "".concat(username, "'s posts") : "Posts";
+}
 window.addEventListener("pageswap", function (event) {
-  if (!event.viewTransition || !clickedPost) return;
+  if (!event.viewTransition) return;
+  if (clickedOwner && userId) {
+    clickedOwner.style.viewTransitionName = "avatar-".concat(userId);
+    if (postsOwnerName) postsOwnerName.style.viewTransitionName = "name-".concat(userId);
+    var _cleanup = function _cleanup() {
+      clickedOwner.style.viewTransitionName = "";
+      if (postsOwnerName) postsOwnerName.style.viewTransitionName = "";
+    };
+    event.viewTransition.ready.then(_cleanup, _cleanup);
+    clickedOwner = null;
+    return;
+  }
+  if (!clickedPost) return;
   var _clickedPost = clickedPost,
     id = _clickedPost.id,
     authorId = _clickedPost.authorId,
@@ -77,11 +67,12 @@ window.addEventListener("pageswap", function (event) {
     if (image) image.style.viewTransitionName = "";
   };
   event.viewTransition.ready.then(cleanup, cleanup);
+  clickedPost = null;
 });
 window.addEventListener("pagereveal", function (e) {
-  var _window$navigation2;
+  var _window$navigation;
   if (!e.viewTransition) return;
-  var fromURL = (_window$navigation2 = window.navigation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.activation) === null || _window$navigation2 === void 0 || (_window$navigation2 = _window$navigation2.from) === null || _window$navigation2 === void 0 ? void 0 : _window$navigation2.url;
+  var fromURL = (_window$navigation = window.navigation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.activation) === null || _window$navigation === void 0 || (_window$navigation = _window$navigation.from) === null || _window$navigation === void 0 ? void 0 : _window$navigation.url;
   if (!fromURL) return;
   var url = new URL(fromURL);
   if (!url.pathname.endsWith("post.html")) return;
@@ -124,22 +115,21 @@ if (postList instanceof HTMLUListElement) {
     pfp.alt = post.u.username;
     pfp.dataset.transitionId = post.u.id;
     profileCard.appendChild(pfp);
-    profileCard.onclick = function (event) {
-      event.stopPropagation();
-      clickedPfp = pfp;
-      clickedName = username;
-      clickedPost = null;
-      var params = new URLSearchParams({
-        id: post.u.id
-      });
-      if (post.u.i) params.set("avatar", furzona.getProfilePictureUrl(post.u));
-      if (post.u.b) params.set("banner", furzona.getMediaUrl(post.u.b));
-      if (post.u.username) params.set("username", post.u.username);
-      window.location.href = "profile.html?" + params.toString();
-    };
     var username = document.createElement("p");
     username.textContent = post.u.username;
     profileCard.appendChild(username);
+    profileCard.onclick = function (event) {
+      event.stopPropagation();
+      clickedOwner = null;
+      clickedPost = null;
+      var profileParams = new URLSearchParams({
+        id: post.u.id
+      });
+      if (post.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(post.u));
+      if (post.u.b) profileParams.set("banner", furzona.getMediaUrl(post.u.b));
+      if (post.u.username) profileParams.set("username", post.u.username);
+      window.location.href = "profile.html?" + profileParams.toString();
+    };
     listItem.appendChild(profileCard);
     var title = document.createElement("h2");
     title.textContent = post.t || "";
@@ -151,14 +141,12 @@ if (postList instanceof HTMLUListElement) {
       image.alt = post.t || post.u.username || "Post image";
       listItem.appendChild(image);
     }
-    var likeButton = createLikeButton(post, {
+    listItem.appendChild(createLikeButton(post, {
       liked: !!post.z
-    });
-    listItem.appendChild(likeButton);
+    }));
     listItem.style.cursor = "pointer";
     listItem.onclick = function () {
-      clickedPfp = null;
-      clickedName = null;
+      clickedOwner = null;
       clickedPost = {
         id: post.id,
         authorId: post.u.id,
@@ -182,10 +170,17 @@ if (postList instanceof HTMLUListElement) {
   var loadPosts = function loadPosts(date) {
     if (isLoading || !hasMorePosts) return;
     isLoading = true;
-    furzona.getPosts(date).then(function (posts) {
+    var request = userId ? furzona.getUserPosts(userId, date) : furzona.getPosts(date);
+    request.then(function (posts) {
       if (!posts || posts.length === 0) {
         hasMorePosts = false;
         isLoading = false;
+        if (postList.childElementCount === 0) {
+          var empty = document.createElement("li");
+          empty.className = "meta";
+          empty.textContent = userId ? "No posts from this user yet." : "No posts yet.";
+          postList.appendChild(empty);
+        }
         return;
       }
       posts.forEach(function (post) {

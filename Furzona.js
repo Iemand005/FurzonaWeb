@@ -120,6 +120,18 @@ class Furzona extends RequestService {
 		return this.post("posts", { date: date || undefined, category });
 	}
 	/**
+	 * Fetch posts by a single user.
+	 * @param {string} userId
+	 * @param {number} [date] epoch ms — posts before this timestamp (pagination)
+	 * @param {string} [category]
+	 * @returns {Promise<FurzonaPost[]>}
+	 */
+	async getUserPosts(userId, date = 0, category) {
+		const endpoint = ["posts", userId];
+		if (!category) return this.post(endpoint, date ? { date } : {});
+		return this.post(endpoint, { date: date || undefined, category });
+	}
+	/**
 	 * @param {string} email
 	 * @param {string} password
 	 */

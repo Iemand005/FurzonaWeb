@@ -2,6 +2,19 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   var _window$navigation2;
+  var addLoginLink = function addLoginLink() {
+    if (window.location.pathname.endsWith("login.html")) return;
+    if (furzona.isLoggedIn) return;
+    var headerSections = document.querySelectorAll("header > section");
+    var navSection = headerSections[headerSections.length - 1];
+    if (!navSection) return;
+    var link = document.createElement("a");
+    link.className = "login-link";
+    link.href = "login.html";
+    link.textContent = "Log in";
+    navSection.appendChild(link);
+  };
+  addLoginLink();
   var searchButtons = document.querySelectorAll("[data-nav-search]");
   searchButtons.forEach(function (button) {
     button.addEventListener("click", function () {
