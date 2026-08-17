@@ -135,6 +135,10 @@ class Furzona extends RequestService {
 	async likePost(post) { return this.post("favorite", { post }); }
 	/** @param {string} post  */
 	async unlikePost(post) { return this.post("unfavorite", { post }); }
+	/** @param {string} comment  */
+	async likeComment(comment) { return this.post("likeComment", { comment }); }
+	/** @param {string} comment  */
+	async unlikeComment(comment) { return this.post("unlikeComment", { comment }); }
 	/** @param {string} post  */
 	async getComments(post) {
 		return this.post(["commentLevels", post]);

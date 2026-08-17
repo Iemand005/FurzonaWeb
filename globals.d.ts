@@ -274,6 +274,8 @@ interface FurzonaError {
 
 type FavoritePost = { post: string };
 
+type FavoriteComment = { comment: string };
+
 interface FollowToggleResult {
 	following: boolean;
 }
@@ -424,6 +426,14 @@ interface ApiEndpoints {
 	};
 	unfavorite: {
 		body: FavoritePost;
+		response: LikeToggleResult;
+	};
+	likeComment: {
+		body: FavoriteComment;
+		response: LikeToggleResult;
+	};
+	unlikeComment: {
+		body: FavoriteComment;
 		response: LikeToggleResult;
 	};
 	settings: {
