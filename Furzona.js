@@ -417,15 +417,13 @@ class Furzona extends RequestService {
 	}
 
 	/** @param {string} path */
-	getMediaUrl(path) {
-		return this._contentUrl + path;
-	}
+	getMediaUrl(path) { return this._contentUrl + path; }
 	/** @param {FurzonaUserBase} user */
 	getProfilePictureUrl(user) {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
-	get isLoggedIn: () => !!this.token;
+	get isLoggedIn() { return !!this.token; }
 }
 
 const furzona = new Furzona;
