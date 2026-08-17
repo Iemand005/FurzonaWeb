@@ -370,7 +370,7 @@ interface EditGroupRequest {
 /** POST /post — only `type` is confirmed required; the rest map to FurzonaPost keys */
 interface CreatePostRequest {
 	/** post type discriminator (numeric) */
-	type: number;
+	type: PostType;
 	/** title */
 	t?: string;
 	/** description/caption */
@@ -451,6 +451,10 @@ interface FurzonaChatMessage {
 /** Shape unconfirmed (auth-gated) */
 interface FurzonaBadge {
 	[key: string]: unknown;
+}
+
+enum PostType {
+	Text = 0
 }
 
 interface ApiEndpoints {

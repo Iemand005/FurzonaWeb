@@ -144,7 +144,7 @@ class Furzona extends RequestService {
 	/**
 	 * Create a post. Only `type` is confirmed required; other field names
 	 * (`t`, `d`, `m`…) map to the FurzonaPost keys but are best-effort.
-	 * @param {number} type post type discriminator
+	 * @param {PostType} type post type discriminator
 	 * @param {object} [fields]
 	 * @returns {Promise<FurzonaPost>}
 	 */
