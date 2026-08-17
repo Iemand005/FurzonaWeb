@@ -190,21 +190,24 @@ interface FurzonaUser {
 }
 
 interface FurzonaComment {
-	/** user — author of the comment */
+	/** id — comment id */
+	id: string;
+	/** u — author of the comment */
 	u: FurzonaPostAuthor;
-	content: string;
-	/** replies — reply count, or nested replies; exact shape unconfirmed */
-	s: number | FurzonaComment[];
-	/** likes — like count */
+	/** c — comment text/content */
+	c: string;
+	/** s — reply count */
+	s: number;
+	/** l — like count */
 	l: number;
-	/** liked — whether the current user has liked this comment */
+	/** d — whether the current user has liked this comment */
 	d: boolean;
-	/** deleted */
+	/** t — deleted flag */
 	t: boolean;
-	/** replyingTo — id of the comment being replied to, if any */
-	r: string | null;
-	/** emojis */
+	/** e — emojis */
 	e: unknown[];
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
 }
 
 interface FurzonaPoll {
