@@ -1141,13 +1141,13 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "token",
     get: function get() {
-      if (!this._token) this._token = localStorage.getItem("token");
+      if (!this._token && localStorage) this._token = localStorage.getItem("token");
       return this._token;
     },
     set: function set(token) {
       if (!token) throw new Error("Tried to assign an empty token.");
       this._token = token;
-      localStorage.setItem("token", token);
+      if (localStorage) localStorage.setItem("token", token);
     }
   }, {
     key: "user",
