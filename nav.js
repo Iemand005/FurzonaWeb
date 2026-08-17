@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	addLoginLink();
 
-	const addProfileButton = () => {
+	const addProfileButton = async () => {
 		if (window.location.pathname.endsWith("login.html")) return;
-		const me = furzona.user;
+		const me = furzona.user || (await furzona.fetchSelf?.());
 		if (!me || !furzona.isLoggedIn) return;
 		const headerSections = document.querySelectorAll("header > section");
 		const navSection = headerSections[headerSections.length - 1];

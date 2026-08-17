@@ -379,6 +379,55 @@ class Furzona extends RequestService {
 		}
 		return this._user;
 	}
+
+	/**
+	 * Extract the user id from a JWT auth token (best-effort).
+	 * @returns {string|null}
+	 */
+	_tokenUserId() {
+		const token = this.token;
+		if (!token) return null;
+		try {
+			const parts = token.split(".");
+			if (parts.length !== 3) return null;
+			const padded = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+			const binary = atob(padded);
+			const json = decodeURIComponent(
+				binary.split("").map(c => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join("")
+			);
+			const payload = JSON.parse(json);
+			for (const key of ["id", "sub", "userId", "user_id", "nameid"]) {
+				if (payload[key]) return String(payload[key]);
+			}
+			if (payload.user && payload.user.id) return String(payload.user.id);
+		} catch (error) {
+			// not a JSON/JWT token — ignore
+		}
+		return null;
+	}
+
+	/**
+	 * If logged in but no cached user, try to recover one and store it.
+	 * @returns {Promise<FurzonaUserBase|null>}
+	 */
+	async fetchSelf() {
+		if (this.user) return this.user;
+		if (!this.isLoggedIn) return null;
+
+		const id = this._tokenUserId();
+		if (!id) return null;
+
+		try {
+			const user = await this.getUser(id);
+			if (user && user.id) {
+				this.user = user;
+				return user;
+			}
+		} catch (error) {
+			console.error("fetchSelf: could not load own profile:", error);
+		}
+		return null;
+	}
 	/** @param {string} path */
 	getMediaUrl(path) {
 		return this._contentUrl + path;
