@@ -10,6 +10,16 @@ type ApiRequestFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, me
 type ReadEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => ResponseBody<K>;
 type WriteEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, body?: ApiEndpoints[K]["body"]) => ResponseBody<K>;
 
+class RequestService {
+    protected _token: string | null;
+    constructor();
+    request: ApiRequestFn;
+    get: ReadEndpointFn;
+    put: WriteEndpointFn;
+    post: WriteEndpointFn;
+    delete: ReadEndpointFn;
+}
+
 // Furzona API
 
 interface FurzonaCategory {

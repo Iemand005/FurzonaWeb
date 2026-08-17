@@ -16,11 +16,9 @@ const apiUrl = "https://api.furzona.app/";
 class RequestService {
 
 	constructor() {
-		/** @type {string?} */
 		this._token = null;
 	}
 
-	/** @type {ApiRequestFn} */
 	async request(endpoint, method = "GET", body) {
 
 		/** @type {RequestInit} */
@@ -71,16 +69,12 @@ class RequestService {
 		throw new Error(respObj.error);
 	}
 
-	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
 
-	/** @type {WriteEndpointFn} */
 	async put(endpoint, body) { return this.request(endpoint, "PUT", body); }
 
-	/** @type {WriteEndpointFn} */
 	async post(endpoint, body) { return this.request(endpoint, "POST", body); }
 
-	/** @type {ReadEndpointFn} */
 	async delete(endpoint) { return this.request(endpoint, "DELETE"); }
 }
 
