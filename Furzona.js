@@ -20,13 +20,7 @@ class RequestService {
 		this._token = null;
 	}
 
-	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K | [K, ...string[]]} endpoint 
-	 * @param {Method} [method] 
-	 * @param {ApiEndpoints[K]["body"]} [body] 
-	 * @returns {Promise<ApiEndpoints[K]["response"]>}
-	 */
+	/** @type {ApiRequestFn} */
 	async request(endpoint, method = "GET", body) {
 
 		/** @type {RequestInit} */
