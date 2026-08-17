@@ -87,7 +87,8 @@ function createCommentElement(comment) {
   pfp.alt = comment.u.username;
   var name = document.createElement("p");
   name.textContent = comment.u.username;
-  author.append(pfp, name);
+  author.appendChild(pfp);
+  author.appendChild(name);
   author.style.cursor = "pointer";
   author.onclick = function () {
     var profileParams = new URLSearchParams({

@@ -90,7 +90,8 @@ var createdPost = function createdPost(item) {
   pfp.dataset.transitionId = item.u.id;
   var name = document.createElement("p");
   name.textContent = item.u.username;
-  profile.append(pfp, name);
+  profile.appendChild(pfp);
+  profile.appendChild(name);
   card.appendChild(profile);
   var title = document.createElement("h2");
   title.textContent = item.t || "";
@@ -136,7 +137,8 @@ var createdUser = function createdUser(item) {
   pfp.dataset.transitionId = item.id;
   var name = document.createElement("p");
   name.textContent = item.username;
-  card.append(pfp, name);
+  card.appendChild(pfp);
+  card.appendChild(name);
   card.style.cursor = "pointer";
   card.onclick = function () {
     clickedPfp = pfp;

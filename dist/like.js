@@ -56,7 +56,8 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
     var count = document.createElement("span");
     count.className = "like-count";
     count.textContent = String((_post$l = post.l) !== null && _post$l !== void 0 ? _post$l : 0);
-    button.append(heart, count);
+    button.appendChild(heart);
+    button.appendChild(count);
     if (liked) button.classList.add("liked");
     var liking = false;
     button.addEventListener("click", /*#__PURE__*/function () {

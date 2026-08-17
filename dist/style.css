@@ -260,6 +260,7 @@ header button img {
 	height: 16px;
 	display: block;
 	pointer-events: none;
+	border-radius: 0px;
 }
 
 header .profile-btn {
@@ -746,4 +747,44 @@ img, .banner, .profile, button, .stat, .input {
 	main, .profile-page { padding-left: 12px; padding-right: 12px; }
 	#posts-list > li { max-width: none; flex-basis: 100%; }
 	.profile-top { align-items: flex-start; }
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg: #ffffff;
+		--bg-raised: #f3f4f6;
+		--bg-sunken: #f3f4f6;
+		--bg-btn: #e4e6eb;
+		--bg-btn-hover: #d0d3da;
+		--bg-btn-disabled: #ebecef;
+		--text: #1c1e21;
+		--text-dim: #55606e;
+		--text-faint: #8a8f98;
+		--border: rgba(0, 0, 0, 0.12);
+		--shadow-card: 0 10px 24px rgba(0, 0, 0, 0.10);
+	}
+
+	header {
+		background: rgba(250, 250, 250, 0.92);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+	}
+
+	.post {
+		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+	}
+
+	.post h2 {
+		color: #1c1e21;
+	}
+
+	.like-btn.liked {
+		color: #e0426f;
+		background: #ffe3ea;
+		border-color: #ff8aac55;
+	}
+
+	header button:not(.profile-btn) img,
+	.like-btn:not(.liked) img {
+		filter: brightness(0);
+	}
 }

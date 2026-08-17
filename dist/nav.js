@@ -2,11 +2,13 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   var _window$navigation2;
+  var navSection = function () {
+    var sections = document.querySelectorAll("header > section");
+    return sections[sections.length - 1] || null;
+  }();
   var addLoginLink = function addLoginLink() {
     if (window.location.pathname.endsWith("login.html")) return;
     if (furzona.isLoggedIn) return;
-    var headerSections = document.querySelectorAll("header > section");
-    var navSection = headerSections[headerSections.length - 1];
     if (!navSection) return;
     var link = document.createElement("a");
     link.className = "login-link";
@@ -14,13 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     link.textContent = "Log in";
     navSection.appendChild(link);
   };
-  addLoginLink();
   var addProfileButton = function addProfileButton() {
     if (window.location.pathname.endsWith("login.html")) return;
     var me = furzona.user;
     if (!me || !furzona.isLoggedIn) return;
-    var headerSections = document.querySelectorAll("header > section");
-    var navSection = headerSections[headerSections.length - 1];
     if (!navSection) return;
     var button = document.createElement("button");
     button.type = "button";
@@ -41,30 +40,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     navSection.appendChild(button);
   };
-  addProfileButton();
-  var searchButtons = document.querySelectorAll("[data-nav-search]");
-  searchButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+  var searchButton = document.getElementById("nav-search");
+  if (searchButton) {
+    searchButton.addEventListener("click", function () {
       window.location.href = "search.html";
     });
-  });
-  var homeButtons = document.querySelectorAll("[data-nav-home]");
-  homeButtons.forEach(function (img) {
-    img.addEventListener("click", function () {
+  }
+  var homeImg = document.getElementById("nav-home");
+  if (homeImg) {
+    homeImg.addEventListener("click", function () {
       window.location.href = "index.html";
     });
-    img.style.cursor = "pointer";
-  });
+    homeImg.style.cursor = "pointer";
+  }
   var addNavHomeButton = function addNavHomeButton() {
-    var headerSections = document.querySelectorAll("header > section");
-    var navSection = headerSections[headerSections.length - 1];
-    if (!navSection || navSection.querySelector("[data-nav-home-button]")) return;
+    if (!navSection || document.getElementById("nav-home-button")) return;
     var button = document.createElement("button");
     button.type = "button";
-    button.dataset.navHomeButton = "";
+    button.id = "nav-home-button";
     button.title = "Home";
     var img = document.createElement("img");
-    img.src = "Logo.png";
+    img.src = "Assets/home.svg";
     img.alt = "Home";
     button.appendChild(img);
     button.addEventListener("click", function () {
@@ -72,17 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     navSection.appendChild(button);
   };
-  addNavHomeButton();
   var addNewPostButton = function addNewPostButton() {
     if (window.location.pathname.endsWith("login.html")) return;
     if (window.location.pathname.endsWith("create-post.html")) return;
     if (!furzona.isLoggedIn) return;
-    var headerSections = document.querySelectorAll("header > section");
-    var navSection = headerSections[headerSections.length - 1];
-    if (!navSection || navSection.querySelector("[data-nav-new-post]")) return;
+    if (!navSection || document.getElementById("nav-new-post")) return;
     var button = document.createElement("button");
     button.type = "button";
-    button.dataset.navNewPost = "";
+    button.id = "nav-new-post";
     button.title = "New post";
     var plus = document.createElement("span");
     plus.textContent = "\uFF0B";
@@ -94,10 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     navSection.appendChild(button);
   };
-  addNewPostButton();
-  var backButtons = document.querySelectorAll("[data-nav-back]");
-  backButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+  var backButton = document.getElementById("nav-back");
+  if (backButton) {
+    backButton.addEventListener("click", function () {
       var _window$navigation;
       if (history.length > 1 || (_window$navigation = window.navigation) !== null && _window$navigation !== void 0 && _window$navigation.canGoBack) {
         history.back();
@@ -105,23 +97,26 @@ document.addEventListener("DOMContentLoaded", function () {
         location.replace("index.html");
       }
     });
-  });
-  var forwardButtons = document.querySelectorAll("[data-nav-forward]");
+  }
+  var forwardButton = document.getElementById("nav-forward");
   var syncForwardState = function syncForwardState() {
+    if (!forwardButton) return;
     var canGoForward = window.navigation ? window.navigation.canGoForward : true;
-    forwardButtons.forEach(function (button) {
-      button.disabled = !canGoForward;
-    });
+    forwardButton.disabled = !canGoForward;
   };
-  forwardButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
+  if (forwardButton) {
+    forwardButton.addEventListener("click", function () {
       history.forward();
     });
-  });
-  syncForwardState();
+  }
   window.addEventListener("pageshow", syncForwardState);
   window.addEventListener("popstate", syncForwardState);
   (_window$navigation2 = window.navigation) === null || _window$navigation2 === void 0 || _window$navigation2.addEventListener("navigate", syncForwardState);
+  addLoginLink();
+  addNavHomeButton();
+  addNewPostButton();
+  addProfileButton();
+  syncForwardState();
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(function () {});
   }
