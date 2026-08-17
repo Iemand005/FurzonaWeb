@@ -2,7 +2,9 @@
 	const HEART_UNLIKED = "Assets/heart.svg";
 	const HEART_LIKED = "Assets/heart-liked.svg";
 
-	window.createLikeButton = (post, { liked = false } = {}) => {
+	window.createLikeButton = (post, { liked = false, onLike } = {}) => {
+		const handleLike = onLike || (() => furzona.likePost(post.id));
+
 		const button = document.createElement("button");
 		button.type = "button";
 		button.className = "like-btn";
@@ -24,13 +26,13 @@
 			if (liking) return;
 			liking = true;
 			try {
-				const result = await furzona.likePost(post.id);
+				const result = await handleLike();
 				const isLiked = !!result.liked;
 				button.classList.toggle("liked", isLiked);
 				heart.src = isLiked ? HEART_LIKED : HEART_UNLIKED;
 				count.textContent = String(result.likes);
 			} catch (error) {
-				console.error("Failed to like post:", error);
+				console.error("Failed to like:", error);
 			} finally {
 				liking = false;
 			}

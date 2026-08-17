@@ -119,6 +119,10 @@ function createCommentElement(comment) {
 	metaParts.push(date.toLocaleString());
 	meta.textContent = metaParts.join(" • ");
 	card.appendChild(meta);
+	card.appendChild(createLikeButton(comment, {
+		liked: !!comment.d,
+		onLike: () => furzona.likePost(comment.id)
+	}));
 
 	return card;
 }
