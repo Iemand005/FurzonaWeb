@@ -52,6 +52,16 @@ if (form instanceof HTMLFormElement) {
 			const d = descriptionInput.value.trim();
 			const files = mediaInput.files ? Array.from(mediaInput.files) : [];
 
+			const isText = type === 0;
+			if (isText && !t && !d) {
+				statusEl.textContent = "Text posts need a title or a description.";
+				return;
+			}
+			if (!isText && !files.length && !t && !d) {
+				statusEl.textContent = "Add media, a title, or a description.";
+				return;
+			}
+
 			const media = [];
 			for (const file of files) {
 				const uploaded = await uploadFile(file);
@@ -62,7 +72,7 @@ if (form instanceof HTMLFormElement) {
 
 			const fields = {};
 			if (t) fields.t = t;
-			if (d || (!files.length && !t)) fields.d = d;
+			if (d) fields.d = d;
 			if (media.length) fields.m = media;
 
 			const post = await furzona.createPost(type, fields);
