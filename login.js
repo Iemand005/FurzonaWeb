@@ -9,9 +9,7 @@ if (loginForm instanceof HTMLFormElement) {
 	loginForm.onsubmit = ev => {
 		ev.preventDefault();
 
-		if (!(ev.target instanceof HTMLFormElement)) return;
-
-		const formData = new FormData(ev.target);
+		const formData = new FormData(loginForm);
 		const email = formData.get('email');
 		const password = formData.get('password');
 		
