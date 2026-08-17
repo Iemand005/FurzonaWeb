@@ -476,7 +476,7 @@ main {
 	transition: filter 100ms linear;
 }
 
-img, .banner, .profile, button, .stat, .input, .comment {
+img, a, .banner, .profile, button, .stat, .input, .comment {
 	border-radius: 14px;
 }
 
