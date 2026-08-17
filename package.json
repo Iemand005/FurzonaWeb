@@ -1,11 +1,10 @@
 {
 	"scripts": {
-		"clean": "rimraf dist",
 		"build:js": "babel . -d dist --ignore \"node_modules/**\",\"dist/**\"",
 		"build:assets": "cpy \"**/*.{html,css}\" dist --parents --ignore=\"node_modules/**\" --ignore=\"dist/**\"",
 		"build:polyfill": "node -e \"const fs=require('fs'); fs.copyFileSync('node_modules/core-js-bundle/minified.js', 'dist/polyfill.js'); fs.copyFileSync('node_modules/whatwg-fetch/dist/fetch.umd.js', 'dist/fetch-polyfill.js'); fs.copyFileSync('node_modules/url-polyfill/url-polyfill.min.js', 'dist/url-polyfill.js')\"",
-		"build": "npm run clean && npm run build:js && npm run build:assets && npm run build:polyfill"
-	},
+		"build": "npm run build:js && npm run build:assets && npm run build:polyfill"
+	}
 	"devDependencies": {
 		"@babel/cli": "^8.0.4",
 		"@babel/core": "^8.0.1",
