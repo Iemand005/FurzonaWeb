@@ -2,6 +2,22 @@
 	const HEART_UNLIKED = "Assets/heart.svg";
 	const HEART_LIKED = "Assets/heart-liked.svg";
 
+	/** @param {unknown} result @returns {{ liked: boolean|null, likes: number|null }} */
+	const normalize = (result) => {
+		if (result === null || result === undefined) return { liked: null, likes: null };
+		if (typeof result === "boolean") return { liked: result, likes: null };
+		if (typeof result === "number") return { liked: null, likes: result };
+		if (typeof result !== "object") return { liked: null, likes: null };
+		const liked = typeof result.liked === "boolean" ? result.liked
+			: typeof result.d === "boolean" ? result.d
+			: null;
+		const likes = typeof result.likes === "number" ? result.likes
+			: typeof result.l === "number" ? result.l
+			: typeof result.count === "number" ? result.count
+			: null;
+		return { liked, likes };
+	};
+
 	window.createLikeButton = (post, { liked = false, onLike, onUnlike } = {}) => {
 		const handleLike = onLike || (() => furzona.likePost(post.id));
 		const handleUnlike = onUnlike || (() => furzona.unlikePost(post.id));
@@ -28,10 +44,13 @@
 			liking = true;
 			try {
 				const result = liked ? await handleUnlike() : await handleLike();
-				liked = !!result.liked;
-				button.classList.toggle("liked", liked);
-				heart.src = liked ? HEART_LIKED : HEART_UNLIKED;
-				count.textContent = String(result.likes);
+				const { liked: newLiked, likes: newLikes } = normalize(result);
+				if (newLiked !== null) {
+					liked = newLiked;
+					button.classList.toggle("liked", liked);
+					heart.src = liked ? HEART_LIKED : HEART_UNLIKED;
+				}
+				if (newLikes !== null) count.textContent = String(newLikes);
 			} catch (error) {
 				console.error("Failed to like:", error);
 			} finally {

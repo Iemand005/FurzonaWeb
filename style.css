@@ -382,7 +382,7 @@ main {
 .post .post-desc {
 	margin: 8px 0 0;
 	/* max-height: 120px; */
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	word-break: break-word;
 	white-space: pre-wrap;
 	color: var(--text-dim);
