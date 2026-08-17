@@ -13,6 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	addLoginLink();
 
+	const addProfileButton = () => {
+		if (window.location.pathname.endsWith("login.html")) return;
+		const me = furzona.user;
+		if (!me || !furzona.isLoggedIn) return;
+		const headerSections = document.querySelectorAll("header > section");
+		const navSection = headerSections[headerSections.length - 1];
+		if (!navSection) return;
+		const button = document.createElement("button");
+		button.type = "button";
+		button.className = "profile-btn";
+		button.title = me.username || "My profile";
+		const img = document.createElement("img");
+		img.alt = me.username || "My profile";
+		img.src = furzona.getProfilePictureUrl(me);
+		button.appendChild(img);
+		button.addEventListener("click", () => {
+			const params = new URLSearchParams({ id: me.id });
+			if (me.i) params.set("avatar", furzona.getMediaUrl(me.i));
+			if (me.b) params.set("banner", furzona.getMediaUrl(me.b));
+			if (me.username) params.set("username", me.username);
+			window.location.href = "profile.html?" + params.toString();
+		});
+		navSection.appendChild(button);
+	};
+	addProfileButton();
+
 	const searchButtons = document.querySelectorAll("[data-nav-search]");
 	searchButtons.forEach(button => {
 		button.addEventListener("click", () => {

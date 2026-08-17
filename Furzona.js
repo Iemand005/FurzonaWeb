@@ -79,6 +79,15 @@ class RequestService {
 	async post(endpoint, body) {
 		return this.request(endpoint, "POST", body);
 	}
+
+	/**
+	 * @template {keyof ApiEndpoints} K
+	 * @param {K | [K, ...string[]]} endpoint
+	 * @returns {Promise<ApiEndpoints[K]["response"]>}
+	 */
+	async delete(endpoint) {
+		return this.request(endpoint, "DELETE");
+	}
 }
 
 class Furzona extends RequestService {
@@ -111,6 +120,7 @@ class Furzona extends RequestService {
 		const response = await this.post("login", { email, password });
 
 		this.token = response.s;
+		this.user = response;
 
 		return response;
 	}
@@ -345,6 +355,29 @@ class Furzona extends RequestService {
 	get token() {
 		if (!this._token) this._token = localStorage.getItem("token");
 		return this._token;
+	}
+
+	set user(user) {
+		this._user = user;
+		if (user) {
+			localStorage.setItem("currentUser", JSON.stringify(user));
+		} else {
+			localStorage.removeItem("currentUser");
+		}
+	}
+
+	/** The signed-in Furzona user (from /login), or null when logged out. */
+	get user() {
+		if (!this._user) {
+			try {
+				/** @type {FurzonaUser|null} */
+				const raw = localStorage.getItem("currentUser");
+				if (raw) this._user = JSON.parse(raw);
+			} catch (error) {
+				this._user = null;
+			}
+		}
+		return this._user;
 	}
 	/** @param {string} path */
 	getMediaUrl(path) {

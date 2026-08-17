@@ -228,6 +228,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
             case 1:
               response = _context6.v;
               this.token = response.s;
+              this.user = response;
               return _context6.a(2, response);
           }
         }, _callee6, this);
@@ -555,22 +556,23 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
         return _unblock.apply(this, arguments);
       }
       return unblock;
-    }() /** @param {string} userId @param {string} reason */)
+    }() /** @param {string} userId @param {string} reason @param {number} period */)
   }, {
     key: "banUser",
     value: (function () {
-      var _banUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(userId, reason) {
+      var _banUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(userId, reason, period) {
         return _regenerator().w(function (_context20) {
           while (1) switch (_context20.n) {
             case 0:
               return _context20.a(2, this.post("ban", {
                 userId: userId,
-                reason: reason
+                reason: reason,
+                period: period
               }));
           }
         }, _callee20, this);
       }));
-      function banUser(_x21, _x22) {
+      function banUser(_x21, _x22, _x23) {
         return _banUser.apply(this, arguments);
       }
       return banUser;
@@ -588,7 +590,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee21, this);
       }));
-      function unbanUser(_x23) {
+      function unbanUser(_x24) {
         return _unbanUser.apply(this, arguments);
       }
       return unbanUser;
@@ -604,7 +606,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee22, this);
       }));
-      function getUser(_x24) {
+      function getUser(_x25) {
         return _getUser.apply(this, arguments);
       }
       return getUser;
@@ -635,7 +637,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee23, this);
       }));
-      function search(_x25) {
+      function search(_x26) {
         return _search.apply(this, arguments);
       }
       return search;
@@ -659,7 +661,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee24, this);
       }));
-      function forgotPassword(_x26) {
+      function forgotPassword(_x27) {
         return _forgotPassword.apply(this, arguments);
       }
       return forgotPassword;
@@ -677,7 +679,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee25, this);
       }));
-      function getFollowers(_x27) {
+      function getFollowers(_x28) {
         return _getFollowers.apply(this, arguments);
       }
       return getFollowers;
@@ -695,7 +697,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee26, this);
       }));
-      function getFollowing(_x28) {
+      function getFollowing(_x29) {
         return _getFollowing.apply(this, arguments);
       }
       return getFollowing;
@@ -711,7 +713,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee27, this);
       }));
-      function deletePost(_x29) {
+      function deletePost(_x30) {
         return _deletePost.apply(this, arguments);
       }
       return deletePost;
@@ -734,7 +736,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee28, this);
       }));
-      function editPost(_x30, _x31) {
+      function editPost(_x31, _x32) {
         return _editPost.apply(this, arguments);
       }
       return editPost;
@@ -750,7 +752,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee29, this);
       }));
-      function deleteComment(_x32) {
+      function deleteComment(_x33) {
         return _deleteComment.apply(this, arguments);
       }
       return deleteComment;
@@ -788,7 +790,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee31, this);
       }));
-      function getNotificationData(_x33) {
+      function getNotificationData(_x34) {
         return _getNotificationData.apply(this, arguments);
       }
       return getNotificationData;
@@ -822,7 +824,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee33, this);
       }));
-      function startChat(_x34) {
+      function startChat(_x35) {
         return _startChat.apply(this, arguments);
       }
       return startChat;
@@ -848,7 +850,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee34, this);
       }));
-      function sendMessage(_x35, _x36) {
+      function sendMessage(_x36, _x37) {
         return _sendMessage.apply(this, arguments);
       }
       return sendMessage;
@@ -866,7 +868,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee35, this);
       }));
-      function muteChat(_x37) {
+      function muteChat(_x38) {
         return _muteChat.apply(this, arguments);
       }
       return muteChat;
@@ -884,7 +886,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee36, this);
       }));
-      function unmuteChat(_x38) {
+      function unmuteChat(_x39) {
         return _unmuteChat.apply(this, arguments);
       }
       return unmuteChat;
@@ -902,7 +904,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee37, this);
       }));
-      function sendTyping(_x39) {
+      function sendTyping(_x40) {
         return _sendTyping.apply(this, arguments);
       }
       return sendTyping;
@@ -926,7 +928,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee38, this);
       }));
-      function getGroupInfo(_x40) {
+      function getGroupInfo(_x41) {
         return _getGroupInfo.apply(this, arguments);
       }
       return getGroupInfo;
@@ -954,7 +956,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee39, this);
       }));
-      function editGroup(_x41) {
+      function editGroup(_x42) {
         return _editGroup.apply(this, arguments);
       }
       return editGroup;
@@ -972,7 +974,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee40, this);
       }));
-      function subscribe(_x42) {
+      function subscribe(_x43) {
         return _subscribe.apply(this, arguments);
       }
       return subscribe;
@@ -1010,7 +1012,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee42, this);
       }));
-      function upload(_x43) {
+      function upload(_x44) {
         return _upload.apply(this, arguments);
       }
       return upload;
@@ -1033,7 +1035,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee43, this);
       }));
-      function newSearch(_x44) {
+      function newSearch(_x45) {
         return _newSearch.apply(this, arguments);
       }
       return newSearch;
@@ -1051,7 +1053,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee44, this);
       }));
-      function searchUsers(_x45) {
+      function searchUsers(_x46) {
         return _searchUsers.apply(this, arguments);
       }
       return searchUsers;
@@ -1069,7 +1071,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee45, this);
       }));
-      function searchGroups(_x46) {
+      function searchGroups(_x47) {
         return _searchGroups.apply(this, arguments);
       }
       return searchGroups;
@@ -1093,7 +1095,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
           }
         }, _callee46, this);
       }));
-      function verifyEmail(_x47) {
+      function verifyEmail(_x48) {
         return _verifyEmail.apply(this, arguments);
       }
       return verifyEmail;
@@ -1103,12 +1105,35 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
     get: function get() {
       if (!this._token) this._token = localStorage.getItem("token");
       return this._token;
-    }
-    /** @param {string} path */,
+    },
     set: function set(token) {
       if (!token) throw new Error("Tried to assign an empty token.");
       this._token = token;
       localStorage.setItem("token", token);
+    }
+  }, {
+    key: "user",
+    get: /** The signed-in Furzona user (from /login), or null when logged out. */
+    function get() {
+      if (!this._user) {
+        try {
+          /** @type {FurzonaUser|null} */
+          var raw = localStorage.getItem("currentUser");
+          if (raw) this._user = JSON.parse(raw);
+        } catch (error) {
+          this._user = null;
+        }
+      }
+      return this._user;
+    }
+    /** @param {string} path */,
+    set: function set(user) {
+      this._user = user;
+      if (user) {
+        localStorage.setItem("currentUser", JSON.stringify(user));
+      } else {
+        localStorage.removeItem("currentUser");
+      }
     }
   }, {
     key: "getMediaUrl",

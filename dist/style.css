@@ -262,6 +262,22 @@ header button img {
 	pointer-events: none;
 }
 
+header .profile-btn {
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+header .profile-btn img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
 button:disabled {
 	background: var(--bg-btn-disabled);
 	color: var(--text-faint);

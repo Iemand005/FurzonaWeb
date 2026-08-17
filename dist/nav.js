@@ -15,6 +15,33 @@ document.addEventListener("DOMContentLoaded", function () {
     navSection.appendChild(link);
   };
   addLoginLink();
+  var addProfileButton = function addProfileButton() {
+    if (window.location.pathname.endsWith("login.html")) return;
+    var me = furzona.user;
+    if (!me || !furzona.isLoggedIn) return;
+    var headerSections = document.querySelectorAll("header > section");
+    var navSection = headerSections[headerSections.length - 1];
+    if (!navSection) return;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "profile-btn";
+    button.title = me.username || "My profile";
+    var img = document.createElement("img");
+    img.alt = me.username || "My profile";
+    img.src = furzona.getProfilePictureUrl(me);
+    button.appendChild(img);
+    button.addEventListener("click", function () {
+      var params = new URLSearchParams({
+        id: me.id
+      });
+      if (me.i) params.set("avatar", furzona.getMediaUrl(me.i));
+      if (me.b) params.set("banner", furzona.getMediaUrl(me.b));
+      if (me.username) params.set("username", me.username);
+      window.location.href = "profile.html?" + params.toString();
+    });
+    navSection.appendChild(button);
+  };
+  addProfileButton();
   var searchButtons = document.querySelectorAll("[data-nav-search]");
   searchButtons.forEach(function (button) {
     button.addEventListener("click", function () {
