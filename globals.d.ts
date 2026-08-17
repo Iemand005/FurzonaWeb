@@ -349,10 +349,10 @@ interface VerifyEmailRequest {
 	code: string;
 }
 
-/** POST /ban — mode? no; fields revealed as userId then reason */
 interface BanRequest {
 	userId: string;
 	reason: string;
+	period: number;
 }
 
 /** Group/GC search query — shared by POST /users and POST /groups */
