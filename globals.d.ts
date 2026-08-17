@@ -266,7 +266,7 @@ enum ErrorCode {
 	NogLoggedIn = 5
 }
 
-interface FurzonaError {
+interface FurzonaErrorResponse {
 	error: string;
 	errorCode: ErrorCode;
 }

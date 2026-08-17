@@ -30,6 +30,17 @@ function displayError(ex, respTxt) {
 
 const apiUrl = "https://api.furzona.app/";
 
+class FurzonaError extends Error {
+	/**
+	 * @param {string} message
+	 * @param {number} code
+	 */
+	constructor(message, code) {
+		super(message);
+		this.code = code;
+	}
+}
+
 class RequestService {
 
 	constructor() {
@@ -58,7 +69,7 @@ class RequestService {
 
 		const respTxt = await response.text();
 
-		/** @type {FurzonaError?} */
+		/** @type {FurzonaErrorResponse?} */
 		let respObj = null;
 		try { respObj = JSON.parse(respTxt); } catch(ex) { displayError(ex, respTxt); }
 		if (!respObj) respObj = { error: "Empty JSON response from server, unkown error!", errorCode: -1 };
@@ -71,7 +82,7 @@ class RequestService {
 			this.logout();
 		}
 		
-		throw new Error(respObj.error);
+		throw new FurzonaError(respObj.error, respObj.errorCode);
 	}
 
 	/** @type {ReadEndpointFn} */
@@ -371,7 +382,7 @@ class Furzona extends RequestService {
 	async probe(endpoint) {
 		const requests = [this.get(endpoint), this.post(endpoint)];
 		// [this.get(endpoint), this.post(endpoint), this.put(endpoint), this.delete(endpoint)]
-		Promise.all(requests).then(console.log)
+		await results = Promise.allSettled(requests).then(console.log)
 	}
 
 	set user(user) {
