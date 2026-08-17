@@ -378,11 +378,13 @@ class Furzona extends RequestService {
 	async verifyEmail(code) {
 		return this.post("verifyEmail", { code });
 	}
-	/** @param {string} endpoint */
+	/** @type {ProbeEndpointFn} */
 	async probe(endpoint) {
 		const requests = [this.get(endpoint), this.post(endpoint)];
 		// [this.get(endpoint), this.post(endpoint), this.put(endpoint), this.delete(endpoint)]
-		await results = Promise.allSettled(requests).then(console.log)
+		await results = Promise.all(requests.map(request => {
+
+		}))
 	}
 
 	set user(user) {
