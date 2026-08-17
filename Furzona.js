@@ -50,9 +50,8 @@ class RequestService {
 		/** @type {FurzonaError?} */
 		let respObj = null;
 		try {
-			const err = JSON.parse(respTxt);
-			console.error(`Error: ${err.error} (Code: ${err.errorCode})`);
-			respObj = err;
+			/** @type {FurzonaError?} */
+			const respObj = JSON.parse(respTxt);
 		} catch(ex) {
 			console.error(ex);
 			
@@ -66,7 +65,11 @@ class RequestService {
 			
 			
 			errorContainer.innerHTML = respTxt;
+
+			return;
 		}
+		
+		console.error(`Error: ${err.error} (Code: ${err.errorCode})`);
 
 		alert(respObj?.error);
 		
