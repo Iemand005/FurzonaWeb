@@ -354,11 +354,11 @@ class Furzona extends RequestService {
 		if (!token) throw new Error("Tried to assign an empty token.");
 		this._token = token;
 
-		localStorage.setItem("token", token);
+		if (localStorage) localStorage.setItem("token", token);
 	}
 
 	get token() {
-		if (!this._token) this._token = localStorage.getItem("token");
+		if (!this._token && localStorage) this._token = localStorage.getItem("token");
 		return this._token;
 	}
 

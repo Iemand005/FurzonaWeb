@@ -31,6 +31,7 @@ window.addEventListener("pageswap", function (event) {
  * @param {FurzonaProfile} profile 
  */
 function renderProfile(profile) {
+  if (!(bannerEl instanceof HTMLImageElement && avatarEl instanceof HTMLImageElement && nameEl instanceof HTMLElement)) return;
   var user = profile.user;
   var stats = profile.stats || {};
   var bannerUrl = user.b ? furzona.getMediaUrl(user.b) : "https://placehold.co/1200x260/20212B/ffffff?text=" + encodeURIComponent(user.username);
@@ -40,7 +41,26 @@ function renderProfile(profile) {
   avatarEl.src = avatarUrl;
   avatarEl.alt = user.username;
   nameEl.textContent = user.username;
-  if (badgeEl && user.p) badgeEl.hidden = false;
+  if (badgeEl) {
+    var roles = {
+      1: {
+        cls: "moderator-badge",
+        text: "Moderator"
+      },
+      2: {
+        cls: "admin-badge",
+        text: "Admin"
+      }
+    };
+    var role = roles[user.p];
+    if (role) {
+      badgeEl.className = role.cls;
+      badgeEl.textContent = role.text;
+      badgeEl.hidden = false;
+    } else {
+      badgeEl.hidden = true;
+    }
+  }
   var renderMeta = function renderMeta() {
     metaEl.textContent = "ID: ".concat(user.id, " \u2022 ").concat(profile.following ? "Following" : "Not following", " \u2022 ").concat(profile.online ? "Online" : "Offline");
   };
