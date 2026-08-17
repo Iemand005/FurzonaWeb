@@ -9,7 +9,7 @@ if (loginForm instanceof HTMLFormElement) {
 	loginForm.onsubmit = ev => {
 		ev.preventDefault();
 
-		if (!ev.target) requestAnimationFrame;
+		if (!(ev.target instanceof HTMLFormElement)) return;
 
 		const formData = new FormData(ev.target);
 		const email = formData.get('email');
