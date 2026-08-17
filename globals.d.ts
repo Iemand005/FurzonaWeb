@@ -1,6 +1,6 @@
 // global.d.ts
 
-type Method = "GET" | "POST";
+type Method = "GET" | "POST" | "DELETE";
 
 interface FurzonaCategory {
 	pos: number;
@@ -292,6 +292,63 @@ interface SearchRequest {
 	nsfwSelector?: number;
 }
 
+interface ForgotPasswordRequest {
+	email: string;
+}
+
+/** POST /followers and /following both take a single userId */
+interface UserIdRequest {
+	userId: string;
+}
+
+interface ChatMuteRequest {
+	/** chat id */
+	chat: string;
+}
+
+interface SendMessageRequest {
+	text: string;
+	/** optional chat id — unconfirmed whether it is required for 1:1 vs group chats */
+	chat?: string;
+}
+
+interface SubscribeRequest {
+	/** Integer subscription type. Observed values 0..5 all pass validation; the enum is unconfirmed. */
+	type: number;
+}
+
+interface ReportRequest {
+	/** Required reason text */
+	reason: string;
+	/** Target post — unconfirmed field name */
+	post?: string;
+	/** Target user — unconfirmed field name */
+	user?: string;
+}
+
+/**
+ * Shape unconfirmed (auth-gated; not observable without a token).
+ * Treat as opaque until a token is available to inspect it.
+ */
+interface FurzonaNotification {
+	[key: string]: unknown;
+}
+
+/** Shape unconfirmed (auth-gated) */
+interface FurzonaChat {
+	[key: string]: unknown;
+}
+
+/** Shape unconfirmed (auth-gated) */
+interface FurzonaChatMessage {
+	[key: string]: unknown;
+}
+
+/** Shape unconfirmed (auth-gated) */
+interface FurzonaBadge {
+	[key: string]: unknown;
+}
+
 interface ApiEndpoints {
 	[endpoint: string]: {
 		body?: unknown;
@@ -356,10 +413,52 @@ interface ApiEndpoints {
 		body: SearchRequest;
 		response: (FurzonaPost | FurzonaUserBase)[];
 	};
-	notifications: {
+	forgotPassword: {
+		body: ForgotPasswordRequest;
+		response: boolean;
+	};
+	followers: {
+		body: UserIdRequest;
+		response: FurzonaUserBase[];
+	};
+	following: {
+		body: UserIdRequest;
+		response: FurzonaUserBase[];
+	};
+	chat: {
+		body: { userId: string };
+		response: FurzonaChat;
+	};
+	chats: {
+		response: FurzonaChat[];
+	};
+	message: {
+		body: SendMessageRequest;
+		response: FurzonaChatMessage;
+	};
+	mute: {
+		body: ChatMuteRequest;
 		response: unknown;
 	};
+	unmute: {
+		body: ChatMuteRequest;
+		response: unknown;
+	};
+	subscribe: {
+		body: SubscribeRequest;
+		response: unknown;
+	};
+	badges: {
+		response: FurzonaBadge[];
+	};
+	upload: {
+		response: unknown;
+	};
+	notifications: {
+		response: FurzonaNotification[];
+	};
 	report: {
+		body: ReportRequest;
 		response: unknown;
 	};
 }

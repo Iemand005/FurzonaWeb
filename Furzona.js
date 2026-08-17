@@ -23,7 +23,11 @@ class RequestService {
 		init.headers = {};
 		if (this._token) init.headers["Authorization"] = this._token;
 
-		if (body) init.body = JSON.stringify(body);
+		if (body instanceof FormData) {
+			init.body = body;
+		} else if (body) {
+			init.body = JSON.stringify(body);
+		}
 
 		const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
 
@@ -176,6 +180,73 @@ class Furzona extends RequestService {
 			nsfwSelector: 0,
 			...opts
 		});
+	}
+	/**
+	 * Request a password reset for an account.
+	 * @param {string} email
+	 * @returns {Promise<boolean>}
+	 */
+	async forgotPassword(email) {
+		return this.post("forgotPassword", { email });
+	}
+	/** @param {string} userId */
+	async getFollowers(userId) {
+		return this.post("followers", { userId });
+	}
+	/** @param {string} userId */
+	async getFollowing(userId) {
+		return this.post("following", { userId });
+	}
+	/** @param {string} id */
+	async deletePost(id) {
+		return this.request(["post", id], "DELETE");
+	}
+	/** @param {string} id */
+	async deleteComment(id) {
+		return this.request(["comment", id], "DELETE");
+	}
+	/** @returns {Promise<FurzonaNotification[]>} */
+	async getNotifications() {
+		return this.post("notifications", {});
+	}
+	/** @returns {Promise<FurzonaChat[]>} */
+	async getChats() {
+		return this.post("chats", {});
+	}
+	/** @param {string} userId */
+	async startChat(userId) {
+		return this.post("chat", { userId });
+	}
+	/**
+	 * @param {string} text
+	 * @param {string} [chat]
+	 */
+	async sendMessage(text, chat) {
+		return this.post("message", chat ? { text, chat } : { text });
+	}
+	/** @param {string} chat */
+	async muteChat(chat) {
+		return this.post("mute", { chat });
+	}
+	/** @param {string} chat */
+	async unmuteChat(chat) {
+		return this.post("unmute", { chat });
+	}
+	/** @param {number} type */
+	async subscribe(type) {
+		return this.post("subscribe", { type });
+	}
+	/** @returns {Promise<FurzonaBadge[]>} */
+	async getBadges() {
+		return this.get("badges");
+	}
+	/**
+	 * Upload media. Multipart field names are unconfirmed.
+	 * @param {FormData} formData
+	 * @returns {Promise<unknown>}
+	 */
+	async upload(formData) {
+		return this.request("upload", "POST", formData);
 	}
 
 	async newSearch() {
