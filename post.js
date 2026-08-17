@@ -169,7 +169,7 @@ if (id) {
 }
 
 if (commentForm && commentInput && id) {
-	if (!furzona.isLoggedIn()) {
+	if (!furzona.isLoggedIn) {
 		commentInput.disabled = true;
 		commentInput.placeholder = "Log in to comment";
 	} else {

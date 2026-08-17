@@ -57,7 +57,7 @@ function renderProfile(profile) {
 		const btn = document.createElement("button");
 		btn.type = "button";
 		btn.textContent = profile.following ? "Unfollow" : "Follow";
-		if (!furzona.isLoggedIn()) {
+		if (!furzona.isLoggedIn) {
 			btn.disabled = true;
 			btn.textContent = "Log in to follow";
 		} else {
