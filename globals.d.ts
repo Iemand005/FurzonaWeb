@@ -157,6 +157,12 @@ interface FurzonaPost {
 	updatedAt: string; // ISO date string
 }
 
+enum PermissionLevel {
+	User = 0;
+	Moderator = 1;
+	Admin = 2;
+}
+
 interface FurzonaUser {
 	username: string;
 	/** description — user's bio */
