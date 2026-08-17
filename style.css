@@ -226,8 +226,11 @@ header img {
 
 header > section {
 	display: flex;
-	gap: 10px;
 	align-items: center;
+}
+
+header > section > *:not(:first-child) {
+	margin-left: 10px;
 }
 
 header h1 {
@@ -239,7 +242,6 @@ button, a.login-link {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 6px;
 	background: var(--bg-btn);
 	border: 1px solid var(--border);
 	color: var(--text);
@@ -253,6 +255,11 @@ button, a.login-link {
 button:hover, a.login-link:hover {
 	background: var(--bg-btn-hover);
 	transform: translateY(-1px);
+}
+
+button > *:not(:first-child),
+a.login-link > *:not(:first-child) {
+	margin-left: 6px;
 }
 
 header button img {
