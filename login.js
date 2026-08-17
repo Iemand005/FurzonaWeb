@@ -1,9 +1,9 @@
 
 const loginForm = document.getElementById("login-form");
 
-function redirectIfLoggedIn() {
+var hi = function redirectIfLoggedIn() {
 	if (furzona.isLoggedIn) location.href = "index.html";
-}
+};
 
 if (loginForm instanceof HTMLFormElement) {
 	loginForm.onsubmit = e => {
