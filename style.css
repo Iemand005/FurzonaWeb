@@ -148,6 +148,7 @@ html, body, button {
 	color: #f3f6fb;
 }
 
+/* Button Background Color */
 button, a.login-link, .profile-row .pfp, .avatar {
 	background: #2d3240;
 }
@@ -167,8 +168,19 @@ button, a.login-link, .profile-row .pfp, .avatar {
 		--shadow-card: 0 10px 24px rgba(0, 0, 0, 0.10);
 	} */
 
+	/* Background Color */
 	html, body {
 		background-color: #ffffff;
+	}
+	
+	/* Text Color */
+	html, body, button {
+		color: black;
+	}
+
+	/* Button Background Color */
+	button, a.login-link, .profile-row .pfp, .avatar {
+		background: #f3f4f6;
 	}
 
 	header {
@@ -354,6 +366,12 @@ button:disabled {
 button:disabled:hover {
 	background: var(--bg-btn-disabled);
 	transform: none;
+}
+
+/* #f3f4f6 --bg-btn-disabled*/
+button:disabled, button:disabled:hover {
+	background: #22262f;
+	color: #7a8094;
 }
 
 #login-form button[type="submit"] {
