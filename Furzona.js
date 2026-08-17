@@ -68,7 +68,7 @@ class RequestService {
 	/**
 	 * @template {keyof ApiEndpoints} K
 	 * @param {K} endpoint 
-	 * @param {ApiEndpoints[K]["body"]} body 
+	 * @param {ApiEndpoints[K]["body"]} [body] 
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async post(endpoint, body) {
@@ -129,6 +129,10 @@ class Furzona extends RequestService {
 	async likePost(post) { return this.post("favorite", { post }); }
 	/** @param {string} post  */
 	async unlikePost(post) { return this.post("unfavorite", { post }); }
+	/** @param {string} post  */
+	async getComments(post) {
+		return this.post("commentLevels/" + post);
+	}
 
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");

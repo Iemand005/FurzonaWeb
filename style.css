@@ -235,7 +235,7 @@ header h1 {
 	font-size: clamp(1.5rem, 2vw, 2.25rem);
 }
 
-.btn {
+button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -250,7 +250,7 @@ header h1 {
 	transition: transform .2s ease, background .2s ease;
 }
 
-.btn:hover {
+button:hover {
 	background: var(--bg-btn-hover);
 	transform: translateY(-1px);
 }
@@ -262,23 +262,23 @@ header button img {
 	pointer-events: none;
 }
 
-.btn:disabled {
+button:disabled {
 	background: var(--bg-btn-disabled);
 	color: var(--text-faint);
 	cursor: not-allowed;
 	transform: none;
 }
 
-.btn:disabled:hover {
+button:disabled:hover {
 	background: var(--bg-btn-disabled);
 	transform: none;
 }
 
-.btn-primary {
+#login-form button[type="submit"] {
 	background: var(--bg-btn-hover);
 }
 
-.btn-primary:hover {
+#login-form button[type="submit"]:hover {
 	background: #525e7a;
 	transform: translateY(-1px);
 }
@@ -430,7 +430,7 @@ main {
 	gap: 10px;
 }
 
-#login-form .btn {
+#login-form button {
 	width: 100%;
 	margin-top: 6px;
 }
