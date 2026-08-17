@@ -4,8 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		return sections[sections.length - 1] || null;
 	})();
 
+	const isLoginPage = endsWith(window.location.pathname, "login.html");
+	if (isLoginPage) return;
+
 	const addLoginLink = () => {
-		if (window.location.pathname.endsWith("login.html")) return;
+		if (isLoginPage) return;
 		if (furzona.isLoggedIn) return;
 		if (!navSection) return;
 		const link = document.createElement("a");
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	const addProfileButton = () => {
-		if (window.location.pathname.endsWith("login.html")) return;
+		if (isLoginPage) return;
 		const me = furzona.user;
 		if (!me || !furzona.isLoggedIn) return;
 		if (!navSection) return;
