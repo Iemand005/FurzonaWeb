@@ -18,4 +18,5 @@
     "files.associations": {
 		"*.hta": "html"
 	},
+    "terminal.integrated.shellIntegration.enabled": false
 }
