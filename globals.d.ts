@@ -1,6 +1,6 @@
 // global.d.ts
 
-type Method = "GET" | "POST" | "DELETE";
+type Method = "GET" | "POST" | "DELETE" | "PUT";
 
 interface FurzonaCategory {
 	pos: number;
@@ -344,6 +344,47 @@ interface ForgotPasswordRequest {
 	email: string;
 }
 
+interface VerifyEmailRequest {
+	/** Verification / password-reset code sent by email */
+	code: string;
+}
+
+/** POST /ban — mode? no; fields revealed as userId then reason */
+interface BanRequest {
+	userId: string;
+	reason: string;
+}
+
+/** Group/GC search query — shared by POST /users and POST /groups */
+interface UserOrGroupSearchRequest {
+	query: string;
+}
+
+/** POST /editGroup — takes at least `chat`; other allowed fields unconfirmed */
+interface EditGroupRequest {
+	/** chat id */
+	chat: string;
+	[key: string]: unknown;
+}
+
+/**
+ * Public group shape from POST /groups.
+ * Field order observed: id, t, description, m, i, createdAt, updatedAt.
+ */
+interface FurzonaGroup {
+	id: string;
+	/** title/name */
+	t: string;
+	/** description */
+	description: string | null;
+	/** member count */
+	m: number;
+	/** icon image path, null when unset */
+	i: string | null;
+	createdAt: string;
+	updatedAt: string;
+}
+
 /** POST /followers and /following both take a single userId */
 interface UserIdRequest {
 	userId: string;
@@ -522,6 +563,38 @@ interface ApiEndpoints {
 	};
 	report: {
 		body: ReportRequest;
+		response: unknown;
+	};
+	verifyEmail: {
+		body: VerifyEmailRequest;
+		response: boolean;
+	};
+	users: {
+		body: UserOrGroupSearchRequest;
+		response: FurzonaUserBase[];
+	};
+	groups: {
+		body: UserOrGroupSearchRequest;
+		response: FurzonaGroup[];
+	};
+	chatTyping: {
+		body: ChatMuteRequest;
+		response: unknown;
+	};
+	ban: {
+		body: BanRequest;
+		response: unknown;
+	};
+	unban: {
+		body: UserIdRequest;
+		response: unknown;
+	};
+	groupInfo: {
+		body: ChatMuteRequest;
+		response: unknown;
+	};
+	editGroup: {
+		body: EditGroupRequest;
 		response: unknown;
 	};
 }
