@@ -112,10 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("pageshow", syncForwardState);
   window.addEventListener("popstate", syncForwardState);
   (_window$navigation2 = window.navigation) === null || _window$navigation2 === void 0 || _window$navigation2.addEventListener("navigate", syncForwardState);
-  addLoginLink();
   addNavHomeButton();
   addNewPostButton();
   addProfileButton();
+  addLoginLink();
   syncForwardState();
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(function () {});
