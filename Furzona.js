@@ -140,11 +140,8 @@ class Furzona extends RequestService {
 		return this.post(["posts", userId], { date: date || undefined, category });
 	}
 	/**
-	 * Create a post. Only `type` is confirmed required; other field names
-	 * (`t`, `d`, `m`…) map to the FurzonaPost keys but are best-effort.
 	 * @param {PostType} type post type discriminator
 	 * @param {object} [fields]
-	 * @returns {Promise<FurzonaPost>}
 	 */
 	async createPost(type, fields = {}) {
 		return this.post("post", { type, ...fields });

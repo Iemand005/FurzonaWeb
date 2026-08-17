@@ -71,9 +71,9 @@ if (form instanceof HTMLFormElement) {
 			}
 
 			const fields = {};
-			if (t) fields.t = t;
-			if (d) fields.d = d;
-			if (media.length) fields.m = media;
+			if (t) fields.title = t;
+			if (d) fields.content = d;
+			if (media.length) fields.media = media;
 
 			const post = await furzona.createPost(type, fields);
 			statusEl.textContent = "Posted!";
