@@ -105,41 +105,127 @@ interface FurzonaResponse<T> {
 
 interface FurzonaPost {
 	id: string;
-	/** Title, optional — some posts omit it */
+	/** title */
 	t?: string;
-	/** Description/caption text */
+	/** description/caption */
 	d?: string;
-	/** Content/body text, used for longer text posts */
+	/** content/body text, used for longer text posts */
 	c?: string;
-	/** Attribution/credit text (e.g. "written by me", source name) */
+	/** artist — attribution/credit text (e.g. "written by me", source name) */
 	a?: string;
-	/** Category positions, matching FurzonaCategory.pos */
+	/** source — NOT present in this interface yet, seen in key-map as "s" */
+	s?: unknown;
+	/** categories — positions, matching FurzonaCategory.pos */
 	e: number[];
-	/** Warning positions, matching FurzonaWarning.pos */
+	/** warnings — positions, matching FurzonaWarning.pos */
 	w: number[];
-	/** NSFW warning positions, matching FurzonaNsfwWarning.pos */
+	/** nsfwWarnings — positions, matching FurzonaNsfwWarning.pos */
 	n: number[];
-	/** Media image paths */
+	/** media — image paths */
 	m: string[];
+	/** likes — like count */
 	l: number;
+	/** comments — comment count */
 	o: number;
+	/** hidden */
 	h: boolean;
+	/** nsfw */
 	f: boolean;
+	/** liked — whether the current user has liked this post */
 	z: boolean;
+	/** type — post type discriminator */
 	y: number;
+	/** user — author of the post */
 	u: FurzonaPostAuthor;
+	/** reference — NOT present in this interface yet, seen in key-map as "x" */
+	x?: unknown;
+	/** ddl — boolean flag, exact meaning unconfirmed (possibly "direct download link") */
 	k: boolean;
-	/** Unknown, seen only as null */
+	/** specialType — string enum or null, exact values unconfirmed */
 	i: string | null;
-	/** Image width, present only on posts with media */
+	/** poll — NOT present in this interface yet, seen in key-map as "p" */
+	p?: FurzonaPoll;
+	/** width — image width, present only on posts with media */
 	b?: number;
-	/** Image height, present only on posts with media */
+	/** height — image height, present only on posts with media */
 	g?: number;
-	/** Group/GC invite code, seen on "New GC" style posts */
+	/** invite — group/GC invite code, seen on "New GC" style posts */
 	j?: string;
+	/** emojis */
 	q: unknown[];
 	createdAt: string; // ISO date string
 	updatedAt: string; // ISO date string
+}
+
+interface FurzonaUser {
+	username: string;
+	/** description — user's bio */
+	d?: string;
+	/** icon — avatar image path */
+	i?: string;
+	/** banner — banner image path */
+	b?: string;
+	/** permLevel — permission/role level, exact scale unconfirmed */
+	p: number;
+	/** sessionToken */
+	s?: string;
+	email: string;
+	age: number;
+	/** nsfw — whether NSFW content is enabled for this user */
+	n: boolean;
+	/** dpm — meaning unconfirmed */
+	m: unknown;
+	/** emailVerified */
+	v: boolean;
+	/** warns — warning count */
+	w: number;
+	/** tag — discriminator/badge tag string */
+	t?: string;
+	/** behaviourPoints */
+	h: number;
+	/** safeMode */
+	o: boolean;
+	/** userIcons — unlocked/available icon options */
+	c: string[];
+}
+
+interface FurzonaComment {
+	/** user — author of the comment */
+	u: FurzonaPostAuthor;
+	content: string;
+	/** replies — reply count, or nested replies; exact shape unconfirmed */
+	s: number | FurzonaComment[];
+	/** likes — like count */
+	l: number;
+	/** liked — whether the current user has liked this comment */
+	d: boolean;
+	/** deleted */
+	t: boolean;
+	/** replyingTo — id of the comment being replied to, if any */
+	r: string | null;
+	/** emojis */
+	e: unknown[];
+}
+
+interface FurzonaPoll {
+	title: string;
+	/** participants — total vote/participant count */
+	p: number;
+	/** multiple — whether multiple options can be selected */
+	m: boolean;
+	options: FurzonaPollOption[];
+	/** voted — whether the current user has voted */
+	v: boolean;
+	/** isOwner — whether the current user created this poll */
+	i: boolean;
+}
+
+interface FurzonaPollOption {
+	text: string;
+	/** votedUsers — vote count for this option */
+	u: number;
+	/** voted — whether the current user voted for this option */
+	v: boolean;
 }
 
 interface FurzonaProfileStats {
