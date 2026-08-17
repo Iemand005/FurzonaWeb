@@ -14,5 +14,8 @@
         "statusBar.debuggingForeground": "#FEFBEC",
         "statusBar.noFolderBackground": "#23232c",
         "statusBar.noFolderForeground": "#FEFBEC"
-    }
+    },
+    "files.associations": {
+		"*.hta": "html"
+	},
 }

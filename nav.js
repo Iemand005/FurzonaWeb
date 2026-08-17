@@ -73,6 +73,29 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	addNavHomeButton();
 
+	const addNewPostButton = () => {
+		if (window.location.pathname.endsWith("login.html")) return;
+		if (window.location.pathname.endsWith("create-post.html")) return;
+		if (!furzona.isLoggedIn) return;
+		const headerSections = document.querySelectorAll("header > section");
+		const navSection = headerSections[headerSections.length - 1];
+		if (!navSection || navSection.querySelector("[data-nav-new-post]")) return;
+		const button = document.createElement("button");
+		button.type = "button";
+		button.dataset.navNewPost = "";
+		button.title = "New post";
+		const plus = document.createElement("span");
+		plus.textContent = "\uFF0B";
+		plus.style.fontSize = "18px";
+		plus.style.lineHeight = "1";
+		button.appendChild(plus);
+		button.addEventListener("click", () => {
+			window.location.href = "create-post.html";
+		});
+		navSection.appendChild(button);
+	};
+	addNewPostButton();
+
 	const backButtons = document.querySelectorAll("[data-nav-back]");
 	backButtons.forEach(button => {
 		button.addEventListener("click", () => {

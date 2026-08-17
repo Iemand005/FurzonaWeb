@@ -367,6 +367,21 @@ interface EditGroupRequest {
 	[key: string]: unknown;
 }
 
+/** POST /post — only `type` is confirmed required; the rest map to FurzonaPost keys */
+interface CreatePostRequest {
+	/** post type discriminator (numeric) */
+	type: number;
+	/** title */
+	t?: string;
+	/** description/caption */
+	d?: string;
+	/** content/body text */
+	c?: string;
+	/** media paths (from /upload) */
+	m?: string[];
+	[key: string]: unknown;
+}
+
 /**
  * Public group shape from POST /groups.
  * Field order observed: id, t, description, m, i, createdAt, updatedAt.
@@ -455,6 +470,7 @@ interface ApiEndpoints {
 		response: FurzonaProfile;
 	};
 	post: {
+		body: CreatePostRequest;
 		response: FurzonaPost;
 	};
 	posts: {

@@ -1,0 +1,78 @@
+const form = document.getElementById("new-post-form");
+const typeSelect = document.getElementById("post-type");
+const titleInput = document.getElementById("post-title");
+const descriptionInput = document.getElementById("post-description");
+const mediaInput = document.getElementById("post-media");
+const statusEl = document.getElementById("post-status");
+
+if (!furzona.isLoggedIn) {
+	statusEl.textContent = "Log in to create a post.";
+}
+
+/** @param {File} file @returns {Promise<unknown>} */
+const uploadFile = async (file) => {
+	const formData = new FormData();
+	formData.append("file", file);
+	return furzona.upload(formData);
+};
+
+/**
+ * Convert an upload result into a media path. Best-effort: the upload
+ * response shape is unconfirmed — try common shapes.
+ * @param {unknown} result
+ * @returns {string|null}
+ */
+const toMediaPath = (result) => {
+	if (typeof result === "string") return result;
+	if (result && typeof result === "object") {
+		if (typeof result.path === "string" && result.path) return result.path;
+		if (typeof result.url === "string" && result.url) return result.url;
+		if (Array.isArray(result.files) && typeof result.files[0] === "string") return result.files[0];
+		for (const key of ["file", "media", "image", "src", "result"]) {
+			const v = result[key];
+			if (typeof v === "string" && v) return v;
+		}
+	}
+	return null;
+};
+
+if (form instanceof HTMLFormElement) {
+	form.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		if (!furzona.isLoggedIn) {
+			statusEl.textContent = "Log in to create a post.";
+			return;
+		}
+		const submitButton = form.querySelector('button[type="submit"]');
+		submitButton.disabled = true;
+		statusEl.textContent = "Posting…";
+		try {
+			const type = Number(typeSelect.value);
+			const t = titleInput.value.trim();
+			const d = descriptionInput.value.trim();
+			const files = mediaInput.files ? Array.from(mediaInput.files) : [];
+
+			const media = [];
+			for (const file of files) {
+				const uploaded = await uploadFile(file);
+				const path = toMediaPath(uploaded);
+				if (path) media.push(path);
+				else console.warn("Upload returned an unrecognised shape:", uploaded);
+			}
+
+			const fields = {};
+			if (t) fields.t = t;
+			if (d || (!files.length && !t)) fields.d = d;
+			if (media.length) fields.m = media;
+
+			const post = await furzona.createPost(type, fields);
+			statusEl.textContent = "Posted!";
+			window.location.href = "post.html?id=" + encodeURIComponent(post.id);
+		} catch (error) {
+			console.error("Failed to create post:", error);
+			statusEl.textContent = error.message || "Could not create post.";
+		} finally {
+			submitButton.disabled = false;
+		}
+	});
+}
