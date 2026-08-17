@@ -356,8 +356,8 @@ main {
 }
 
 #posts-list > li {
-	flex: 1 1 250px;
-	max-width: 320px;
+	flex: 1 1 350px;
+    max-width: 100rem;
 }
 
 .post {
@@ -375,8 +375,21 @@ main {
 	font-size: 1.15rem;
 	line-height: 1.45;
 	color: #f1f5ff;
-	flex-grow: 1;
+	/* flex-grow: 1; */
 	word-break: break-word;
+}
+
+.post .post-desc {
+	margin: 8px 0 0;
+	/* max-height: 120px; */
+	/* overflow-y: auto; */
+	word-break: break-word;
+	white-space: pre-wrap;
+	color: var(--text-dim);
+	font-size: 0.95rem;
+	line-height: 1.45;
+
+    flex-grow: 1;
 }
 
 .post img, .banner {
@@ -439,15 +452,22 @@ img, .banner, .profile, button, .stat, .input {
 	font-size: 1.6rem;
 }
 
-#login-form {
+#login-form,
+#new-post-form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-#login-form button {
+#login-form button,
+#new-post-form button {
 	width: 100%;
 	margin-top: 6px;
+}
+
+#new-post-form textarea {
+	resize: vertical;
+	min-height: 120px;
 }
 
 .profile, .profile-top {

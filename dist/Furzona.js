@@ -334,6 +334,35 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
       return getUserPosts;
     }()
     /**
+     * Create a post. Only `type` is confirmed required; other field names
+     * (`t`, `d`, `m`…) map to the FurzonaPost keys but are best-effort.
+     * @param {number} type post type discriminator
+     * @param {object} [fields]
+     * @returns {Promise<FurzonaPost>}
+     */
+    )
+  }, {
+    key: "createPost",
+    value: (function () {
+      var _createPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(type) {
+        var fields,
+          _args0 = arguments;
+        return _regenerator().w(function (_context0) {
+          while (1) switch (_context0.n) {
+            case 0:
+              fields = _args0.length > 1 && _args0[1] !== undefined ? _args0[1] : {};
+              return _context0.a(2, this.post("post", _objectSpread({
+                type: type
+              }, fields)));
+          }
+        }, _callee0, this);
+      }));
+      function createPost(_x9) {
+        return _createPost.apply(this, arguments);
+      }
+      return createPost;
+    }()
+    /**
      * @param {string} email
      * @param {string} password
      */
@@ -341,24 +370,24 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "createUser",
     value: (function () {
-      var _createUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee0(email, password) {
+      var _createUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1(email, password) {
         var response;
-        return _regenerator().w(function (_context0) {
-          while (1) switch (_context0.n) {
+        return _regenerator().w(function (_context1) {
+          while (1) switch (_context1.n) {
             case 0:
-              _context0.n = 1;
+              _context1.n = 1;
               return this.post("user", {
                 email: email,
                 password: password,
                 gte16: true
               });
             case 1:
-              response = _context0.v;
-              return _context0.a(2, response);
+              response = _context1.v;
+              return _context1.a(2, response);
           }
-        }, _callee0, this);
+        }, _callee1, this);
       }));
-      function createUser(_x9, _x0) {
+      function createUser(_x0, _x1) {
         return _createUser.apply(this, arguments);
       }
       return createUser;
@@ -366,15 +395,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getProfile",
     value: (function () {
-      var _getProfile = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee1(id) {
-        return _regenerator().w(function (_context1) {
-          while (1) switch (_context1.n) {
+      var _getProfile = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee10(id) {
+        return _regenerator().w(function (_context10) {
+          while (1) switch (_context10.n) {
             case 0:
-              return _context1.a(2, this.get(["profile", id]));
+              return _context10.a(2, this.get(["profile", id]));
           }
-        }, _callee1, this);
+        }, _callee10, this);
       }));
-      function getProfile(_x1) {
+      function getProfile(_x10) {
         return _getProfile.apply(this, arguments);
       }
       return getProfile;
@@ -382,15 +411,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getPost",
     value: (function () {
-      var _getPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee10(id) {
-        return _regenerator().w(function (_context10) {
-          while (1) switch (_context10.n) {
+      var _getPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee11(id) {
+        return _regenerator().w(function (_context11) {
+          while (1) switch (_context11.n) {
             case 0:
-              return _context10.a(2, this.get(["post", id]));
+              return _context11.a(2, this.get(["post", id]));
           }
-        }, _callee10, this);
+        }, _callee11, this);
       }));
-      function getPost(_x10) {
+      function getPost(_x11) {
         return _getPost.apply(this, arguments);
       }
       return getPost;
@@ -398,17 +427,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "likePost",
     value: (function () {
-      var _likePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee11(post) {
-        return _regenerator().w(function (_context11) {
-          while (1) switch (_context11.n) {
+      var _likePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee12(post) {
+        return _regenerator().w(function (_context12) {
+          while (1) switch (_context12.n) {
             case 0:
-              return _context11.a(2, this.post("favorite", {
+              return _context12.a(2, this.post("favorite", {
                 post: post
               }));
           }
-        }, _callee11, this);
+        }, _callee12, this);
       }));
-      function likePost(_x11) {
+      function likePost(_x12) {
         return _likePost.apply(this, arguments);
       }
       return likePost;
@@ -416,17 +445,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unlikePost",
     value: (function () {
-      var _unlikePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee12(post) {
-        return _regenerator().w(function (_context12) {
-          while (1) switch (_context12.n) {
+      var _unlikePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee13(post) {
+        return _regenerator().w(function (_context13) {
+          while (1) switch (_context13.n) {
             case 0:
-              return _context12.a(2, this.post("unfavorite", {
+              return _context13.a(2, this.post("unfavorite", {
                 post: post
               }));
           }
-        }, _callee12, this);
+        }, _callee13, this);
       }));
-      function unlikePost(_x12) {
+      function unlikePost(_x13) {
         return _unlikePost.apply(this, arguments);
       }
       return unlikePost;
@@ -434,17 +463,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "likeComment",
     value: (function () {
-      var _likeComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee13(comment) {
-        return _regenerator().w(function (_context13) {
-          while (1) switch (_context13.n) {
+      var _likeComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee14(comment) {
+        return _regenerator().w(function (_context14) {
+          while (1) switch (_context14.n) {
             case 0:
-              return _context13.a(2, this.post("likeComment", {
+              return _context14.a(2, this.post("likeComment", {
                 comment: comment
               }));
           }
-        }, _callee13, this);
+        }, _callee14, this);
       }));
-      function likeComment(_x13) {
+      function likeComment(_x14) {
         return _likeComment.apply(this, arguments);
       }
       return likeComment;
@@ -452,17 +481,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unlikeComment",
     value: (function () {
-      var _unlikeComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee14(comment) {
-        return _regenerator().w(function (_context14) {
-          while (1) switch (_context14.n) {
+      var _unlikeComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee15(comment) {
+        return _regenerator().w(function (_context15) {
+          while (1) switch (_context15.n) {
             case 0:
-              return _context14.a(2, this.post("unlikeComment", {
+              return _context15.a(2, this.post("unlikeComment", {
                 comment: comment
               }));
           }
-        }, _callee14, this);
+        }, _callee15, this);
       }));
-      function unlikeComment(_x14) {
+      function unlikeComment(_x15) {
         return _unlikeComment.apply(this, arguments);
       }
       return unlikeComment;
@@ -470,15 +499,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getComments",
     value: (function () {
-      var _getComments = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee15(post) {
-        return _regenerator().w(function (_context15) {
-          while (1) switch (_context15.n) {
+      var _getComments = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee16(post) {
+        return _regenerator().w(function (_context16) {
+          while (1) switch (_context16.n) {
             case 0:
-              return _context15.a(2, this.post(["commentLevels", post]));
+              return _context16.a(2, this.post(["commentLevels", post]));
           }
-        }, _callee15, this);
+        }, _callee16, this);
       }));
-      function getComments(_x15) {
+      function getComments(_x16) {
         return _getComments.apply(this, arguments);
       }
       return getComments;
@@ -491,18 +520,18 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "createComment",
     value: (function () {
-      var _createComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee16(post, content) {
-        return _regenerator().w(function (_context16) {
-          while (1) switch (_context16.n) {
+      var _createComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(post, content) {
+        return _regenerator().w(function (_context17) {
+          while (1) switch (_context17.n) {
             case 0:
-              return _context16.a(2, this.post("comment", {
+              return _context17.a(2, this.post("comment", {
                 post: post,
                 content: content
               }));
           }
-        }, _callee16, this);
+        }, _callee17, this);
       }));
-      function createComment(_x16, _x17) {
+      function createComment(_x17, _x18) {
         return _createComment.apply(this, arguments);
       }
       return createComment;
@@ -510,17 +539,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "follow",
     value: (function () {
-      var _follow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee17(userId) {
-        return _regenerator().w(function (_context17) {
-          while (1) switch (_context17.n) {
+      var _follow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(userId) {
+        return _regenerator().w(function (_context18) {
+          while (1) switch (_context18.n) {
             case 0:
-              return _context17.a(2, this.post("follow", {
+              return _context18.a(2, this.post("follow", {
                 userId: userId
               }));
           }
-        }, _callee17, this);
+        }, _callee18, this);
       }));
-      function follow(_x18) {
+      function follow(_x19) {
         return _follow.apply(this, arguments);
       }
       return follow;
@@ -528,17 +557,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unfollow",
     value: (function () {
-      var _unfollow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee18(userId) {
-        return _regenerator().w(function (_context18) {
-          while (1) switch (_context18.n) {
+      var _unfollow = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(userId) {
+        return _regenerator().w(function (_context19) {
+          while (1) switch (_context19.n) {
             case 0:
-              return _context18.a(2, this.post("unfollow", {
+              return _context19.a(2, this.post("unfollow", {
                 userId: userId
               }));
           }
-        }, _callee18, this);
+        }, _callee19, this);
       }));
-      function unfollow(_x19) {
+      function unfollow(_x20) {
         return _unfollow.apply(this, arguments);
       }
       return unfollow;
@@ -546,17 +575,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "block",
     value: (function () {
-      var _block = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee19(userId) {
-        return _regenerator().w(function (_context19) {
-          while (1) switch (_context19.n) {
+      var _block = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(userId) {
+        return _regenerator().w(function (_context20) {
+          while (1) switch (_context20.n) {
             case 0:
-              return _context19.a(2, this.post("block", {
+              return _context20.a(2, this.post("block", {
                 user: userId
               }));
           }
-        }, _callee19, this);
+        }, _callee20, this);
       }));
-      function block(_x20) {
+      function block(_x21) {
         return _block.apply(this, arguments);
       }
       return block;
@@ -564,17 +593,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unblock",
     value: (function () {
-      var _unblock = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee20(userId) {
-        return _regenerator().w(function (_context20) {
-          while (1) switch (_context20.n) {
+      var _unblock = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21(userId) {
+        return _regenerator().w(function (_context21) {
+          while (1) switch (_context21.n) {
             case 0:
-              return _context20.a(2, this.post("unblock", {
+              return _context21.a(2, this.post("unblock", {
                 user: userId
               }));
           }
-        }, _callee20, this);
+        }, _callee21, this);
       }));
-      function unblock(_x21) {
+      function unblock(_x22) {
         return _unblock.apply(this, arguments);
       }
       return unblock;
@@ -582,19 +611,19 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "banUser",
     value: (function () {
-      var _banUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee21(userId, reason, period) {
-        return _regenerator().w(function (_context21) {
-          while (1) switch (_context21.n) {
+      var _banUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee22(userId, reason, period) {
+        return _regenerator().w(function (_context22) {
+          while (1) switch (_context22.n) {
             case 0:
-              return _context21.a(2, this.post("ban", {
+              return _context22.a(2, this.post("ban", {
                 userId: userId,
                 reason: reason,
                 period: period
               }));
           }
-        }, _callee21, this);
+        }, _callee22, this);
       }));
-      function banUser(_x22, _x23, _x24) {
+      function banUser(_x23, _x24, _x25) {
         return _banUser.apply(this, arguments);
       }
       return banUser;
@@ -602,17 +631,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unbanUser",
     value: (function () {
-      var _unbanUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee22(userId) {
-        return _regenerator().w(function (_context22) {
-          while (1) switch (_context22.n) {
+      var _unbanUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee23(userId) {
+        return _regenerator().w(function (_context23) {
+          while (1) switch (_context23.n) {
             case 0:
-              return _context22.a(2, this.post("unban", {
+              return _context23.a(2, this.post("unban", {
                 userId: userId
               }));
           }
-        }, _callee22, this);
+        }, _callee23, this);
       }));
-      function unbanUser(_x25) {
+      function unbanUser(_x26) {
         return _unbanUser.apply(this, arguments);
       }
       return unbanUser;
@@ -620,15 +649,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getUser",
     value: (function () {
-      var _getUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee23(id) {
-        return _regenerator().w(function (_context23) {
-          while (1) switch (_context23.n) {
+      var _getUser = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee24(id) {
+        return _regenerator().w(function (_context24) {
+          while (1) switch (_context24.n) {
             case 0:
-              return _context23.a(2, this.get(["user", id]));
+              return _context24.a(2, this.get(["user", id]));
           }
-        }, _callee23, this);
+        }, _callee24, this);
       }));
-      function getUser(_x26) {
+      function getUser(_x27) {
         return _getUser.apply(this, arguments);
       }
       return getUser;
@@ -641,14 +670,14 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "search",
     value: (function () {
-      var _search = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee24(q) {
+      var _search = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee25(q) {
         var opts,
-          _args24 = arguments;
-        return _regenerator().w(function (_context24) {
-          while (1) switch (_context24.n) {
+          _args25 = arguments;
+        return _regenerator().w(function (_context25) {
+          while (1) switch (_context25.n) {
             case 0:
-              opts = _args24.length > 1 && _args24[1] !== undefined ? _args24[1] : {};
-              return _context24.a(2, this.post("search", _objectSpread({
+              opts = _args25.length > 1 && _args25[1] !== undefined ? _args25[1] : {};
+              return _context25.a(2, this.post("search", _objectSpread({
                 q: q,
                 nsfw: 0,
                 hidden: 0,
@@ -657,9 +686,9 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
                 nsfwSelector: 0
               }, opts)));
           }
-        }, _callee24, this);
+        }, _callee25, this);
       }));
-      function search(_x27) {
+      function search(_x28) {
         return _search.apply(this, arguments);
       }
       return search;
@@ -673,17 +702,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "forgotPassword",
     value: (function () {
-      var _forgotPassword = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee25(email) {
-        return _regenerator().w(function (_context25) {
-          while (1) switch (_context25.n) {
+      var _forgotPassword = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee26(email) {
+        return _regenerator().w(function (_context26) {
+          while (1) switch (_context26.n) {
             case 0:
-              return _context25.a(2, this.post("forgotPassword", {
+              return _context26.a(2, this.post("forgotPassword", {
                 email: email
               }));
           }
-        }, _callee25, this);
+        }, _callee26, this);
       }));
-      function forgotPassword(_x28) {
+      function forgotPassword(_x29) {
         return _forgotPassword.apply(this, arguments);
       }
       return forgotPassword;
@@ -691,17 +720,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getFollowers",
     value: (function () {
-      var _getFollowers = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee26(userId) {
-        return _regenerator().w(function (_context26) {
-          while (1) switch (_context26.n) {
+      var _getFollowers = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee27(userId) {
+        return _regenerator().w(function (_context27) {
+          while (1) switch (_context27.n) {
             case 0:
-              return _context26.a(2, this.post("followers", {
+              return _context27.a(2, this.post("followers", {
                 userId: userId
               }));
           }
-        }, _callee26, this);
+        }, _callee27, this);
       }));
-      function getFollowers(_x29) {
+      function getFollowers(_x30) {
         return _getFollowers.apply(this, arguments);
       }
       return getFollowers;
@@ -709,17 +738,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getFollowing",
     value: (function () {
-      var _getFollowing = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee27(userId) {
-        return _regenerator().w(function (_context27) {
-          while (1) switch (_context27.n) {
+      var _getFollowing = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee28(userId) {
+        return _regenerator().w(function (_context28) {
+          while (1) switch (_context28.n) {
             case 0:
-              return _context27.a(2, this.post("following", {
+              return _context28.a(2, this.post("following", {
                 userId: userId
               }));
           }
-        }, _callee27, this);
+        }, _callee28, this);
       }));
-      function getFollowing(_x30) {
+      function getFollowing(_x31) {
         return _getFollowing.apply(this, arguments);
       }
       return getFollowing;
@@ -727,15 +756,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "deletePost",
     value: (function () {
-      var _deletePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee28(id) {
-        return _regenerator().w(function (_context28) {
-          while (1) switch (_context28.n) {
+      var _deletePost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee29(id) {
+        return _regenerator().w(function (_context29) {
+          while (1) switch (_context29.n) {
             case 0:
-              return _context28.a(2, this.request(["post", id], "DELETE"));
+              return _context29.a(2, this.request(["post", id], "DELETE"));
           }
-        }, _callee28, this);
+        }, _callee29, this);
       }));
-      function deletePost(_x31) {
+      function deletePost(_x32) {
         return _deletePost.apply(this, arguments);
       }
       return deletePost;
@@ -750,15 +779,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "editPost",
     value: (function () {
-      var _editPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee29(id, fields) {
-        return _regenerator().w(function (_context29) {
-          while (1) switch (_context29.n) {
+      var _editPost = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee30(id, fields) {
+        return _regenerator().w(function (_context30) {
+          while (1) switch (_context30.n) {
             case 0:
-              return _context29.a(2, this.request(["post", id], "PUT", fields));
+              return _context30.a(2, this.request(["post", id], "PUT", fields));
           }
-        }, _callee29, this);
+        }, _callee30, this);
       }));
-      function editPost(_x32, _x33) {
+      function editPost(_x33, _x34) {
         return _editPost.apply(this, arguments);
       }
       return editPost;
@@ -766,15 +795,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "deleteComment",
     value: (function () {
-      var _deleteComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee30(id) {
-        return _regenerator().w(function (_context30) {
-          while (1) switch (_context30.n) {
+      var _deleteComment = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee31(id) {
+        return _regenerator().w(function (_context31) {
+          while (1) switch (_context31.n) {
             case 0:
-              return _context30.a(2, this.request(["comment", id], "DELETE"));
+              return _context31.a(2, this.request(["comment", id], "DELETE"));
           }
-        }, _callee30, this);
+        }, _callee31, this);
       }));
-      function deleteComment(_x34) {
+      function deleteComment(_x35) {
         return _deleteComment.apply(this, arguments);
       }
       return deleteComment;
@@ -782,13 +811,13 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getNotifications",
     value: (function () {
-      var _getNotifications = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee31() {
-        return _regenerator().w(function (_context31) {
-          while (1) switch (_context31.n) {
+      var _getNotifications = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee32() {
+        return _regenerator().w(function (_context32) {
+          while (1) switch (_context32.n) {
             case 0:
-              return _context31.a(2, this.post("notifications", {}));
+              return _context32.a(2, this.post("notifications", {}));
           }
-        }, _callee31, this);
+        }, _callee32, this);
       }));
       function getNotifications() {
         return _getNotifications.apply(this, arguments);
@@ -804,15 +833,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getNotificationData",
     value: (function () {
-      var _getNotificationData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee32(id) {
-        return _regenerator().w(function (_context32) {
-          while (1) switch (_context32.n) {
+      var _getNotificationData = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee33(id) {
+        return _regenerator().w(function (_context33) {
+          while (1) switch (_context33.n) {
             case 0:
-              return _context32.a(2, this.get(["data", id]));
+              return _context33.a(2, this.get(["data", id]));
           }
-        }, _callee32, this);
+        }, _callee33, this);
       }));
-      function getNotificationData(_x35) {
+      function getNotificationData(_x36) {
         return _getNotificationData.apply(this, arguments);
       }
       return getNotificationData;
@@ -820,13 +849,13 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getChats",
     value: (function () {
-      var _getChats = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee33() {
-        return _regenerator().w(function (_context33) {
-          while (1) switch (_context33.n) {
+      var _getChats = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee34() {
+        return _regenerator().w(function (_context34) {
+          while (1) switch (_context34.n) {
             case 0:
-              return _context33.a(2, this.post("chats", {}));
+              return _context34.a(2, this.post("chats", {}));
           }
-        }, _callee33, this);
+        }, _callee34, this);
       }));
       function getChats() {
         return _getChats.apply(this, arguments);
@@ -836,17 +865,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "startChat",
     value: (function () {
-      var _startChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee34(userId) {
-        return _regenerator().w(function (_context34) {
-          while (1) switch (_context34.n) {
+      var _startChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee35(userId) {
+        return _regenerator().w(function (_context35) {
+          while (1) switch (_context35.n) {
             case 0:
-              return _context34.a(2, this.post("chat", {
+              return _context35.a(2, this.post("chat", {
                 userId: userId
               }));
           }
-        }, _callee34, this);
+        }, _callee35, this);
       }));
-      function startChat(_x36) {
+      function startChat(_x37) {
         return _startChat.apply(this, arguments);
       }
       return startChat;
@@ -859,20 +888,20 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "sendMessage",
     value: (function () {
-      var _sendMessage = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee35(text, chat) {
-        return _regenerator().w(function (_context35) {
-          while (1) switch (_context35.n) {
+      var _sendMessage = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee36(text, chat) {
+        return _regenerator().w(function (_context36) {
+          while (1) switch (_context36.n) {
             case 0:
-              return _context35.a(2, this.post("message", chat ? {
+              return _context36.a(2, this.post("message", chat ? {
                 text: text,
                 chat: chat
               } : {
                 text: text
               }));
           }
-        }, _callee35, this);
+        }, _callee36, this);
       }));
-      function sendMessage(_x37, _x38) {
+      function sendMessage(_x38, _x39) {
         return _sendMessage.apply(this, arguments);
       }
       return sendMessage;
@@ -880,17 +909,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "muteChat",
     value: (function () {
-      var _muteChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee36(chat) {
-        return _regenerator().w(function (_context36) {
-          while (1) switch (_context36.n) {
+      var _muteChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee37(chat) {
+        return _regenerator().w(function (_context37) {
+          while (1) switch (_context37.n) {
             case 0:
-              return _context36.a(2, this.post("mute", {
+              return _context37.a(2, this.post("mute", {
                 chat: chat
               }));
           }
-        }, _callee36, this);
+        }, _callee37, this);
       }));
-      function muteChat(_x39) {
+      function muteChat(_x40) {
         return _muteChat.apply(this, arguments);
       }
       return muteChat;
@@ -898,17 +927,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "unmuteChat",
     value: (function () {
-      var _unmuteChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee37(chat) {
-        return _regenerator().w(function (_context37) {
-          while (1) switch (_context37.n) {
+      var _unmuteChat = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee38(chat) {
+        return _regenerator().w(function (_context38) {
+          while (1) switch (_context38.n) {
             case 0:
-              return _context37.a(2, this.post("unmute", {
+              return _context38.a(2, this.post("unmute", {
                 chat: chat
               }));
           }
-        }, _callee37, this);
+        }, _callee38, this);
       }));
-      function unmuteChat(_x40) {
+      function unmuteChat(_x41) {
         return _unmuteChat.apply(this, arguments);
       }
       return unmuteChat;
@@ -916,17 +945,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "sendTyping",
     value: (function () {
-      var _sendTyping = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee38(chat) {
-        return _regenerator().w(function (_context38) {
-          while (1) switch (_context38.n) {
+      var _sendTyping = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee39(chat) {
+        return _regenerator().w(function (_context39) {
+          while (1) switch (_context39.n) {
             case 0:
-              return _context38.a(2, this.post("chatTyping", {
+              return _context39.a(2, this.post("chatTyping", {
                 chat: chat
               }));
           }
-        }, _callee38, this);
+        }, _callee39, this);
       }));
-      function sendTyping(_x41) {
+      function sendTyping(_x42) {
         return _sendTyping.apply(this, arguments);
       }
       return sendTyping;
@@ -940,17 +969,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getGroupInfo",
     value: (function () {
-      var _getGroupInfo = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee39(chat) {
-        return _regenerator().w(function (_context39) {
-          while (1) switch (_context39.n) {
+      var _getGroupInfo = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee40(chat) {
+        return _regenerator().w(function (_context40) {
+          while (1) switch (_context40.n) {
             case 0:
-              return _context39.a(2, this.post("groupInfo", {
+              return _context40.a(2, this.post("groupInfo", {
                 chat: chat
               }));
           }
-        }, _callee39, this);
+        }, _callee40, this);
       }));
-      function getGroupInfo(_x42) {
+      function getGroupInfo(_x43) {
         return _getGroupInfo.apply(this, arguments);
       }
       return getGroupInfo;
@@ -965,20 +994,20 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "editGroup",
     value: (function () {
-      var _editGroup = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee40(chat) {
+      var _editGroup = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee41(chat) {
         var fields,
-          _args40 = arguments;
-        return _regenerator().w(function (_context40) {
-          while (1) switch (_context40.n) {
+          _args41 = arguments;
+        return _regenerator().w(function (_context41) {
+          while (1) switch (_context41.n) {
             case 0:
-              fields = _args40.length > 1 && _args40[1] !== undefined ? _args40[1] : {};
-              return _context40.a(2, this.post("editGroup", _objectSpread({
+              fields = _args41.length > 1 && _args41[1] !== undefined ? _args41[1] : {};
+              return _context41.a(2, this.post("editGroup", _objectSpread({
                 chat: chat
               }, fields)));
           }
-        }, _callee40, this);
+        }, _callee41, this);
       }));
-      function editGroup(_x43) {
+      function editGroup(_x44) {
         return _editGroup.apply(this, arguments);
       }
       return editGroup;
@@ -986,17 +1015,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "subscribe",
     value: (function () {
-      var _subscribe = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee41(type) {
-        return _regenerator().w(function (_context41) {
-          while (1) switch (_context41.n) {
+      var _subscribe = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee42(type) {
+        return _regenerator().w(function (_context42) {
+          while (1) switch (_context42.n) {
             case 0:
-              return _context41.a(2, this.post("subscribe", {
+              return _context42.a(2, this.post("subscribe", {
                 type: type
               }));
           }
-        }, _callee41, this);
+        }, _callee42, this);
       }));
-      function subscribe(_x44) {
+      function subscribe(_x45) {
         return _subscribe.apply(this, arguments);
       }
       return subscribe;
@@ -1004,13 +1033,13 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "getBadges",
     value: (function () {
-      var _getBadges = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee42() {
-        return _regenerator().w(function (_context42) {
-          while (1) switch (_context42.n) {
+      var _getBadges = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee43() {
+        return _regenerator().w(function (_context43) {
+          while (1) switch (_context43.n) {
             case 0:
-              return _context42.a(2, this.get("badges"));
+              return _context43.a(2, this.get("badges"));
           }
-        }, _callee42, this);
+        }, _callee43, this);
       }));
       function getBadges() {
         return _getBadges.apply(this, arguments);
@@ -1026,15 +1055,15 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "upload",
     value: (function () {
-      var _upload = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee43(formData) {
-        return _regenerator().w(function (_context43) {
-          while (1) switch (_context43.n) {
+      var _upload = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee44(formData) {
+        return _regenerator().w(function (_context44) {
+          while (1) switch (_context44.n) {
             case 0:
-              return _context43.a(2, this.request("upload", "POST", formData));
+              return _context44.a(2, this.request("upload", "POST", formData));
           }
-        }, _callee43, this);
+        }, _callee44, this);
       }));
-      function upload(_x45) {
+      function upload(_x46) {
         return _upload.apply(this, arguments);
       }
       return upload;
@@ -1047,17 +1076,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "newSearch",
     value: (function () {
-      var _newSearch = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee44(query) {
-        return _regenerator().w(function (_context44) {
-          while (1) switch (_context44.n) {
+      var _newSearch = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee45(query) {
+        return _regenerator().w(function (_context45) {
+          while (1) switch (_context45.n) {
             case 0:
-              return _context44.a(2, this.post("newSearch", {
+              return _context45.a(2, this.post("newSearch", {
                 query: query
               }));
           }
-        }, _callee44, this);
+        }, _callee45, this);
       }));
-      function newSearch(_x46) {
+      function newSearch(_x47) {
         return _newSearch.apply(this, arguments);
       }
       return newSearch;
@@ -1065,17 +1094,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "searchUsers",
     value: (function () {
-      var _searchUsers = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee45(query) {
-        return _regenerator().w(function (_context45) {
-          while (1) switch (_context45.n) {
+      var _searchUsers = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee46(query) {
+        return _regenerator().w(function (_context46) {
+          while (1) switch (_context46.n) {
             case 0:
-              return _context45.a(2, this.post("users", {
+              return _context46.a(2, this.post("users", {
                 query: query
               }));
           }
-        }, _callee45, this);
+        }, _callee46, this);
       }));
-      function searchUsers(_x47) {
+      function searchUsers(_x48) {
         return _searchUsers.apply(this, arguments);
       }
       return searchUsers;
@@ -1083,17 +1112,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "searchGroups",
     value: (function () {
-      var _searchGroups = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee46(query) {
-        return _regenerator().w(function (_context46) {
-          while (1) switch (_context46.n) {
+      var _searchGroups = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee47(query) {
+        return _regenerator().w(function (_context47) {
+          while (1) switch (_context47.n) {
             case 0:
-              return _context46.a(2, this.post("groups", {
+              return _context47.a(2, this.post("groups", {
                 query: query
               }));
           }
-        }, _callee46, this);
+        }, _callee47, this);
       }));
-      function searchGroups(_x48) {
+      function searchGroups(_x49) {
         return _searchGroups.apply(this, arguments);
       }
       return searchGroups;
@@ -1107,17 +1136,17 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
   }, {
     key: "verifyEmail",
     value: (function () {
-      var _verifyEmail = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee47(code) {
-        return _regenerator().w(function (_context47) {
-          while (1) switch (_context47.n) {
+      var _verifyEmail = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee48(code) {
+        return _regenerator().w(function (_context48) {
+          while (1) switch (_context48.n) {
             case 0:
-              return _context47.a(2, this.post("verifyEmail", {
+              return _context48.a(2, this.post("verifyEmail", {
                 code: code
               }));
           }
-        }, _callee47, this);
+        }, _callee48, this);
       }));
-      function verifyEmail(_x49) {
+      function verifyEmail(_x50) {
         return _verifyEmail.apply(this, arguments);
       }
       return verifyEmail;
@@ -1149,10 +1178,7 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
       return this._user;
     }
 
-    /**
-     * Extract the user id from a JWT auth token (best-effort).
-     * @returns {string|null}
-     */,
+    /** @param {string} path */,
     set: function set(user) {
       this._user = user;
       if (user) {
@@ -1161,90 +1187,6 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
         localStorage.removeItem("currentUser");
       }
     }
-  }, {
-    key: "_tokenUserId",
-    value: function _tokenUserId() {
-      var token = this.token;
-      if (!token) return null;
-      try {
-        var parts = token.split(".");
-        if (parts.length !== 3) return null;
-        var padded = parts[1].replace(/-/g, "+").replace(/_/g, "/");
-        var binary = atob(padded);
-        var json = decodeURIComponent(binary.split("").map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(""));
-        var payload = JSON.parse(json);
-        for (var _i = 0, _arr = ["id", "sub", "userId", "user_id", "nameid"]; _i < _arr.length; _i++) {
-          var key = _arr[_i];
-          if (payload[key]) return String(payload[key]);
-        }
-        if (payload.user && payload.user.id) return String(payload.user.id);
-      } catch (error) {
-        // not a JSON/JWT token — ignore
-      }
-      return null;
-    }
-
-    /**
-     * If logged in but no cached user, try to recover one and store it.
-     * @returns {Promise<FurzonaUserBase|null>}
-     */
-  }, {
-    key: "fetchSelf",
-    value: (function () {
-      var _fetchSelf = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee48() {
-        var id, user, _t;
-        return _regenerator().w(function (_context48) {
-          while (1) switch (_context48.p = _context48.n) {
-            case 0:
-              if (!this.user) {
-                _context48.n = 1;
-                break;
-              }
-              return _context48.a(2, this.user);
-            case 1:
-              if (this.isLoggedIn) {
-                _context48.n = 2;
-                break;
-              }
-              return _context48.a(2, null);
-            case 2:
-              id = this._tokenUserId();
-              if (id) {
-                _context48.n = 3;
-                break;
-              }
-              return _context48.a(2, null);
-            case 3:
-              _context48.p = 3;
-              _context48.n = 4;
-              return this.getUser(id);
-            case 4:
-              user = _context48.v;
-              if (!(user && user.id)) {
-                _context48.n = 5;
-                break;
-              }
-              this.user = user;
-              return _context48.a(2, user);
-            case 5:
-              _context48.n = 7;
-              break;
-            case 6:
-              _context48.p = 6;
-              _t = _context48.v;
-              console.error("fetchSelf: could not load own profile:", _t);
-            case 7:
-              return _context48.a(2, null);
-          }
-        }, _callee48, this, [[3, 6]]);
-      }));
-      function fetchSelf() {
-        return _fetchSelf.apply(this, arguments);
-      }
-      return fetchSelf;
-    }() /** @param {string} path */)
   }, {
     key: "getMediaUrl",
     value: function getMediaUrl(path) {

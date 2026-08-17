@@ -144,6 +144,13 @@ if (postList instanceof HTMLUListElement) {
     var title = document.createElement("h2");
     title.textContent = post.t || "";
     listItem.appendChild(title);
+    var description = [post.c, post.d].filter(Boolean).join("\n\n");
+    if (description) {
+      var descEl = document.createElement("p");
+      descEl.className = "post-desc";
+      descEl.textContent = description;
+      listItem.appendChild(descEl);
+    }
     var image = null;
     if (post.m && post.m.length > 0) {
       image = document.createElement("img");

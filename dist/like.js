@@ -4,9 +4,36 @@ function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present,
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 (function () {
   var HEART_UNLIKED = "Assets/heart.svg";
   var HEART_LIKED = "Assets/heart-liked.svg";
+
+  /** @param {unknown} result @returns {{ liked: boolean|null, likes: number|null }} */
+  var normalize = function normalize(result) {
+    if (result === null || result === undefined) return {
+      liked: null,
+      likes: null
+    };
+    if (typeof result === "boolean") return {
+      liked: result,
+      likes: null
+    };
+    if (typeof result === "number") return {
+      liked: null,
+      likes: result
+    };
+    if (_typeof(result) !== "object") return {
+      liked: null,
+      likes: null
+    };
+    var liked = typeof result.liked === "boolean" ? result.liked : typeof result.d === "boolean" ? result.d : null;
+    var likes = typeof result.likes === "number" ? result.likes : typeof result.l === "number" ? result.l : typeof result.count === "number" ? result.count : null;
+    return {
+      liked: liked,
+      likes: likes
+    };
+  };
   window.createLikeButton = function (post) {
     var _post$l;
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
@@ -34,7 +61,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     var liking = false;
     button.addEventListener("click", /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(event) {
-        var result, _t, _t2;
+        var result, _normalize, newLiked, newLikes, _t, _t2;
         return _regenerator().w(function (_context) {
           while (1) switch (_context.p = _context.n) {
             case 0:
@@ -64,10 +91,13 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               _t = _context.v;
             case 6:
               result = _t;
-              liked = !!result.liked;
-              button.classList.toggle("liked", liked);
-              heart.src = liked ? HEART_LIKED : HEART_UNLIKED;
-              count.textContent = String(result.likes);
+              _normalize = normalize(result), newLiked = _normalize.liked, newLikes = _normalize.likes;
+              if (newLiked !== null) {
+                liked = newLiked;
+                button.classList.toggle("liked", liked);
+                heart.src = liked ? HEART_LIKED : HEART_UNLIKED;
+              }
+              if (newLikes !== null) count.textContent = String(newLikes);
               _context.n = 8;
               break;
             case 7:
