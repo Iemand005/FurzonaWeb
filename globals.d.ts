@@ -262,6 +262,7 @@ interface LikeToggleResult {
 
 enum ErrorCode {
 	Unknown = -1,
+	Deprecated = 2,
 	NogLoggedIn = 5
 }
 
