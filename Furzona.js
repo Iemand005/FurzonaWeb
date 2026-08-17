@@ -13,7 +13,7 @@ function goHome() {
 
 /** @param {*} ex @param {string} respTxt  */
 function displayError(ex, respTxt) {
-	console.error(ex);
+	// console.error(ex);
 			
 	let errorContainer = document.getElementById('error-container');
 	
@@ -65,7 +65,7 @@ class RequestService {
 
 		console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
 
-		alert(respObj?.error);
+		// alert(respObj?.error);
 
 		if (respObj.errorCode === 5 && this._token) {
 			this.logout();
