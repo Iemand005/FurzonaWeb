@@ -158,9 +158,9 @@ interface FurzonaPost {
 }
 
 enum PermissionLevel {
-	User = 0;
-	Moderator = 1;
-	Admin = 2;
+	User = 0,
+	Moderator = 1,
+	Admin = 2
 }
 
 interface FurzonaUser {
@@ -172,7 +172,7 @@ interface FurzonaUser {
 	/** banner — banner image path */
 	b?: string;
 	/** permLevel — permission/role level, exact scale unconfirmed */
-	p: number;
+	p: PermissionLevel;
 	/** sessionToken */
 	s?: string;
 	email: string;
