@@ -345,6 +345,69 @@ button:disabled:hover {
 	}
 }
 
+@supports (gap: 1px) {
+	header > section,
+	.profile,
+	#login-form,
+	#new-post-form,
+	.search-form,
+	.comment-form {
+		gap: 10px;
+	}
+
+	button,
+	a.login-link {
+		gap: 6px;
+	}
+
+	.profile-top {
+		gap: 16px;
+	}
+
+	.stats,
+	.profile-row {
+		gap: 12px;
+	}
+
+	.comment .profile {
+		gap: 8px;
+	}
+
+	#posts-list,
+	#search-results {
+		gap: 20px;
+	}
+
+	header > section > *:not(:first-child),
+	.profile > *:not(:first-child),
+	.profile-top > *:not(:first-child),
+	.search-form > *:not(:first-child),
+	.comment-form > *:not(:first-child),
+	button > *:not(:first-child),
+	a.login-link > *:not(:first-child),
+	.profile-row > *:not(:first-child),
+	.comment .profile > *:not(:first-child) {
+		margin-left: 0;
+	}
+
+	#login-form > *:not(:first-child),
+	#new-post-form > *:not(:first-child) {
+		margin-top: 0;
+	}
+
+	#posts-list > li,
+	#search-results > li,
+	#search-results .profile-row,
+	.stat {
+		margin: 0;
+	}
+
+	.stats {
+		margin: 0;
+		padding: 0 20px 20px;
+	}
+}
+
 main {
 	box-shadow: inset 0 0 10px rgba(11,12,16,.9);
 	padding: 20px 18px 32px;
@@ -661,13 +724,8 @@ img, .banner, .profile, button, .stat, .input {
 	margin-top: 10px;
 }
 
-.comment .profile {
-	gap: 8px;
-	margin-left: -4px;
-}
-
 .comment .profile > *:not(:first-child) {
-	margin-left: 4px;
+	margin-left: 8px;
 }
 
 .comment .pfp {
@@ -702,9 +760,13 @@ img, .banner, .profile, button, .stat, .input {
 .search-form,
 .comment-form {
 	display: flex;
-	gap: 10px;
 	max-width: 640px;
 	margin: 0 auto 24px;
+}
+
+.search-form > *:not(:first-child),
+.comment-form > *:not(:first-child) {
+	margin-left: 10px;
 }
 
 .search-form .input,
@@ -720,7 +782,6 @@ img, .banner, .profile, button, .stat, .input {
 	list-style: none;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
 	width: min(1200px, 100%);
 	margin: 0 auto;
 	padding: 0;
@@ -729,18 +790,23 @@ img, .banner, .profile, button, .stat, .input {
 #search-results > li {
 	flex: 1 1 250px;
 	max-width: 320px;
+	margin: 10px;
 }
 
 #search-results .profile-row {
 	flex: 1 1 auto;
 	max-width: 640px;
+	margin: 10px;
 }
 
 .profile-row {
 	display: flex;
 	align-items: center;
-	gap: 12px;
 	padding: 14px;
+}
+
+.profile-row > *:not(:first-child) {
+	margin-left: 12px;
 }
 
 #profile-follow {
