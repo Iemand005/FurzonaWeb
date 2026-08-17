@@ -1,4 +1,4 @@
-const form = document.getElementById("new-post-form");
+const postForm = document.getElementById("new-post-form");
 const typeSelect = document.getElementById("post-type");
 const titleInput = document.getElementById("post-title");
 const descriptionInput = document.getElementById("post-description");
@@ -36,14 +36,14 @@ const toMediaPath = (result) => {
 	return null;
 };
 
-if (form instanceof HTMLFormElement) {
-	form.addEventListener("submit", async (event) => {
+if (searchForm instanceof HTMLFormElement) {
+	searchForm.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		if (!furzona.isLoggedIn) {
 			statusEl.textContent = "Log in to create a post.";
 			return;
 		}
-		const submitButton = form.querySelector('button[type="submit"]');
+		const submitButton = searchForm.querySelector('button[type="submit"]');
 		submitButton.disabled = true;
 		statusEl.textContent = "Posting…";
 		try {

@@ -1,4 +1,4 @@
-const form = document.getElementById("search-form");
+const searchForm = document.getElementById("search-form");
 const input = document.getElementById("search-input");
 const resultsEl = document.getElementById("search-results");
 const emptyEl = document.getElementById("search-empty");
@@ -147,8 +147,8 @@ const createdUser = (item) => {
 	return card;
 };
 
-if (form) {
-	form.addEventListener("submit", (event) => {
+if (searchForm) {
+	searchForm.addEventListener("submit", (event) => {
 		event.preventDefault();
 		const q = input.value.trim();
 		if (!q) return;
