@@ -9,7 +9,7 @@ type ResponseBody<K extends keyof ApiEndpoints> = Promise<ApiEndpoints[K]["respo
 type ApiRequestFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, method?: Method, body?: ApiEndpoints[K]["body"]) => ResponseBody<K>;
 type ReadEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => ResponseBody<K>;
 type WriteEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, body?: ApiEndpoints[K]["body"]) => ResponseBody<K>;
-type ProbeEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => void;
+type ProbeEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => Promise<void>;
 
 // Furzona API
 

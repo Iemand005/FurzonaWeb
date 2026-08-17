@@ -378,13 +378,18 @@ class Furzona extends RequestService {
 	async verifyEmail(code) {
 		return this.post("verifyEmail", { code });
 	}
-	/** @type {ProbeEndpointFn} */
+	// /** @type {ProbeEndpointFn} */
+	/**
+	 * @template {K extends keyof ApiEndpoints}
+	 * @param {*} endpoint 
+	 */
 	async probe(endpoint) {
 		const requests = [this.get(endpoint), this.post(endpoint)];
 		// [this.get(endpoint), this.post(endpoint), this.put(endpoint), this.delete(endpoint)]
 		await results = Promise.all(requests.map(request => {
-
-		}))
+			.then(value => ({ status: 'fulfilled', value }))
+			.catch(reason => ({ status: 'rejected', reason }))
+		}));
 	}
 
 	set user(user) {
