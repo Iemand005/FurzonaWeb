@@ -63,8 +63,6 @@ const createdUser = (item) => {
 	return card;
 };
 
-const createResultCard = (item) => item.u ? createdPost(item) : createdUser(item);
-
 if (form) {
 	form.addEventListener("submit", (event) => {
 		event.preventDefault();
