@@ -6,8 +6,8 @@ function redirectIfLoggedIn() {
 }
 
 if (loginForm instanceof HTMLFormElement) {
-	loginForm.onsubmit = ev => {
-		ev.preventDefault();
+	loginForm.onsubmit = e => {
+		e.preventDefault();
 
 		const formData = new FormData(loginForm);
 		const email = formData.get('email');
@@ -15,9 +15,9 @@ if (loginForm instanceof HTMLFormElement) {
 		
 		console.log(email, password);
 
-		if (typeof email === "string" && typeof password === "string") furzona.login(email, password).then(_ => redirectIfLoggedIn());
-
+		if (typeof email !== "string" || typeof password !== "string") return;
 		
+		furzona.login(email, password).then(_ => redirectIfLoggedIn());
 	};
 }
 
