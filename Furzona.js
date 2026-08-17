@@ -11,20 +11,21 @@ function goHome() {
 	window.location.href = "index.html"
 }
 
-function displayError(error) {
+/** @param {*} ex @param {string} respTxt  */
+function displayError(ex, respTxt) {
 	console.error(ex);
 			
-			let errorContainer = document.getElementById('error-container');
-			
-			if (!errorContainer) {
-				errorContainer = document.createElement("div");
-				errorContainer.id = "error-container";
-				document.body.appendChild(errorContainer);
-			}
-			
-			errorContainer.innerHTML = respTxt;
+	let errorContainer = document.getElementById('error-container');
+	
+	if (!errorContainer) {
+		errorContainer = document.createElement("div");
+		errorContainer.id = "error-container";
+		document.body.appendChild(errorContainer);
+	}
+	
+	errorContainer.innerHTML = respTxt;
 
-			return;
+	return;
 }
 
 const apiUrl = "https://api.furzona.app/";
