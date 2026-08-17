@@ -611,6 +611,58 @@ img, .banner, .profile, button, .stat, .input {
 	padding: 6px 10px;
 }
 
+.search-form {
+	display: flex;
+	gap: 10px;
+	max-width: 640px;
+	margin: 0 auto 24px;
+}
+
+.search-form .input {
+	flex: 1;
+}
+
+#search-results {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: min(1200px, 100%);
+	margin: 0 auto;
+	padding: 0;
+}
+
+#search-results > li {
+	flex: 1 1 250px;
+	max-width: 320px;
+}
+
+#search-results .profile-row {
+	flex: 1 1 auto;
+	max-width: 640px;
+}
+
+.profile-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px;
+}
+
+.profile-row .pfp {
+	width: 48px;
+	height: 48px;
+	object-fit: cover;
+	border-radius: 14px;
+	background: var(--bg-btn);
+}
+
+#search-empty {
+	max-width: 640px;
+	margin: 0 auto;
+	text-align: center;
+}
+
 @media (max-width: 640px) {
 	main, .profile-page { padding-left: 12px; padding-right: 12px; }
 	#posts-list > li { max-width: none; flex-basis: 100%; }

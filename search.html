@@ -18,7 +18,10 @@
 	<title>Furzona Lite Search</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="manifest" href="manifest.json">
+	<script src="Furzona.js"></script>
 	<script src="nav.js" defer></script>
+	<script src="like.js" defer></script>
+	<script src="search.js" defer></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -35,7 +38,12 @@
 		</section>
 	</header>
 	<main>
-		<p>Search page placeholder.</p>
+		<form id="search-form" class="search-form">
+			<input class="input" type="search" id="search-input" placeholder="Search posts and users…" autocomplete="off">
+			<button type="submit">Search</button>
+		</form>
+		<p id="search-empty" class="meta"></p>
+		<ul id="search-results"></ul>
 	</main>
 </body>
 </html>
