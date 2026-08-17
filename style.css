@@ -787,4 +787,9 @@ img, .banner, .profile, button, .stat, .input {
 	.like-btn:not(.liked) img {
 		filter: brightness(0);
 	}
+
+	.profile p,
+	.meta {
+		color: var(--text-dim);
+	}
 }
