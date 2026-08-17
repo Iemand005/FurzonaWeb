@@ -368,8 +368,10 @@ interface CreatePostRequest {
 }
 
 interface GetPostsRequest {
+	/** Date before which post to search */
 	date?: number;
-	category? : string;
+	/** Post cagegory I dunno yet what this uh are */
+	category?: string;
 }
 
 /**
