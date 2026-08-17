@@ -166,6 +166,14 @@ class Furzona extends RequestService {
 	async unblock(userId) {
 		return this.post("unblock", { user: userId });
 	}
+	/** @param {string} userId @param {string} reason */
+	async banUser(userId, reason) {
+		return this.post("ban", { userId, reason });
+	}
+	/** @param {string} userId */
+	async unbanUser(userId) {
+		return this.post("unban", { userId });
+	}
 	/** @param {string} id  */
 	async getUser(id) {
 		return this.get(["user", id]);
@@ -205,6 +213,15 @@ class Furzona extends RequestService {
 	async deletePost(id) {
 		return this.request(["post", id], "DELETE");
 	}
+	/**
+	 * Edit a post.
+	 * @param {string} id
+	 * @param {object} fields
+	 * @returns {Promise<FurzonaPost>}
+	 */
+	async editPost(id, fields) {
+		return this.request(["post", id], "PUT", fields);
+	}
 	/** @param {string} id */
 	async deleteComment(id) {
 		return this.request(["comment", id], "DELETE");
@@ -243,6 +260,27 @@ class Furzona extends RequestService {
 	/** @param {string} chat */
 	async unmuteChat(chat) {
 		return this.post("unmute", { chat });
+	}
+	/** @param {string} chat */
+	async sendTyping(chat) {
+		return this.post("chatTyping", { chat });
+	}
+	/**
+	 * Fetch group/GC details.
+	 * @param {string} chat
+	 * @returns {Promise<unknown>}
+	 */
+	async getGroupInfo(chat) {
+		return this.post("groupInfo", { chat });
+	}
+	/**
+	 * Edit a group/GC. Allowed fields are unconfirmed.
+	 * @param {string} chat
+	 * @param {object} [fields]
+	 * @returns {Promise<unknown>}
+	 */
+	async editGroup(chat, fields = {}) {
+		return this.post("editGroup", { chat, ...fields });
 	}
 	/** @param {number} type */
 	async subscribe(type) {
