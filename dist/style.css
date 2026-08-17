@@ -121,7 +121,6 @@ html {
 
 html, body {
 	margin: 0;
-	color: #f3f6fb;
 	font-family: "Varela Round", sans-serif;
 }
 
@@ -139,8 +138,14 @@ html, body {
 	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
 }
 
+/* Background Color */
 html, body {
 	background-color: #16181D;
+}
+
+/* Text Color */
+html, body, button {
+	color: #f3f6fb;
 }
 
 body {

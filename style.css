@@ -138,12 +138,12 @@ html, body {
 	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
 }
 
-/* Background Colour */
+/* Background Color */
 html, body {
 	background-color: #16181D;
 }
 
-/* Text Colour */
+/* Text Color */
 html, body, button {
 	color: #f3f6fb;
 }
