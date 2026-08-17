@@ -83,7 +83,8 @@ const createdPost = (item) => {
 	pfp.dataset.transitionId = item.u.id;
 	const name = document.createElement("p");
 	name.textContent = item.u.username;
-	profile.append(pfp, name);
+	profile.appendChild(pfp);
+	profile.appendChild(name);
 	card.appendChild(profile);
 
 	const title = document.createElement("h2");
@@ -129,7 +130,8 @@ const createdUser = (item) => {
 	pfp.dataset.transitionId = item.id;
 	const name = document.createElement("p");
 	name.textContent = item.username;
-	card.append(pfp, name);
+	card.appendChild(pfp);
+	card.appendChild(name);
 
 	card.style.cursor = "pointer";
 	card.onclick = () => {

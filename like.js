@@ -34,7 +34,8 @@
 		count.className = "like-count";
 		count.textContent = String(post.l ?? 0);
 
-		button.append(heart, count);
+		button.appendChild(heart);
+		button.appendChild(count);
 		if (liked) button.classList.add("liked");
 
 		let liking = false;
