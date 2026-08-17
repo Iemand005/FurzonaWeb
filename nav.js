@@ -11,8 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		link.textContent = "Log in";
 		navSection.appendChild(link);
 	};
-	addLoginLink();
-
+	
 	const addProfileButton = () => {
 		if (window.location.pathname.endsWith("login.html")) return;
 		const me = furzona.user;
@@ -37,15 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 		navSection.appendChild(button);
 	};
-	addProfileButton();
-
+	
 	const searchButtons = document.querySelectorAll("[data-nav-search]");
 	searchButtons.forEach(button => {
 		button.addEventListener("click", () => {
 			window.location.href = "search.html";
 		});
 	});
-
+	
 	const homeButtons = document.querySelectorAll("[data-nav-home]");
 	homeButtons.forEach(img => {
 		img.addEventListener("click", () => {
@@ -71,8 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 		navSection.appendChild(button);
 	};
-	addNavHomeButton();
-
+	
 	const addNewPostButton = () => {
 		if (window.location.pathname.endsWith("login.html")) return;
 		if (window.location.pathname.endsWith("create-post.html")) return;
@@ -94,8 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 		navSection.appendChild(button);
 	};
-	addNewPostButton();
-
+	
 	const backButtons = document.querySelectorAll("[data-nav-back]");
 	backButtons.forEach(button => {
 		button.addEventListener("click", () => {
@@ -106,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 	});
-
+	
 	const forwardButtons = document.querySelectorAll("[data-nav-forward]");
 	const syncForwardState = () => {
 		const canGoForward = window.navigation ? window.navigation.canGoForward : true;
@@ -119,10 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			history.forward();
 		});
 	});
-	syncForwardState();
 	window.addEventListener("pageshow", syncForwardState);
 	window.addEventListener("popstate", syncForwardState);
 	window.navigation?.addEventListener("navigate", syncForwardState);
+	
+	addLoginLink();
+	addNavHomeButton();
+	addNewPostButton();
+	addProfileButton();
+	syncForwardState();
 	
 	if ('serviceWorker' in navigator) {
 	  navigator.serviceWorker.register('./sw.js').catch(() => {});
