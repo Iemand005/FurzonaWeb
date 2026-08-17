@@ -369,16 +369,14 @@ interface EditGroupRequest {
 
 /** POST /post — only `type` is confirmed required; the rest map to FurzonaPost keys */
 interface CreatePostRequest {
-	/** post type discriminator (numeric) */
-	type: PostType;
+	/** post type discriminator (numeric): 0 = text, 1 = image/media */
+	type: number;
 	/** title */
-	t?: string;
-	/** description/caption */
-	d?: string;
+	title?: string;
 	/** content/body text */
-	c?: string;
-	/** media paths (from /upload) */
-	m?: string[];
+	content?: string;
+	/** media paths (from /upload) — field name unconfirmed */
+	media?: string[];
 	[key: string]: unknown;
 }
 
