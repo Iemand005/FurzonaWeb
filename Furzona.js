@@ -265,11 +265,6 @@ class Furzona extends RequestService {
 		return this.post("newSearch", { query });
 	}
 
-	/** @returns {Promise<FurzonaNotificationResponse>} */
-	async getNotificationData(id) {
-		return this.get(["data", id]);
-	}
-
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");
 		this._token = token;

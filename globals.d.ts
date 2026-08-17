@@ -292,6 +292,52 @@ interface SearchRequest {
 	nsfwSelector?: number;
 }
 
+interface NewSearchRequest {
+	query: string;
+}
+
+/** POST /newSearch result — posts and matching users */
+interface FurzonaNewSearchResult {
+	/** posts */
+	p: FurzonaPost[];
+	/** users */
+	u: FurzonaUserBase[];
+}
+
+/** Discriminator for notification objects returned by GET /data/{id} */
+type FurzonaNotificationType =
+	| "mention-post"
+	| "mention-comment"
+	| "follow"
+	| "unfollow"
+	| "comment"
+	| "reply"
+	| "suspended"
+	| (string & {});
+
+/**
+ * Mirrors the native notifier's `PNRes` object (see the C# NotifBackground task).
+ * Field names may differ between the raw API JSON and the C# model — treat as best-effort.
+ */
+interface FurzonaNotificationObject {
+	/** Type discriminator */
+	__type: FurzonaNotificationType;
+	/** Present for mention-post / mention-comment — carries the post and its author */
+	PostM?: { user: FurzonaPostAuthor };
+	/** Present for follow / unfollow — the other user */
+	UserM?: FurzonaUserBase;
+	/** Present for comment — content read via `.Content` in the C# notifier */
+	CommentM?: FurzonaComment;
+	/** Present for reply — content read via `.Content` in the C# notifier */
+	CommentR?: FurzonaComment;
+	[key: string]: unknown;
+}
+
+/** GET /data/{id} response (after the `result` wrapper is unwrapped) */
+interface FurzonaNotificationResponse {
+	obj: FurzonaNotificationObject;
+}
+
 interface ForgotPasswordRequest {
 	email: string;
 }
@@ -412,6 +458,13 @@ interface ApiEndpoints {
 	search: {
 		body: SearchRequest;
 		response: (FurzonaPost | FurzonaUserBase)[];
+	};
+	newSearch: {
+		body: NewSearchRequest;
+		response: FurzonaNewSearchResult;
+	};
+	data: {
+		response: FurzonaNotificationResponse;
 	};
 	forgotPassword: {
 		body: ForgotPasswordRequest;
