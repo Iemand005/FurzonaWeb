@@ -26,10 +26,7 @@ class RequestService {
 
 		const response = await fetch(apiUrl + endpoint, init);
 
-		if (response.ok) {
-			const result = await response.json();
-			return result.result;
-		}
+		if (response.ok) return response.json().then(r => r.result);
 
 		const respTxt = await response.text();
 
