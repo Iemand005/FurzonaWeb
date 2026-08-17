@@ -415,10 +415,6 @@ main {
 	padding: 20px 18px 32px;
 
 	min-height: 100%;
-
-	display: flex;
-
-	justify-content: center;
 }
 
 #posts-list {
