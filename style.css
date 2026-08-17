@@ -124,7 +124,7 @@ html, body {
 	font-family: "Varela Round", sans-serif;
 }
 
-:root {
+/* :root {
 	--bg: #16181D;
 	--bg-raised: #1d212a;
 	--bg-sunken: #161b22;
@@ -136,7 +136,7 @@ html, body {
 	--text-faint: #7a8094;
 	--border: rgba(255,255,255,.08);
 	--shadow-card: 0 10px 24px rgba(0,0,0,.18);
-}
+} */
 
 /* Background Color */
 html, body {
@@ -196,7 +196,7 @@ button:disabled, button:disabled:hover {
 	}
 
 	body header {
-		background: rgba(250, 250, 250, 0.7);
+		background: linear-gradient(to top, transparent 0, rgb(195 195 195) 60px), rgb(174 174 174 / 81%);
 		
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 	}
