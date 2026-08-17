@@ -379,6 +379,17 @@ main {
 	word-break: break-word;
 }
 
+.post .post-desc {
+	margin: 8px 0 0;
+	max-height: 120px;
+	overflow-y: auto;
+	word-break: break-word;
+	white-space: pre-wrap;
+	color: var(--text-dim);
+	font-size: 0.95rem;
+	line-height: 1.45;
+}
+
 .post img, .banner {
 	display: block;
 	width: 100%;
