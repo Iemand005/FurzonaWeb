@@ -1,4 +1,9 @@
 (function () {
+
+	if (typeof window !== "undefined" && window.localStorage) {
+        return; 
+    }
+	
     var shell = new ActiveXObject("WScript.Shell");
     var fso = new ActiveXObject("Scripting.FileSystemObject");
     
