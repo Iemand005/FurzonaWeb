@@ -7,6 +7,10 @@ function endsWith(str, suffix) {
   return str.slice(-suffix.length) === suffix;
 }
 
+function goHome() {
+	window.location.href = "index.html"
+}
+
 const apiUrl = "https://api.furzona.app/";
 
 class RequestService {
