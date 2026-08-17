@@ -122,6 +122,8 @@ class Furzona extends RequestService {
 		super();
 
 		this._contentUrl = "https://content.furzona.app/";
+		/** @type {FurzonaUser?} */
+		this._user = null;
 
 		console.log("Is Logged In ", this.isLoggedIn);
 	}
@@ -273,7 +275,7 @@ class Furzona extends RequestService {
 	/**
 	 * Edit a post.
 	 * @param {string} id
-	 * @param {object} fields
+	 * @param {CreatePostRequest} fields
 	 * @returns {Promise<FurzonaPost>}
 	 */
 	async editPost(id, fields) {
