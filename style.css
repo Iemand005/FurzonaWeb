@@ -555,6 +555,56 @@ img, .banner, .profile, button, .stat, .input {
 	background: #131721;
 }
 
+#post-comments {
+	margin-top: 24px;
+	border-top: 1px solid var(--border);
+	padding-top: 16px;
+}
+
+#post-comments h3 {
+	margin: 0 0 12px;
+	font-size: 1.1rem;
+	color: var(--text-dim);
+}
+
+.comment {
+	background: var(--bg-sunken);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	padding: 12px 14px;
+}
+
+#post-comments .comment + .comment {
+	margin-top: 10px;
+}
+
+.comment .profile {
+	gap: 8px;
+}
+
+.comment .pfp {
+	width: 32px;
+	height: 32px;
+	border-radius: 10px;
+	object-fit: cover;
+	background: var(--bg-btn);
+}
+
+.comment-text {
+	margin: 8px 0 0;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-word;
+	color: var(--text);
+}
+
+.comment .meta {
+	margin-top: 8px;
+	font-size: 0.8rem;
+	color: var(--text-dim);
+	font-weight: 400;
+}
+
 @media (max-width: 640px) {
 	main, .profile-page { padding-left: 12px; padding-right: 12px; }
 	#posts-list > li { max-width: none; flex-basis: 100%; }
