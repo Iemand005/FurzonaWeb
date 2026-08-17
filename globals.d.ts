@@ -4,12 +4,11 @@
 type Method = "GET" | "POST" | "DELETE" | "PUT";
 
 type EndpointPath<K extends keyof ApiEndpoints> = K | [K, ...string[]];
+type ResponseBody<K extends keyof ApiEndpoints> = Promise<ApiEndpoints[K]["response"]>;
 
-type ApiRequestFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, method?: Method, body?: ApiEndpoints[K]["body"]) => Promise<ApiEndpoints[K]["response"]>;
-
-type ReadEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => Promise<ApiEndpoints[K]["response"]>;
-
-type WriteEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, body?: ApiEndpoints[K]["body"]) => Promise<ApiEndpoints[K]["response"]>;
+type ApiRequestFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, method?: Method, body?: ApiEndpoints[K]["body"]) => ResponseBody<K>;
+type ReadEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>) => ResponseBody<K>;
+type WriteEndpointFn = <K extends keyof ApiEndpoints>(endpoint: EndpointPath<K>, body?: ApiEndpoints[K]["body"]) => ResponseBody<K>;
 
 // Furzona API
 
