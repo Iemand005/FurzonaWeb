@@ -3,9 +3,15 @@
 	const userId = params.get("author") || params.get("id");
 	const postId = params.get("id");
 
+	const appendTextPreservingBadges = (el, v) => {
+		const badges = [...el.querySelectorAll("[data-role-badge]")];
+		el.textContent = v;
+		for (const badge of badges) el.appendChild(badge);
+	};
+
 	const roles = {
 		avatar: { param: "avatar", key: "userId", set: (el, v) => { el.src = v; } },
-		name: { param: "username", key: "userId", set: (el, v) => { el.textContent = v; } },
+		name: { param: "username", key: "userId", set: (el, v) => { appendTextPreservingBadges(el, v); } },
 		banner: { param: "banner", key: "userId", set: (el, v) => { el.src = v; } },
 		title: { param: "title", key: "postId", set: (el, v) => { el.textContent = v; } },
 		image: { param: "img", key: "postId", set: (el, v) => { el.src = v; el.hidden = false; } }
