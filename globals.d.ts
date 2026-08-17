@@ -1,6 +1,17 @@
-// global.d.ts
+// RequestService
 
 type Method = "GET" | "POST" | "DELETE" | "PUT";
+
+export type ReadEndpointFn = <K extends keyof ApiEndpoints>(
+  endpoint: K | [K, ...string[]]
+) => Promise<ApiEndpoints[K]["response"]>;
+
+export type WriteEndpointFn = <K extends keyof ApiEndpoints>(
+  endpoint: K | [K, ...string[]],
+  body?: ApiEndpoints[K]["body"]
+) => Promise<ApiEndpoints[K]["response"]>;
+
+// Furzona API
 
 interface FurzonaCategory {
 	pos: number;
