@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v2.0';
+const CACHE_NAME = 'app-cache-v2.1';
 const ASSETS = [
 	'./',
 	'./index.html',
@@ -14,9 +14,16 @@ const ASSETS = [
 	'./login.js',
 	'./search.js',
 	'./nav.js',
+	'./like.js',
 	'./Furzona.js',
 	'./profile-preload.js',
-	'./vt-types.js'
+	'./vt-types.js',
+	'./Assets/arrow-left.svg',
+	'./Assets/arrow-right.svg',
+	'./Assets/menu.svg',
+	'./Assets/search.svg',
+	'./Assets/heart.svg',
+	'./Assets/heart-liked.svg'
 ];
 
 const LONG_TTL = 'public, max-age=31536000, immutable';

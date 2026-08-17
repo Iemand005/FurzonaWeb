@@ -9,6 +9,7 @@ const metaEl = document.getElementById("post-meta");
 const mediaEl = document.getElementById("post-media");
 const firstImageEl = document.getElementById("post-first-image");
 const textEl = document.getElementById("post-text");
+const actionsEl = document.getElementById("post-actions");
 
 let authorId = null;
 
@@ -55,6 +56,10 @@ function renderPost(post) {
 		if (user.username) profileParams.set("username", user.username);
 		window.location.href = "profile.html?" + profileParams.toString();
 	};
+
+	if (actionsEl) {
+		actionsEl.appendChild(createLikeButton(post, { liked: !!post.z }));
+	}
 
 	if (post.m && post.m.length > 0) {
 		post.m.forEach((path, index) => {

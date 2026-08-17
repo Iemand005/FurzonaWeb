@@ -327,12 +327,10 @@ main {
 	object-fit: cover;
 }
 
-.post .like-btn {
+.like-btn {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
-	align-self: flex-start;
-	margin-top: 12px;
 	background: #2d3240;
 	border: 1px solid rgba(255,255,255,.08);
 	border-radius: 12px;
@@ -342,7 +340,16 @@ main {
 	cursor: pointer;
 }
 
-.post .like-btn img {
+.post .like-btn {
+	align-self: flex-start;
+	margin-top: 12px;
+}
+
+.post-card .like-btn {
+	margin-top: 16px;
+}
+
+.like-btn img {
 	width: 16px;
 	height: 16px;
 	display: block;
@@ -350,11 +357,11 @@ main {
 	pointer-events: none;
 }
 
-.post .like-btn img:hover {
+.like-btn img:hover {
 	filter: none;
 }
 
-.post .like-btn.liked {
+.like-btn.liked {
 	color: #ff8aac;
 	background: #33222b;
 	border-color: #ff5c8a55;
