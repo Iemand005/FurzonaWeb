@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Furzona Lite</title>
-	<hta:application id="oHTA" applicationname="Furzona" icon="favicon.ico" sysmenu="yes" caption="yes" windowstate="normal"></hta:application>
+	<hta:application id="oHTA" applicationname="Furzona" icon="J:\FurzonaWeb\favicon.ico" sysmenu="yes" caption="yes" windowstate="normal"></hta:application>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,18 +16,6 @@
 			display: block;
 		}
 	</style>
-
-	<script language="VBScript">
-		Sub Window_OnLoad
-			' Zoek de map waarin dit HTA-bestand staat
-			Dim vanAlles, huidigPad
-			vanAlles = Replace(oHTA.commandLine, Chr(34), "")
-			huidigPad = Left(vanAlles, InStrRev(vanAlles, "\"))
-			
-			' Koppel het pictogram via het volledige pad
-			oHTA.icon = huidigPad & "favicon.ico"
-		End Sub
-	</script>
 </head>
 <body>  
 	<iframe src="./dist/index.html" frameborder="0" class="fullscreen" application="yes"></iframe>
