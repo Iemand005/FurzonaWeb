@@ -27,7 +27,6 @@ class RequestService {
 		const response = await fetch(apiUrl + endpoint, init);
 
 		if (response.ok) {
-			/** @type {FurzonaResponse<ApiEndpoints[K]["response"]>} */
 			const result = await response.json();
 			return result.result;
 		}
@@ -119,7 +118,7 @@ class Furzona extends RequestService {
 	async likePost(post) { return this.post("favorite", { post }); }
 
 	set token(token) {
-		if (!token) throw new Error("Tried to assing an empty token.");
+		if (!token) throw new Error("Tried to assign an empty token.");
 		this._token = token;
 
 		localStorage.setItem("token", token);
