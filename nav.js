@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const addLoginLink = () => {
 		if (window.location.pathname.endsWith("login.html")) return;
-		if (furzona.isLoggedIn()) return;
+		if (furzona.isLoggedIn) return;
 		const headerSections = document.querySelectorAll("header > section");
 		const navSection = headerSections[headerSections.length - 1];
 		if (!navSection) return;
