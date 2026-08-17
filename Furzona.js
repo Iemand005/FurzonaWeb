@@ -367,6 +367,13 @@ class Furzona extends RequestService {
 	async verifyEmail(code) {
 		return this.post("verifyEmail", { code });
 	}
+	/** @param {string} endpoint */
+	async probe(endpoint) {
+		this.get(endpoint);
+		this.post(endpoint);
+		this.put(endpoint);
+		this.delete(endpoint);
+	}
 
 	set user(user) {
 		this._user = user;
