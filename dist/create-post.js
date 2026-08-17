@@ -60,7 +60,7 @@ var toMediaPath = function toMediaPath(result) {
 if (form instanceof HTMLFormElement) {
   form.addEventListener("submit", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(event) {
-      var submitButton, type, t, d, files, media, _iterator, _step, file, uploaded, path, fields, post, _t, _t2;
+      var submitButton, type, t, d, files, isText, media, _iterator, _step, file, uploaded, path, fields, post, _t, _t2;
       return _regenerator().w(function (_context2) {
         while (1) switch (_context2.p = _context2.n) {
           case 0:
@@ -80,62 +80,77 @@ if (form instanceof HTMLFormElement) {
             t = titleInput.value.trim();
             d = descriptionInput.value.trim();
             files = mediaInput.files ? Array.from(mediaInput.files) : [];
+            isText = type === 0;
+            if (!(isText && !t && !d)) {
+              _context2.n = 3;
+              break;
+            }
+            statusEl.textContent = "Text posts need a title or a description.";
+            return _context2.a(2);
+          case 3:
+            if (!(!isText && !files.length && !t && !d)) {
+              _context2.n = 4;
+              break;
+            }
+            statusEl.textContent = "Add media, a title, or a description.";
+            return _context2.a(2);
+          case 4:
             media = [];
             _iterator = _createForOfIteratorHelper(files);
-            _context2.p = 3;
+            _context2.p = 5;
             _iterator.s();
-          case 4:
+          case 6:
             if ((_step = _iterator.n()).done) {
-              _context2.n = 7;
+              _context2.n = 9;
               break;
             }
             file = _step.value;
-            _context2.n = 5;
+            _context2.n = 7;
             return uploadFile(file);
-          case 5:
+          case 7:
             uploaded = _context2.v;
             path = toMediaPath(uploaded);
             if (path) media.push(path);else console.warn("Upload returned an unrecognised shape:", uploaded);
-          case 6:
-            _context2.n = 4;
-            break;
-          case 7:
-            _context2.n = 9;
-            break;
           case 8:
-            _context2.p = 8;
+            _context2.n = 6;
+            break;
+          case 9:
+            _context2.n = 11;
+            break;
+          case 10:
+            _context2.p = 10;
             _t = _context2.v;
             _iterator.e(_t);
-          case 9:
-            _context2.p = 9;
-            _iterator.f();
-            return _context2.f(9);
-          case 10:
-            fields = {};
-            if (t) fields.t = t;
-            if (d || !files.length && !t) fields.d = d;
-            if (media.length) fields.m = media;
-            _context2.n = 11;
-            return furzona.createPost(type, fields);
           case 11:
+            _context2.p = 11;
+            _iterator.f();
+            return _context2.f(11);
+          case 12:
+            fields = {};
+            if (t) fields.title = t;
+            if (d) fields.content = d;
+            if (media.length) fields.media = media;
+            _context2.n = 13;
+            return furzona.createPost(type, fields);
+          case 13:
             post = _context2.v;
             statusEl.textContent = "Posted!";
             window.location.href = "post.html?id=" + encodeURIComponent(post.id);
-            _context2.n = 13;
+            _context2.n = 15;
             break;
-          case 12:
-            _context2.p = 12;
+          case 14:
+            _context2.p = 14;
             _t2 = _context2.v;
             console.error("Failed to create post:", _t2);
             statusEl.textContent = _t2.message || "Could not create post.";
-          case 13:
-            _context2.p = 13;
+          case 15:
+            _context2.p = 15;
             submitButton.disabled = false;
-            return _context2.f(13);
-          case 14:
+            return _context2.f(15);
+          case 16:
             return _context2.a(2);
         }
-      }, _callee2, null, [[3, 8, 9, 10], [2, 12, 13, 14]]);
+      }, _callee2, null, [[5, 10, 11, 12], [2, 14, 15, 16]]);
     }));
     return function (_x2) {
       return _ref.apply(this, arguments);

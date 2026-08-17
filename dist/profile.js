@@ -19,6 +19,7 @@ var metaEl = document.getElementById("profile-meta");
 var bioEl = document.getElementById("profile-bio");
 var statsEl = document.getElementById("profile-stats");
 var followEl = document.getElementById("profile-follow");
+var badgeEl = document.getElementById("profile-badge");
 window.addEventListener("pageswap", function (event) {
   if (!event.viewTransition || !id) return;
   if (avatarEl) avatarEl.style.viewTransitionName = "avatar-".concat(id);
@@ -39,6 +40,7 @@ function renderProfile(profile) {
   avatarEl.src = avatarUrl;
   avatarEl.alt = user.username;
   nameEl.textContent = user.username;
+  if (badgeEl && user.p) badgeEl.hidden = false;
   var renderMeta = function renderMeta() {
     metaEl.textContent = "ID: ".concat(user.id, " \u2022 ").concat(profile.following ? "Following" : "Not following", " \u2022 ").concat(profile.online ? "Online" : "Offline");
   };

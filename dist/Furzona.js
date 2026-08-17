@@ -305,23 +305,13 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
       var _getUserPosts = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee9(userId) {
         var date,
           category,
-          endpoint,
           _args9 = arguments;
         return _regenerator().w(function (_context9) {
           while (1) switch (_context9.n) {
             case 0:
               date = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : 0;
               category = _args9.length > 2 ? _args9[2] : undefined;
-              endpoint = ["posts", userId];
-              if (category) {
-                _context9.n = 1;
-                break;
-              }
-              return _context9.a(2, this.post(endpoint, date ? {
-                date: date
-              } : {}));
-            case 1:
-              return _context9.a(2, this.post(endpoint, {
+              return _context9.a(2, this.post(["posts", userId], {
                 date: date || undefined,
                 category: category
               }));
@@ -334,11 +324,8 @@ var Furzona = /*#__PURE__*/function (_RequestService) {
       return getUserPosts;
     }()
     /**
-     * Create a post. Only `type` is confirmed required; other field names
-     * (`t`, `d`, `m`…) map to the FurzonaPost keys but are best-effort.
-     * @param {number} type post type discriminator
+     * @param {PostType} type post type discriminator
      * @param {object} [fields]
-     * @returns {Promise<FurzonaPost>}
      */
     )
   }, {

@@ -61,19 +61,23 @@ interface LoginRequest {
 }
 
 interface FurzonaUserBase {
+	/** id — user id */
 	id: string;
+	/** username */
 	username: string;
-	/** Bio/description, may contain \n */
+	/** description — user's bio, may contain \n */
 	d: string;
-	/** Icon image path, null if not set */
+	/** icon — avatar image path */
 	i: string | null;
-	/** Banner image path, null if not set */
+	/** banner — banner image path */
 	b: string | null;
-	/** Permission level */
+	/** permLevel — permission/role level */
 	p: PermissionLevel;
+	/** dpm — meaning unconfirmed */
 	m: boolean;
-	/** Tag string, null if unset */
+	/** tag — discriminator/badge tag string */
 	t: string | null;
+	/** behaviourPoints */
 	h: number;
 	createdAt: string; // ISO date string
 	updatedAt: string; // ISO date string
@@ -81,17 +85,22 @@ interface FurzonaUserBase {
 
 /** Full user object, e.g. from /login */
 interface FurzonaUser extends FurzonaUserBase {
-	/** Token */
+	/** sessionToken */
 	s: string;
-	/** Email address */
+	/** email — user's email address */
 	e: string;
-	/** Account type/age? */
+	/** age — account age */
 	a: number;
+	/** nsfw — whether NSFW content is enabled for this user */
 	n: boolean;
-	/** Verified flag */
+	/** emailVerified */
 	v: boolean;
-	/** Warnings array — likely indices matching FurzonaWarning.pos */
+	/** warns — warning indices, matching FurzonaWarning.pos */
 	w: number[];
+	/** safeMode */
+	o: boolean;
+	/** userIcons — unlocked/available icon options */
+	c: string[];
 }
 
 /** Author summary embedded in a post — subset of FurzonaUser fields, plus `o` */
@@ -161,38 +170,6 @@ enum PermissionLevel {
 	User = 0,
 	Moderator = 1,
 	Admin = 2
-}
-
-interface FurzonaUser {
-	username: string;
-	/** description — user's bio */
-	d?: string;
-	/** icon — avatar image path */
-	i?: string;
-	/** banner — banner image path */
-	b?: string;
-	/** permLevel — permission/role level, exact scale unconfirmed */
-	p: PermissionLevel;
-	/** sessionToken */
-	s?: string;
-	email: string;
-	age: number;
-	/** nsfw — whether NSFW content is enabled for this user */
-	n: boolean;
-	/** dpm — meaning unconfirmed */
-	m: unknown;
-	/** emailVerified */
-	v: boolean;
-	/** warns — warning count */
-	w: number;
-	/** tag — discriminator/badge tag string */
-	t?: string;
-	/** behaviourPoints */
-	h: number;
-	/** safeMode */
-	o: boolean;
-	/** userIcons — unlocked/available icon options */
-	c: string[];
 }
 
 interface FurzonaComment {

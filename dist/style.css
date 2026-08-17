@@ -560,6 +560,24 @@ img, .banner, .profile, button, .stat, .input {
 	text-decoration: underline;
 }
 
+.admin-badge {
+	display: inline-block;
+	background: #c0392b;
+	color: #fff;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	padding: 2px 8px;
+	border-radius: 10px;
+	margin-left: 8px;
+	vertical-align: middle;
+	text-transform: uppercase;
+}
+
+.admin-badge[hidden] {
+	display: none;
+}
+
 .post-card {
 	max-width: 900px;
 	margin: 0 auto;
