@@ -10,12 +10,13 @@ function redirectIfLoggedIn() {
 ;
 redirectIfLoggedIn();
 var loginForm = document.getElementById("login-form");
-if (loginForm instanceof HTMLFormElement) {
+var pass = document.getElementById("email-input");
+var passwordInput = document.getElementById("password-input");
+if (loginForm instanceof HTMLFormElement && pass instanceof HTMLInputElement && passwordInput instanceof HTMLInputElement) {
   loginForm.onsubmit = function (e) {
     e.preventDefault();
-    var formData = new FormData(loginForm);
-    var email = formData.get('email');
-    var password = formData.get('password');
+    var email = pass.value;
+    var password = passwordInput.value;
     console.log(email, password);
     if (typeof email !== "string" || typeof password !== "string") return;
     furzona.login(email, password).then(function (_) {
@@ -48,7 +49,7 @@ if (loginForm instanceof HTMLFormElement) {
           case 3:
             _context.p = 3;
             _t = _context.v;
-            alert((_t === null || _t === void 0 ? void 0 : _t.message) || "Could not send password reset.");
+            alert(_t instanceof Error ? _t.message : "Could not send password reset.");
           case 4:
             return _context.a(2);
         }
