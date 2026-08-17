@@ -407,7 +407,6 @@ class Furzona extends RequestService {
 	get user() {
 		if (!this._user) {
 			try {
-				/** @type {FurzonaUser|null} */
 				const raw = localStorage.getItem("currentUser");
 				if (raw) this._user = JSON.parse(raw);
 			} catch (error) {
