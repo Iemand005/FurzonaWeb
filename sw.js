@@ -27,6 +27,7 @@ const ASSETS = [
 	'./Assets/search.svg',
 	'./Assets/heart.svg',
 	'./Assets/heart-liked.svg',
+	'./Assets/home.svg',
 	'./Logo.png',
 	'./Logo-192.png'
 ];

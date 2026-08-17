@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		button.dataset.navHomeButton = "";
 		button.title = "Home";
 		const img = document.createElement("img");
-		img.src = "Logo.png";
+		img.src = "Assets/home.svg";
 		img.alt = "Home";
 		button.appendChild(img);
 		button.addEventListener("click", () => {
