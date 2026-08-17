@@ -16,6 +16,9 @@ class RequestService {
 	 * @returns {Promise<ApiEndpoints[K]["response"]>}
 	 */
 	async request(endpoint, method = "GET", body) {
+
+		if (typeof endpoint !== "string" && endpoint instanceof Array) endpoint.join("/"); 
+
 		/** @type {RequestInit} */
 		const init = { method };
 
