@@ -274,6 +274,24 @@ interface FurzonaError {
 
 type FavoritePost = { post: string };
 
+interface FollowToggleResult {
+	following: boolean;
+}
+
+interface CommentCreateRequest {
+	post: string;
+	content: string;
+}
+
+interface SearchRequest {
+	q: string;
+	nsfw?: number;
+	hidden?: number;
+	catSelector?: number;
+	warnSelector?: number;
+	nsfwSelector?: number;
+}
+
 interface ApiEndpoints {
 	[endpoint: string]: {
 		body?: unknown;
@@ -310,5 +328,38 @@ interface ApiEndpoints {
 	},
 	commentLevels: {
 		response: FurzonaComment[];
-	}
+	};
+	comment: {
+		body: CommentCreateRequest;
+		response: FurzonaComment;
+	};
+	follow: {
+		body: { userId: string };
+		response: FollowToggleResult;
+	};
+	unfollow: {
+		body: { userId: string };
+		response: FollowToggleResult;
+	};
+	block: {
+		body: { user: string };
+		response: unknown;
+	};
+	unblock: {
+		body: { user: string };
+		response: unknown;
+	};
+	user: {
+		response: FurzonaUserBase;
+	};
+	search: {
+		body: SearchRequest;
+		response: (FurzonaPost | FurzonaUserBase)[];
+	};
+	notifications: {
+		response: unknown;
+	};
+	report: {
+		response: unknown;
+	};
 }

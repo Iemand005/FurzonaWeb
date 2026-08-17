@@ -111,8 +111,9 @@ class Furzona extends RequestService {
 		return response;
 	}
 
-	async getPosts(date = 0) {
-		return this.post("posts", date ? { date } : {});
+	async getPosts(date = 0, category) {
+		if (!category) return this.post("posts", date ? { date } : {});
+		return this.post("posts", { date: date || undefined, category });
 	}
 	/**
 	 * @param {string} email
@@ -133,6 +134,48 @@ class Furzona extends RequestService {
 	/** @param {string} post  */
 	async getComments(post) {
 		return this.post(["commentLevels", post]);
+	}
+	/**
+	 * @param {string} post
+	 * @param {string} content
+	 */
+	async createComment(post, content) {
+		return this.post("comment", { post, content });
+	}
+	/** @param {string} userId */
+	async follow(userId) {
+		return this.post("follow", { userId });
+	}
+	/** @param {string} userId */
+	async unfollow(userId) {
+		return this.post("unfollow", { userId });
+	}
+	/** @param {string} userId */
+	async block(userId) {
+		return this.post("block", { user: userId });
+	}
+	/** @param {string} userId */
+	async unblock(userId) {
+		return this.post("unblock", { user: userId });
+	}
+	/** @param {string} id  */
+	async getUser(id) {
+		return this.get(["user", id]);
+	}
+	/**
+	 * @param {string} q
+	 * @param {{ nsfw?: number; hidden?: number; catSelector?: number; warnSelector?: number; nsfwSelector?: number }} [opts]
+	 */
+	async search(q, opts = {}) {
+		return this.post("search", {
+			q,
+			nsfw: 0,
+			hidden: 0,
+			catSelector: 0,
+			warnSelector: 0,
+			nsfwSelector: 0,
+			...opts
+		});
 	}
 
 	set token(token) {
