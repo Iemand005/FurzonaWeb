@@ -66,6 +66,10 @@ class RequestService {
 		console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
 
 		alert(respObj?.error);
+
+		if (respObj.errorCode === 5) {
+			this.logout();
+		}
 		
 		throw new Error(respObj.error);
 	}
@@ -79,6 +83,22 @@ class RequestService {
 	async post(endpoint, body) { return this.request(endpoint, "POST", body); }
 	/** @type {ReadEndpointFn} */
 	async delete(endpoint) { return this.request(endpoint, "DELETE"); }
+
+	set token(token) {
+		if (!token) throw new Error("Tried to assign an empty token.");
+		this._token = token;
+
+		if (localStorage) localStorage.setItem("token", token);
+	}
+
+	get token() {
+		if (!this._token && localStorage) this._token = localStorage.getItem("token");
+		return this._token;
+	}
+
+	logout() {
+		if (localStorage) localStorage.removeItem("token");
+	}
 }
 
 class Furzona extends RequestService {
@@ -345,18 +365,6 @@ class Furzona extends RequestService {
 	 */
 	async verifyEmail(code) {
 		return this.post("verifyEmail", { code });
-	}
-
-	set token(token) {
-		if (!token) throw new Error("Tried to assign an empty token.");
-		this._token = token;
-
-		if (localStorage) localStorage.setItem("token", token);
-	}
-
-	get token() {
-		if (!this._token && localStorage) this._token = localStorage.getItem("token");
-		return this._token;
 	}
 
 	set user(user) {
