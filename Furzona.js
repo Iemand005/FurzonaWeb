@@ -178,9 +178,9 @@ class Furzona extends RequestService {
 	async unblock(userId) {
 		return this.post("unblock", { user: userId });
 	}
-	/** @param {string} userId @param {string} reason */
-	async banUser(userId, reason) {
-		return this.post("ban", { userId, reason });
+	/** @param {string} userId @param {string} reason @param {number} period */
+	async banUser(userId, reason, period) {
+		return this.post("ban", { userId, reason, period });
 	}
 	/** @param {string} userId */
 	async unbanUser(userId) {
