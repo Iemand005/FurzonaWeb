@@ -268,6 +268,22 @@ class Furzona extends RequestService {
 	async newSearch(query) {
 		return this.post("newSearch", { query });
 	}
+	/** @param {string} query @returns {Promise<FurzonaUserBase[]>} */
+	async searchUsers(query) {
+		return this.post("users", { query });
+	}
+	/** @param {string} query @returns {Promise<FurzonaGroup[]>} */
+	async searchGroups(query) {
+		return this.post("groups", { query });
+	}
+	/**
+	 * Verify a code sent to the account email (password reset/email confirmation).
+	 * @param {string} code
+	 * @returns {Promise<boolean>}
+	 */
+	async verifyEmail(code) {
+		return this.post("verifyEmail", { code });
+	}
 
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");
