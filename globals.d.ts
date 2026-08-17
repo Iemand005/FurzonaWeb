@@ -304,5 +304,8 @@ interface ApiEndpoints {
 	};
 	settings: {
 		response: FurzonaSettings
+	},
+	commentLevels: {
+		response: FurzonaComment[];
 	}
 }
