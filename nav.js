@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	addLoginLink();
 
-	const addProfileButton = async () => {
+	const addProfileButton = () => {
 		if (window.location.pathname.endsWith("login.html")) return;
-		const me = furzona.user || (await furzona.fetchSelf?.());
+		const me = furzona.user;
 		if (!me || !furzona.isLoggedIn) return;
 		const headerSections = document.querySelectorAll("header > section");
 		const navSection = headerSections[headerSections.length - 1];
@@ -53,6 +53,25 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 		img.style.cursor = "pointer";
 	});
+
+	const addNavHomeButton = () => {
+		const headerSections = document.querySelectorAll("header > section");
+		const navSection = headerSections[headerSections.length - 1];
+		if (!navSection || navSection.querySelector("[data-nav-home-button]")) return;
+		const button = document.createElement("button");
+		button.type = "button";
+		button.dataset.navHomeButton = "";
+		button.title = "Home";
+		const img = document.createElement("img");
+		img.src = "Logo.png";
+		img.alt = "Home";
+		button.appendChild(img);
+		button.addEventListener("click", () => {
+			window.location.href = "index.html";
+		});
+		navSection.appendChild(button);
+	};
+	addNavHomeButton();
 
 	const backButtons = document.querySelectorAll("[data-nav-back]");
 	backButtons.forEach(button => {
