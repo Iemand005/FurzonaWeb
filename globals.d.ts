@@ -367,6 +367,11 @@ interface CreatePostRequest {
 	[key: string]: unknown;
 }
 
+interface GetPostsRequest {
+	date?: number;
+	category? : string;
+}
+
 /**
  * Public group shape from POST /groups.
  * Field order observed: id, t, description, m, i, createdAt, updatedAt.
@@ -463,7 +468,7 @@ interface ApiEndpoints {
 		response: FurzonaPost;
 	};
 	posts: {
-		body: { date?: number, category? : string, post? : string };
+		body: GetPostsRequest;
 		response: FurzonaPost[];
 	};
 	favorite: {
