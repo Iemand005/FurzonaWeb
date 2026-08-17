@@ -17,9 +17,6 @@ class RequestService {
 	 */
 	async request(endpoint, method = "GET", body) {
 
-		let end = endpoint;
-		if (endpoint instanceof Array) endpoint = endpoint.join("/"); 
-
 		/** @type {RequestInit} */
 		const init = { method };
 
@@ -28,7 +25,7 @@ class RequestService {
 
 		if (body) init.body = JSON.stringify(body);
 
-		const response = await fetch(apiUrl + endpoint, init);
+		const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
 
 		if (response.ok) return response.json().then(r => r.result);
 
