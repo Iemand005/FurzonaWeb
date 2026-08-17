@@ -476,7 +476,7 @@ main {
 	transition: filter 100ms linear;
 }
 
-img, .banner, .profile, button, .stat, .input {
+img, .banner, .profile, button, .stat, .input, .comment {
 	border-radius: 14px;
 }
 
@@ -725,7 +725,6 @@ img, .banner, .profile, button, .stat, .input {
 
 .comment {
 	background: var(--bg-sunken);
-	border-radius: 14px;
 	padding: 12px 14px;
 }
 
@@ -831,7 +830,6 @@ img, .banner, .profile, button, .stat, .input {
 	width: 48px;
 	height: 48px;
 	object-fit: cover;
-	border-radius: 14px;
 }
 
 #search-empty {
