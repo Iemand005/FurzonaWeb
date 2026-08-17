@@ -463,7 +463,7 @@ interface ApiEndpoints {
 		response: FurzonaPost;
 	};
 	posts: {
-		body: { date?: number };
+		body: { date?: number, category? : string, post? : string };
 		response: FurzonaPost[];
 	};
 	favorite: {
