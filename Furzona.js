@@ -50,6 +50,8 @@ class RequestService {
 			
 			errorContainer.innerHTML = respTxt;
 		}
+
+		alert(respObj?.error);
 		
 		if (respObj) throw new Error(respObj.error);
 	}
@@ -80,6 +82,8 @@ class Furzona extends RequestService {
 		super();
 
 		this._contentUrl = "https://content.furzona.app/";
+
+		console.log("Is Logged In ", this.isLoggedIn);
 	}
 
 	async loadSettings() {
