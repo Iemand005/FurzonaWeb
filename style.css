@@ -242,7 +242,6 @@ button {
 	gap: 6px;
 	background: var(--bg-btn);
 	border: 1px solid var(--border);
-	border-radius: 12px;
 	color: var(--text);
 	padding: 8px 12px;
 	font: inherit;
@@ -294,7 +293,6 @@ button:disabled:hover {
 	width: 100%;
 	background: var(--bg-sunken);
 	border: 1px solid var(--border);
-	border-radius: 12px;
 	color: var(--text);
 	padding: 12px 14px;
 	font: inherit;
@@ -372,7 +370,7 @@ main {
 	transition: filter 100ms linear;
 }
 
-img, .banner, .profile, button {
+img, .banner, .profile, button, .stat, .input {
 	border-radius: 14px;
 }
 
@@ -511,7 +509,6 @@ img, .banner, .profile, button {
 	flex-direction: column;
 	background: var(--bg-sunken);
 	padding: 14px 12px;
-	border-radius: 12px;
 }
 
 .stat strong { font-size: 1.3rem; }

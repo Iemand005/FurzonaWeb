@@ -10,6 +10,7 @@ const mediaEl = document.getElementById("post-media");
 const firstImageEl = document.getElementById("post-first-image");
 const textEl = document.getElementById("post-text");
 const actionsEl = document.getElementById("post-actions");
+const commentsEl = document.getElementById("post-comments");
 
 let authorId = null;
 
@@ -84,6 +85,12 @@ if (id) {
 		.catch(error => {
 			console.error("Failed to load post:", error);
 			textEl.textContent = "Could not load post.";
+		});
+
+	furzona.getComments(id)
+		.then(renderComments)
+		.catch(error => {
+			console.error("Failed to load comments:", error);
 		});
 } else {
 	console.error("No post id provided in the URL.");
