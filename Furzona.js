@@ -77,11 +77,7 @@ class RequestService {
 		throw new Error(respObj.error);
 	}
 
-	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K | [K, ...string[]]} endpoint
-	 * @returns {Promise<ApiEndpoints[K]["response"]>}
-	 */
+	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
 
 	/**
