@@ -1,23 +1,26 @@
 {
-    "editor.tabSize": 4,
+	"editor.tabSize": 4,
 	"editor.indentSize": "tabSize",
 	"editor.insertSpaces": false,
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#23232c",
-        "titleBar.activeBackground": "#252544",
-        "titleBar.activeForeground": "#FEFBEC",
-        "titleBar.inactiveBackground": "#23232c",
-        "titleBar.inactiveForeground": "#FEFBEC",
-        "statusBar.background": "#23232c",
-        "statusBar.foreground": "#FEFBEC",
-        "statusBar.debuggingBackground": "#23232c",
-        "statusBar.debuggingForeground": "#FEFBEC",
-        "statusBar.noFolderBackground": "#23232c",
-        "statusBar.noFolderForeground": "#FEFBEC"
-    },
-    "files.associations": {
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#23232c",
+		"titleBar.activeBackground": "#252544",
+		"titleBar.activeForeground": "#FEFBEC",
+		"titleBar.inactiveBackground": "#23232c",
+		"titleBar.inactiveForeground": "#FEFBEC",
+		"statusBar.background": "#23232c",
+		"statusBar.foreground": "#FEFBEC",
+		"statusBar.debuggingBackground": "#23232c",
+		"statusBar.debuggingForeground": "#FEFBEC",
+		"statusBar.noFolderBackground": "#23232c",
+		"statusBar.noFolderForeground": "#FEFBEC"
+	},
+	"files.associations": {
 		"*.hta": "html"
 	},
-    "terminal.integrated.shellIntegration.enabled": false,
-    "git.autofetch": false
+	"terminal.integrated.shellIntegration.enabled": false,
+	"git.autofetch": false
+
+	"typescript.inlayHints.parameterNames.enabled": "all",
+	"javascript.inlayHints.parameterNames.enabled": "all"
 }
