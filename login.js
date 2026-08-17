@@ -7,14 +7,15 @@ function redirectIfLoggedIn() {
 redirectIfLoggedIn();
 
 const loginForm = document.getElementById("login-form");
+const pass = document.getElementById("email-input");
+const passwordInput = document.getElementById("password-input");
 
-if (loginForm instanceof HTMLFormElement) {
+if (loginForm instanceof HTMLFormElement && pass instanceof HTMLInputElement && passwordInput instanceof HTMLInputElement) {
 	loginForm.onsubmit = e => {
 		e.preventDefault();
 
-		const formData = new FormData(loginForm);
-		const email = formData.get('email');
-		const password = formData.get('password');
+		const email = pass.value;
+		const password = passwordInput.value;
 		
 		console.log(email, password);
 
@@ -38,7 +39,7 @@ if (loginForm instanceof HTMLFormElement) {
 				await furzona.forgotPassword(email.trim());
 				alert("Password reset link sent, if that email is registered.");
 			} catch (error) {
-				alert(error?.message || "Could not send password reset.");
+				alert(error instanceof Error ? error.message : "Could not send password reset.");
 			}
 		};
 	}
