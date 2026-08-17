@@ -128,6 +128,14 @@ if (postList instanceof HTMLUListElement) {
 		title.textContent = post.t || "";
 		listItem.appendChild(title);
 
+		const description = [post.c, post.d].filter(Boolean).join("\n\n");
+		if (description) {
+			const descEl = document.createElement("p");
+			descEl.className = "post-desc";
+			descEl.textContent = description;
+			listItem.appendChild(descEl);
+		}
+
 		let image = null;
 		if (post.m && post.m.length > 0) {
 			image = document.createElement("img");
