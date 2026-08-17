@@ -34,15 +34,7 @@ function renderProfile(profile) {
 
 	nameEl.textContent = user.username;
 
-	if (badgeEl) {
-		furzona.getSettings().then(settings => {
-			const isStaff = (settings.admins || []).some(member => member.id === user.id)
-				|| (settings.mods || []).some(member => member.id === user.id);
-			if (isStaff) badgeEl.hidden = false;
-		}).catch(error => {
-			console.error("Failed to check staff status:", error);
-		});
-	}
+	if (badgeEl && user.p) badgeEl.hidden = false;
 
 	const renderMeta = () => {
 		metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
