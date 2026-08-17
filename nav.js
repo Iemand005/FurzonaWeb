@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		img.src = "Assets/home.svg";
 		img.alt = "Home";
 		button.appendChild(img);
-		button.addEventListener("click", () => window.location.href = "index.html");
+		button.onclick = goHome;
+		button.addEventListener("click", goHome);
 		navSection.appendChild(button);
 	};
 
