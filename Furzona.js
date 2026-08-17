@@ -425,7 +425,7 @@ class Furzona extends RequestService {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
-	get isLoggedIn() { return !!this.token; }
+	get isLoggedIn: () => !!this.token;
 }
 
 const furzona = new Furzona;
