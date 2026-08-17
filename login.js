@@ -1,9 +1,12 @@
 
-const loginForm = document.getElementById("login-form");
 
-var hi = function redirectIfLoggedIn() {
+function redirectIfLoggedIn() {
 	if (furzona.isLoggedIn) location.href = "index.html";
 };
+
+redirectIfLoggedIn();
+
+const loginForm = document.getElementById("login-form");
 
 if (loginForm instanceof HTMLFormElement) {
 	loginForm.onsubmit = e => {
@@ -20,5 +23,3 @@ if (loginForm instanceof HTMLFormElement) {
 		furzona.login(email, password).then(_ => redirectIfLoggedIn());
 	};
 }
-
-redirectIfLoggedIn()
