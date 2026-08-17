@@ -150,7 +150,11 @@ class Furzona extends RequestService {
 
 		return response;
 	}
-
+	/**
+	 * @param {number} date 
+	 * @param {string} category 
+	 * @returns 
+	 */
 	async getPosts(date = 0, category) {
 		if (!category) return this.post("posts", date ? { date } : {});
 		return this.post("posts", { date: date || undefined, category });
