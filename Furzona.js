@@ -137,9 +137,7 @@ class Furzona extends RequestService {
 	 * @returns {Promise<FurzonaPost[]>}
 	 */
 	async getUserPosts(userId, date = 0, category) {
-		const endpoint = ["posts", userId];
-		if (!category) return this.post(endpoint, date ? { date } : {});
-		return this.post(endpoint, { date: date || undefined, category });
+		return this.post(["posts", userId], { date: date || undefined, category });
 	}
 	/**
 	 * Create a post. Only `type` is confirmed required; other field names
