@@ -17,9 +17,7 @@ if (loginForm instanceof HTMLFormElement) {
 		
 		console.log(email, password);
 
-		furzona.login(email?.toString(), password).then(() => {
-			redirectIfLoggedIn();
-		});
+		if (typeof email === "string" && typeof password === "string") furzona.login(email, password).then(_ => redirectIfLoggedIn());
 
 		
 	};
