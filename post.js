@@ -11,6 +11,8 @@ const firstImageEl = document.getElementById("post-first-image");
 const textEl = document.getElementById("post-text");
 const actionsEl = document.getElementById("post-actions");
 const commentsEl = document.getElementById("post-comments");
+const commentForm = document.getElementById("comment-form");
+const commentInput = document.getElementById("comment-input");
 
 let authorId = null;
 
@@ -112,11 +114,14 @@ function createCommentElement(comment) {
 	card.appendChild(meta);
 	card.appendChild(createLikeButton(comment, {
 		liked: !!comment.d,
-		onLike: () => furzona.likePost(comment.id)
+		onLike: () => furzona.likeComment(comment.id),
+		onUnlike: () => furzona.unlikeComment(comment.id)
 	}));
 
 	return card;
 }
+
+let emptyCommentsEl = null;
 
 /**
  * @param {FurzonaComment[]} comments
@@ -124,15 +129,25 @@ function createCommentElement(comment) {
 function renderComments(comments) {
 	if (!commentsEl) return;
 	if (!comments || comments.length === 0) {
-		const empty = document.createElement("p");
-		empty.className = "meta";
-		empty.textContent = "No comments yet.";
-		commentsEl.appendChild(empty);
+		emptyCommentsEl = document.createElement("p");
+		emptyCommentsEl.className = "meta";
+		emptyCommentsEl.textContent = "No comments yet.";
+		commentsEl.appendChild(emptyCommentsEl);
 		return;
 	}
 	comments.forEach(comment => {
 		commentsEl.appendChild(createCommentElement(comment));
 	});
+}
+
+/** @param {FurzonaComment} comment */
+function insertComment(comment) {
+	if (!commentsEl) return;
+	if (emptyCommentsEl) {
+		emptyCommentsEl.remove();
+		emptyCommentsEl = null;
+	}
+	commentsEl.prepend(createCommentElement(comment));
 }
 
 if (id) {
@@ -151,4 +166,28 @@ if (id) {
 } else {
 	console.error("No post id provided in the URL.");
 	textEl.textContent = "No post id provided.";
+}
+
+if (commentForm && commentInput && id) {
+	if (!furzona.isLoggedIn()) {
+		commentInput.disabled = true;
+		commentInput.placeholder = "Log in to comment";
+	} else {
+		commentForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const content = commentInput.value.trim();
+			if (!content) return;
+			const button = commentForm.querySelector('button[type="submit"]');
+			button.disabled = true;
+			try {
+				const comment = await furzona.createComment(id, content);
+				commentInput.value = "";
+				if (comment) insertComment(comment);
+			} catch (error) {
+				console.error("Failed to post comment:", error);
+			} finally {
+				button.disabled = false;
+			}
+		});
+	}
 }

@@ -612,15 +612,21 @@ img, .banner, .profile, button, .stat, .input {
 	padding: 6px 10px;
 }
 
-.search-form {
+.search-form,
+.comment-form {
 	display: flex;
 	gap: 10px;
 	max-width: 640px;
 	margin: 0 auto 24px;
 }
 
-.search-form .input {
+.search-form .input,
+.comment-form .input {
 	flex: 1;
+}
+
+.comment-form {
+	margin-bottom: 16px;
 }
 
 #search-results {
@@ -648,6 +654,15 @@ img, .banner, .profile, button, .stat, .input {
 	align-items: center;
 	gap: 12px;
 	padding: 14px;
+}
+
+#profile-follow {
+	display: flex;
+	margin-top: 12px;
+}
+
+#profile-follow button {
+	flex: 1;
 }
 
 .profile-row .pfp {

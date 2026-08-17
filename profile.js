@@ -6,6 +6,7 @@ const nameEl = document.getElementById("profile-name");
 const metaEl = document.getElementById("profile-meta");
 const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
+const followEl = document.getElementById("profile-follow");
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
@@ -31,7 +32,11 @@ function renderProfile(profile) {
 	avatarEl.alt = user.username;
 
 	nameEl.textContent = user.username;
-	metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
+
+	const renderMeta = () => {
+		metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
+	};
+	renderMeta();
 	bioEl.textContent = user.d || "No bio yet.";
 
 	statsEl.innerHTML = [
@@ -47,6 +52,33 @@ function renderProfile(profile) {
 			<span>${label}</span>
 		</div>
 	`).join("");
+
+	if (followEl) {
+		const btn = document.createElement("button");
+		btn.type = "button";
+		btn.textContent = profile.following ? "Unfollow" : "Follow";
+		if (!furzona.isLoggedIn()) {
+			btn.disabled = true;
+			btn.textContent = "Log in to follow";
+		} else {
+			btn.onclick = async () => {
+				try {
+					if (profile.following) {
+						await furzona.unfollow(user.id);
+						profile.following = false;
+					} else {
+						await furzona.follow(user.id);
+						profile.following = true;
+					}
+					btn.textContent = profile.following ? "Unfollow" : "Follow";
+					renderMeta();
+				} catch (error) {
+					console.error("Failed to update follow:", error);
+				}
+			};
+		}
+		followEl.appendChild(btn);
+	}
 };
 
 if (id) {
