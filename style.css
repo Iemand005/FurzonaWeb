@@ -357,7 +357,6 @@ main {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 20px;
 	width: min(1200px, 100%);
 	margin: 0 auto;
 	padding: 0;
@@ -366,6 +365,7 @@ main {
 #posts-list > li {
 	flex: 1 1 350px;
     max-width: 100rem;
+	margin: 10px;
 }
 
 .post {
@@ -464,7 +464,11 @@ img, .banner, .profile, button, .stat, .input {
 #new-post-form {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+}
+
+#login-form > *:not(:first-child),
+#new-post-form > *:not(:first-child) {
+	margin-top: 10px;
 }
 
 #login-form button,
@@ -481,7 +485,10 @@ img, .banner, .profile, button, .stat, .input {
 .profile, .profile-top {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+}
+
+.profile > *:not(:first-child) {
+	margin-left: 10px;
 }
 
 .profile:hover {
@@ -508,7 +515,10 @@ img, .banner, .profile, button, .stat, .input {
 .profile-top {
 	padding: 20px;
 	margin-top: -40px;
-	gap: 16px;
+}
+
+.profile-top > *:not(:first-child) {
+	margin-left: 16px;
 }
 
 .avatar {
@@ -541,8 +551,8 @@ img, .banner, .profile, button, .stat, .input {
 .stats {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 12px;
-	padding: 0 20px 20px;
+	margin: -6px;
+	padding: 0 14px 14px;
 }
 
 .stat {
@@ -554,6 +564,7 @@ img, .banner, .profile, button, .stat, .input {
 	flex-direction: column;
 	background: var(--bg-sunken);
 	padding: 14px 12px;
+	margin: 6px;
 }
 
 .stat strong { font-size: 1.3rem; }
@@ -652,6 +663,11 @@ img, .banner, .profile, button, .stat, .input {
 
 .comment .profile {
 	gap: 8px;
+	margin-left: -4px;
+}
+
+.comment .profile > *:not(:first-child) {
+	margin-left: 4px;
 }
 
 .comment .pfp {
