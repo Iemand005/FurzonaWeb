@@ -84,7 +84,7 @@ class RequestService {
 			this.logout();
 		}
 		
-		throw new FurzonaError(respObj.error, respObj.errorCode, status: response.status);
+		throw new FurzonaError(respObj.error, respObj.errorCode, response.status);
 	}
 
 	/** @type {ReadEndpointFn} */
@@ -389,7 +389,7 @@ class Furzona extends RequestService {
 		const methods = ["GET", "POST"];
 		
 		return Promise.all(methods.map(method => 
-			this.request(endpoint, method).then(() => ({ method, success: true })).catch(reason => ({ method, success: reason.code !== -1 }))
+			this.request(endpoint, method).then(() => ({ method, success: true })).catch((/**@type {FurzonaError}*/reason) => ({ method, success: reason.code !== -1 || reason.status !== 404 }))
 		)).then(results => results.filter(result => result.success).map(valid => valid.method));
 	}
 	/**
