@@ -436,14 +436,29 @@ class FurzonaProber extends Furzona {
 
 	constructor() {
 		super();
-		/** @type {ProbeResult[]} */
-		this.foundEndpoints = [];
+		/** @type {Map<string, ProbeResult>} */
+    this.foundEndpoints = new Map();
 	}
 	/**
 	 * @param {string[]} endpoints
 	 */
 	async collect(endpoints) {
-		return this.foundEndpoints.push(...await this.probeAll(endpoints));
+		    const results = await this.probeAll(endpoints);
+		let addedCount = 0;
+		for (const result of results) {
+			const { endpoint, methods } = result;
+			if (this.foundEndpoints.has(endpoint)) {
+				const existing = this.foundEndpoints.get(endpoint);
+				if (existing) {
+					const mergedMethods = [...new Set([...existing.methods, ...methods])];
+					this.foundEndpoints.set(endpoint, { endpoint, methods: mergedMethods });
+				}
+			} else {
+				this.foundEndpoints.set(endpoint, { endpoint, methods: [...methods] });
+				addedCount++;
+			}
+		}
+		return addedCount;
 	}
 }
 
