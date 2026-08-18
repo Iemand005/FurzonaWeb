@@ -105,7 +105,7 @@ class RequestService {
 	/** @type {ApiSafeRequestFn} */
 	async requestWithCare(endpoint, method = "GET", body, attempt = 0) {
 		const maxRetries = 5;
-		const baseDelay = 4000;
+		const baseDelay = 200;
 
 		try {
 			return await this.request(endpoint, method, body);
@@ -449,7 +449,6 @@ class Furzona extends RequestService {
 				const success = !(reason.status === 404 || reason.status === 429) && reason.code !== -1;
 				if (success) successful.push(method);
 			}
-			await this.delay(100);
 		}
 
 		return successful;
