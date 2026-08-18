@@ -102,8 +102,8 @@ class RequestService {
 		}
 	}
 
-	/** @type {ApiRequestFn} */
-	async requestWithCare(endpoint, method = "GET", body) {
+	/** @type {ApiSafeRequestFn} */
+	async requestWithCare(endpoint, method = "GET", body, attempt = 0) {
 		const baseDelay = 400;
 
 		try {
@@ -111,11 +111,11 @@ class RequestService {
 		} catch (error) {
 			if (!(error instanceof FurzonaError)) throw new FurzonaError("Uhm I don't even know man", -1, 0);
 
-			if (!error.status === 429) {
+			if (error.status !== 429) {
 				throw error;
 			}
 
-			const delayMs = baseDelay * 2 ** attempt; // exponential backoff
+			const delayMs = baseDelay * 2 ** attempt;
 			await this.delay(delayMs);
 			return this.requestWithCare(endpoint, method, body, attempt + 1);
 		}
