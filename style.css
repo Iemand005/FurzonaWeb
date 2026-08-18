@@ -524,6 +524,21 @@ main {
     height: 100px;
 }
 
+.tab-contents {
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+
+	overflow-y: scroll;
+}
+
+.tab-contents > li {
+	width: 100%;
+
+	flex: 0 0 auto;
+}
+
 .post {
 	display: flex;
 	flex-direction: column;
