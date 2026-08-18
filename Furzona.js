@@ -443,6 +443,6 @@ class FurzonaProber extends Furzona {
 	 * @param {string[]} endpoints
 	 */
 	async collect(endpoints) {
-		return this.foundEndpoints.push(...this.probeAll(endpoints));
+		return this.foundEndpoints.push(...await this.probeAll(endpoints));
 	}
 }
