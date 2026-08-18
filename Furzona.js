@@ -381,7 +381,7 @@ class Furzona extends RequestService {
 	/**
 	 * @template {keyof ApiEndpoints} K
 	 * @param {K} endpoint
-	 * @returns {Promise<{ method: Method }[]>}
+	 * @returns {Promise<Method[]>}
 	 */
 	async probe(endpoint) {
 		/** @type {Method[]} */
@@ -391,7 +391,7 @@ class Furzona extends RequestService {
 			this.request(endpoint, method).then(() => ({ method, success: true })).catch(reason => ({ method, success: reason.code !== -1 }))
 		));
 
-		return results.filter(result => result.success).map(validEndpoint => ({ method: validEndpoint.method }) );
+		return results.filter(result => result.success).map(valid => valid.method);
 	}
 
 	set user(user) {
