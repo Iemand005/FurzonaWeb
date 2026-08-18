@@ -34,10 +34,12 @@ class FurzonaError extends Error {
 	/**
 	 * @param {string} message
 	 * @param {number} code
+	 * @param {number} status
 	 */
-	constructor(message, code) {
+	constructor(message, code, status) {
 		super(message);
 		this.code = code;
+		this.status = status;
 	}
 }
 
