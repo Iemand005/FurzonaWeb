@@ -84,7 +84,7 @@ class RequestService {
 			this.logout();
 		}
 		
-		throw new FurzonaError(respObj.error, respObj.errorCode);
+		throw new FurzonaError(respObj.error, respObj.errorCode, status: response.status);
 	}
 
 	/** @type {ReadEndpointFn} */
