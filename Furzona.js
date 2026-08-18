@@ -386,7 +386,7 @@ class Furzona extends RequestService {
 		/** @type {Method[]} */
 		const methods = ["GET", "POST"];
 		
-		return await Promise.all(methods.map(method => 
+		return Promise.all(methods.map(method => 
 			this.request(endpoint, method).then(() => ({ method, success: true })).catch(reason => ({ method, success: reason.code !== -1 }))
 		)).then(results => results.filter(result => result.success).map(valid => valid.method));
 	}
