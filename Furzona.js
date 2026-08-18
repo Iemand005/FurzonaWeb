@@ -65,26 +65,30 @@ class RequestService {
 			init.body = JSON.stringify(body);
 		}
 
-		const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
+		try {
+			const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
+			
+			if (response.ok) return response.json().then(r => r.result);
+			
+			const respTxt = await response.text();
 
-		if (response.ok) return response.json().then(r => r.result);
+			/** @type {FurzonaErrorResponse?} */
+			let respObj = null;
+			try { respObj = JSON.parse(respTxt); } catch(ex) { displayError(ex, respTxt); }
+			if (!respObj) respObj = { error: "Empty JSON response from server, unkown error!", errorCode: -1 };
 
-		const respTxt = await response.text();
+			console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
 
-		/** @type {FurzonaErrorResponse?} */
-		let respObj = null;
-		try { respObj = JSON.parse(respTxt); } catch(ex) { displayError(ex, respTxt); }
-		if (!respObj) respObj = { error: "Empty JSON response from server, unkown error!", errorCode: -1 };
+			// alert(respObj?.error);
 
-		console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
+			if (respObj.errorCode === 5 && this._token) {
+				this.logout();
+			}
+			
+			throw new FurzonaError(respObj.error, respObj.errorCode, response.status);
+		} catch(ex) {
 
-		// alert(respObj?.error);
-
-		if (respObj.errorCode === 5 && this._token) {
-			this.logout();
 		}
-		
-		throw new FurzonaError(respObj.error, respObj.errorCode, response.status);
 	}
 
 	/** @type {ReadEndpointFn} */
