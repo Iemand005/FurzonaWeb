@@ -437,13 +437,13 @@ class FurzonaProber extends Furzona {
 	constructor() {
 		super();
 		/** @type {Map<string, ProbeResult>} */
-    this.foundEndpoints = new Map();
+		this.foundEndpoints = new Map();
 	}
 	/**
 	 * @param {string[]} endpoints
 	 */
 	async collect(endpoints) {
-		    const results = await this.probeAll(endpoints);
+		const results = await this.probeAll(endpoints);
 		let addedCount = 0;
 		for (const result of results) {
 			const { endpoint, methods } = result;
@@ -459,6 +459,13 @@ class FurzonaProber extends Furzona {
 			}
 		}
 		return addedCount;
+	}
+
+	/**
+	 * @returns {ProbeResult[]}
+	 */
+	get endpointsArray() {
+		return Array.from(this.foundEndpoints.values());
 	}
 }
 
