@@ -102,6 +102,11 @@ class RequestService {
 		}
 	}
 
+	/** @type {ApiRequestFn} */
+	async requestWithCare(endpoint, method = "GET", body) {
+		return this.request(endpoint, method, body);
+	}
+
 	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
 
