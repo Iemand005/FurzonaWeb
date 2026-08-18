@@ -96,7 +96,7 @@ class RequestService {
 
 			throw error;
 		} catch(ex) {
-
+			console.error("It did throw! see:?? ", ex);
 		}
 	}
 
