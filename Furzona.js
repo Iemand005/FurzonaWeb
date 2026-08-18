@@ -430,7 +430,7 @@ class Furzona extends RequestService {
 		const methods = ["GET", "POST", "PUT", "DELETE"];
 		
 		return Promise.all(methods.map(method => 
-			this.requestWithCare(endpoint, method).then(() => ({ method, success: true })).catch((/**@type {FurzonaError}*/reason) => ({ method, success: !(reason.status === 404 || reason.status === 429) && reason.code !== -1 }))
+			this.requestWithCare(endpoint, method).then(() => ({ method, success: true })).catch((/**@type {FurzonaError}*/reason) => ({ method, success: reason.status !== 429 && reason.code !== -1 }))
 		)).then(results => results.filter(r => r.success).map(v => v.method));
 	}
 	/**
