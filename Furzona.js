@@ -449,7 +449,7 @@ class Furzona extends RequestService {
 				successful.push(method);
 			} catch (reason) {
 				if (!(reason instanceof FurzonaError)) throw reason;
-				const success = !(reason.status === 404 || reason.status === 429) && reason.code !== -1;
+				const success = reason.status !== 429 && reason.code !== -1;
 				if (success) successful.push(method);
 			}
 		}
