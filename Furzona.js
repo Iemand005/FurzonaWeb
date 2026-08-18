@@ -269,7 +269,7 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} id */
 	async deletePost(id) {
-		return this.request(["post", id], "DELETE");
+		return this.delete(["post", id]);
 	}
 	/**
 	 * Edit a post.
@@ -282,7 +282,7 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} id */
 	async deleteComment(id) {
-		return this.request(["comment", id], "DELETE");
+		return this.delete(["comment", id]);
 	}
 	/** @returns {Promise<FurzonaNotification[]>} */
 	async getNotifications() {
@@ -404,7 +404,7 @@ class Furzona extends RequestService {
 	 * @param {number} timeout
 	 * @returns {Promise<ProbeResult[]>}
 	 */
-	async probeAll(endpoints, timeout = 200) {
+	async probeAll(endpoints, timeout = 300) {
 
 		const delay = (/**@type {number}*/ms) => new Promise(resolve => setTimeout(resolve, ms));
 		const results = [];
