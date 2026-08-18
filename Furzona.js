@@ -395,7 +395,7 @@ class Furzona extends RequestService {
 	 * @returns {Promise<{ endpoint: string, methods: Method[]}[]>}
 	 */
 	async probeAll(endpoints) {
-		const a = Promise.all(endpoints.map(async endpoint => ({ endpoint })));
+		return Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })));
 	}
 
 	set user(user) {
