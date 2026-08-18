@@ -385,12 +385,12 @@ class Furzona extends RequestService {
 	async probe(endpoint) {
 		/** @type {Method[]} */
 		const methods = ["GET", "POST"];
-		const requests = methods.map(method => ({ response: this.request(endpoint, method), endpoint, method }));
 		
-		const results = await Promise.all(requests.map(async req => ({
-			method: req.method,
-			response: await req.response.then(_ => true).catch((/** @type {FurzonaError} */reason) => reason.code != -1)
-		})));
+		const results = await Promise.all(methods.map(method => 
+			this.request(endpoint, method)
+			.then(() => ({ endpoint, method, response: true }))
+			.catch(reason => ({ endpoint, method, response: reason.code !== -1 }))
+		));
 
 		return results;
 	}
