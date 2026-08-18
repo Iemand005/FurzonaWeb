@@ -449,7 +449,7 @@ class Furzona extends RequestService {
 		for (const endpoint of endpoints) {
 			const methods = await this.probe(endpoint);
 			if (methods.length > 0) results.push({ endpoint, methods });
-			await delay(timeout);
+			await this.delay(timeout);
 		}
 
 		return results;
