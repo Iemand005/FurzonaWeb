@@ -494,6 +494,8 @@ main {
 	display: flex;
 
 	justify-content: center;
+
+	flex-direction: column;
 }
 
 #posts-list {
@@ -511,6 +513,15 @@ main {
     max-width: 100rem;
 	margin: 10px;
 	cursor: pointer;
+}
+
+#posts-header {
+    height: 10rem;
+}
+
+#posts-owner-avatar {
+	object-fit: cover;
+    height: 100px;
 }
 
 .post {
