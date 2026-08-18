@@ -446,3 +446,5 @@ class FurzonaProber extends Furzona {
 		return this.foundEndpoints.push(...await this.probeAll(endpoints));
 	}
 }
+
+const urzonaProber = new FurzonaProber;
