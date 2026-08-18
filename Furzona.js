@@ -105,7 +105,7 @@ class RequestService {
 	/** @type {ApiSafeRequestFn} */
 	async requestWithCare(endpoint, method = "GET", body, attempt = 0) {
 		const maxRetries = 5;
-		const baseDelay = 400;
+		const baseDelay = 4000;
 
 		try {
 			return await this.request(endpoint, method, body);
