@@ -551,13 +551,8 @@ class FurzonaProber extends Furzona {
 	 * @param {string[]} endpoints
 	 */
 	async collectNew(endpoints) {
-		const unmapped = endpoints.filter(endpoint => !this.foundEndpoints.has(endpoint));
-		if (unmapped.length === 0) return 0;
-
-		return this.collect(unmapped);
+		return this.collect(endpoints.filter(endpoint => !this.foundEndpoints.has(endpoint)));
 	}
-
-	Now c
 
 	/**
 	 * @returns {ProbeResult[]}
