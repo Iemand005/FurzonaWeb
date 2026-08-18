@@ -623,3 +623,5 @@ interface ApiEndpoints {
 		response: unknown;
 	};
 }
+
+type ProbeResult = { endpoint: string, methods: Method[] };

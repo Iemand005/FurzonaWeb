@@ -392,7 +392,7 @@ class Furzona extends RequestService {
 	}
 	/**
 	 * @param {string[]} endpoints
-	 * @returns {Promise<{ endpoint: string, methods: Method[]}[]>}
+	 * @returns {Promise<ProbeResult[]>}
 	 */
 	async probeAll(endpoints) {
 		return (await Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })))).filter(result => result.methods.length > 0);
@@ -431,3 +431,18 @@ class Furzona extends RequestService {
 }
 
 const furzona = new Furzona;
+
+class FurzonaProber extends Furzona {
+
+	constructor() {
+		super();
+		/** @type {ProbeResult[]} */
+		this.foundEndpoints = [];
+	}
+	/**
+	 * @param {string[]} endpoints
+	 */
+	async collect(endpoints) {
+		return this.foundEndpoints.push(...this.probeAll(endpoints));
+	}
+}
