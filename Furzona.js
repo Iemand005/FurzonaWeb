@@ -381,7 +381,7 @@ class Furzona extends RequestService {
 	/**
 	 * @template {keyof ApiEndpoints} K
 	 * @param {K} endpoint
-	 * @returns {Promise<{ endpoint: Endpoint, method: Method, success: boolean }>}
+	 * @returns {Promise<{ endpoint: string, method: Method, success: boolean }[]>}
 	 */
 	async probe(endpoint) {
 		/** @type {Method[]} */
