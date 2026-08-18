@@ -447,4 +447,4 @@ class FurzonaProber extends Furzona {
 	}
 }
 
-const urzonaProber = new FurzonaProber;
+const furzonaProber = new FurzonaProber;
