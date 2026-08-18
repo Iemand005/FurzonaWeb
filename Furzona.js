@@ -517,10 +517,13 @@ const furzona = new Furzona;
 
 class FurzonaProber extends Furzona {
 
+	static STORAGE_KEY = "furzona-prober-endpoints";
+
 	constructor() {
 		super();
 		/** @type {Map<string, ProbeResult>} */
 		this.foundEndpoints = new Map();
+		this.load();
 	}
 	/**
 	 * @param {string[]} endpoints
@@ -552,7 +555,25 @@ class FurzonaProber extends Furzona {
 	}
 
 	save() {
-		localStorage.setItem("", JSON.stringify())
+		try {
+			localStorage.setItem(FurzonaProber.STORAGE_KEY, JSON.stringify(this.endpointsArray));
+		} catch (err) {
+			console.error("Failed to save endpoints:", err);
+		}
+	}
+
+	load() {
+		try {
+			const raw = localStorage.getItem(FurzonaProber.STORAGE_KEY);
+			if (!raw) return;
+
+			/** @type {ProbeResult[]} */
+			const parsed = JSON.parse(raw);
+			this.foundEndpoints = new Map(parsed.map(result => [result.endpoint, result]));
+		} catch (err) {
+			console.error("Failed to load endpoints:", err);
+			this.foundEndpoints = new Map();
+		}
 	}
 }
 
