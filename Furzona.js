@@ -69,6 +69,11 @@ class RequestService {
 			const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
 			
 			if (response.ok) return response.json().then(r => r.result);
+
+			if (response.status === 429) {
+				const retryAfter = response.headers.get('Retry-After');
+				console.warn("Rate limited, pls retri aftr", retryAfter);
+			}
 			
 			const respTxt = await response.text();
 
