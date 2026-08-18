@@ -69,6 +69,9 @@ class RequestService {
 			init.body = JSON.stringify(body);
 		}
 
+		/** @type {FurzonaError?} */
+		let error = null;
+
 		try {
 			const response = await fetch(apiUrl + (endpoint instanceof Array ? endpoint.join("/") : endpoint), init);
 			
@@ -91,15 +94,15 @@ class RequestService {
 				this.logout();
 			}
 			
-			const error = new FurzonaError(respObj.error, respObj.errorCode, response.status);
+			error = new FurzonaError(respObj.error, respObj.errorCode, response.status);
 			error.log();
 
-			throw error;
 		} catch(ex) {
 			console.error("It did throw! see:?? ", ex);
 			if (ex instanceof Error)
-				throw new FurzonaError(ex.message, -2, 429);
+				error = new FurzonaError(ex.message, -2, 429);
 		}
+		throw error;
 	}
 
 	/** @type {ApiSafeRequestFn} */
