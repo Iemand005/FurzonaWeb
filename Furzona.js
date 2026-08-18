@@ -390,7 +390,7 @@ class Furzona extends RequestService {
 		
 		return Promise.all(methods.map(method => 
 			this.request(endpoint, method).then(() => ({ method, success: true })).catch((/**@type {FurzonaError}*/reason) => ({ method, success: !(reason.status === 404 || reason.status === 429) && reason.code !== -1 }))
-		)).then(results => results.filter(result => result.success).map(valid => valid.method));
+		)).then(results => results.filter(r => r.success).map(v => v.method));
 	}
 	/**
 	 * @param {string[]} endpoints
