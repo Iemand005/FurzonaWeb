@@ -41,6 +41,10 @@ class FurzonaError extends Error {
 		this.code = code;
 		this.status = status;
 	}
+
+	log() {
+		console.error(`Error: ${this.message} (Code: ${this.code}, status: ${this.status})`);
+	}
 }
 
 class RequestService {
