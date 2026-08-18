@@ -544,6 +544,7 @@ class FurzonaProber extends Furzona {
 				addedCount++;
 			}
 		}
+		this.save();
 		return addedCount;
 	}
 
