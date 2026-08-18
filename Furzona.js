@@ -550,6 +550,10 @@ class FurzonaProber extends Furzona {
 	get endpointsArray() {
 		return Array.from(this.foundEndpoints.values());
 	}
+
+	save() {
+		localStorage.setItem("", JSON.stringify())
+	}
 }
 
 const furzonaProber = new FurzonaProber;
