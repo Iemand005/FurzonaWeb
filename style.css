@@ -524,6 +524,15 @@ main {
     height: 100px;
 }
 
+.tab-control > form {
+	justify-content: space-evenly;
+}
+
+.tab-control > form input {
+	background-color: red;
+	width: 100%;
+}
+
 .tab-control > .tab-contents {
 	display: flex;
     width: 100%;

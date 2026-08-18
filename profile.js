@@ -8,12 +8,15 @@ const bioEl = document.getElementById("profile-bio");
 const statsEl = document.getElementById("profile-stats");
 const followEl = document.getElementById("profile-follow");
 const badgeEl = document.getElementById("profile-badge");
+const tabForm = document.getElementById("tab-form");
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
 	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${id}`;
 	if (nameEl) nameEl.style.viewTransitionName = `name-${id}`;
 });
+
+if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
 
 /**
  * 
