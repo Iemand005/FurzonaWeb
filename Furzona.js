@@ -86,15 +86,15 @@ class RequestService {
 			try { respObj = JSON.parse(respTxt); } catch(ex) { displayError(ex, respTxt); }
 			if (!respObj) respObj = { error: "Empty JSON response from server, unkown error!", errorCode: -1 };
 
-			console.error(`Error: ${respObj.error} (Code: ${respObj.errorCode})`);
-
-			// alert(respObj?.error);
 
 			if (respObj.errorCode === 5 && this._token) {
 				this.logout();
 			}
 			
-			throw new FurzonaError(respObj.error, respObj.errorCode, response.status);
+			const error = new FurzonaError(respObj.error, respObj.errorCode, response.status);
+			error.log();
+
+			throw error;
 		} catch(ex) {
 
 		}
