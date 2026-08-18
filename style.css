@@ -526,11 +526,9 @@ main {
 
 .tab-contents {
 	display: flex;
-    justify-content: center;
-    flex-direction: row;
     width: 100%;
 
-	overflow-y: scroll;
+	overflow-x: scroll;
 }
 
 .tab-contents > li {
