@@ -524,7 +524,7 @@ main {
     height: 100px;
 }
 
-.tab-contents {
+.tab-control > .tab-contents {
 	display: flex;
     width: 100%;
 
