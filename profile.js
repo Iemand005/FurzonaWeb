@@ -18,9 +18,7 @@ window.addEventListener("pageswap", (event) => {
 
 if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
 
-/**
- * @param {FurzonaProfile} profile 
- */
+/** @param {FurzonaProfile} profile */
 function renderProfile(profile) {
 	if (!((bannerEl instanceof HTMLImageElement) && (avatarEl instanceof HTMLImageElement) && (nameEl instanceof HTMLElement))) return;
 
