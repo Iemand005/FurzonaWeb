@@ -387,6 +387,8 @@ class Furzona extends RequestService {
 		/** @type {{response: {}, method: string}[]} */
 		const requests = [];
 
+		for (const method of methods) requests.push(this.request(endpoint, method))
+
 		const results = await Promise.all(requests.map(request => 
 			request.then(_ => true)
 			.catch((/** @type {FurzonaError} */reason) => reason.code != -1)
