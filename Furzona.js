@@ -385,8 +385,7 @@ class Furzona extends RequestService {
 	async probe(endpoint) {
 		/** @type {Method[]} */
 		const methods = ["GET", "POST"];
-		/** @type {{response: {}, method: Method}[]} */
-		const requests = methods.map(method => { response: this.request(endpoint, method), method });
+		const requests = methods.map(method => ({ response: this.request(endpoint, method), method }));
 
 		const results = await Promise.all(requests.map(request => 
 			request.then(_ => true)
