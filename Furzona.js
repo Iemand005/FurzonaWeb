@@ -390,6 +390,13 @@ class Furzona extends RequestService {
 			this.request(endpoint, method).then(() => ({ method, success: true })).catch(reason => ({ method, success: reason.code !== -1 }))
 		)).then(results => results.filter(result => result.success).map(valid => valid.method));
 	}
+	/**
+	 * @param {string[]} endpoints
+	 * @returns {Promise<{ endpoint: string, methods: Method[]}[]>}
+	 */
+	async probeAll(endpoints) {
+		const a = Promise.all(endpoints.map(async endpoint => ({ endpoint })));
+	}
 
 	set user(user) {
 		this._user = user;
