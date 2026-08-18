@@ -104,6 +104,7 @@ class RequestService {
 
 	/** @type {ApiSafeRequestFn} */
 	async requestWithCare(endpoint, method = "GET", body, attempt = 0) {
+		const maxRetries = 5;
 		const baseDelay = 400;
 
 		try {
@@ -111,7 +112,7 @@ class RequestService {
 		} catch (error) {
 			if (!(error instanceof FurzonaError)) throw new FurzonaError("Uhm I don't even know man", -1, 0);
 
-			if (error.status !== 429) {
+			if (error.status !== 429 || attempt >= maxRetries) {
 				throw error;
 			}
 
