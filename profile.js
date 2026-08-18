@@ -19,7 +19,6 @@ window.addEventListener("pageswap", (event) => {
 if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
 
 /**
- * 
  * @param {FurzonaProfile} profile 
  */
 function renderProfile(profile) {
