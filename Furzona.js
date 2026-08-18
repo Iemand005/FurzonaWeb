@@ -379,8 +379,7 @@ class Furzona extends RequestService {
 		return this.post("verifyEmail", { code });
 	}
 	/**
-	 * @template {keyof ApiEndpoints} K
-	 * @param {K} endpoint
+	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
 	 */
 	async probe(endpoint) {
