@@ -422,13 +422,38 @@ class Furzona extends RequestService {
 	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
 	 */
-	async probe(endpoint) {
+	async probeBlast(endpoint) {
 		/** @type {Method[]} */
 		const methods = ["GET", "POST", "PUT", "DELETE"];
 		
 		return Promise.all(methods.map(method => 
 			this.requestWithCare(endpoint, method).then(() => ({ method, success: true })).catch((/**@type {FurzonaError}*/reason) => ({ method, success: !(reason.status === 404 || reason.status === 429) && reason.code !== -1 }))
 		)).then(results => results.filter(r => r.success).map(v => v.method));
+	}
+	/**
+	 * @param {string} endpoint
+	 * @returns {Promise<Method[]>}
+	 */
+	async probe(endpoint) {
+		/** @type {Method[]} */
+		const methods = ["GET", "POST", "PUT", "DELETE"];
+		const results = [];
+
+		for (const method of methods) {
+			try {
+				await this.requestWithCare(endpoint, method);
+				results.push({ method, success: true });
+			} catch (reason) {
+				if (!(reason instanceof FurzonaError)) throw reason;
+				results.push({
+					method,
+					success: !(reason.status === 404 || reason.status === 429) && reason.code !== -1
+				});
+			}
+			await this.delay(100); // small gap between methods too, optional
+		}
+
+		return results.filter(r => r.success).map(v => v.method);
 	}
 	/**
 	 * @param {string[]} endpoints
