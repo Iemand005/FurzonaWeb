@@ -97,6 +97,8 @@ class RequestService {
 			throw error;
 		} catch(ex) {
 			console.error("It did throw! see:?? ", ex);
+			if (ex instanceof Error)
+				throw new FurzonaError(ex.message, -2, 429);
 		}
 	}
 
