@@ -104,8 +104,14 @@ class RequestService {
 
 	/** @type {ApiRequestFn} */
 	async requestWithCare(endpoint, method = "GET", body) {
-		return this.request(endpoint, method, body);
+		return this.request(endpoint, method, body).catch(async (/** @type {FurzonaError} */error) => {
+			await this.delay(400);
+			return this.requestWithCare(endpoint, method, body);
+		});
 	}
+	/** @param {number} ms */
+	async delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
 
 	/** @type {ReadEndpointFn} */
 	async get(endpoint) { return this.request(endpoint); }
@@ -426,7 +432,6 @@ class Furzona extends RequestService {
 	 */
 	async probeAll(endpoints, timeout = 300) {
 
-		const delay = (/**@type {number}*/ms) => new Promise(resolve => setTimeout(resolve, ms));
 		const results = [];
 
 		for (const endpoint of endpoints) {
