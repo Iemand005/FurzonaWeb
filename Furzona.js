@@ -136,7 +136,10 @@ class RequestService {
 	/** @type {WriteEndpointFn} */
 	async post(endpoint, body) { return this.request(endpoint, "POST", body); }
 	/** @type {ReadEndpointFn} */
-	async delete(endpoint) { return this.request(endpoint, "DELETE"); }
+	async delete(endpoint) {
+		// return this.request(endpoint, "DELETE");
+		return {};
+	}
 
 	set token(token) {
 		if (!token) throw new Error("Tried to assign an empty token.");
@@ -396,6 +399,10 @@ class Furzona extends RequestService {
 	 */
 	async upload(formData) {
 		return this.request("upload", "POST", formData);
+	}
+
+	async deleteAccount() {
+		return this.delete("user");
 	}
 
 	/**
