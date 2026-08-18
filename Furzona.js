@@ -388,11 +388,11 @@ class Furzona extends RequestService {
 		
 		const results = await Promise.all(methods.map(method => 
 			this.request(endpoint, method)
-			.then(() => ({ endpoint, method, response: true }))
-			.catch(reason => ({ endpoint, method, response: reason.code !== -1 }))
+			.then(() => ({ endpoint, method, success: true }))
+			.catch(reason => ({ endpoint, method, success: reason.code !== -1 }))
 		));
 
-		return results;
+		return results.filter(result => result.success);
 	}
 
 	set user(user) {
