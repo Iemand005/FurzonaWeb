@@ -284,7 +284,7 @@ class Furzona extends RequestService {
 	}
 	/** @returns {Promise<FurzonaNotification[]>} */
 	async getNotifications() {
-		return this.post("notifications", {});
+		return this.post("notifications");
 	}
 	/**
 	 * Fetch a single notification's data by id.
@@ -296,7 +296,7 @@ class Furzona extends RequestService {
 	}
 	/** @returns {Promise<FurzonaChat[]>} */
 	async getChats() {
-		return this.post("chats", {});
+		return this.post("chats");
 	}
 	/** @param {string} userId */
 	async startChat(userId) {
@@ -395,7 +395,7 @@ class Furzona extends RequestService {
 	 * @returns {Promise<{ endpoint: string, methods: Method[]}[]>}
 	 */
 	async probeAll(endpoints) {
-		return Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })));
+		return (await Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })))).filter(result => result.methods.length > 0);
 	}
 
 	set user(user) {
