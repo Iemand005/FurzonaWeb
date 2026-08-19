@@ -144,7 +144,7 @@ html, body {
 }
 
 /* Text Color */
-html, body, button {
+html, body, button, .input, select {
 	color: #f3f6fb;
 }
 
