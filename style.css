@@ -398,6 +398,7 @@ button:disabled:hover {
 	background: var(--bg-sunken);
 	padding: 12px 14px;
 	font: inherit;
+	color: white;
 }
 
 .input::placeholder {
