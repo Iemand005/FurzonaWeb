@@ -632,6 +632,8 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 .login-card {
 	max-width: 420px;
 	padding: 24px;
+	width: 100%;
+    margin: auto;
 }
 
 .login-card h1 {
