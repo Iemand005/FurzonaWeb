@@ -90,10 +90,11 @@ function renderProfile(profile) {
 		 * @param {boolean} clickable
 		 */
 		const createStatDisplay = (name, value, clickable) => {
-			const div = document.createElement("div");
-			div.className = "stat";
-			if (clickable) div.classList.add("clickable");
-			
+			const statDisplay = document.createElement("div");
+			statDisplay.className = "stat";
+			if (clickable) statDisplay.classList.add("clickable");
+			const valueEl = document.createElement("strong");
+			const labelEl = document.createElement("span");
 		};
 
 		const postsStat = statsEl.querySelector(".stat.clickable");
