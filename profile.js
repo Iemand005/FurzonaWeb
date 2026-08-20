@@ -72,12 +72,16 @@ function renderProfile(profile) {
 		/**
 		 * @param {string} name
 		 * @param {string | number} value
-		 * @param {()=>void} [onClick]
+		 * @param {()=>void} [onCtick]
 		 */
-		const createStatDisplay = (name, value, clickable) => {
+		const createStatDisplay = (name, value, onCtick) => {
 			const statDisplay = document.createElement("div");
 			statDisplay.className = "stat";
-			if (clickable) statDisplay.classList.add("clickable");
+			if (onCtick) {
+				statDisplay.classList.add("clickable");
+
+				statDisplay.onclick = onCtick;
+			}
 			const valueEl = document.createElement("strong");
 			const labelEl = document.createElement("span");
 			valueEl.textContent = value.toString();
