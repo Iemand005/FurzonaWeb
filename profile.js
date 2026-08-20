@@ -72,7 +72,7 @@ function renderProfile(profile) {
 		/**
 		 * @param {string} name
 		 * @param {string | number} value
-		 * @param {boolean} [clickable]
+		 * @param {()=>void} [onClick]
 		 */
 		const createStatDisplay = (name, value, clickable) => {
 			const statDisplay = document.createElement("div");
