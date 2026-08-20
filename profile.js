@@ -91,7 +91,9 @@ function renderProfile(profile) {
 		 */
 		const createStatDisplay = (name, value, clickable) => {
 			const div = document.createElement("div");
-			div.className = "";
+			div.className = "stat";
+			if (clickable) div.classList.add("clickable");
+			
 		};
 
 		const postsStat = statsEl.querySelector(".stat.clickable");
