@@ -99,7 +99,10 @@ function renderProfile(profile) {
 			labelEl.textContent = name;
 			statDisplay.appendChild(valueEl);
 			statDisplay.appendChild(labelEl);
+			return statDisplay;
 		};
+
+		const addStat = ()
 
 		const postsStat = statsEl.querySelector(".stat.clickable");
 		if (postsStat instanceof HTMLElement) {
