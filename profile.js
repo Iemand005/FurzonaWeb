@@ -59,28 +59,29 @@ function renderProfile(profile) {
 
 	nameEl.textContent = user.username;
 
-	if (!badgeEl) return;
-
-	switch (user.p) {
-		case 1:
-			badgeEl.className = "moderator-badge";
-			badgeEl.textContent = "Moderator";
-			break;
-		case 2:
-			badgeEl.className = "admin-badge";
-			badgeEl.textContent = "Admin";
-			break;
+	if (badgeEl) {
+		switch (user.p) {
+			case 1:
+				badgeEl.className = "moderator-badge";
+				badgeEl.textContent = "Moderator";
+				break;
+			case 2:
+				badgeEl.className = "admin-badge";
+				badgeEl.textContent = "Admin";
+				break;
+		}
+		badgeEl.hidden = !!user.p;
+	
+		if (user.t) {
+			const badge = furzona.parseBadge(user.t);
+			badgeEl.textContent = badge.name;
+			badgeEl.style.color = badge.foregroundColor;
+			badgeEl.style.backgroundColor = badge.backgroundColor;
+			badgeEl.hidden = false;
+	
+		}
 	}
-	badgeEl.hidden = !!user.p;
 
-	if (user.t) {
-		const badge = furzona.parseBadge(user.t);
-		badgeEl.textContent = badge.name;
-		badgeEl.style.color = badge.foregroundColor;
-		badgeEl.style.backgroundColor = badge.backgroundColor;
-		badgeEl.hidden = false;
-
-	}
 
 	
 	const renderMeta = () => {
