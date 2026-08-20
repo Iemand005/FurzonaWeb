@@ -512,6 +512,8 @@ class Furzona extends RequestService {
 		}
 		return this._user;
 	}
+	
+	get isLoggedIn() { return !!this.token; }
 
 	/** @param {string} path */
 	getMediaUrl(path) { return this._contentUrl + path; }
@@ -520,7 +522,6 @@ class Furzona extends RequestService {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
-	get isLoggedIn() { return !!this.token; }
 }
 
 const furzona = new Furzona;
