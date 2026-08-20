@@ -37,30 +37,17 @@ function renderProfile(profile) {
 	nameEl.textContent = user.username;
 
 	if (!badgeEl) return;
-
-	const roles = {
-		1: { cls: "moderator-badge", text: "Moderator" },
-		2: { cls: "admin-badge", text: "Admin" }
-	};
-	const role = roles[user.p];
-	if (role) {
-		badgeEl.className = role.cls;
-		badgeEl.textContent = role.text;
-		badgeEl.hidden = false;
-	} else {
-		badgeEl.hidden = true;
-	}
-
+	
 	switch (user.p) {
 		
 		case 1:
-			badgeEl.className = role.cls;
-			badgeEl.textContent = role.text;
+			badgeEl.className = "moderator-badge";
+			badgeEl.textContent = "Moderator";
 			badgeEl.hidden = false;
 			break;
 		case 2:
-			badgeEl.className = role.cls;
-			badgeEl.textContent = role.text;
+			badgeEl.className = "admin-badge";
+			badgeEl.textContent = "Admin";
 			badgeEl.hidden = false; break;
 		default: badgeEl.hidden = true;
 	}
