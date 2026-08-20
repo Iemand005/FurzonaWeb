@@ -51,6 +51,10 @@ function renderProfile(profile) {
 		badgeEl.hidden = true;
 	}
 
+	switch (user.p) {
+		case PermissionLevel.Admin:
+	}
+
 	if (user.t) {
 		const badge = furzona.parseBadge(user.t);
 		badgeEl.textContent = badge.name;
