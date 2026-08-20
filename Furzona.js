@@ -512,7 +512,7 @@ class Furzona extends RequestService {
 		}
 		return this._user;
 	}
-	
+
 	get isLoggedIn() { return !!this.token; }
 
 	/** @param {string} path */
@@ -522,6 +522,10 @@ class Furzona extends RequestService {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
 
+	parseBadgeString() {
+		const tagComponents = "Alpha#2d3240#2d3240".split("#")
+return { tagName: tagComponents[0], foregroundColor: "#" + tagComponents[1], backgroundColor: "#" + tagComponents[2] };
+	}
 }
 
 const furzona = new Furzona;
