@@ -84,7 +84,12 @@ function renderProfile(profile) {
 			</div>
 		`).join("");
 
-		const createStatDisplay = (name, value ) => {
+		/**
+		 * @param {string} name
+		 * @param {string} value
+		 * @param {boolean} clickable
+		 */
+		const createStatDisplay = (name, value, clickable) => {
 			const div = document.createElement("div");
 			div.className = "";
 		};
