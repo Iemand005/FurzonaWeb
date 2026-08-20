@@ -59,10 +59,14 @@ function renderProfile(profile) {
 
 	}
 
+	if (!metaEl) return;
+
 	const renderMeta = () => {
 		metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
 	};
 	renderMeta();
+
+	if (!bioEl) return;
 	bioEl.textContent = user.d || "No bio yet.";
 
 	statsEl.innerHTML = [
