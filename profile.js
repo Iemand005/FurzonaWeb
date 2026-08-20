@@ -52,7 +52,11 @@ function renderProfile(profile) {
 	}
 
 	switch (user.p) {
-		case PermissionLevel.Admin:
+		case 1:
+			badgeEl.className = role.cls;
+			badgeEl.textContent = role.text;
+			badgeEl.hidden = false;
+			break;
 	}
 
 	if (user.t) {
