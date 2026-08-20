@@ -95,6 +95,10 @@ function renderProfile(profile) {
 			if (clickable) statDisplay.classList.add("clickable");
 			const valueEl = document.createElement("strong");
 			const labelEl = document.createElement("span");
+			valueEl.textContent = value;
+			labelEl.textContent = name;
+			statDisplay.appendChild(valueEl);
+			statDisplay.appendChild(labelEl);
 		};
 
 		const postsStat = statsEl.querySelector(".stat.clickable");
