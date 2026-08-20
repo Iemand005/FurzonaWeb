@@ -84,6 +84,11 @@ function renderProfile(profile) {
 			</div>
 		`).join("");
 
+		const createStatDisplay = (name, value ) => {
+			const div = document.createElement("div");
+			div.className = "";
+		};
+
 		const postsStat = statsEl.querySelector(".stat.clickable");
 		if (postsStat instanceof HTMLElement) {
 			postsStat.onclick = () => {
