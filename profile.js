@@ -1,5 +1,5 @@
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const profileParams = new URLSearchParams(window.location.search);
+const profileId = params.get("id");
 const bannerEl = document.getElementById("profile-banner");
 const avatarEl = document.getElementById("profile-avatar");
 const nameEl = document.getElementById("profile-name");
