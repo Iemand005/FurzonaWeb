@@ -521,10 +521,10 @@ class Furzona extends RequestService {
 	getProfilePictureUrl(user) {
 		return user.i ? furzona.getMediaUrl(user.i) : "Assets/profile_default.png";
 	}
-
-	parseBadgeString() {
-		const tagComponents = "Alpha#2d3240#2d3240".split("#")
-return { tagName: tagComponents[0], foregroundColor: "#" + tagComponents[1], backgroundColor: "#" + tagComponents[2] };
+	/** @param {string} badge */
+	parseBadge(badge) {
+		const tagComponents = badge.split("#");
+		return { tagName: tagComponents[0], foregroundColor: "#" + tagComponents[1], backgroundColor: "#" + tagComponents[2] };
 	}
 }
 
