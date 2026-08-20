@@ -52,6 +52,7 @@ function renderProfile(profile) {
 	}
 
 	switch (user.p) {
+		
 		case 1:
 			badgeEl.className = role.cls;
 			badgeEl.textContent = role.text;
@@ -61,7 +62,7 @@ function renderProfile(profile) {
 			badgeEl.className = role.cls;
 			badgeEl.textContent = role.text;
 			badgeEl.hidden = false; break;
-
+		default: badgeEl.hidden = true;
 	}
 
 	if (user.t) {
