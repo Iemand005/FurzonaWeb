@@ -64,7 +64,7 @@ function renderProfile(profile) {
 		["Comments", stats.comments],
 		["Followers", stats.followers],
 		["Following", stats.followed]
-	].map(([label, value]) => `
+	].map(([label, value]) => /* HTML */`
 		<div class="stat${label === "Posts" ? " clickable" : ""}"${label === "Posts" ? ` data-user-posts="${user.id}"` : ""}>
 			<strong>${value ?? 0}</strong>
 			<span>${label}</span>
