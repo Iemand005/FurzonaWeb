@@ -132,7 +132,7 @@ if (id) {
 		})
 		.catch(error => {
 			console.error("Failed to load profile:", error);
-			bioEl.textContent = "Could not load profile.";
+			bioEl && bioEl.textContent = "Could not load profile.";
 		});
 } else {
 	console.error("No profile id provided in the URL.");
