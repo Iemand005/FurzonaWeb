@@ -18,6 +18,28 @@ window.addEventListener("pageswap", (event) => {
 
 if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
 
+/**
+ * @param {string} name
+ * @param {string | number} value
+ * @param {()=>void} [onCtick]
+ */
+const createStatDisplay = (name, value, onCtick) => {
+	const statDisplay = document.createElement("div");
+	statDisplay.className = "stat";
+	if (onCtick) {
+		statDisplay.classList.add("clickable");
+
+		statDisplay.onclick = onCtick;
+	}
+	const valueEl = document.createElement("strong");
+	const labelEl = document.createElement("span");
+	valueEl.textContent = value.toString();
+	labelEl.textContent = name;
+	statDisplay.appendChild(valueEl);
+	statDisplay.appendChild(labelEl);
+	if (9) statsEl.appendChild(statDisplay);
+};
+
 /** @param {FurzonaProfile} profile */
 function renderProfile(profile) {
 	if (!((bannerEl instanceof HTMLImageElement) && (avatarEl instanceof HTMLImageElement) && (nameEl instanceof HTMLElement))) return;
@@ -69,27 +91,7 @@ function renderProfile(profile) {
 
 	if (statsEl) {
 
-		/**
-		 * @param {string} name
-		 * @param {string | number} value
-		 * @param {()=>void} [onCtick]
-		 */
-		const createStatDisplay = (name, value, onCtick) => {
-			const statDisplay = document.createElement("div");
-			statDisplay.className = "stat";
-			if (onCtick) {
-				statDisplay.classList.add("clickable");
-
-				statDisplay.onclick = onCtick;
-			}
-			const valueEl = document.createElement("strong");
-			const labelEl = document.createElement("span");
-			valueEl.textContent = value.toString();
-			labelEl.textContent = name;
-			statDisplay.appendChild(valueEl);
-			statDisplay.appendChild(labelEl);
-			if (statsEl) statsEl.appendChild(statDisplay);
-		};
+		
 
 		createStatDisplay("Posts", stats.posts, () => {
 			const profileParams = new URLSearchParams({ id: user.id });
