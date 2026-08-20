@@ -108,6 +108,7 @@ function renderProfile(profile) {
 		createStatDisplay("Comments", stats.comments);
 		createStatDisplay("Followers", stats.followers);
 		createStatDisplay("Following", stats.followed);
+		
 		const postsStat = statsEl.querySelector(".stat.clickable");
 		if (postsStat instanceof HTMLElement) {
 			postsStat.onclick = () => {
