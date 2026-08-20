@@ -37,7 +37,7 @@ function renderProfile(profile) {
 	nameEl.textContent = user.username;
 
 	if (!badgeEl) return;
-	
+
 	const roles = {
 		1: { cls: "moderator-badge", text: "Moderator" },
 		2: { cls: "admin-badge", text: "Admin" }
@@ -49,6 +49,11 @@ function renderProfile(profile) {
 		badgeEl.hidden = false;
 	} else {
 		badgeEl.hidden = true;
+	}
+
+	if (user.t) {
+		const badge = furzona.parseBadge(user.t);
+		
 	}
 
 	const renderMeta = () => {
