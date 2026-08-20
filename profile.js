@@ -66,6 +66,8 @@ function renderProfile(profile) {
 	if (!bioEl) return;
 	bioEl.textContent = user.d || "No bio yet.";
 
+	if (!statsEl) return;
+
 	statsEl.innerHTML = [
 		["Posts", stats.posts],
 		["Liked", stats.liked],
