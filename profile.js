@@ -57,6 +57,11 @@ function renderProfile(profile) {
 			badgeEl.textContent = role.text;
 			badgeEl.hidden = false;
 			break;
+		case 2:
+			badgeEl.className = role.cls;
+			badgeEl.textContent = role.text;
+			badgeEl.hidden = false; break;
+
 	}
 
 	if (user.t) {
