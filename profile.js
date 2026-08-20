@@ -87,8 +87,7 @@ function renderProfile(profile) {
 	const renderMeta = () => metaEl.textContent = `ID: ${user.id} • ${profile.following ? "Following" : "Not following"} • ${profile.online ? "Online" : "Offline"}`;
 	renderMeta();
 
-	if (!bioEl) return;
-	bioEl.textContent = user.d || "No bio yet.";
+	if (bioEl) bioEl.textContent = user.d || "No bio yet.";
 
 	createStatDisplay("Posts", stats.posts, () => {
 		const profileParams = new URLSearchParams({ id: user.id });
