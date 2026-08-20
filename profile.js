@@ -91,23 +91,18 @@ function renderProfile(profile) {
 			if (statsEl) statsEl.appendChild(statDisplay);
 		};
 
-		createStatDisplay("Posts", stats.posts);
+		createStatDisplay("Posts", stats.posts, () => {
+			const profileParams = new URLSearchParams({ id: user.id });
+			if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
+			if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
+			if (user.username) profileParams.set("username", user.username);
+			window.location.href = "posts.html?" + profileParams.toString();
+		});
 		createStatDisplay("Liked", stats.liked);
 		createStatDisplay("Likes", stats.likes);
 		createStatDisplay("Comments", stats.comments);
 		createStatDisplay("Followers", stats.followers);
 		createStatDisplay("Following", stats.followed);
-
-		const postsStat = statsEl.querySelector(".stat.clickable");
-		if (postsStat instanceof HTMLElement) {
-			postsStat.onclick = () => {
-				const profileParams = new URLSearchParams({ id: user.id });
-				if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
-				if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
-				if (user.username) profileParams.set("username", user.username);
-				window.location.href = "posts.html?" + profileParams.toString();
-			};
-		}
 	}
 
 	if (followEl) {
