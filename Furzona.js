@@ -523,8 +523,8 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} badge */
 	parseBadge(badge) {
-		const tagComponents = badge.split("#");
-		return { tagName: tagComponents[0], foregroundColor: "#" + tagComponents[1], backgroundColor: "#" + tagComponents[2] };
+		const [name, back, foreground] = badge.split("#");
+		return { name, foregroundColor: "#" + back, backgroundColor: "#" +foreground };
 	}
 }
 
