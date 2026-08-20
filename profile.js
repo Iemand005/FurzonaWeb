@@ -102,8 +102,12 @@ function renderProfile(profile) {
 			if (statsEl) statsEl.appendChild(statDisplay);
 		};
 
-		const addStat = ()
-
+		createStatDisplay("Posts", stats.posts);
+		createStatDisplay("Liked", stats.liked);
+		createStatDisplay("Likes", stats.likes);
+		createStatDisplay("Comments", stats.comments);
+		createStatDisplay("Followers", stats.followers);
+		createStatDisplay("Following", stats.followed);
 		const postsStat = statsEl.querySelector(".stat.clickable");
 		if (postsStat instanceof HTMLElement) {
 			postsStat.onclick = () => {
