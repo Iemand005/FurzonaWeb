@@ -54,8 +54,10 @@ function renderProfile(profile) {
 	if (user.t) {
 		const badge = furzona.parseBadge(user.t);
 		badgeEl.textContent = badge.name;
+		badgeEl.style.color = badge.foregroundColor;
+		badgeEl.style.backgroundColor = badge.backgroundColor;
 		badgeEl.hidden = false;
-		
+
 	}
 
 	const renderMeta = () => {
