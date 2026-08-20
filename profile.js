@@ -86,8 +86,8 @@ function renderProfile(profile) {
 
 		/**
 		 * @param {string} name
-		 * @param {string} value
-		 * @param {boolean} clickable
+		 * @param {string | number} value
+		 * @param {boolean} [clickable]
 		 */
 		const createStatDisplay = (name, value, clickable) => {
 			const statDisplay = document.createElement("div");
@@ -95,7 +95,7 @@ function renderProfile(profile) {
 			if (clickable) statDisplay.classList.add("clickable");
 			const valueEl = document.createElement("strong");
 			const labelEl = document.createElement("span");
-			valueEl.textContent = value;
+			valueEl.textContent = value.toString();
 			labelEl.textContent = name;
 			statDisplay.appendChild(valueEl);
 			statDisplay.appendChild(labelEl);
