@@ -99,7 +99,7 @@ function renderProfile(profile) {
 			labelEl.textContent = name;
 			statDisplay.appendChild(valueEl);
 			statDisplay.appendChild(labelEl);
-			return statDisplay;
+			if (statsEl) statsEl.appendChild(statDisplay);
 		};
 
 		const addStat = ()
