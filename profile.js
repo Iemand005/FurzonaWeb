@@ -70,19 +70,6 @@ function renderProfile(profile) {
 	bioEl.textContent = user.d || "No bio yet.";
 
 	if (statsEl) {
-		statsEl.innerHTML = [
-			["Posts", stats.posts],
-			["Liked", stats.liked],
-			["Likes", stats.likes],
-			["Comments", stats.comments],
-			["Followers", stats.followers],
-			["Following", stats.followed]
-		].map(([label, value]) => /* HTML */`
-			<div class="stat${label === "Posts" ? " clickable" : ""}"${label === "Posts" ? ` data-user-posts="${user.id}"` : ""}>
-				<strong>${value ?? 0}</strong>
-				<span>${label}</span>
-			</div>
-		`).join("");
 
 		/**
 		 * @param {string} name
@@ -108,7 +95,7 @@ function renderProfile(profile) {
 		createStatDisplay("Comments", stats.comments);
 		createStatDisplay("Followers", stats.followers);
 		createStatDisplay("Following", stats.followed);
-		
+
 		const postsStat = statsEl.querySelector(".stat.clickable");
 		if (postsStat instanceof HTMLElement) {
 			postsStat.onclick = () => {
