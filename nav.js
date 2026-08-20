@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const navSection = (() => {
-		const sections = document.querySelectorAll("header > section");
-		return sections[sections.length - 1] || null;
+		const sections = document.querySelectorAll("nav");
+		return sections[0] || null;
 	})();
 
 	const isLoginPage = endsWith(window.location.pathname, "login.html");
