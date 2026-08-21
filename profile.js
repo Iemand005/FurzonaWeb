@@ -11,9 +11,9 @@ const badgeEl = document.getElementById("profile-badge");
 const tabForm = document.getElementById("tab-form");
 
 window.addEventListener("pageswap", (event) => {
-	if (!event.viewTransition || !id) return;
-	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${id}`;
-	if (nameEl) nameEl.style.viewTransitionName = `name-${id}`;
+	if (!event.viewTransition || !profileId) return;
+	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${profileId}`;
+	if (nameEl) nameEl.style.viewTransitionName = `name-${profileId}`;
 });
 
 if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
@@ -133,8 +133,8 @@ function renderProfile(profile) {
 	}
 };
 
-if (id) {
-	furzona.getProfile(id)
+if (profileId) {
+	furzona.getProfile(profileId)
 		.then(profile => {
 			console.log("Profile data:", profile);
 			renderProfile(profile);
