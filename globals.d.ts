@@ -65,6 +65,44 @@ interface FurzonaSettings {
 	mods: FurzonaStaffMember[];
 	admins: FurzonaStaffMember[];
 	maxImages: number;
+	/** whether this account/token is suspended — Android client checks this before parsing the rest */
+	suspended?: boolean;
+	/** active bans for the account */
+	bans?: FurzonaBan[];
+	/** custom emojis */
+	emojis?: FurzonaEmoji[];
+	/** subscribed push/notification types (ints, see SubscribeRequest) */
+	subs?: number[];
+	/** news counter — defaults 0 when absent */
+	news?: number;
+	/** message counter — defaults 0 when absent */
+	msgs?: number;
+	/** safe mode view enabled — defaults false when absent */
+	smv?: boolean;
+}
+
+/** Shape from the Android client's Ban.parseBan — exact fields unconfirmed */
+interface FurzonaBan {
+	[key: string]: unknown;
+}
+
+/** Shape from the Android client's Emoji.parseEmoji — exact fields unconfirmed */
+interface FurzonaEmoji {
+	[key: string]: unknown;
+}
+
+/** Shape from the Android client's Log.parseLog — exact fields unconfirmed */
+interface FurzonaLog {
+	[key: string]: unknown;
+}
+
+/** GET /adminStatus response (Android ServerInfo) */
+interface FurzonaServerInfo {
+	/** users parsed from the "fcm" child object */
+	fcm: FurzonaUserBase[];
+	serverBattery: number;
+	serverBatteryStatus: string;
+	objectStats: string;
 }
 
 interface LoginRequest {
@@ -85,7 +123,7 @@ interface FurzonaUserBase {
 	b: string | null;
 	/** permLevel — permission/role level */
 	p: PermissionLevel;
-	/** dpm — meaning unconfirmed */
+	/** dpm — disable profile media (confirmed via Android client's Editor.setProfileMediaDisabled) */
 	m: boolean;
 	/** tag — discriminator/badge tag string */
 	t: string | null;
@@ -379,6 +417,50 @@ interface BanRequest {
 	period: number;
 }
 
+/** PUT /user — profile edit (Android LocalUser.Editor.apply); only provided fields are sent */
+interface EditUserRequest {
+	username?: string;
+	description?: string;
+	/** uploaded icon file id/path */
+	icon?: string;
+	/** uploaded banner file id/path */
+	banner?: string;
+	email?: string;
+	age?: number;
+	nsfw?: boolean;
+	/** disable profile media */
+	dpm?: boolean;
+	/** warning positions, matching FurzonaWarning.pos */
+	warns?: number[];
+}
+
+/** PUT /password — change password; responds with a fresh session token */
+interface ResetPasswordRequest {
+	password: string;
+}
+
+/** PUT /password response — new session token under the user key "s" */
+interface PasswordResetResult {
+	s: string;
+}
+
+/** POST /adminLogs and POST /modLogs body */
+interface AdminLogsRequest {
+	query?: string;
+	/** epoch ms (UTC) — fetch logs before this timestamp */
+	date?: number;
+}
+
+/** POST /exec — run a server command (admin) */
+interface ExecRequest {
+	cmd: string;
+}
+
+/** POST /safeModeView */
+interface SafeModeViewRequest {
+	enabled: boolean;
+}
+
 /** Group/GC search query — shared by POST /users and POST /groups */
 interface UserOrGroupSearchRequest {
 	query: string;
@@ -496,8 +578,10 @@ interface ApiEndpoints {
 		response: FurzonaUser;
 	};
 	user: {
-		body: FurzonaSignupRequest;
-		response: FurzonaUser;
+		/** POST /user = signup; PUT /user = profile edit (EditUserRequest); DELETE /user = delete account */
+		body: FurzonaSignupRequest | EditUserRequest;
+		/** POST/PUT return the full user; DELETE returns a success boolean */
+		response: FurzonaUser | boolean;
 	};
 	profile: {
 		response: FurzonaProfile;
@@ -551,9 +635,6 @@ interface ApiEndpoints {
 	unblock: {
 		body: { user: string };
 		response: unknown;
-	};
-	user: {
-		response: FurzonaUserBase;
 	};
 	search: {
 		body: SearchRequest;
@@ -645,6 +726,76 @@ interface ApiEndpoints {
 	editGroup: {
 		body: EditGroupRequest;
 		response: unknown;
+	};
+	/** GET /asUser/{id} — act as another user (admin) */
+	asUser: {
+		response: FurzonaUser;
+	};
+	/** PUT /password — change password, returns a fresh session token */
+	password: {
+		body: ResetPasswordRequest;
+		response: PasswordResetResult;
+	};
+	/** POST /sendConsent — parental consent request */
+	sendConsent: {
+		body: LoginRequest;
+		response: boolean;
+	};
+	/** POST /clearLogin — log out all devices */
+	clearLogin: {
+		response: boolean;
+	};
+	/** GET /adminStatus — server admin info (admin) */
+	adminStatus: {
+		response: FurzonaServerInfo;
+	};
+	/** POST /adminLogs — server logs (admin) */
+	adminLogs: {
+		body: AdminLogsRequest;
+		response: FurzonaLog[];
+	};
+	/** POST /modLogs — mod logs (moderator) */
+	modLogs: {
+		body: AdminLogsRequest;
+		response: FurzonaLog[];
+	};
+	/** POST /exec — run a server command (admin) */
+	exec: {
+		body: ExecRequest;
+		response: string;
+	};
+	/** POST /sendVerificationEmail — resend the verification email */
+	sendVerificationEmail: {
+		response: boolean;
+	};
+	/** POST /wipeSpecial — wipe special posts (admin) */
+	wipeSpecial: {
+		response: boolean;
+	};
+	/** GET /ping — list online users */
+	ping: {
+		response: FurzonaUserBase[];
+	};
+	/** GET /pong/{id} — respond to another user's ping */
+	pong: {
+		response: boolean;
+	};
+	/** GET /cleanServer — clean the server (admin), returns affected count */
+	cleanServer: {
+		response: number;
+	};
+	/** POST /isEmailVerified — refresh + return email verification state */
+	isEmailVerified: {
+		response: boolean;
+	};
+	/** GET /setOnline — mark this session online */
+	setOnline: {
+		response: boolean;
+	};
+	/** POST /safeModeView — toggle safe mode view */
+	safeModeView: {
+		body: SafeModeViewRequest;
+		response: boolean;
 	};
 }
 
