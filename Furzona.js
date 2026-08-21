@@ -441,11 +441,8 @@ class Furzona extends RequestService {
 	/**
 	 * Verify a code sent to the account email (password reset/email confirmation).
 	 * @param {string} code
-	 * @returns {Promise<boolean>}
 	 */
-	async verifyEmail(code) {
-		return this.post("verifyEmail", { code });
-	}
+	async verifyEmail(code) { return this.post("verifyEmail", { code }); }
 	async getLinkCode() {
 		return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" });
 	}
