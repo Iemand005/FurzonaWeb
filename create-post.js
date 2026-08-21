@@ -1,4 +1,4 @@
-const postForm = document.getElementById("new-post-form");
+const searchForm = document.getElementById("new-post-form");
 const typeSelect = document.getElementById("post-type");
 const titleInput = document.getElementById("post-title");
 const descriptionInput = document.getElementById("post-description");
