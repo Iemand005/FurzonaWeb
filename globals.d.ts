@@ -296,7 +296,30 @@ interface SearchRequest {
 }
 
 interface NewSearchRequest {
-	query: string;
+	/** free-text query (web client); the Android client splits this into title/content instead */
+	query?: string;
+	/** nsfw filter mode — Android always sends it (0 by default) */
+	nsfw?: number;
+	/** hidden filter mode — Android always sends it (0 by default) */
+	hidden?: number;
+	/** match against post title */
+	title?: string;
+	/** match against post content/description */
+	content?: string;
+	/** category selector mode — Android always sends it (0 by default) */
+	catSelector?: number;
+	/** category positions, matching FurzonaCategory.pos */
+	categories?: number[];
+	/** warning selector mode — Android always sends it (0 by default) */
+	warnSelector?: number;
+	/** warning positions, matching FurzonaWarning.pos */
+	warnings?: number[];
+	/** nsfw warning selector mode — Android always sends it (0 by default) */
+	nsfwSelector?: number;
+	/** nsfw warning positions, matching FurzonaNsfwWarning.pos */
+	nsfwWarnings?: number[];
+	/** filter by author username/id */
+	postedBy?: string;
 }
 
 /** POST /newSearch result — posts and matching users */

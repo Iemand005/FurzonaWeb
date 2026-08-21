@@ -406,11 +406,29 @@ class Furzona extends RequestService {
 	}
 
 	/**
-	 * @param {string} query
+	 * Search posts and users. Accepts a plain query string or an options object
+	 * mirroring the official Android client's search body.
+	 * @param {string|NewSearchRequest} queryOrOptions
 	 * @returns {Promise<FurzonaNewSearchResult>}
 	 */
-	async newSearch(query) {
-		return this.post("newSearch", { query });
+	async newSearch(queryOrOptions) {
+		/** @type {NewSearchRequest} */
+		const options = typeof queryOrOptions === "string" ? { query: queryOrOptions } : queryOrOptions || {};
+		const body = {
+			query: options.query || undefined,
+			title: options.title || undefined,
+			content: options.content || undefined,
+			postedBy: options.postedBy || undefined,
+			nsfw: options.nsfw || 0,
+			hidden: options.hidden || 0,
+			catSelector: options.catSelector || 0,
+			categories: options.categories || [],
+			warnSelector: options.warnSelector || 0,
+			warnings: options.warnings || [],
+			nsfwSelector: options.nsfwSelector || 0,
+			nsfwWarnings: options.nsfwWarnings || []
+		};
+		return this.post("newSearch", body);
 	}
 	/** @param {string} query @returns {Promise<FurzonaUserBase[]>} */
 	async searchUsers(query) {
