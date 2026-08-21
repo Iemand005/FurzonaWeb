@@ -263,7 +263,7 @@ if (editBtn && editForm && id) {
 		button.disabled = true;
 		showEditStatus("Updating…");
 		try {
-			const updated = await furzona.editPost(id, fields);
+			const updated = await furzona.updatePost(id, fields);
 			if (updated && typeof updated === "object" && updated.id) {
 				applyPostEdits({ ...currentPost, ...updated });
 			} else {
