@@ -396,31 +396,7 @@ class Furzona extends RequestService {
 
 	async deleteAccount() { return this.delete("user"); }
 
-	/**
-	 * Search posts and users. Accepts a plain query string or an options object
-	 * mirroring the official Android client's search body.
-	 * @param {string|NewSearchRequest} queryOrOptions
-	 * @returns {Promise<FurzonaNewSearchResult>}
-	 */
-	async newSearch(queryOrOptions) {
-		/** @type {NewSearchRequest} */
-		const options = typeof queryOrOptions === "string" ? { query: queryOrOptions } : queryOrOptions || {};
-		const body = {
-			query: options.query || undefined,
-			title: options.title || undefined,
-			content: options.content || undefined,
-			postedBy: options.postedBy || undefined,
-			nsfw: options.nsfw || 0,
-			hidden: options.hidden || 0,
-			catSelector: options.catSelector || 0,
-			categories: options.categories || [],
-			warnSelector: options.warnSelector || 0,
-			warnings: options.warnings || [],
-			nsfwSelector: options.nsfwSelector || 0,
-			nsfwWarnings: options.nsfwWarnings || []
-		};
-		return this.post("newSearch", body);
-	}
+	
 	async searchUsers(/** @type {string} */query) { return this.post("users", { query }); }
 	async searchGroups(/** @type {string} */query) { return this.post("groups", { query }); }
 	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
@@ -473,6 +449,34 @@ class Furzona extends RequestService {
 	async getCommentReports() { return this.get("commentReports"); }
 	async getUserReports() { return this.get("userReports"); }
 	async getAllReports(/** @type {number} */date) { return this.post("allReports", date ? { date } : {}); }
+
+
+	/**
+	 * Search posts and users. Accepts a plain query string or an options object
+	 * mirroring the official Android client's search body.
+	 * @param {string|NewSearchRequest} queryOrOptions
+	 * @returns {Promise<FurzonaNewSearchResult>}
+	 */
+	async newSearch(queryOrOptions) {
+		/** @type {NewSearchRequest} */
+		const options = typeof queryOrOptions === "string" ? { query: queryOrOptions } : queryOrOptions || {};
+		const body = {
+			query: options.query || undefined,
+			title: options.title || undefined,
+			content: options.content || undefined,
+			postedBy: options.postedBy || undefined,
+			nsfw: options.nsfw || 0,
+			hidden: options.hidden || 0,
+			catSelector: options.catSelector || 0,
+			categories: options.categories || [],
+			warnSelector: options.warnSelector || 0,
+			warnings: options.warnings || [],
+			nsfwSelector: options.nsfwSelector || 0,
+			nsfwWarnings: options.nsfwWarnings || []
+		};
+		return this.post("newSearch", body);
+	}
+
 	/**
 	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
