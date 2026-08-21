@@ -140,6 +140,11 @@ interface FurzonaUserBase {
 	t: string | null;
 	/** behaviourPoints */
 	h: number;
+	/**
+	 * Also confirmed on the Android client but JSON key letters not yet mapped:
+	 * linked (boolean, defaults false). Note dpm defaults TRUE when absent on
+	 * public user objects.
+	 */
 	createdAt: string; // ISO date string
 	updatedAt: string; // ISO date string
 }
@@ -160,8 +165,8 @@ interface FurzonaUser extends FurzonaUserBase {
 	w: number[];
 	/** safeMode */
 	o: boolean;
-	/** userIcons — unlocked/available icon options */
-	c: string[];
+	/** userIcons — icon unlock count/level (parsed as an int by the Android client) */
+	c: number;
 }
 
 /** Author summary embedded in a post — subset of FurzonaUser fields, plus `o` */
@@ -344,12 +349,15 @@ interface FurzonaProfile {
 	user: FurzonaPostAuthor;
 	following: boolean;
 	stats: FurzonaProfileStats;
-	/** Unknown shape, seen only as null — likely ban details/reason when present */
-	ban: unknown | null;
+	/** active ban details when present */
+	ban: FurzonaBan | null;
 	blocked: boolean;
-	/** Unknown shape, seen only as null */
-	featured: unknown | null;
+	/** pinned/featured post when present */
+	featured: FurzonaPost | null;
+	/** defaults false when absent */
 	online: boolean;
+	/** account age — defaults -1 when absent */
+	age?: number;
 }
 
 interface FurzonaCredentials {
@@ -383,6 +391,8 @@ type FavoriteComment = { comment: string };
 
 interface FollowToggleResult {
 	following: boolean;
+	/** the target user's new follower count (confirmed via Android follow/unfollow) */
+	followers: number;
 }
 
 interface CommentCreateRequest {
@@ -424,6 +434,10 @@ interface NewSearchRequest {
 	nsfwWarnings?: number[];
 	/** filter by author username/id */
 	postedBy?: string;
+	/** search tab index (Android advancedSearchQuick/advancedSearchPosts) */
+	tab?: number;
+	/** set true to search users instead of posts (Android advancedSearchUsers) */
+	users?: boolean;
 }
 
 /** POST /newSearch result — posts and matching users */
