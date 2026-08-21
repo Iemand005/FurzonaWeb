@@ -451,6 +451,8 @@ class Furzona extends RequestService {
 	}
 	/** @param {string} userId */
 	async getAlts(userId) { return this.post("getAlts", { userId }); }
+	/** @param {string} userId */
+	async getAlts2(userId) { return this.post("getAlts2", { userId }); }
 	/**
 	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
