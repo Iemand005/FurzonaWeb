@@ -609,7 +609,7 @@ interface ReportRequest {
 
 /** Attachment entry sent with POST /report */
 interface ReportAttachmentInput {
-	/** attachment type discriminator (int) */
+	/** media kind — see AttachmentType (Android names uploads image.jpg / gif.gif / video.mp4 per type) */
 	type: number;
 	/** uploaded file id (from /upload) */
 	file: string;
@@ -619,7 +619,7 @@ interface ReportAttachmentInput {
 interface FurzonaAttachment {
 	/** content path (resolvable against the content URL) */
 	path: string;
-	/** attachment type discriminator (int) */
+	/** media kind — see AttachmentType */
 	type: number;
 }
 
@@ -680,6 +680,16 @@ interface FurzonaBadge {
 
 enum PostType {
 	Text = 0
+}
+
+/**
+ * Attachment media kind (Android Attachment.Raw.upload picks the upload
+ * filename per type: 1 -> image.jpg, 2 -> gif.gif, anything else -> video.mp4).
+ */
+enum AttachmentType {
+	Image = 1,
+	Gif = 2,
+	Video = 3
 }
 
 interface ApiEndpoints {
