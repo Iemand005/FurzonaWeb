@@ -1030,6 +1030,100 @@ interface ApiEndpoints {
 		body: ViewPollResultsRequest;
 		response: PollResultsResult;
 	};
+	/** POST /modNote — attach a mod note to a user (mod) */
+	modNote: {
+		body: ModNoteRequest;
+		response: boolean;
+	};
+	/** POST /suspendUser — suspend an account */
+	suspendUser: {
+		body: SuspendUserRequest;
+		response: boolean;
+	};
+	/** GET /bans/{userId} — ban history for a user */
+	bans: {
+		response: FurzonaBan[];
+	};
+	/** POST /purge — delete all of a user's posts (mod) */
+	purge: {
+		body: TargetUserRequest;
+		response: boolean;
+	};
+	/** GET /profileUsername/{username} — profile lookup by username (dots replaced with dashes) */
+	profileUsername: {
+		response: FurzonaProfile;
+	};
+	/** POST /getAlts — suspected alt accounts (mod), paginated by date */
+	getAlts: {
+		body: UserListRequest;
+		response: FurzonaUserBase[];
+	};
+	/** POST /getAlts2 — alt accounts, second method (mod) */
+	getAlts2: {
+		body: UserIdRequest;
+		response: FurzonaUserBase[];
+	};
+	/** GET /removePfp/{userId} — remove a user's avatar (mod) */
+	removePfp: {
+		response: boolean;
+	};
+	/** GET /removeBanner/{userId} — remove a user's banner (mod) */
+	removeBanner: {
+		response: boolean;
+	};
+	/** GET /resetUsername/{userId} — reset a user's username (mod) */
+	resetUsername: {
+		response: boolean;
+	};
+	/** GET /removeDesc/{userId} — clear a user's bio (mod) */
+	removeDesc: {
+		response: boolean;
+	};
+	/** POST /deleteAllComments — delete every comment by a user (mod), returns deleted count */
+	deleteAllComments: {
+		body: TargetUserRequest;
+		response: number;
+	};
+	/** POST /changeTag — set a user's tag (admin) */
+	changeTag: {
+		body: ChangeTagRequest;
+		response: boolean;
+	};
+	/** POST /changePermLevel — set a user's permission level (admin) */
+	changePermLevel: {
+		body: ChangePermLevelRequest;
+		response: boolean;
+	};
+	/** POST /verifyEmailAdmin — mark a user's email verified (admin) */
+	verifyEmailAdmin: {
+		body: UserIdRequest;
+		response: boolean;
+	};
+	/** POST /resetIps — clear a user's stored IPs (admin) */
+	resetIps: {
+		body: UserIdRequest;
+		response: boolean;
+	};
+	/** POST /safeMode — toggle safe mode on a user (mod) */
+	safeMode: {
+		body: UserIdRequest;
+		response: boolean;
+	};
+	/** POST /award — grant behaviour points (admin) */
+	award: {
+		body: AwardRequest;
+		response: boolean;
+	};
+	/** POST /modUsers — mod-visible user list, paginated by date */
+	modUsers: {
+		body: DatePageRequest;
+		response: FurzonaUserBase[];
+	};
+	/** POST /unsubscribe */
+	unsubscribe: {
+		body: SubscribeRequest;
+		response: boolean;
+	};
 }
 
 type ProbeResult = { endpoint: string, methods: Method[] };
