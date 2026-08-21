@@ -395,9 +395,8 @@ class Furzona extends RequestService {
 	/**
 	 * Upload media. Multipart field names are unconfirmed.
 	 * @param {FormData} formData
-	 * @returns {Promise<unknown>}
 	 */
-	async upload(formData) {
+	async upload(/* @type {@param {FormData}} */formData) {
 		return this.request("upload", "POST", formData);
 	}
 
