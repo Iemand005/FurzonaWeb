@@ -23,5 +23,6 @@
 
 	"typescript.inlayHints.parameterNames.enabled": "all",
 	"javascript.inlayHints.parameterNames.enabled": "all",
-	"js/ts.inlayHints.parameterTypes.enabled": true
+	"js/ts.inlayHints.parameterTypes.enabled": true,
+	"liveServer.settings.port": 5501
 }
