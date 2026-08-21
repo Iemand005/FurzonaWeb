@@ -447,7 +447,13 @@ class Furzona extends RequestService {
 		return this.post("verifyEmail", { code });
 	}
 	async getLinkCode() {
-		await furzona.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" });
+		return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" });
+	}
+
+	async getAlts() {
+		return this.post("getAlts", {
+
+		});
 	}
 	/**
 	 * @param {string} endpoint
