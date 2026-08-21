@@ -375,7 +375,7 @@ interface CreatePostRequest {
 	/** title */
 	title?: string;
 	/** content/body text */
-	content?: string;
+	text?: string;
 	/** media paths (from /upload) — field name unconfirmed */
 	media?: string[];
 	[key: string]: unknown;

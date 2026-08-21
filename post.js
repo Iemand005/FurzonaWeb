@@ -17,7 +17,6 @@ const editBtn = document.getElementById("post-edit-btn");
 const editForm = document.getElementById("post-edit-form");
 const editTitleInput = document.getElementById("edit-title");
 const editContentInput = document.getElementById("edit-content");
-const editDescriptionInput = document.getElementById("edit-description");
 const editStatusEl = document.getElementById("edit-status");
 const editCancelButton = document.getElementById("edit-cancel");
 
@@ -228,7 +227,6 @@ const openEditForm = () => {
 	if (!currentPost || !editForm) return;
 	editTitleInput.value = currentPost.t || "";
 	editContentInput.value = currentPost.c || "";
-	editDescriptionInput.value = currentPost.d || "";
 	showEditStatus("");
 	editBtn.hidden = true;
 	editForm.hidden = false;
@@ -249,13 +247,12 @@ if (editBtn && editForm && id) {
 		event.preventDefault();
 		if (!currentPost) return;
 
+		/** @type {CreatePostRequest} */
 		const fields = {};
 		const t = editTitleInput.value.trim();
 		const c = editContentInput.value.trim();
-		const d = editDescriptionInput.value.trim();
 		if (t !== (currentPost.t || "")) fields.title = t;
-		if (c !== (currentPost.c || "")) fields.content = c;
-		if (d !== (currentPost.d || "")) fields.description = d;
+		if (c !== (currentPost.c || "")) fields.text = c;
 
 		if (Object.keys(fields).length === 0) {
 			closeEditForm();
@@ -273,8 +270,7 @@ if (editBtn && editForm && id) {
 				applyPostEdits({
 					...currentPost,
 					t: "title" in fields ? fields.title : currentPost.t,
-					c: "content" in fields ? fields.content : currentPost.c,
-					d: "description" in fields ? fields.description : currentPost.d
+					c: "text" in fields ? fields.text : currentPost.c
 				});
 			}
 			closeEditForm();
