@@ -392,13 +392,7 @@ class Furzona extends RequestService {
 	async getBadges() {
 		return this.get("badges");
 	}
-	/**
-	 * Upload media. Multipart field names are unconfirmed.
-	 * @param {FormData} formData
-	 */
-	async upload(/* @type {@param {FormData}} */formData) {
-		return this.request("upload", "POST", formData);
-	}
+	async upload(/** @type {FormData} */formData) { return this.request("upload", "POST", formData); }
 
 	async deleteAccount() { return this.delete("user"); }
 
