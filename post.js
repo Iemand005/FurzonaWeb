@@ -65,6 +65,12 @@ function renderPost(post) {
 		actionsEl.appendChild(createLikeButton(post, { liked: !!post.z }));
 	}
 
+	if (editBtn) {
+		const me = furzona.user;
+		const isOwner = !!user.o || !!(me && user.id === me.id);
+		if (isOwner && furzona.isLoggedIn) editBtn.hidden = false;
+	}
+
 	if (post.m && post.m.length > 0) {
 		post.m.forEach((path, index) => {
 			if (index === 0) {
@@ -201,4 +207,73 @@ if (commentForm && commentInput && id) {
 			}
 		});
 	}
+}
+
+/** @param {FurzonaPost} post */
+function applyPostEdits(post) {
+	currentPost = post;
+	titleEl.textContent = post.t || "Untitled";
+	textEl.textContent = [post.c, post.d].filter(Boolean).join("\n\n");
+	const date = new Date(post.updatedAt || post.createdAt);
+	metaEl.textContent = `ID: ${post.id} • ${date.toLocaleString()}`;
+}
+
+const showEditStatus = (message) => {
+	if (!editStatusEl) return;
+	editStatusEl.textContent = message;
+	editStatusEl.hidden = !message;
+};
+
+const openEditForm = () => {
+	if (!currentPost || !editForm) return;
+	editTitleInput.value = currentPost.t || "";
+	editContentInput.value = currentPost.c || "";
+	editDescriptionInput.value = currentPost.d || "";
+	showEditStatus("");
+	editBtn.hidden = true;
+	editForm.hidden = false;
+};
+
+const closeEditForm = () => {
+	if (!editForm) return;
+	editForm.hidden = true;
+	showEditStatus("");
+	if (editBtn) editBtn.hidden = false;
+};
+
+if (editBtn && editForm && id) {
+	editBtn.addEventListener("click", openEditForm);
+	if (editCancelButton) editCancelButton.addEventListener("click", closeEditForm);
+
+	editForm.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		if (!currentPost) return;
+
+		const fields = {};
+		const t = editTitleInput.value.trim();
+		const c = editContentInput.value.trim();
+		const d = editDescriptionInput.value.trim();
+		if (t !== (currentPost.t || "")) fields.title = t;
+		if (c !== (currentPost.c || "")) fields.content = c;
+		if (d !== (currentPost.d || "")) fields.description = d;
+
+		if (Object.keys(fields).length === 0) {
+			closeEditForm();
+			return;
+		}
+
+		const button = editForm.querySelector('button[type="submit"]');
+		button.disabled = true;
+		showEditStatus("Updating…");
+		try {
+			const updated = await furzona.editPost(id, fields);
+			applyPostEdits(updated && typeof updated === "object" && updated.id ? { ...currentPost, ...updated } : { ...currentPost, ...fields, t: fields.title ?? currentPost.t, c: fields.content ?? currentPost.c, d: fields.description ?? currentPost.d });
+			closeEditForm();
+		} catch (error) {
+			console.error("Failed to update post:", error);
+			showEditStatus(error.message || "Could not update post.");
+		} finally {
+			button.disabled = false;
+		}
+	});
 }
