@@ -432,8 +432,54 @@ class Furzona extends RequestService {
 	async searchGroups(/** @type {string} */query) { return this.post("groups", { query }); }
 	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
 	async getLinkCode() { return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" }); }
-	async getAlts(/** @type {string} */userId) { return this.post("getAlts", { userId }); }
+	async getAlts(/** @type {string} */userId, /** @type {number} */[date]) { return this.post("getAlts", date ? { userId, date } : { userId }); }
 	async getAlts2(/** @type {string} */userId) { return this.post("getAlts2", { userId }); }
+	async updateUser(/** @type {EditUserRequest} */fields) { return this.put("user", fields); }
+	async resetPassword(/** @type {string} */password) { return this.put("password", { password }); }
+	async sendParentsConsent(/** @type {string} */email, /** @type {string} */password) { return this.post("sendConsent", { email, password }); }
+	async logoutDevices() { return this.post("clearLogin"); }
+	async sendVerificationEmail() { return this.post("sendVerificationEmail"); }
+	async updateEmailVerified() { return this.post("isEmailVerified"); }
+	async setOnline() { return this.get("setOnline"); }
+	async setSafeModeView(/** @type {boolean} */enabled) { return this.post("safeModeView", { enabled }); }
+	async asUser(/** @type {string} */userId) { return this.get(["asUser", userId]); }
+	async ping() { return this.get("ping"); }
+	async pong(/** @type {string} */id) { return this.get(["pong", id]); }
+	async getServerAdminInfo() { return this.get("adminStatus"); }
+	async getAdminLogs(/** @type {string} */query, /** @type {number} */date) { return this.post("adminLogs", { query: query || undefined, date: date || undefined }); }
+	async getModLogs(/** @type {string} */query, /** @type {number} */date) { return this.post("modLogs", { query: query || undefined, date: date || undefined }); }
+	async sendServerCommand(/** @type {string} */cmd) { return this.post("exec", { cmd }); }
+	async wipeSpecialPosts() { return this.post("wipeSpecial"); }
+	async cleanServer() { return this.get("cleanServer"); }
+	async getModUsers(/** @type {number} */[date]) { return this.post("modUsers", date ? { date } : {}); }
+	async unsubscribe(/** @type {number} */type) { return this.post("unsubscribe", { type }); }
+	async voteInPoll(/** @type {string} */poll, /** @type {string[]} */options) { return this.post("submitPolls", { poll, options }); }
+	async viewPollResults(/** @type {string} */poll) { return this.post("viewPollResults", { poll }); }
+	async addModNote(/** @type {string} */userId, /** @type {string} */note) { return this.post("modNote", { userId, note }); }
+	async suspendUser(/** @type {string} */userId, /** @type {string} */reason) { return this.post("suspendUser", { userId, reason }); }
+	async getBans(/** @type {string} */userId) { return this.get(["bans", userId]); }
+	async purgeUserPosts(/** @type {string} */userId) { return this.post("purge", { user: userId }); }
+	async deleteAllComments(/** @type {string} */userId) { return this.post("deleteAllComments", { user: userId }); }
+	async getProfileByUsername(/** @type {string} */username) { return this.get(["profileUsername", username.split(".").join("-")]); }
+	async removePfp(/** @type {string} */userId) { return this.get(["removePfp", userId]); }
+	async removeBanner(/** @type {string} */userId) { return this.get(["removeBanner", userId]); }
+	async resetUsername(/** @type {string} */userId) { return this.get(["resetUsername", userId]); }
+	async removeDescription(/** @type {string} */userId) { return this.get(["removeDesc", userId]); }
+	async toggleUserSafeMode(/** @type {string} */userId) { return this.post("safeMode", { user: userId }); }
+	async changeTag(/** @type {string} */userId, /** @type {string} */tag) { return this.post("changeTag", { user: userId, tag }); }
+	async changePermLevel(/** @type {string} */userId, /** @type {PermissionLevel} */permLevel) { return this.post("changePermLevel", { user: userId, permLevel }); }
+	async verifyEmailAdmin(/** @type {string} */userId) { return this.post("verifyEmailAdmin", { user: userId }); }
+	async resetIps(/** @type {string} */userId) { return this.post("resetIps", { user: userId }); }
+	async awardPoints(/** @type {string} */userId, /** @type {number} */points) { return this.post("award", { userId, points }); }
+	async reportPost(/** @type {string} */post, /** @type {string} */reason, /** @type {ReportAttachmentInput[]} */attachments = []) { return this.post("report", { post, reason, attachments }); }
+	async reportComment(/** @type {string} */comment, /** @type {string} */reason, /** @type {ReportAttachmentInput[]} */attachments = []) { return this.post("report", { comment, reason, attachments }); }
+	async reportUser(/** @type {string} */user, /** @type {string} */reason, /** @type {ReportAttachmentInput[]} */attachments = []) { return this.post("report", { user, reason, attachments }); }
+	async claimReport(/** @type {string} */id) { return this.get(["assignReport", id]); }
+	async isReportReviewed(/** @type {string} */id) { return this.get(["reviewed", id]); }
+	async getPostReports() { return this.get("postReports"); }
+	async getCommentReports() { return this.get("commentReports"); }
+	async getUserReports() { return this.get("userReports"); }
+	async getAllReports(/** @type {number} */[date]) { return this.post("allReports", date ? { date } : {}); }
 	/**
 	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
