@@ -432,7 +432,7 @@ class Furzona extends RequestService {
 	async searchGroups(/** @type {string} */query) { return this.post("groups", { query }); }
 	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
 	async getLinkCode() { return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" }); }
-	async getAlts(/** @type {string} */userId, /** @type {number} */[date]) { return this.post("getAlts", date ? { userId, date } : { userId }); }
+	async getAlts(/** @type {string} */userId, /** @type {number} */date) { return this.post("getAlts", date ? { userId, date } : { userId }); }
 	async getAlts2(/** @type {string} */userId) { return this.post("getAlts2", { userId }); }
 	async updateUser(/** @type {EditUserRequest} */fields) { return this.put("user", fields); }
 	async resetPassword(/** @type {string} */password) { return this.put("password", { password }); }
@@ -451,7 +451,7 @@ class Furzona extends RequestService {
 	async sendServerCommand(/** @type {string} */cmd) { return this.post("exec", { cmd }); }
 	async wipeSpecialPosts() { return this.post("wipeSpecial"); }
 	async cleanServer() { return this.get("cleanServer"); }
-	async getModUsers(/** @type {number} */[date]) { return this.post("modUsers", date ? { date } : {}); }
+	async getModUsers(/** @type {number} */date) { return this.post("modUsers", date ? { date } : {}); }
 	async unsubscribe(/** @type {number} */type) { return this.post("unsubscribe", { type }); }
 	async voteInPoll(/** @type {string} */poll, /** @type {string[]} */options) { return this.post("submitPolls", { poll, options }); }
 	async viewPollResults(/** @type {string} */poll) { return this.post("viewPollResults", { poll }); }
@@ -465,11 +465,11 @@ class Furzona extends RequestService {
 	async removeBanner(/** @type {string} */userId) { return this.get(["removeBanner", userId]); }
 	async resetUsername(/** @type {string} */userId) { return this.get(["resetUsername", userId]); }
 	async removeDescription(/** @type {string} */userId) { return this.get(["removeDesc", userId]); }
-	async toggleUserSafeMode(/** @type {string} */userId) { return this.post("safeMode", { user: userId }); }
+	async toggleUserSafeMode(/** @type {string} */userId) { return this.post("safeMode", { userId }); }
 	async changeTag(/** @type {string} */userId, /** @type {string} */tag) { return this.post("changeTag", { user: userId, tag }); }
 	async changePermLevel(/** @type {string} */userId, /** @type {PermissionLevel} */permLevel) { return this.post("changePermLevel", { user: userId, permLevel }); }
-	async verifyEmailAdmin(/** @type {string} */userId) { return this.post("verifyEmailAdmin", { user: userId }); }
-	async resetIps(/** @type {string} */userId) { return this.post("resetIps", { user: userId }); }
+	async verifyEmailAdmin(/** @type {string} */userId) { return this.post("verifyEmailAdmin", { userId }); }
+	async resetIps(/** @type {string} */userId) { return this.post("resetIps", { userId }); }
 	async awardPoints(/** @type {string} */userId, /** @type {number} */points) { return this.post("award", { userId, points }); }
 	async reportPost(/** @type {string} */post, /** @type {string} */reason, /** @type {ReportAttachmentInput[]} */attachments = []) { return this.post("report", { post, reason, attachments }); }
 	async reportComment(/** @type {string} */comment, /** @type {string} */reason, /** @type {ReportAttachmentInput[]} */attachments = []) { return this.post("report", { comment, reason, attachments }); }
@@ -479,7 +479,7 @@ class Furzona extends RequestService {
 	async getPostReports() { return this.get("postReports"); }
 	async getCommentReports() { return this.get("commentReports"); }
 	async getUserReports() { return this.get("userReports"); }
-	async getAllReports(/** @type {number} */[date]) { return this.post("allReports", date ? { date } : {}); }
+	async getAllReports(/** @type {number} */date) { return this.post("allReports", date ? { date } : {}); }
 	/**
 	 * @param {string} endpoint
 	 * @returns {Promise<Method[]>}
