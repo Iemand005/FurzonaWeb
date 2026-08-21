@@ -209,7 +209,7 @@ class Furzona extends RequestService {
 	async unmuteChat(/** @type {string} */chat) { return this.post("unmute", { chat }); }
 	async sendTyping(/** @type {string} */chat) { return this.post("chatTyping", { chat }); }
 	async getGroupInfo(/** @type {string} */chat) { return this.post("groupInfo", { chat }); }
-	async editGroup(/** @type {string} */chat, /** @type {EditGroupRequest} */fields = {}) { return this.post("editGroup", { chat, ...fields }); }
+	async editGroup(/** @type {string} */chat, /** @type {EditGroupRequest?} */fields) { return this.post("editGroup", { chat, ...fields }); }
 	async subscribe(/** @type {number} */type) { return this.post("subscribe", { type }); }
 	async getBadges() { return this.get("badges"); }
 	async upload(/** @type {FormData} */formData) { return this.request("upload", "POST", formData); }
