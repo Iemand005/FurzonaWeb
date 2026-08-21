@@ -532,13 +532,70 @@ interface SubscribeRequest {
 	type: number;
 }
 
+/**
+ * POST /report — create a report. Exactly one target id is set depending on
+ * what is being reported (post, comment or user) — confirmed via the Android
+ * client's Report.reportPost/reportComment/reportUser.
+ */
 interface ReportRequest {
 	/** Required reason text */
 	reason: string;
-	/** Target post — unconfirmed field name */
+	/** Target post id (reportPost) */
 	post?: string;
-	/** Target user — unconfirmed field name */
+	/** Target comment id (reportComment) */
+	comment?: string;
+	/** Target user id (reportUser) */
 	user?: string;
+	/** uploaded evidence files */
+	attachments?: ReportAttachmentInput[];
+}
+
+/** Attachment entry sent with POST /report */
+interface ReportAttachmentInput {
+	/** attachment type discriminator (int) */
+	type: number;
+	/** uploaded file id (from /upload) */
+	file: string;
+}
+
+/** Attachment entry as returned on a FurzonaReport */
+interface FurzonaAttachment {
+	/** content path (resolvable against the content URL) */
+	path: string;
+	/** attachment type discriminator (int) */
+	type: number;
+}
+
+/**
+ * Report object from GET /report/{id}, /postReports, /commentReports,
+ * /userReports and POST /allReports (Android Report.parseReport).
+ */
+interface FurzonaReport {
+	id: string;
+	/** the user who filed the report — null when unavailable */
+	reporter: FurzonaPostAuthor | null;
+	reason: string;
+	/** report type discriminator (int) */
+	type: number;
+	attachments: FurzonaAttachment[];
+	/** present when a post was reported */
+	post: FurzonaPost | null;
+	/** present when a user was reported */
+	user: FurzonaPostAuthor | null;
+	/** present when a comment was reported */
+	comment: FurzonaComment | null;
+	/** defaults false when absent */
+	resolved: boolean;
+	/** mod currently assigned to this report */
+	assigned: FurzonaPostAuthor | null;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
+}
+
+/** POST /allReports body — list every report before this timestamp */
+interface AllReportsRequest {
+	/** epoch ms (UTC) — pagination cursor */
+	date?: number;
 }
 
 /**
@@ -691,9 +748,35 @@ interface ApiEndpoints {
 	notifications: {
 		response: FurzonaNotification[];
 	};
+	/** POST /report = file a report; GET /report/{id} = fetch one; DELETE /report/{id} = remove one (mod) */
 	report: {
 		body: ReportRequest;
-		response: unknown;
+		response: boolean | FurzonaReport;
+	};
+	/** GET /assignReport/{id} — claim a report (mod) */
+	assignReport: {
+		response: boolean;
+	};
+	/** GET /reviewed/{id} — whether a report has been reviewed */
+	reviewed: {
+		response: boolean;
+	};
+	/** GET /postReports — post reports queue (mod) */
+	postReports: {
+		response: FurzonaReport[];
+	};
+	/** GET /commentReports — comment reports queue (mod) */
+	commentReports: {
+		response: FurzonaReport[];
+	};
+	/** GET /userReports — user reports queue (mod) */
+	userReports: {
+		response: FurzonaReport[];
+	};
+	/** POST /allReports — every report, paginated by date (mod) */
+	allReports: {
+		body: AllReportsRequest;
+		response: FurzonaReport[];
 	};
 	verifyEmail: {
 		body: VerifyEmailRequest;
