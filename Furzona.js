@@ -438,14 +438,8 @@ class Furzona extends RequestService {
 	async searchGroups(query) {
 		return this.post("groups", { query });
 	}
-	/**
-	 * Verify a code sent to the account email (password reset/email confirmation).
-	 * @param {string} code
-	 */
-	async verifyEmail(code) { return this.post("verifyEmail", { code }); }
-	async getLinkCode() {
-		return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" });
-	}
+	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
+	async getLinkCode() { return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" }); }
 	async getAlts(/** @type {string} */userId) { return this.post("getAlts", { userId }); }
 	async getAlts2(/** @type {string} */userId) { return this.post("getAlts2", { userId }); }
 	/**
