@@ -393,10 +393,7 @@ class Furzona extends RequestService {
 		return this.get("badges");
 	}
 	async upload(/** @type {FormData} */formData) { return this.request("upload", "POST", formData); }
-
 	async deleteAccount() { return this.delete("user"); }
-
-	
 	async searchUsers(/** @type {string} */query) { return this.post("users", { query }); }
 	async searchGroups(/** @type {string} */query) { return this.post("groups", { query }); }
 	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
