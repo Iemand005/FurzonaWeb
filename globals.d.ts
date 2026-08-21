@@ -598,6 +598,54 @@ interface UserIdRequest {
 	userId: string;
 }
 
+/** POST /followers, /following and /getAlts — userId plus optional epoch-ms pagination cursor */
+interface UserListRequest {
+	userId: string;
+	/** epoch ms (UTC) — fetch entries before this timestamp */
+	date?: number;
+}
+
+/** POST /modUsers — mod-visible user list, paginated by date */
+interface DatePageRequest {
+	/** epoch ms (UTC) — fetch entries before this timestamp */
+	date?: number;
+}
+
+/** POST /modNote — attach a mod note to a user */
+interface ModNoteRequest {
+	userId: string;
+	note: string;
+}
+
+/** POST /suspendUser */
+interface SuspendUserRequest {
+	userId: string;
+	reason: string;
+}
+
+/** POST /purge and POST /deleteAllComments — target by `user` id */
+interface TargetUserRequest {
+	user: string;
+}
+
+/** POST /changeTag (admin) */
+interface ChangeTagRequest {
+	user: string;
+	tag: string;
+}
+
+/** POST /changePermLevel (admin) */
+interface ChangePermLevelRequest {
+	user: string;
+	permLevel: PermissionLevel;
+}
+
+/** POST /award (admin) — grant behaviour points */
+interface AwardRequest {
+	userId: string;
+	points: number;
+}
+
 interface ChatMuteRequest {
 	/** chat id */
 	chat: string;
@@ -801,11 +849,11 @@ interface ApiEndpoints {
 		response: boolean;
 	};
 	followers: {
-		body: UserIdRequest;
+		body: UserListRequest;
 		response: FurzonaUserBase[];
 	};
 	following: {
-		body: UserIdRequest;
+		body: UserListRequest;
 		response: FurzonaUserBase[];
 	};
 	chat: {
