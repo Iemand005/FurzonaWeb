@@ -430,14 +430,8 @@ class Furzona extends RequestService {
 		};
 		return this.post("newSearch", body);
 	}
-	/** @param {string} query @returns {Promise<FurzonaUserBase[]>} */
-	async searchUsers(query) {
-		return this.post("users", { query });
-	}
-	/** @param {string} query @returns {Promise<FurzonaGroup[]>} */
-	async searchGroups(query) {
-		return this.post("groups", { query });
-	}
+	async searchUsers(/** @type {string} */query) { return this.post("users", { query }); }
+	async searchGroups(/** @type {string} */query) { return this.post("groups", { query }); }
 	async verifyEmail(/** @type {string} */code) { return this.post("verifyEmail", { code }); }
 	async getLinkCode() { return this.post("linkCode", { appName: "FurzonaWeb", perms: "chats.info" }); }
 	async getAlts(/** @type {string} */userId) { return this.post("getAlts", { userId }); }
