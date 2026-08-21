@@ -609,8 +609,8 @@ interface ReportRequest {
 
 /** Attachment entry sent with POST /report */
 interface ReportAttachmentInput {
-	/** media kind — see AttachmentType (Android names uploads image.jpg / gif.gif / video.mp4 per type) */
-	type: number;
+	/** media kind (Android names uploads image.jpg / gif.gif / video.mp4 per type) */
+	type: AttachmentType;
 	/** uploaded file id (from /upload) */
 	file: string;
 }
@@ -619,8 +619,8 @@ interface ReportAttachmentInput {
 interface FurzonaAttachment {
 	/** content path (resolvable against the content URL) */
 	path: string;
-	/** media kind — see AttachmentType */
-	type: number;
+	/** media kind */
+	type: AttachmentType;
 }
 
 /**
