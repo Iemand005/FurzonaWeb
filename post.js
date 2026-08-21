@@ -247,31 +247,21 @@ if (editBtn && editForm && id) {
 		event.preventDefault();
 		if (!currentPost) return;
 
-		/** @type {CreatePostRequest} */
-		const fields = {};
-		const t = editTitleInput.value.trim();
-		const c = editContentInput.value.trim();
-		if (t !== (currentPost.t || "")) fields.title = t;
-		if (c !== (currentPost.c || "")) fields.text = c;
-
-		if (Object.keys(fields).length === 0) {
-			closeEditForm();
-			return;
-		}
-
 		const button = editForm.querySelector('button[type="submit"]');
 		button.disabled = true;
 		showEditStatus("Updating…");
 		try {
+			/** @type {CreatePostRequest} */
+			const fields = {
+				type: currentPost.y,
+				title: editTitleInput.value.trim(),
+				text: editContentInput.value.trim()
+			};
 			const updated = await furzona.updatePost(id, fields);
 			if (updated && typeof updated === "object" && updated.id) {
 				applyPostEdits({ ...currentPost, ...updated });
 			} else {
-				applyPostEdits({
-					...currentPost,
-					t: "title" in fields ? fields.title : currentPost.t,
-					c: "text" in fields ? fields.text : currentPost.c
-				});
+				applyPostEdits({ ...currentPost, t: fields.title, c: fields.text });
 			}
 			closeEditForm();
 		} catch (error) {
