@@ -13,8 +13,17 @@ const actionsEl = document.getElementById("post-actions");
 const commentsEl = document.getElementById("post-comment-list");
 const commentForm = document.getElementById("comment-form");
 const commentInput = document.getElementById("comment-input");
+const editBtn = document.getElementById("post-edit-btn");
+const editForm = document.getElementById("post-edit-form");
+const editTitleInput = document.getElementById("edit-title");
+const editContentInput = document.getElementById("edit-content");
+const editDescriptionInput = document.getElementById("edit-description");
+const editStatusEl = document.getElementById("edit-status");
+const editCancelButton = document.getElementById("edit-cancel");
 
 let authorId = null;
+/** @type {FurzonaPost?} */
+let currentPost = null;
 
 window.addEventListener("pageswap", (event) => {
 	if (!event.viewTransition || !id) return;
@@ -31,6 +40,7 @@ window.addEventListener("pageswap", (event) => {
 function renderPost(post) {
 	const user = post.u;
 	authorId = user.id;
+	currentPost = post;
 	const date = new Date(post.createdAt || post.updatedAt);
 
 	titleEl.textContent = post.t || "Untitled";
