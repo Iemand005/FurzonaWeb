@@ -243,7 +243,13 @@ interface FurzonaComment {
 	updatedAt: string; // ISO date string
 }
 
+/**
+ * Poll object embedded in a post (Android Poll.parsePoll).
+ * Field letters confirmed against PollMapping getters: p=participants,
+ * m=multiple, v=voted, i=isOwner.
+ */
 interface FurzonaPoll {
+	id: string;
 	title: string;
 	/** participants — total vote/participant count */
 	p: number;
@@ -254,14 +260,63 @@ interface FurzonaPoll {
 	v: boolean;
 	/** isOwner — whether the current user created this poll */
 	i: boolean;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
 }
 
 interface FurzonaPollOption {
+	id: string;
 	text: string;
 	/** votedUsers — vote count for this option */
 	u: number;
 	/** voted — whether the current user voted for this option */
 	v: boolean;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
+}
+
+/** POST /submitPolls body — cast votes for a poll */
+interface SubmitPollRequest {
+	/** poll id */
+	poll: string;
+	/** selected option ids */
+	options: string[];
+}
+
+/** POST /viewPollResults body */
+interface ViewPollResultsRequest {
+	/** poll id */
+	poll: string;
+}
+
+/** Per-option result entry returned by /submitPolls and /viewPollResults, keyed by option id */
+interface PollOptionResult {
+	voted: boolean;
+	votedUsers: number;
+}
+
+/** POST /submitPolls response */
+interface SubmitPollResult {
+	/** whether the vote registered */
+	__voted: boolean;
+	/** new total participant count */
+	__participants: number;
+	/** per-option results keyed by option id */
+	[optionId: string]: PollOptionResult | boolean | number;
+}
+
+/** POST /viewPollResults response — per-option results keyed by option id */
+interface PollResultsResult {
+	[optionId: string]: PollOptionResult;
+}
+
+/** Poll payload attached to POST /post when creating a poll (Android Poll.getNetworkData) */
+interface CreatePollRequest {
+	title: string;
+	/** whether multiple options can be selected */
+	multiple: boolean;
+	/** plain-text option labels */
+	options: string[];
 }
 
 interface FurzonaProfileStats {
@@ -483,6 +538,8 @@ interface CreatePostRequest {
 	text?: string;
 	/** media paths (from /upload) — field name unconfirmed */
 	media?: string[];
+	/** poll payload when the post is a poll (Android Poll.getNetworkData) */
+	poll?: CreatePollRequest;
 	[key: string]: unknown;
 }
 
@@ -879,6 +936,16 @@ interface ApiEndpoints {
 	safeModeView: {
 		body: SafeModeViewRequest;
 		response: boolean;
+	};
+	/** POST /submitPolls — cast votes on a poll */
+	submitPolls: {
+		body: SubmitPollRequest;
+		response: SubmitPollResult;
+	};
+	/** POST /viewPollResults — reveal per-option results for a poll */
+	viewPollResults: {
+		body: ViewPollResultsRequest;
+		response: PollResultsResult;
 	};
 }
 
