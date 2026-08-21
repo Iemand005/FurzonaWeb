@@ -333,9 +333,7 @@ class Furzona extends RequestService {
 	 * @param {string[]} endpoints
 	 * @returns {Promise<ProbeResult[]>}
 	 */
-	async probeAllBlast(endpoints) {
-		return (await Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })))).filter(result => result.methods.length > 0);
-	}
+	async probeAllBlast(endpoints) { return (await Promise.all(endpoints.map(async endpoint => ({ endpoint, methods: await this.probe(endpoint) })))).filter(result => result.methods.length > 0); }
 	/**
 	 * @param {string[]} endpoints
 	 * @param {number} timeout
