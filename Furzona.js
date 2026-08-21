@@ -401,9 +401,7 @@ class Furzona extends RequestService {
 		return this.request("upload", "POST", formData);
 	}
 
-	async deleteAccount() {
-		return this.delete("user");
-	}
+	async deleteAccount() { return this.delete("user"); }
 
 	/**
 	 * Search posts and users. Accepts a plain query string or an options object
