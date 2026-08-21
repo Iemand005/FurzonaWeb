@@ -171,227 +171,47 @@ class Furzona extends RequestService {
 		console.log("Is Logged In ", this.isLoggedIn);
 	}
 
-	async loadSettings() {
-		const settings = await this.getSettings();
-
-		this._contentUrl = settings.contentUrl;
-		return settings;
-	}
-
-	async getSettings() {
-		return this.get("settings");
-	}
-
-	/**
-	 * @param {string} email 
-	 * @param {string} password 
-	 */
-	async login(email, password) {
-
-		const response = await this.post("login", { email, password });
-
-		this.token = response.s;
-		this.user = response;
-
-		return response;
-	}
-	/**
-	 * @param {number} date 
-	 * @param {string} category 
-	 * @returns 
-	 */
-	async getPosts(date = 0, category) {
-		if (!category) return this.post("posts", date ? { date } : {});
-		return this.post("posts", { date: date || undefined, category });
-	}
-	/**
-	 * Fetch posts by a single user.
-	 * @param {string} userId
-	 * @param {number} [date] epoch ms — posts before this timestamp (pagination)
-	 * @param {string} [category]
-	 * @returns {Promise<FurzonaPost[]>}
-	 */
-	async getUserPosts(userId, date = 0, category) {
-		return this.post(["posts", userId], { date: date || undefined, category });
-	}
-	/**
-	 * @param {PostType} type post type discriminator
-	 * @param {object} [fields]
-	 */
-	async createPost(type, fields = {}) {
-		return this.post("post", { type, ...fields });
-	}
-	/**
-	 * @param {string} email
-	 * @param {string} password
-	 */
-	async createUser(email, password) {
-		const response = await this.post("user", { email, password, gte16: true });
-		return response;
-	}
-	/** @param {string} id  */
-	async getProfile(id) { return this.get(["profile", id]); }
-	/** @param {string} id  */
-	async getPost(id) { return this.get(["post", id]); }
-	/** @param {string} post  */
-	async likePost(post) { return this.post("favorite", { post }); }
-	/** @param {string} post  */
-	async unlikePost(post) { return this.post("unfavorite", { post }); }
-	/** @param {string} comment  */
-	async likeComment(comment) { return this.post("likeComment", { comment }); }
-	/** @param {string} comment  */
-	async unlikeComment(comment) { return this.post("unlikeComment", { comment }); }
-	/** @param {string} post  */
-	async getComments(post) {
-		return this.post(["commentLevels", post]);
-	}
-	/**
-	 * @param {string} post
-	 * @param {string} content
-	 */
-	async createComment(post, content) {
-		return this.post("comment", { post, content });
-	}
-	/** @param {string} userId */
-	async follow(userId) {
-		return this.post("follow", { userId });
-	}
-	/** @param {string} userId */
-	async unfollow(userId) {
-		return this.post("unfollow", { userId });
-	}
-	/** @param {string} userId */
-	async block(userId) {
-		return this.post("block", { user: userId });
-	}
-	/** @param {string} userId */
-	async unblock(userId) {
-		return this.post("unblock", { user: userId });
-	}
-	/** @param {string} userId @param {string} reason @param {number} period */
-	async banUser(userId, reason, period) {
-		return this.post("ban", { userId, reason, period });
-	}
-	/** @param {string} userId */
-	async unbanUser(userId) {
-		return this.post("unban", { userId });
-	}
-	/** @param {string} id  */
-	async getUser(id) {
-		return this.get(["user", id]);
-	}
-	/**
-	 * @param {string} q
-	 * @param {{ nsfw?: number; hidden?: number; catSelector?: number; warnSelector?: number; nsfwSelector?: number }} [opts]
-	 */
-	async search(q, opts = {}) {
-		return this.post("search", {
-			q,
-			nsfw: 0,
-			hidden: 0,
-			catSelector: 0,
-			warnSelector: 0,
-			nsfwSelector: 0,
-			...opts
-		});
-	}
-	/**
-	 * Request a password reset for an account.
-	 * @param {string} email
-	 * @returns {Promise<boolean>}
-	 */
-	async forgotPassword(email) {
-		return this.post("forgotPassword", { email });
-	}
-	/** @param {string} userId */
-	async getFollowers(userId) {
-		return this.post("followers", { userId });
-	}
-	/** @param {string} userId */
-	async getFollowing(userId) {
-		return this.post("following", { userId });
-	}
-	/** @param {string} id */
-	async deletePost(id) {
-		return this.delete(["post", id]);
-	}
-	/**
-	 * Edit a post.
-	 * @param {string} id
-	 * @param {CreatePostRequest} fields
-	 * @returns {Promise<FurzonaPost>}
-	 */
-	async updatePost(id, fields) {
-		return this.put(["post", id], fields);
-	}
-	/** @param {string} id */
-	async deleteComment(id) {
-		return this.delete(["comment", id]);
-	}
-	/** @returns {Promise<FurzonaNotification[]>} */
-	async getNotifications() {
-		return this.post("notifications");
-	}
-	/**
-	 * Fetch a single notification's data by id.
-	 * @param {string} id
-	 * @returns {Promise<FurzonaNotificationResponse>}
-	 */
-	async getNotificationData(id) {
-		return this.get(["data", id]);
-	}
-	/** @returns {Promise<FurzonaChat[]>} */
-	async getChats() {
-		return this.post("chats");
-	}
-	/** @param {string} userId */
-	async startChat(userId) {
-		return this.post("chat", { userId });
-	}
-	/**
-	 * @param {string} text
-	 * @param {string} [chat]
-	 */
-	async sendMessage(text, chat) {
-		return this.post("message", chat ? { text, chat } : { text });
-	}
-	/** @param {string} chat */
-	async muteChat(chat) {
-		return this.post("mute", { chat });
-	}
-	/** @param {string} chat */
-	async unmuteChat(chat) {
-		return this.post("unmute", { chat });
-	}
-	/** @param {string} chat */
-	async sendTyping(chat) {
-		return this.post("chatTyping", { chat });
-	}
-	/**
-	 * Fetch group/GC details.
-	 * @param {string} chat
-	 * @returns {Promise<unknown>}
-	 */
-	async getGroupInfo(chat) {
-		return this.post("groupInfo", { chat });
-	}
-	/**
-	 * Edit a group/GC. Allowed fields are unconfirmed.
-	 * @param {string} chat
-	 * @param {object} [fields]
-	 * @returns {Promise<unknown>}
-	 */
-	async editGroup(chat, fields = {}) {
-		return this.post("editGroup", { chat, ...fields });
-	}
-	/** @param {number} type */
-	async subscribe(type) {
-		return this.post("subscribe", { type });
-	}
-	/** @returns {Promise<FurzonaBadge[]>} */
-	async getBadges() {
-		return this.get("badges");
-	}
+	async loadSettings() { const settings = await this.getSettings(); this._contentUrl = settings.contentUrl; return settings; }
+	async getSettings() { return this.get("settings"); }
+	async login(/** @type {string} */email, /** @type {string} */password) { const response = await this.post("login", { email, password }); this.token = response.s; this.user = response; return response; }
+	async getPosts(/** @type {number} */date = 0, /** @type {string} */category) { if (!category) return this.post("posts", date ? { date } : {}); return this.post("posts", { date: date || undefined, category }); }
+	async getUserPosts(/** @type {string} */userId, /** @type {number} */date = 0, /** @type {string} */category) { return this.post(["posts", userId], { date: date || undefined, category }); }
+	async createPost(/** @type {PostType} */type, /** @type {Omit<CreatePostRequest, "type">} */fields = {}) { return this.post("post", { type, ...fields }); }
+	async createUser(/** @type {string} */email, /** @type {string} */password) { return this.post("user", { email, password, gte16: true }); }
+	async getProfile(/** @type {string} */id) { return this.get(["profile", id]); }
+	async getPost(/** @type {string} */id) { return this.get(["post", id]); }
+	async likePost(/** @type {string} */post) { return this.post("favorite", { post }); }
+	async unlikePost(/** @type {string} */post) { return this.post("unfavorite", { post }); }
+	async likeComment(/** @type {string} */comment) { return this.post("likeComment", { comment }); }
+	async unlikeComment(/** @type {string} */comment) { return this.post("unlikeComment", { comment }); }
+	async getComments(/** @type {string} */post) { return this.post(["commentLevels", post]); }
+	async createComment(/** @type {string} */post, /** @type {string} */content) { return this.post("comment", { post, content }); }
+	async follow(/** @type {string} */userId) { return this.post("follow", { userId }); }
+	async unfollow(/** @type {string} */userId) { return this.post("unfollow", { userId }); }
+	async block(/** @type {string} */userId) { return this.post("block", { user: userId }); }
+	async unblock(/** @type {string} */userId) { return this.post("unblock", { user: userId }); }
+	async banUser(/** @type {string} */userId, /** @type {string} */reason, /** @type {number} */period) { return this.post("ban", { userId, reason, period }); }
+	async unbanUser(/** @type {string} */userId) { return this.post("unban", { userId }); }
+	async getUser(/** @type {string} */id) { return this.get(["user", id]); }
+	async search(/** @type {string} */q, /** @type {{ nsfw?: number; hidden?: number; catSelector?: number; warnSelector?: number; nsfwSelector?: number }} */opts = {}) { return this.post("search", { q, nsfw: 0, hidden: 0, catSelector: 0, warnSelector: 0, nsfwSelector: 0, ...opts }); }
+	async forgotPassword(/** @type {string} */email) { return this.post("forgotPassword", { email }); }
+	async getFollowers(/** @type {string} */userId) { return this.post("followers", { userId }); }
+	async getFollowing(/** @type {string} */userId) { return this.post("following", { userId }); }
+	async deletePost(/** @type {string} */id) { return this.delete(["post", id]); }
+	async updatePost(/** @type {string} */id, /** @type {CreatePostRequest} */fields) { return this.put(["post", id], fields); }
+	async deleteComment(/** @type {string} */id) { return this.delete(["comment", id]); }
+	async getNotifications() { return this.post("notifications"); }
+	async getNotificationData(/** @type {string} */id) { return this.get(["data", id]); }
+	async getChats() { return this.post("chats"); }
+	async startChat(/** @type {string} */userId) { return this.post("chat", { userId }); }
+	async sendMessage(/** @type {string} */text, /** @type {string} */chat) { return this.post("message", chat ? { text, chat } : { text }); }
+	async muteChat(/** @type {string} */chat) { return this.post("mute", { chat }); }
+	async unmuteChat(/** @type {string} */chat) { return this.post("unmute", { chat }); }
+	async sendTyping(/** @type {string} */chat) { return this.post("chatTyping", { chat }); }
+	async getGroupInfo(/** @type {string} */chat) { return this.post("groupInfo", { chat }); }
+	async editGroup(/** @type {string} */chat, /** @type {EditGroupRequest} */fields = {}) { return this.post("editGroup", { chat, ...fields }); }
+	async subscribe(/** @type {number} */type) { return this.post("subscribe", { type }); }
+	async getBadges() { return this.get("badges"); }
 	async upload(/** @type {FormData} */formData) { return this.request("upload", "POST", formData); }
 	async deleteAccount() { return this.delete("user"); }
 	async searchUsers(/** @type {string} */query) { return this.post("users", { query }); }
