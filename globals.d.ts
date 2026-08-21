@@ -81,9 +81,20 @@ interface FurzonaSettings {
 	smv?: boolean;
 }
 
-/** Shape from the Android client's Ban.parseBan — exact fields unconfirmed */
+/** Ban object from GET /settings `bans` (Android Ban.parseBan) */
 interface FurzonaBan {
-	[key: string]: unknown;
+	id: string;
+	/** ban type discriminator — defaults 0 when absent/null */
+	type: number;
+	reason: string;
+	/** when the ban expires — date string */
+	until: string;
+	/** mod/admin who issued the ban */
+	issuer: FurzonaPostAuthor;
+	/** whether the ban has been lifted — defaults false when absent/null */
+	unbanned: boolean;
+	createdAt: string; // ISO date string
+	updatedAt: string; // ISO date string
 }
 
 /** Shape from the Android client's Emoji.parseEmoji — exact fields unconfirmed */
