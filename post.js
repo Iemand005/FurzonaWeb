@@ -267,7 +267,16 @@ if (editBtn && editForm && id) {
 		showEditStatus("Updating…");
 		try {
 			const updated = await furzona.editPost(id, fields);
-			applyPostEdits(updated && typeof updated === "object" && updated.id ? { ...currentPost, ...updated } : { ...currentPost, ...fields, t: fields.title ?? currentPost.t, c: fields.content ?? currentPost.c, d: fields.description ?? currentPost.d });
+			if (updated && typeof updated === "object" && updated.id) {
+				applyPostEdits({ ...currentPost, ...updated });
+			} else {
+				applyPostEdits({
+					...currentPost,
+					t: "title" in fields ? fields.title : currentPost.t,
+					c: "content" in fields ? fields.content : currentPost.c,
+					d: "description" in fields ? fields.description : currentPost.d
+				});
+			}
 			closeEditForm();
 		} catch (error) {
 			console.error("Failed to update post:", error);
