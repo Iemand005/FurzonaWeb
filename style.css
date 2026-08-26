@@ -206,14 +206,15 @@ button:disabled, button:disabled:hover {
 
 	/* Post */
 	body .post {
-		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+		background: linear-gradient(180deg, #e8eaed 0%, #f3f4f6 100%);
 	}
 
 	body .post h2,
 	.post-card h2,
 	.post-card #post-text,
 	.comment-text,
-	.bio {
+	.bio,
+	.name {
 		color: #1c1e21;
 	}
 
