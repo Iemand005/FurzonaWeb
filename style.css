@@ -205,11 +205,11 @@ button:disabled, button:disabled:hover {
 	}
 
 	/* Post */
-	.post {
+	body .post {
 		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
 	}
 
-	.post h2,
+	body .post h2,
 	.post-card h2,
 	.post-card #post-text,
 	.comment-text,
