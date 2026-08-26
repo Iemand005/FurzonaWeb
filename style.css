@@ -209,14 +209,8 @@ button:disabled, button:disabled:hover {
 		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
 	}
 
-	.post h2 {
-		color: #1c1e21;
-	}
-
-	.post-card h2 {
-		color: #1c1e21;
-	}
-
+	.post h2,
+	.post-card h2,
 	.post-card #post-text {
 		color: #1c1e21;
 	}
