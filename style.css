@@ -166,7 +166,11 @@ button:disabled, button:disabled:hover {
 	}
 	
 	/* Text Color */
-	html, body, button, .input, select {
+	html, body, button, select {
+		color: #1c1e21;
+	}
+
+	body .input {
 		color: #1c1e21;
 	}
 
@@ -247,6 +251,10 @@ button:disabled, button:disabled:hover {
 	.stat,
 	.comment {
 		background: #f3f4f6;
+	}
+
+	.comment-form button {
+		padding: 12px 20px;
 	}
 
 	.input::placeholder {
