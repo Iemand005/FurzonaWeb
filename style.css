@@ -160,47 +160,51 @@ button:disabled, button:disabled:hover {
 }
 
 @media (prefers-color-scheme: light) {
-	/* :root {
-		--bg: #ffffff;
-		--bg-raised: #f3f4f6;
-		--bg-sunken: #f3f4f6;
-		--bg-btn: #e4e6eb;
-		--bg-btn-hover: #d0d3da;
-		--bg-btn-disabled: #ebecef;
-		--text: #1c1e21;
-		--text-dim: #55606e;
-		--text-faint: #8a8f98;
-		--border: rgba(0, 0, 0, 0.12);
-		--shadow-card: 0 10px 24px rgba(0, 0, 0, 0.10);
-	} */
-
 	/* Background Color */
 	html, body {
 		background-color: #ffffff;
 	}
 	
 	/* Text Color */
-	html, body, button {
-		color: black;
+	html, body, button, .input, select {
+		color: #1c1e21;
 	}
 
 	/* Button Background Color */
 	button, a.login-link, .profile-row .pfp, .avatar {
-		background: #f3f4f6;
+		background: #e4e6eb;
 	}
 
-	/* #f3f4f6 --bg-btn-disabled*/
+	button:hover, a.login-link:hover {
+		background: #d0d3da;
+	}
+
+	/* Button Disabled */
 	button:disabled, button:disabled:hover {
 		background: #ebecef;
 		color: #8a8f98;
 	}
 
+	#login-form button[type="submit"] {
+		background: #d0d3da;
+	}
+
+	#login-form button[type="submit"]:hover {
+		background: #b8bcc6;
+	}
+
 	body header {
 		background: linear-gradient(to top, transparent 0, rgb(195 195 195) 60px), rgb(174 174 174 / 81%);
-		
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 	}
 
+	/* Card */
+	.card {
+		background: #f3f4f6;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+	}
+
+	/* Post */
 	.post {
 		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
 	}
@@ -209,21 +213,106 @@ button:disabled, button:disabled:hover {
 		color: #1c1e21;
 	}
 
+	.post-card h2 {
+		color: #1c1e21;
+	}
+
+	.post-card #post-text {
+		color: #1c1e21;
+	}
+
+	/* Post page media background */
+	#post-media img {
+		background: #e4e6eb;
+	}
+
+	/* Like Button */
 	.like-btn.liked {
 		color: #e0426f;
 		background: #ffe3ea;
 		border-color: #ff8aac55;
 	}
 
+	/* Invert icon colors for light bg */
 	header button:not(.profile-btn) img,
 	.like-btn:not(.liked) img {
 		filter: brightness(0);
 	}
 
+	/* Dim / secondary text */
 	.profile p,
 	.meta,
-	.post .post-desc {
+	.post .post-desc,
+	.field,
+	.stat span,
+	.comment .meta,
+	#post-comments h3 {
 		color: #55606e;
+	}
+
+	/* Primary body text in specific elements */
+	.comment-text,
+	.bio {
+		color: #1c1e21;
+	}
+
+	/* Input */
+	.input {
+		background: #f3f4f6;
+	}
+
+	.input::placeholder {
+		color: #8a8f98;
+	}
+
+	.input:focus {
+		outline-color: #d0d3da;
+	}
+
+	/* Stat */
+	.stat {
+		background: #f3f4f6;
+	}
+
+	/* Comment */
+	.comment {
+		background: #f3f4f6;
+	}
+
+	.comment .pfp {
+		background: #e4e6eb;
+	}
+
+	/* Avatar border */
+	.avatar {
+		border-color: #f3f4f6;
+	}
+
+	/* Scrollbar */
+	html, body, * {
+		scrollbar-color: #e4e6eb #ffffff;
+	}
+
+	*::-webkit-scrollbar-track {
+		background: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: #e4e6eb;
+		border-color: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background: #d0d3da;
+	}
+
+	*::-webkit-scrollbar-corner {
+		background: #ffffff;
+	}
+
+	/* Profile hover */
+	.profile:hover {
+		background: #e4e6eb44;
 	}
 }
 
