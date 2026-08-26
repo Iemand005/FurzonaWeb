@@ -428,7 +428,6 @@ button:disabled:hover {
 @supports (top: env(titlebar-area-y)) {
 	header button {
 		-webkit-app-region: no-drag;
-		app-region: no-drag;
 	}
 }
 
