@@ -171,7 +171,7 @@ button:disabled, button:disabled:hover {
 	}
 
 	/* Button Background Color */
-	button, a.login-link, .profile-row .pfp, .avatar {
+	button, a.login-link, .profile-row .pfp, .avatar, .comment .pfp, #post-media img {
 		background: #e4e6eb;
 	}
 
@@ -211,13 +211,10 @@ button:disabled, button:disabled:hover {
 
 	.post h2,
 	.post-card h2,
-	.post-card #post-text {
+	.post-card #post-text,
+	.comment-text,
+	.bio {
 		color: #1c1e21;
-	}
-
-	/* Post page media background */
-	#post-media img {
-		background: #e4e6eb;
 	}
 
 	/* Like Button */
@@ -244,14 +241,10 @@ button:disabled, button:disabled:hover {
 		color: #55606e;
 	}
 
-	/* Primary body text in specific elements */
-	.comment-text,
-	.bio {
-		color: #1c1e21;
-	}
-
 	/* Input */
-	.input {
+	.input,
+	.stat,
+	.comment {
 		background: #f3f4f6;
 	}
 
@@ -260,55 +253,6 @@ button:disabled, button:disabled:hover {
 	}
 
 	.input:focus {
-		outline-color: #d0d3da;
-	}
-
-	/* Stat */
-	.stat {
-		background: #f3f4f6;
-	}
-
-	/* Comment */
-	.comment {
-		background: #f3f4f6;
-	}
-
-	.comment .pfp {
-		background: #e4e6eb;
-	}
-
-	/* Avatar border */
-	.avatar {
-		border-color: #f3f4f6;
-	}
-
-	/* Scrollbar */
-	html, body, * {
-		scrollbar-color: #e4e6eb #ffffff;
-	}
-
-	*::-webkit-scrollbar-track {
-		background: #ffffff;
-	}
-
-	*::-webkit-scrollbar-thumb {
-		background: #e4e6eb;
-		border-color: #ffffff;
-	}
-
-	*::-webkit-scrollbar-thumb:hover {
-		background: #d0d3da;
-	}
-
-	*::-webkit-scrollbar-corner {
-		background: #ffffff;
-	}
-
-	/* Profile hover */
-	.profile:hover {
-		background: #e4e6eb44;
-	}
-}
 
 body {
 	overflow: auto;
