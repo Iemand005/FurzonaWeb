@@ -253,6 +253,10 @@ button:disabled, button:disabled:hover {
 		background: #f3f4f6;
 	}
 
+	body .comment-form .input {
+		border: 1px solid #d0d3da;
+	}
+
 	.comment-form button {
 		padding: 12px 20px;
 	}
