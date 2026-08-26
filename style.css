@@ -170,7 +170,7 @@ button:disabled, button:disabled:hover {
 		color: #1c1e21;
 	}
 
-	body .input {
+	body input {
 		color: #1c1e21;
 	}
 
@@ -247,13 +247,13 @@ button:disabled, button:disabled:hover {
 	}
 
 	/* Input */
-	.input,
+	input,
 	.stat,
 	.comment {
 		background: #f3f4f6;
 	}
 
-	body .comment-form .input {
+	body .comment-form input {
 		border: 1px solid #d0d3da;
 	}
 
@@ -261,11 +261,11 @@ button:disabled, button:disabled:hover {
 		padding: 12px 20px;
 	}
 
-	.input::placeholder {
+	input::placeholder {
 		color: #8a8f98;
 	}
 
-	.input:focus {
+	input:focus {
 		outline-color: #d0d3da;
 	}
 
