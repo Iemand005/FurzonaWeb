@@ -210,11 +210,11 @@ button:disabled, button:disabled:hover {
 	}
 
 	body .post h2,
-	.post-card h2,
-	.post-card #post-text,
-	.comment-text,
-	.bio,
-	.name {
+	body .post-card h2,
+	body .post-card #post-text,
+	body .comment-text,
+	body .bio,
+	body .name {
 		color: #1c1e21;
 	}
 
@@ -232,9 +232,9 @@ button:disabled, button:disabled:hover {
 	}
 
 	/* Dim / secondary text */
-	.profile p,
-	.meta,
-	.post .post-desc,
+	body .profile p,
+	body .meta,
+	body .post .post-desc,
 	.field,
 	.stat span,
 	.comment .meta,
