@@ -253,6 +253,38 @@ button:disabled, button:disabled:hover {
 	}
 
 	.input:focus {
+		outline-color: #d0d3da;
+	}
+
+	/* Avatar border */
+	.avatar {
+		border-color: #f3f4f6;
+	}
+
+	/* Scrollbar */
+	html, body, * {
+		scrollbar-color: #e4e6eb #ffffff;
+	}
+
+	*::-webkit-scrollbar-track,
+	*::-webkit-scrollbar-corner {
+		background: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: #e4e6eb;
+		border-color: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background: #d0d3da;
+	}
+
+	/* Profile hover */
+	.profile:hover {
+		background: #e4e6eb44;
+	}
+}
 
 body {
 	overflow: auto;
