@@ -1,4 +1,5 @@
-const CACHE_NAME = 'app-cache-v2.8';
+const CACHE_NAME = 'app-cache-v3';
+const MEDIA_CACHE_NAME = 'media-cache-v1';
 const ASSETS = [
 	'./',
 	'./index.html',
@@ -53,7 +54,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
 	event.waitUntil((async () => {
 		const keys = await caches.keys();
-		await Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)));
+		await Promise.all(keys.filter(key => key !== CACHE_NAME && key !== MEDIA_CACHE_NAME).map(key => caches.delete(key)));
 		await self.clients.claim();
 	}));
 });
