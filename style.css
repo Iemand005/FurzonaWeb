@@ -144,7 +144,7 @@ html, body {
 }
 
 /* Text Color */
-html, body, button, .input, select {
+html, body, button, input, select {
 	color: #f3f6fb;
 }
 
@@ -303,7 +303,7 @@ body {
 	overflow: auto;
 }
 
-header, button, a.login-link, .stat, .banner, .avatar, .comment, .input, .card, #post-comments, #post-comments {
+header, button, a.login-link, .stat, .banner, .avatar, .comment, input, .card, #post-comments, #post-comments {
 	border: 1px solid rgba(255,255,255,.08);
 }
 
@@ -474,7 +474,7 @@ button:disabled:hover {
 	box-shadow: var(--shadow-card);
 }
 
-.input {
+input {
 	width: 100%;
 	/* background: var(--bg-sunken); */
 	padding: 12px 14px;
@@ -482,11 +482,11 @@ button:disabled:hover {
 	/* color: white; */
 }
 
-.input::placeholder {
+input::placeholder {
 	color: var(--text-faint);
 }
 
-.input:focus {
+input:focus {
 	outline: 2px solid var(--bg-btn-hover);
 	outline-offset: 1px;
 }
@@ -669,7 +669,7 @@ main {
 	transition: filter 100ms linear;
 }
 
-img, a, .banner, .profile, button, .stat, .input, .comment {
+img, a, .banner, .profile, button, .stat, input, .comment {
 	border-radius: 14px;
 }
 
@@ -979,8 +979,8 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 	margin-left: 10px;
 }
 
-.search-form .input,
-.comment-form .input {
+.search-form input,
+.comment-form input {
 	flex: 1;
 }
 
