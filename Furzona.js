@@ -195,7 +195,7 @@ class Furzona extends RequestService {
 	async getUser(/** @type {string} */id) { return this.get(["user", id]); }
 	async search(/** @type {string} */q, /** @type {{ nsfw?: number; hidden?: number; catSelector?: number; warnSelector?: number; nsfwSelector?: number }} */opts = {}) { return this.post("search", { q, nsfw: 0, hidden: 0, catSelector: 0, warnSelector: 0, nsfwSelector: 0, ...opts }); }
 	async forgotPassword(/** @type {string} */email) { return this.post("forgotPassword", { email }); }
-	async getFollowers(/** @type {string} */userId) { return this.post("followers", { userId }); }
+	async getFollowers(/** @type {string} */userId) { return this.post("followers", { userId: userId || this.user && this.user.id }); }
 	async getFollowing(/** @type {string} */userId) { return this.post("following", { userId }); }
 	async deletePost(/** @type {string} */id) { return this.delete(["post", id]); }
 	async updatePost(/** @type {string} */id, /** @type {CreatePostRequest} */fields) { return this.put(["post", id], fields); }
