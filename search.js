@@ -109,12 +109,7 @@ const createdPost = (item) => {
 		clickedName = name;
 		clickedTitle = title;
 		clickedImage = image;
-		const params = new URLSearchParams({ id: item.id, username: item.u.username });
-		if (item.u.id) params.set("author", item.u.id);
-		if (item.u.i) params.set("avatar", furzona.getProfilePictureUrl(item.u));
-		if (item.t) params.set("title", item.t);
-		if (item.m && item.m.length > 0) params.set("img", furzona.getMediaUrl(item.m[0]));
-		window.location.href = "post.html?" + params.toString();
+		window.openPost(item, image?.src);
 	};
 	return card;
 };

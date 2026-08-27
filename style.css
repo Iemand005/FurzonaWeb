@@ -670,6 +670,10 @@ main {
 	transition: filter 100ms linear;
 }
 
+#profile-banner {
+	background-color: gray;
+}
+
 img, a, .banner, .profile, button, .stat,
 input, select, textarea,
 .comment {

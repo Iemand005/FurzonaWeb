@@ -14,6 +14,25 @@ window.openProfile = (user) => {
 	window.location.href = "profile.html?" + params.toString();
 };
 
+/**
+ * Navigate to the post page, deriving the URL params from a post object.
+ * An optional pre-resolved `imageUrl` overrides the media derived from `post.m`.
+ * @param {{ id?: string, u?: { id?: string, i?: string, username?: string }, t?: string, m?: string[] } | null | undefined} post
+ * @param {string} [imageUrl]
+ */
+window.openPost = (post, imageUrl) => {
+	if (!post || !post.id) return;
+	const u = post.u || {};
+	const params = new URLSearchParams({ id: post.id });
+	if (u.id) params.set("author", u.id);
+	if (u.i) params.set("avatar", furzona.getProfilePictureUrl(u));
+	if (u.username) params.set("username", u.username);
+	if (post.t) params.set("title", post.t);
+	if (imageUrl) params.set("img", imageUrl);
+	else if (post.m && post.m.length) params.set("img", furzona.getMediaUrl(post.m[0]));
+	window.location.href = "post.html?" + params.toString();
+};
+
 document.addEventListener("DOMContentLoaded", () => {
 	const navSection = (() => {
 		const navEl = document.querySelector("header nav");

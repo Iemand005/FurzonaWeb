@@ -162,13 +162,7 @@ const likeButton = createLikeButton(post, { liked: !!post.z });
 			clickedPfp = null;
 			clickedName = null;
 			clickedPost = { id: post.id, authorId: post.u.id, pfp, username, title, image };
-			const postParams = new URLSearchParams({ id: post.id });
-			if (post.u.id) postParams.set("author", post.u.id);
-			if (post.u.i) postParams.set("avatar", furzona.getProfilePictureUrl(post.u));
-			if (post.u.username) postParams.set("username", post.u.username);
-			if (post.t) postParams.set("title", post.t);
-			if (image) postParams.set("img", image.src);
-			window.location.href = "post.html?" + postParams.toString();
+			window.openPost(post, image?.src);
 		};
 
 		return listItem;
