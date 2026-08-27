@@ -1,6 +1,7 @@
 const profileParams = new URLSearchParams(window.location.search);
 const profileId = profileParams.get("id");
 const bannerEl = document.getElementById("profile-banner");
+const profileTopEl = document.querySelector(".profile-top");
 const avatarEl = document.getElementById("profile-avatar");
 const nameEl = document.getElementById("profile-name");
 const metaEl = document.getElementById("profile-meta");
@@ -15,6 +16,17 @@ window.addEventListener("pageswap", (event) => {
 	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${profileId}`;
 	if (nameEl) nameEl.style.viewTransitionName = `name-${profileId}`;
 });
+
+const setBannerVisible = (visible) => {
+	if (bannerEl) bannerEl.style.display = visible ? "" : "none";
+	if (profileTopEl && profileTopEl.classList) profileTopEl.classList.toggle("banner", visible);
+};
+
+if (profileParams.get("banner") === "0") {
+	setBannerVisible(false);
+} else {
+	setBannerVisible(true);
+}
 
 if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", ev => ev.preventDefault());
 
@@ -54,7 +66,11 @@ function renderProfile(profile) {
 	if (bannerUrl) {
 		bannerEl.src = bannerUrl;
 		bannerEl.alt = `${user.username} banner`;
-	} else bannerEl.style.display = "none";
+		setBannerVisible(true);
+	} else {
+		bannerEl.style.display = "none";
+		if (profileTopEl && profileTopEl.classList) profileTopEl.classList.remove("banner");
+	}
 
 	avatarEl.src = avatarUrl;
 	avatarEl.alt = user.username;

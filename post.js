@@ -55,7 +55,7 @@ function renderPost(post) {
 	authorEl.onclick = () => {
 		const profileParams = new URLSearchParams({ id: user.id });
 		if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
-		if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
+		profileParams.set("banner", user.b ? furzona.getMediaUrl(user.b) : 0);
 		if (user.username) profileParams.set("username", user.username);
 		window.location.href = "profile.html?" + profileParams.toString();
 	};
@@ -108,7 +108,7 @@ function createCommentElement(comment) {
 	author.onclick = () => {
 		const profileParams = new URLSearchParams({ id: comment.u.id });
 		if (comment.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(comment.u));
-		if (comment.u.b) profileParams.set("banner", furzona.getMediaUrl(comment.u.b));
+		profileParams.set("banner", comment.u.b ? furzona.getMediaUrl(comment.u.b) : 0);
 		if (comment.u.username) profileParams.set("username", comment.u.username);
 		window.location.href = "profile.html?" + profileParams.toString();
 	};

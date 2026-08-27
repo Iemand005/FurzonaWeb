@@ -776,7 +776,15 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 
 .profile-top {
 	padding: 20px;
-	margin-top: -40px;
+	/* margin-top: -40px; */
+}
+
+.profile-top.banner {
+	width: auto;
+	height: auto;
+	object-fit: initial;
+	border: 0;
+	border-radius: 0;
 }
 
 .profile-top > *:not(:first-child) {
