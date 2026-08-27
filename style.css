@@ -583,11 +583,15 @@ main {
 
 	justify-content: center;
 
-	flex-direction: row;
+	flex-direction: column;
 }
 
 main >* {
 	flex: 1;
+}
+
+#error-container{
+	position: absolute;
 }
 
 #posts-list {
