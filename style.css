@@ -483,6 +483,7 @@ input, select, textarea {
 	/* color: white; */
 }
 
+/** .comment --bg-sunken */
 input, select, textarea,
 .comment, .stat {
 	background: #161b22;
