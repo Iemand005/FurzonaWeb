@@ -4,15 +4,10 @@ function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present,
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var params = new URLSearchParams(window.location.search);
-var id = params.get("id");
+var profileParams = new URLSearchParams(window.location.search);
+var profileId = profileParams.get("id");
 var bannerEl = document.getElementById("profile-banner");
+var profileTopEl = document.querySelector(".profile-top");
 var avatarEl = document.getElementById("profile-avatar");
 var nameEl = document.getElementById("profile-name");
 var metaEl = document.getElementById("profile-meta");
@@ -20,70 +15,106 @@ var bioEl = document.getElementById("profile-bio");
 var statsEl = document.getElementById("profile-stats");
 var followEl = document.getElementById("profile-follow");
 var badgeEl = document.getElementById("profile-badge");
+var tabForm = document.getElementById("tab-form");
 window.addEventListener("pageswap", function (event) {
-  if (!event.viewTransition || !id) return;
-  if (avatarEl) avatarEl.style.viewTransitionName = "avatar-".concat(id);
-  if (nameEl) nameEl.style.viewTransitionName = "name-".concat(id);
+  if (!event.viewTransition || !profileId) return;
+  if (avatarEl) avatarEl.style.viewTransitionName = "avatar-".concat(profileId);
+  if (nameEl) nameEl.style.viewTransitionName = "name-".concat(profileId);
+});
+var setBannerVisible = function setBannerVisible(visible) {
+  if (bannerEl) bannerEl.style.display = visible ? "" : "none";
+  if (profileTopEl && profileTopEl.classList) profileTopEl.classList.toggle("banner", visible);
+};
+if (profileParams.get("banner") === "0") {
+  setBannerVisible(false);
+} else {
+  setBannerVisible(true);
+}
+if (tabForm instanceof HTMLFormElement) tabForm.addEventListener("submit", function (ev) {
+  return ev.preventDefault();
 });
 
 /**
- * 
- * @param {FurzonaProfile} profile 
+ * @param {string} name
+ * @param {string | number} value
+ * @param {()=>void} [onCtick]
  */
+function createStatDisplay(name, value, onCtick) {
+  if (!statsEl) return;
+  var statDisplay = document.createElement("div");
+  statDisplay.className = "stat";
+  if (onCtick) {
+    statDisplay.classList.add("clickable");
+    statDisplay.onclick = onCtick;
+  }
+  var valueEl = document.createElement("strong");
+  var labelEl = document.createElement("span");
+  valueEl.textContent = value.toString();
+  labelEl.textContent = name;
+  statDisplay.appendChild(valueEl);
+  statDisplay.appendChild(labelEl);
+  statsEl.appendChild(statDisplay);
+}
+;
+
+/** @param {FurzonaProfile} profile */
 function renderProfile(profile) {
   if (!(bannerEl instanceof HTMLImageElement && avatarEl instanceof HTMLImageElement && nameEl instanceof HTMLElement)) return;
   var user = profile.user;
   var stats = profile.stats || {};
-  var bannerUrl = user.b ? furzona.getMediaUrl(user.b) : "https://placehold.co/1200x260/20212B/ffffff?text=" + encodeURIComponent(user.username);
+  var bannerUrl = user.b ? furzona.getMediaUrl(user.b) : null;
   var avatarUrl = furzona.getProfilePictureUrl(user);
-  bannerEl.src = bannerUrl;
-  bannerEl.alt = "".concat(user.username, " banner");
+  if (bannerUrl) {
+    bannerEl.src = bannerUrl;
+    bannerEl.alt = "".concat(user.username, " banner");
+    setBannerVisible(true);
+  } else {
+    bannerEl.style.display = "none";
+    if (profileTopEl && profileTopEl.classList) profileTopEl.classList.remove("banner");
+  }
   avatarEl.src = avatarUrl;
   avatarEl.alt = user.username;
   nameEl.textContent = user.username;
   if (badgeEl) {
-    var roles = {
-      1: {
-        cls: "moderator-badge",
-        text: "Moderator"
-      },
-      2: {
-        cls: "admin-badge",
-        text: "Admin"
-      }
-    };
-    var role = roles[user.p];
-    if (role) {
-      badgeEl.className = role.cls;
-      badgeEl.textContent = role.text;
+    switch (user.p) {
+      case 1:
+        badgeEl.className = "moderator-badge";
+        badgeEl.textContent = "Moderator";
+        break;
+      case 2:
+        badgeEl.className = "admin-badge";
+        badgeEl.textContent = "Admin";
+        break;
+    }
+    badgeEl.hidden = !!user.p;
+    if (user.t) {
+      var badge = furzona.parseBadge(user.t);
+      badgeEl.textContent = badge.name;
+      badgeEl.style.color = badge.foregroundColor;
+      badgeEl.style.backgroundColor = badge.backgroundColor;
       badgeEl.hidden = false;
-    } else {
-      badgeEl.hidden = true;
     }
   }
   var renderMeta = function renderMeta() {
+    if (!metaEl) return;
     metaEl.textContent = "ID: ".concat(user.id, " \u2022 ").concat(profile.following ? "Following" : "Not following", " \u2022 ").concat(profile.online ? "Online" : "Offline");
   };
   renderMeta();
-  bioEl.textContent = user.d || "No bio yet.";
-  statsEl.innerHTML = [["Posts", stats.posts], ["Liked", stats.liked], ["Likes", stats.likes], ["Comments", stats.comments], ["Followers", stats.followers], ["Following", stats.followed]].map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-      label = _ref2[0],
-      value = _ref2[1];
-    return "\n\t\t<div class=\"stat".concat(label === "Posts" ? " clickable" : "", "\"").concat(label === "Posts" ? " data-user-posts=\"".concat(user.id, "\"") : "", ">\n\t\t\t<strong>").concat(value !== null && value !== void 0 ? value : 0, "</strong>\n\t\t\t<span>").concat(label, "</span>\n\t\t</div>\n\t");
-  }).join("");
-  var postsStat = statsEl.querySelector(".stat.clickable");
-  if (postsStat) {
-    postsStat.onclick = function () {
-      var profileParams = new URLSearchParams({
-        id: user.id
-      });
-      if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
-      if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
-      if (user.username) profileParams.set("username", user.username);
-      window.location.href = "posts.html?" + profileParams.toString();
-    };
-  }
+  if (bioEl) bioEl.textContent = user.d || "No bio yet.";
+  createStatDisplay("Posts", stats.posts, function () {
+    var profileParams = new URLSearchParams({
+      id: user.id
+    });
+    if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
+    if (user.b) profileParams.set("banner", furzona.getMediaUrl(user.b));
+    if (user.username) profileParams.set("username", user.username);
+    window.location.href = "posts.html?" + profileParams.toString();
+  });
+  createStatDisplay("Liked", stats.liked);
+  createStatDisplay("Likes", stats.likes);
+  createStatDisplay("Comments", stats.comments);
+  createStatDisplay("Followers", stats.followers);
+  createStatDisplay("Following", stats.followed);
   if (followEl) {
     var btn = document.createElement("button");
     btn.type = "button";
@@ -132,15 +163,15 @@ function renderProfile(profile) {
   }
 }
 ;
-if (id) {
-  furzona.getProfile(id).then(function (profile) {
+if (profileId) {
+  furzona.getProfile(profileId).then(function (profile) {
     console.log("Profile data:", profile);
     renderProfile(profile);
   }).catch(function (error) {
     console.error("Failed to load profile:", error);
-    bioEl.textContent = "Could not load profile.";
+    if (bioEl) bioEl.textContent = "Could not load profile.";
   });
 } else {
   console.error("No profile id provided in the URL.");
-  bioEl.textContent = "No profile id provided.";
+  if (bioEl) bioEl.textContent = "No profile id provided.";
 }

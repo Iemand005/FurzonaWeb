@@ -141,7 +141,7 @@ const createdUser = (item) => {
 		clickedImage = null;
 		const params = new URLSearchParams({ id: item.id, username: item.username });
 		if (item.i) params.set("avatar", furzona.getProfilePictureUrl(item));
-		if (item.b) params.set("banner", furzona.getMediaUrl(item.b));
+		params.set("banner", item.b ? furzona.getMediaUrl(item.b) : 0);
 		window.location.href = "profile.html?" + params.toString();
 	};
 	return card;

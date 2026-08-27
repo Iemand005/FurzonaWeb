@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		button.addEventListener("click", () => {
 			const params = new URLSearchParams({ id: me.id });
 			if (me.i) params.set("avatar", furzona.getMediaUrl(me.i));
-			if (me.b) params.set("banner", furzona.getMediaUrl(me.b));
+			params.set("banner", me.b ? furzona.getMediaUrl(me.b) : 0);
 			if (me.username) params.set("username", me.username);
 			window.location.href = "profile.html?" + params.toString();
 		});

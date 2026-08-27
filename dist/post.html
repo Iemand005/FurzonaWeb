@@ -58,6 +58,16 @@
 				<img id="post-first-image" alt="Post media" data-transition="image" hidden>
 			</div>
 			<p id="post-text"></p>
+			<button type="button" id="post-edit-btn" hidden>Edit</button>
+			<form id="post-edit-form" hidden>
+				<label for="edit-title">Title</label>
+				<input class="input" type="text" id="edit-title" placeholder="Title" autocomplete="off">
+				<label for="edit-content">Content</label>
+				<textarea class="input" id="edit-content" rows="4" placeholder="Content"></textarea>
+				<p id="edit-status" class="meta" hidden></p>
+				<button type="submit">Update</button>
+				<button type="button" id="edit-cancel">Cancel</button>
+			</form>
 			<div id="post-actions"></div>
 			<div id="post-comments">
 				<h3>Comments</h3>

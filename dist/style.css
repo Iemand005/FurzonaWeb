@@ -144,7 +144,7 @@ html, body {
 }
 
 /* Text Color */
-html, body, button {
+html, body, button, .input, select {
 	color: #f3f6fb;
 }
 
@@ -160,70 +160,142 @@ button:disabled, button:disabled:hover {
 }
 
 @media (prefers-color-scheme: light) {
-	/* :root {
-		--bg: #ffffff;
-		--bg-raised: #f3f4f6;
-		--bg-sunken: #f3f4f6;
-		--bg-btn: #e4e6eb;
-		--bg-btn-hover: #d0d3da;
-		--bg-btn-disabled: #ebecef;
-		--text: #1c1e21;
-		--text-dim: #55606e;
-		--text-faint: #8a8f98;
-		--border: rgba(0, 0, 0, 0.12);
-		--shadow-card: 0 10px 24px rgba(0, 0, 0, 0.10);
-	} */
-
 	/* Background Color */
 	html, body {
 		background-color: #ffffff;
 	}
 	
 	/* Text Color */
-	html, body, button {
-		color: black;
+	html, body, button, select {
+		color: #1c1e21;
+	}
+
+	body input {
+		color: #1c1e21;
 	}
 
 	/* Button Background Color */
-	button, a.login-link, .profile-row .pfp, .avatar {
-		background: #f3f4f6;
+	button, a.login-link, .profile-row .pfp, .avatar, .comment .pfp, #post-media img {
+		background: #e4e6eb;
 	}
 
-	/* #f3f4f6 --bg-btn-disabled*/
+	button:hover, a.login-link:hover {
+		background: #d0d3da;
+	}
+
+	/* Button Disabled */
 	button:disabled, button:disabled:hover {
 		background: #ebecef;
 		color: #8a8f98;
 	}
 
+	#login-form button[type="submit"] {
+		background: #d0d3da;
+	}
+
+	#login-form button[type="submit"]:hover {
+		background: #b8bcc6;
+	}
+
 	body header {
 		background: linear-gradient(to top, transparent 0, rgb(195 195 195) 60px), rgb(174 174 174 / 81%);
-		
 		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 	}
 
-	.post {
-		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+	/* Card */
+	.card {
+		background: #f3f4f6;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
 	}
 
-	.post h2 {
+	/* Post */
+	body .post {
+		background: linear-gradient(180deg, #e8eaed 0%, #f3f4f6 100%);
+	}
+
+	body .post h2,
+	body .post-card h2,
+	body .post-card #post-text,
+	body .comment-text,
+	body .bio,
+	body .name {
 		color: #1c1e21;
 	}
 
+	/* Like Button */
 	.like-btn.liked {
 		color: #e0426f;
 		background: #ffe3ea;
 		border-color: #ff8aac55;
 	}
 
+	/* Invert icon colors for light bg */
 	header button:not(.profile-btn) img,
 	.like-btn:not(.liked) img {
 		filter: brightness(0);
 	}
 
-	.profile p,
-	.meta,
-	.post .post-desc {
+	/* Dim / secondary text */
+	body .profile p,
+	body .meta,
+	body .post .post-desc,
+	.field,
+	.stat span,
+	.comment .meta,
+	#post-comments h3 {
 		color: #55606e;
+	}
+
+	/* Input */
+	input,
+	.stat,
+	.comment {
+		background: #f3f4f6;
+	}
+
+	body .comment-form input {
+		border: 1px solid #d0d3da;
+	}
+
+	.comment-form button {
+		padding: 12px 20px;
+	}
+
+	input::placeholder {
+		color: #8a8f98;
+	}
+
+	input:focus {
+		outline-color: #d0d3da;
+	}
+
+	/* Avatar border */
+	.avatar {
+		border-color: #f3f4f6;
+	}
+
+	/* Scrollbar */
+	html, body, * {
+		scrollbar-color: #e4e6eb #ffffff;
+	}
+
+	*::-webkit-scrollbar-track,
+	*::-webkit-scrollbar-corner {
+		background: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: #e4e6eb;
+		border-color: #ffffff;
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background: #d0d3da;
+	}
+
+	/* Profile hover */
+	.profile:hover {
+		background: #e4e6eb44;
 	}
 }
 
@@ -324,6 +396,15 @@ header h1 {
 	font-size: clamp(1.5rem, 2vw, 2.25rem);
 }
 
+header > nav {
+	overflow-x: auto;
+    display: flex;
+}
+
+header > nav > button {
+	margin: 0 5px;
+}
+
 button, a.login-link {
 	display: inline-flex;
 	align-items: center;
@@ -398,6 +479,7 @@ button:disabled:hover {
 	background: var(--bg-sunken);
 	padding: 12px 14px;
 	font: inherit;
+	color: white;
 }
 
 .input::placeholder {
@@ -418,7 +500,6 @@ button:disabled:hover {
 @supports (top: env(titlebar-area-y)) {
 	header button {
 		-webkit-app-region: no-drag;
-		app-region: no-drag;
 	}
 }
 
@@ -494,6 +575,8 @@ main {
 	display: flex;
 
 	justify-content: center;
+
+	flex-direction: column;
 }
 
 #posts-list {
@@ -511,6 +594,39 @@ main {
     max-width: 100rem;
 	margin: 10px;
 	cursor: pointer;
+}
+
+#posts-header {
+    height: 10rem;
+}
+
+#posts-owner-avatar {
+	object-fit: cover;
+    height: 100px;
+}
+
+.tab-control > form {
+	justify-content: space-evenly;
+}
+
+.tab-control > form input {
+	background-color: red;
+	width: 100%;
+}
+
+.tab-control > .tab-contents {
+	display: flex;
+    width: 100%;
+
+	overflow-x: scroll;
+}
+
+.tab-contents > li {
+	width: 100%;
+
+	flex: 0 0 auto;
+
+	flex-shrink: 0;
 }
 
 .post {
@@ -597,6 +713,8 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 .login-card {
 	max-width: 420px;
 	padding: 24px;
+	width: 100%;
+    margin: auto;
 }
 
 .login-card h1 {
@@ -658,7 +776,15 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 
 .profile-top {
 	padding: 20px;
-	margin-top: -40px;
+	/* margin-top: -40px; */
+}
+
+.profile-top.banner {
+	width: auto;
+	height: auto;
+	object-fit: initial;
+	border: 0;
+	border-radius: 0;
 }
 
 .profile-top > *:not(:first-child) {

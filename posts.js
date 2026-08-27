@@ -21,7 +21,7 @@ if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
 		clickedOwner = postsOwnerAvatar;
 		const profileParams = new URLSearchParams({ id: userId });
 		if (avatar) profileParams.set("avatar", avatar);
-		if (params.get("banner")) profileParams.set("banner", params.get("banner"));
+		profileParams.set("banner", params.get("banner") || 0);
 		if (username) profileParams.set("username", username);
 		window.location.href = "profile.html?" + profileParams.toString();
 	};
@@ -118,7 +118,7 @@ if (postList instanceof HTMLUListElement) {
 			clickedPost = null;
 			const profileParams = new URLSearchParams({ id: post.u.id });
 			if (post.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(post.u));
-			if (post.u.b) profileParams.set("banner", furzona.getMediaUrl(post.u.b));
+			profileParams.set("banner", post.u.b ? furzona.getMediaUrl(post.u.b) : 0);
 			if (post.u.username) profileParams.set("username", post.u.username);
 			window.location.href = "profile.html?" + profileParams.toString();
 		};
