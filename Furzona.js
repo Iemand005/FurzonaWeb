@@ -196,12 +196,12 @@ class Furzona extends RequestService {
 	async search(/** @type {string} */q, /** @type {{ nsfw?: number; hidden?: number; catSelector?: number; warnSelector?: number; nsfwSelector?: number }} */opts = {}) { return this.post("search", { q, nsfw: 0, hidden: 0, catSelector: 0, warnSelector: 0, nsfwSelector: 0, ...opts }); }
 	async forgotPassword(/** @type {string} */email) { return this.post("forgotPassword", { email }); }
 	/**
-	 * 
-	 * @param {string} [[userId]]
-	 * @returns 
+	 * @param {string} [userId]
 	 */
 	async getFollowers(/** @type {string} */userId) {
-		return this.post("followers", { userId: userId || this.user && this.user.id }
+		if (!userId) userId = this.user?.id;
+		if (!userId) return [];
+		return this.post("followers", { userId }
 
 		);
 	}
