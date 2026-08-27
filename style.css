@@ -588,11 +588,12 @@ main {
 	align-items: center;
 }
 
-main >* {
+main > * {
 	flex: 1;
+	width: 100%;
 }
 
-#error-container{
+#error-container {
 	position: absolute;
 }
 
