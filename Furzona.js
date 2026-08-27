@@ -394,8 +394,6 @@ class Furzona extends RequestService {
 	}
 }
 
-const furzona = new Furzona;
-
 class FurzonaProber extends Furzona {
 
 	static STORAGE_KEY = "furzona-prober-endpoints";
@@ -466,4 +464,12 @@ class FurzonaProber extends Furzona {
 	}
 }
 
+const furzona = new Furzona;
 const furzonaProber = new FurzonaProber;
+
+module.exports = {
+    furzona,
+    furzonaProber,
+	Furzona,
+	FurzonaProber
+};
