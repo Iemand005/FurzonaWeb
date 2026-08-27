@@ -248,12 +248,13 @@ button:disabled, button:disabled:hover {
 
 	/* Input */
 	input,
+	select
 	.stat,
 	.comment {
 		background: #f3f4f6;
 	}
 
-	body .comment-form input {
+	body input, body select {
 		border: 1px solid #d0d3da;
 	}
 
@@ -669,7 +670,7 @@ main {
 	transition: filter 100ms linear;
 }
 
-img, a, .banner, .profile, button, .stat, input, .comment {
+img, a, .banner, .profile, button, .stat, input, select,  textarea, .comment {
 	border-radius: 14px;
 }
 
@@ -979,8 +980,7 @@ img, a, .banner, .profile, button, .stat, input, .comment {
 	margin-left: 10px;
 }
 
-.search-form input,
-.comment-form input {
+input {
 	flex: 1;
 }
 
