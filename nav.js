@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		navSection.appendChild(link);
 	};
 
+	let navPfpEl = null;
+	let navUserId = null;
+
 	const addProfileButton = () => {
 		const me = furzona.user;
 		if (!me || !furzona.isLoggedIn) return;
@@ -66,12 +69,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		const img = document.createElement("img");
 		img.alt = me.username || "My profile";
 		img.src = furzona.getProfilePictureUrl(me);
+		navPfpEl = img;
+		navUserId = me.id;
 		button.appendChild(img);
 		button.addEventListener("click", () => {
 			window.openProfile(me);
 		});
 		navSection.appendChild(button);
 	};
+
+	window.addEventListener("pageswap", (event) => {
+		if (!event.viewTransition || !navPfpEl || !navUserId) return;
+		let targetId = null;
+		const target = event.activation?.entry?.url;
+		if (target) {
+			const u = new URL(target);
+			if (u.pathname.endsWith("profile.html")) targetId = u.searchParams.get("id");
+		}
+		if (targetId !== navUserId) return;
+		navPfpEl.style.viewTransitionName = `avatar-${navUserId}`;
+		const cleanup = () => { navPfpEl.style.viewTransitionName = ""; };
+		event.viewTransition.ready.then(cleanup, cleanup);
+	});
 
 	const searchButton = document.getElementById("nav-search");
 	if (searchButton) {
