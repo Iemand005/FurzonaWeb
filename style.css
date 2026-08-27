@@ -258,7 +258,7 @@ button:disabled, button:disabled:hover {
 		border: 1px solid #d0d3da;
 	}
 
-	.comment-form button {
+	#post-comments > form button {
 		padding: 12px 20px;
 	}
 
@@ -510,7 +510,7 @@ input:focus {
 	#login-form,
 	#new-post-form,
 	.search-form,
-	.comment-form {
+	#post-comments > form {
 		gap: 10px;
 	}
 
@@ -541,7 +541,7 @@ input:focus {
 	.profile > *:not(:first-child),
 	.profile-top > *:not(:first-child),
 	.search-form > *:not(:first-child),
-	.comment-form > *:not(:first-child),
+	#post-comments > form > *:not(:first-child),
 	button > *:not(:first-child),
 	a.login-link > *:not(:first-child),
 	.profile-row > *:not(:first-child),
@@ -971,14 +971,14 @@ input, select, textarea,
 }
 
 .search-form,
-.comment-form {
+#post-comments > form {
 	display: flex;
 	max-width: 640px;
 	margin: 0 auto 24px;
 }
 
 .search-form > *:not(:first-child),
-.comment-form > *:not(:first-child) {
+#post-comments > form > *:not(:first-child) {
 	margin-left: 10px;
 }
 
@@ -986,7 +986,7 @@ input {
 	flex: 1;
 }
 
-.comment-form {
+#post-comments > form {
 	margin-bottom: 16px;
 }
 

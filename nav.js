@@ -16,8 +16,11 @@ window.openProfile = (user) => {
 
 document.addEventListener("DOMContentLoaded", () => {
 	const navSection = (() => {
-		const sections = document.querySelectorAll("nav");
-		return sections[0] || null;
+		const navEl = document.querySelector("header nav");
+		if (navEl) return navEl;
+		const searchBtn = document.getElementById("nav-search");
+		if (searchBtn?.parentElement) return searchBtn.parentElement;
+		return document.querySelector("header section:nth-child(2)") || null;
 	})();
 
 	const isLoginPage = endsWith(window.location.pathname, "login.html");
