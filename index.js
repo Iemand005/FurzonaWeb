@@ -141,5 +141,13 @@ const likeButton = createLikeButton(post, { liked: !!post.z });
 		}
 	});
 
+	const backFromContent = (() => {
+		const from = window.navigation?.activation?.from?.url;
+		if (!from) return false;
+		const path = new URL(from).pathname;
+		return path.endsWith("post.html") || path.endsWith("profile.html");
+	})();
+
+	if (backFromContent) restoreFeed();
 	loadPosts();
 }
