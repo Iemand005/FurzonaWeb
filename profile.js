@@ -119,15 +119,14 @@ function renderProfile(profile) {
 	createStatDisplay("Followers", stats.followers);
 	createStatDisplay("Following", stats.followed);
 
-	if (followEl) {
-		const btn = document.createElement("button");
-		btn.type = "button";
-		btn.textContent = profile.following ? "Unfollow" : "Follow";
+	if (followEl instanceof HTMLButtonElement) {
+		followEl.textContent = profile.following ? "Unfollow" : "Follow";
+		followEl.disabled = false;
 		if (!furzona.isLoggedIn) {
-			btn.disabled = true;
-			btn.textContent = "Log in to follow";
+			followEl.disabled = true;
+			followEl.textContent = "Log in to follow";
 		} else {
-			btn.onclick = async () => {
+			followEl.onclick = async () => {
 				try {
 					if (profile.following) {
 						await furzona.unfollow(user.id);
@@ -136,14 +135,13 @@ function renderProfile(profile) {
 						await furzona.follow(user.id);
 						profile.following = true;
 					}
-					btn.textContent = profile.following ? "Unfollow" : "Follow";
+					followEl.textContent = profile.following ? "Unfollow" : "Follow";
 					renderMeta();
 				} catch (error) {
 					console.error("Failed to update follow:", error);
 				}
 			};
 		}
-		followEl.appendChild(btn);
 	}
 };
 

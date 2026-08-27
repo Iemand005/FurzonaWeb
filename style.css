@@ -1043,12 +1043,9 @@ input {
 }
 
 #profile-follow {
-	display: flex;
-	margin-top: 12px;
-}
-
-#profile-follow button {
-	flex: 1;
+	display: block;
+	width: calc(100% - 40px);
+	margin: 12px auto 0;
 }
 
 .profile-row .pfp {
