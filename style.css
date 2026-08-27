@@ -476,10 +476,10 @@ button:disabled:hover {
 
 .input {
 	width: 100%;
-	background: var(--bg-sunken);
+	/* background: var(--bg-sunken); */
 	padding: 12px 14px;
 	font: inherit;
-	color: white;
+	/* color: white; */
 }
 
 .input::placeholder {
@@ -831,7 +831,7 @@ img, a, .banner, .profile, button, .stat, .input, .comment {
 .stat {
 	display: flex;
 	flex-direction: column;
-	background: var(--bg-sunken);
+	/* background: var(--bg-sunken); */
 	padding: 14px 12px;
 	margin: 6px;
 }
