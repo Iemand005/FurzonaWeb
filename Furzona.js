@@ -200,7 +200,7 @@ class Furzona extends RequestService {
 	 */
 	async getFollowers(/** @type {string} */userId) {
 		if (!userId) userId = this.user?.id;
-		if (!userId) return [];
+		if (!userId) throw new Error("User ID invalid!");
 		return this.post("followers", { userId }
 
 		);
