@@ -379,7 +379,7 @@ class Furzona extends RequestService {
 		return this._user;
 	}
 
-	get isLoggedIn() { return !!this.token; }
+	get isLoggedIn() { return !!(this.user && this.token); }
 
 	/** @param {string} path */
 	getMediaUrl(path) { return this._contentUrl + path; }
