@@ -6,9 +6,6 @@ const postsOwnerAvatar = document.getElementById("posts-owner-avatar");
 const postsOwnerName = document.getElementById("posts-owner-name");
 const pageTitle = document.getElementById("page-title");
 
-let clickedOwner = null;
-let clickedPost = null;
-
 if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
 	const avatar = params.get("avatar");
 	const username = params.get("username");
@@ -18,7 +15,7 @@ if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
 	postsHeader.hidden = false;
 	postsHeader.style.cursor = "pointer";
 	postsHeader.onclick = () => {
-		clickedOwner = postsOwnerAvatar;
+		window.registerVT({ avatar: [postsOwnerAvatar, userId], name: [postsOwnerName, userId] });
 		window.openProfile({
 			id: userId,
 			username,
@@ -28,65 +25,6 @@ if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
 	};
 	if (pageTitle) pageTitle.textContent = username ? `${username}'s posts` : "Posts";
 }
-
-window.addEventListener("pageswap", (event) => {
-	if (!event.viewTransition) return;
-	if (clickedOwner && userId) {
-		clickedOwner.style.viewTransitionName = `avatar-${userId}`;
-		if (postsOwnerName) postsOwnerName.style.viewTransitionName = `name-${userId}`;
-		const cleanup = () => {
-			clickedOwner.style.viewTransitionName = "";
-			if (postsOwnerName) postsOwnerName.style.viewTransitionName = "";
-		};
-		event.viewTransition.ready.then(cleanup, cleanup);
-		clickedOwner = null;
-		return;
-	}
-	if (!clickedPost) return;
-	const { id, authorId, pfp, username, title, image } = clickedPost;
-	document.querySelectorAll(".pfp").forEach(img => { img.style.viewTransitionName = ""; });
-	document.querySelectorAll(".profile p").forEach(p => { p.style.viewTransitionName = ""; });
-	pfp.style.viewTransitionName = `avatar-${authorId}`;
-	username.style.viewTransitionName = `name-${authorId}`;
-	if (title) title.style.viewTransitionName = `title-${id}`;
-	if (image) image.style.viewTransitionName = `image-${id}`;
-	const cleanup = () => {
-		pfp.style.viewTransitionName = "";
-		username.style.viewTransitionName = "";
-		if (title) title.style.viewTransitionName = "";
-		if (image) image.style.viewTransitionName = "";
-	};
-	event.viewTransition.ready.then(cleanup, cleanup);
-	clickedPost = null;
-});
-
-window.addEventListener("pagereveal", (e) => {
-	if (!e.viewTransition) return;
-	const fromURL = window.navigation?.activation?.from?.url;
-	if (!fromURL) return;
-	const url = new URL(fromURL);
-	if (!url.pathname.endsWith("post.html")) return;
-	const postId = url.searchParams.get("id");
-	if (!postId) return;
-	const item = document.querySelector(`[data-post-id="${postId}"]`);
-	if (!item) return;
-	const pfp = item.querySelector(".pfp");
-	const username = item.querySelector(".profile p");
-	const title = item.querySelector("h2");
-	const image = item.querySelector(":scope > img");
-	const authorId = pfp?.dataset.transitionId;
-	if (pfp && authorId) pfp.style.viewTransitionName = `avatar-${authorId}`;
-	if (username && authorId) username.style.viewTransitionName = `name-${authorId}`;
-	if (title) title.style.viewTransitionName = `title-${postId}`;
-	if (image) image.style.viewTransitionName = `image-${postId}`;
-	const cleanup = () => {
-		if (pfp) pfp.style.viewTransitionName = "";
-		if (username) username.style.viewTransitionName = "";
-		if (title) title.style.viewTransitionName = "";
-		if (image) image.style.viewTransitionName = "";
-	};
-	e.viewTransition.ready.then(cleanup, cleanup);
-});
 
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
@@ -115,8 +53,7 @@ if (postList instanceof HTMLUListElement) {
 
 		profileCard.onclick = (event) => {
 			event.stopPropagation();
-			clickedOwner = null;
-			clickedPost = null;
+			window.registerVT({ avatar: [pfp, post.u.id], name: [username, post.u.id] });
 			window.openProfile(post.u);
 		};
 		listItem.appendChild(profileCard);
@@ -144,8 +81,12 @@ if (postList instanceof HTMLUListElement) {
 		listItem.appendChild(createLikeButton(post, { liked: !!post.z }));
 
 		listItem.onclick = () => {
-			clickedOwner = null;
-			clickedPost = { id: post.id, authorId: post.u.id, pfp, username, title, image };
+			window.registerVT({
+				avatar: [pfp, post.u.id],
+				name: [username, post.u.id],
+				title: [title, post.id],
+				image: [image, post.id]
+			});
 			window.openPost(post, image?.src);
 		};
 

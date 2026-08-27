@@ -33,6 +33,93 @@ window.openPost = (post, imageUrl) => {
 	window.location.href = "post.html?" + params.toString();
 };
 
+/**
+ * Shared View-Transitions manager.
+ *
+ * Pages hand the element(s) that were just clicked to `registerVT()` as
+ * `{ role: [element, id] }` pairs (role: avatar | name | title | image). The
+ * shared `pageswap` handler snapshots them under `{role}-{id}` names and
+ * cleans them up once the outgoing transition is ready. The shared
+ * `pagereveal` handler matches the equivalent feed card when arriving back
+ * from a post or profile page.
+ */
+let vtOut = null;
+const vtRoles = ["avatar", "name", "title", "image"];
+
+/**
+ * @param {{ avatar?: [Element | null, string], name?: [Element | null, string], title?: [Element | null, string], image?: [Element | null, string] } | null | undefined} parts
+ */
+window.registerVT = (parts) => { vtOut = parts || null; };
+
+/**
+ * Apply `{role}-{id}` transition names for the given parts and clear them
+ * once the page transition is ready.
+ * @param {{ avatar?: [Element | null, string], name?: [Element | null, string], title?: [Element | null, string], image?: [Element | null, string] }} parts
+ * @param {Event} event
+ */
+function applyVTParts(parts, event) {
+	for (const role of vtRoles) {
+		const [el, id] = parts[role] || [];
+		if (el && id) el.style.viewTransitionName = `${role}-${id}`;
+	}
+	const cleanup = () => {
+		for (const role of vtRoles) {
+			const [el] = parts[role] || [];
+			if (el) el.style.viewTransitionName = "";
+		}
+	};
+	event.viewTransition.ready.then(cleanup, cleanup);
+}
+
+window.addEventListener("pageswap", (event) => {
+	if (!event.viewTransition) return;
+	document.querySelectorAll(".pfp, .profile p").forEach(el => el.style.viewTransitionName = "");
+	if (vtOut) {
+		const parts = {
+			avatar: vtOut.avatar,
+			name: vtOut.name,
+			title: vtOut.title,
+			image: vtOut.image
+		};
+		applyVTParts(parts, event);
+	}
+	vtOut = null;
+});
+
+window.addEventListener("pagereveal", (event) => {
+	if (!event.viewTransition) return;
+	const fromURL = window.navigation?.activation?.from?.url;
+	if (!fromURL) return;
+	const url = new URL(fromURL);
+	const fromPath = url.pathname;
+
+	if (fromPath.endsWith("post.html")) {
+		const postId = url.searchParams.get("id");
+		const card = postId && document.querySelector(`[data-post-id="${postId}"]`);
+		if (!card) return;
+		const pfp = card.querySelector(".pfp");
+		const authorId = pfp?.dataset.transitionId;
+		applyVTParts({
+			avatar: [pfp, authorId],
+			name: [card.querySelector(".profile p"), authorId],
+			title: [card.querySelector("h2"), postId],
+			image: [card.querySelector(":scope > img"), postId]
+		}, event);
+		return;
+	}
+
+	if (fromPath.endsWith("profile.html")) {
+		const id = url.searchParams.get("id");
+		const pfp = id && document.querySelector(`[data-transition-id="${id}"]`);
+		if (!pfp) return;
+		const nameEl = pfp.closest(".profile")?.querySelector("p");
+		applyVTParts({
+			avatar: [pfp, id],
+			name: [nameEl, id]
+		}, event);
+	}
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 	const navSection = (() => {
 		const navEl = document.querySelector("header nav");
@@ -55,9 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		navSection.appendChild(link);
 	};
 
-	let navPfpEl = null;
-	let navUserId = null;
-
 	const addProfileButton = () => {
 		const me = furzona.user;
 		if (!me || !furzona.isLoggedIn) return;
@@ -69,28 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		const img = document.createElement("img");
 		img.alt = me.username || "My profile";
 		img.src = furzona.getProfilePictureUrl(me);
-		navPfpEl = img;
-		navUserId = me.id;
 		button.appendChild(img);
 		button.addEventListener("click", () => {
+			window.registerVT({ avatar: [img, me.id] });
 			window.openProfile(me);
 		});
 		navSection.appendChild(button);
 	};
-
-	window.addEventListener("pageswap", (event) => {
-		if (!event.viewTransition || !navPfpEl || !navUserId) return;
-		let targetId = null;
-		const target = event.activation?.entry?.url;
-		if (target) {
-			const u = new URL(target);
-			if (u.pathname.endsWith("profile.html")) targetId = u.searchParams.get("id");
-		}
-		if (targetId !== navUserId) return;
-		navPfpEl.style.viewTransitionName = `avatar-${navUserId}`;
-		const cleanup = () => { navPfpEl.style.viewTransitionName = ""; };
-		event.viewTransition.ready.then(cleanup, cleanup);
-	});
 
 	const searchButton = document.getElementById("nav-search");
 	if (searchButton) {

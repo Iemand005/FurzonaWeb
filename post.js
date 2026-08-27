@@ -24,15 +24,6 @@ let authorId = null;
 /** @type {FurzonaPost?} */
 let currentPost = null;
 
-window.addEventListener("pageswap", (event) => {
-	if (!event.viewTransition || !id) return;
-	if (pfpEl && authorId) pfpEl.style.viewTransitionName = `avatar-${authorId}`;
-	if (nameEl && authorId) nameEl.style.viewTransitionName = `name-${authorId}`;
-	if (titleEl) titleEl.style.viewTransitionName = `title-${id}`;
-	const firstImg = firstImageEl && !firstImageEl.hidden ? firstImageEl : null;
-	if (firstImg) firstImg.style.viewTransitionName = `image-${id}`;
-});
-
 /**
  * @param {FurzonaPost} post
  */
@@ -81,6 +72,13 @@ function renderPost(post) {
 			}
 		});
 	}
+
+	window.registerVT({
+		avatar: [pfpEl, authorId],
+		name: [nameEl, authorId],
+		title: [titleEl, id],
+		image: [firstImageEl && !firstImageEl.hidden ? firstImageEl : null, id]
+	});
 }
 
 /**

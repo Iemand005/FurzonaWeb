@@ -11,11 +11,7 @@ const followEl = document.getElementById("profile-follow");
 const badgeEl = document.getElementById("profile-badge");
 const tabForm = document.getElementById("tab-form");
 
-window.addEventListener("pageswap", (event) => {
-	if (!event.viewTransition || !profileId) return;
-	if (avatarEl) avatarEl.style.viewTransitionName = `avatar-${profileId}`;
-	if (nameEl) nameEl.style.viewTransitionName = `name-${profileId}`;
-});
+if (profileId) window.registerVT({ avatar: [avatarEl, profileId], name: [nameEl, profileId] });
 
 const setBannerVisible = (visible) => {
 	if (bannerEl) bannerEl.style.display = visible ? "" : "none";

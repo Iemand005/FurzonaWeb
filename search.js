@@ -3,73 +3,6 @@ const input = document.getElementById("search-input");
 const resultsEl = document.getElementById("search-results");
 const emptyEl = document.getElementById("search-empty");
 
-let clickedPfp = null;
-let clickedName = null;
-let clickedTitle = null;
-let clickedImage = null;
-
-window.addEventListener("pageswap", (event) => {
-	if (!event.viewTransition) return;
-	document.querySelectorAll(".pfp").forEach(img => img.style.viewTransitionName = "");
-	document.querySelectorAll("#search-results p").forEach(p => p.style.viewTransitionName = "");
-	document.querySelectorAll("#search-results h2").forEach(h => h.style.viewTransitionName = "");
-	document.querySelectorAll("#search-results > li > img").forEach(img => img.style.viewTransitionName = "");
-	if (!clickedPfp) return;
-	clickedPfp.style.viewTransitionName = `avatar-${clickedPfp.dataset.transitionId}`;
-	if (clickedName) clickedName.style.viewTransitionName = `name-${clickedPfp.dataset.transitionId}`;
-	if (clickedTitle) clickedTitle.style.viewTransitionName = `title-${clickedTitle.dataset.postId}`;
-	if (clickedImage) clickedImage.style.viewTransitionName = `image-${clickedImage.dataset.postId}`;
-	const cleanup = () => {
-		clickedPfp.style.viewTransitionName = "";
-		if (clickedName) clickedName.style.viewTransitionName = "";
-		if (clickedTitle) clickedTitle.style.viewTransitionName = "";
-		if (clickedImage) clickedImage.style.viewTransitionName = "";
-	};
-	event.viewTransition.ready.then(cleanup, cleanup);
-});
-
-window.addEventListener("pagereveal", (e) => {
-	if (!e.viewTransition) return;
-	const fromURL = window.navigation?.activation?.from?.url;
-	if (!fromURL) return;
-	const url = new URL(fromURL);
-	if (url.pathname.endsWith("post.html")) {
-		const postId = url.searchParams.get("id");
-		const card = postId && document.querySelector(`[data-post-id="${postId}"]`);
-		if (!card) return;
-		const pfp = card.querySelector(".pfp");
-		const authorId = pfp?.dataset.transitionId;
-		const nameEl = pfp?.parentElement.querySelector("p");
-		const title = card.querySelector("h2");
-		const image = card.querySelector(":scope > img");
-		if (pfp && authorId) pfp.style.viewTransitionName = `avatar-${authorId}`;
-		if (nameEl && authorId) nameEl.style.viewTransitionName = `name-${authorId}`;
-		if (title) title.style.viewTransitionName = `title-${postId}`;
-		if (image) image.style.viewTransitionName = `image-${postId}`;
-		const cleanup = () => {
-			if (pfp) pfp.style.viewTransitionName = "";
-			if (nameEl) nameEl.style.viewTransitionName = "";
-			if (title) title.style.viewTransitionName = "";
-			if (image) image.style.viewTransitionName = "";
-		};
-		e.viewTransition.ready.then(cleanup, cleanup);
-		return;
-	}
-	if (url.pathname.endsWith("profile.html")) {
-		const id = url.searchParams.get("id");
-		const pfp = id && document.querySelector(`[data-transition-id="${id}"]`);
-		if (!pfp) return;
-		const nameEl = pfp.parentElement.querySelector("p");
-		pfp.style.viewTransitionName = `avatar-${id}`;
-		if (nameEl) nameEl.style.viewTransitionName = `name-${id}`;
-		const cleanup = () => {
-			pfp.style.viewTransitionName = "";
-			if (nameEl) nameEl.style.viewTransitionName = "";
-		};
-		e.viewTransition.ready.then(cleanup, cleanup);
-	}
-});
-
 const createdPost = (item) => {
 	const card = document.createElement("li");
 	card.className = "post card";
@@ -105,10 +38,12 @@ const createdPost = (item) => {
 
 	card.style.cursor = "pointer";
 	card.onclick = () => {
-		clickedPfp = pfp;
-		clickedName = name;
-		clickedTitle = title;
-		clickedImage = image;
+		window.registerVT({
+			avatar: [pfp, item.u.id],
+			name: [name, item.u.id],
+			title: [title, item.id],
+			image: [image, item.id]
+		});
 		window.openPost(item, image?.src);
 	};
 	return card;
@@ -130,10 +65,7 @@ const createdUser = (item) => {
 
 	card.style.cursor = "pointer";
 	card.onclick = () => {
-		clickedPfp = pfp;
-		clickedName = name;
-		clickedTitle = null;
-		clickedImage = null;
+		window.registerVT({ avatar: [pfp, item.id], name: [name, item.id] });
 		window.openProfile(item);
 	};
 	return card;
