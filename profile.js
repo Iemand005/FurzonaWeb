@@ -48,11 +48,13 @@ function renderProfile(profile) {
 	const user = profile.user;
 	const stats = profile.stats || {};
 
-	const bannerUrl = user.b ? furzona.getMediaUrl(user.b) : "https://placehold.co/1200x260/20212B/ffffff?text=" + encodeURIComponent(user.username);
+	const bannerUrl = user.b ? furzona.getMediaUrl(user.b) : null;
 	const avatarUrl = furzona.getProfilePictureUrl(user);
 
-	bannerEl.src = bannerUrl;
-	bannerEl.alt = `${user.username} banner`;
+	if (bannerUrl) {
+		bannerEl.src = bannerUrl;
+		bannerEl.alt = `${user.username} banner`;
+	} else bannerEl.style.display = "none";
 
 	avatarEl.src = avatarUrl;
 	avatarEl.alt = user.username;
