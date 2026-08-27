@@ -58,13 +58,7 @@ function renderPost(post) {
   nameEl.textContent = user.username;
   authorEl.style.cursor = "pointer";
   authorEl.onclick = function () {
-    var profileParams = new URLSearchParams({
-      id: user.id
-    });
-    if (user.i) profileParams.set("avatar", furzona.getProfilePictureUrl(user));
-    profileParams.set("banner", user.b ? furzona.getMediaUrl(user.b) : 0);
-    if (user.username) profileParams.set("username", user.username);
-    window.location.href = "profile.html?" + profileParams.toString();
+    window.openProfile(user);
   };
   if (actionsEl) {
     actionsEl.appendChild(createLikeButton(post, {
@@ -111,13 +105,7 @@ function createCommentElement(comment) {
   author.appendChild(name);
   author.style.cursor = "pointer";
   author.onclick = function () {
-    var profileParams = new URLSearchParams({
-      id: comment.u.id
-    });
-    if (comment.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(comment.u));
-    profileParams.set("banner", comment.u.b ? furzona.getMediaUrl(comment.u.b) : 0);
-    if (comment.u.username) profileParams.set("username", comment.u.username);
-    window.location.href = "profile.html?" + profileParams.toString();
+    window.openProfile(comment.u);
   };
   card.appendChild(author);
   var content = document.createElement("p");

@@ -145,13 +145,7 @@ var createdUser = function createdUser(item) {
     clickedName = name;
     clickedTitle = null;
     clickedImage = null;
-    var params = new URLSearchParams({
-      id: item.id,
-      username: item.username
-    });
-    if (item.i) params.set("avatar", furzona.getProfilePictureUrl(item));
-    params.set("banner", item.b ? furzona.getMediaUrl(item.b) : 0);
-    window.location.href = "profile.html?" + params.toString();
+    window.openProfile(item);
   };
   return card;
 };

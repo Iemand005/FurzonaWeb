@@ -19,11 +19,12 @@ if (userId && postsHeader && postsOwnerAvatar && postsOwnerName) {
 	postsHeader.style.cursor = "pointer";
 	postsHeader.onclick = () => {
 		clickedOwner = postsOwnerAvatar;
-		const profileParams = new URLSearchParams({ id: userId });
-		if (avatar) profileParams.set("avatar", avatar);
-		profileParams.set("banner", params.get("banner") || 0);
-		if (username) profileParams.set("username", username);
-		window.location.href = "profile.html?" + profileParams.toString();
+		window.openProfile({
+			id: userId,
+			username,
+			avatar,
+			banner: params.get("banner")
+		});
 	};
 	if (pageTitle) pageTitle.textContent = username ? `${username}'s posts` : "Posts";
 }
@@ -116,11 +117,7 @@ if (postList instanceof HTMLUListElement) {
 			event.stopPropagation();
 			clickedOwner = null;
 			clickedPost = null;
-			const profileParams = new URLSearchParams({ id: post.u.id });
-			if (post.u.i) profileParams.set("avatar", furzona.getProfilePictureUrl(post.u));
-			profileParams.set("banner", post.u.b ? furzona.getMediaUrl(post.u.b) : 0);
-			if (post.u.username) profileParams.set("username", post.u.username);
-			window.location.href = "profile.html?" + profileParams.toString();
+			window.openProfile(post.u);
 		};
 		listItem.appendChild(profileCard);
 

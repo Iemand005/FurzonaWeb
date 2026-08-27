@@ -129,13 +129,7 @@ if (postList instanceof HTMLUListElement) {
       clickedPfp = pfp;
       clickedName = username;
       clickedPost = null;
-      var params = new URLSearchParams({
-        id: post.u.id
-      });
-      if (post.u.i) params.set("avatar", furzona.getProfilePictureUrl(post.u));
-      params.set("banner", post.u.b ? furzona.getMediaUrl(post.u.b) : 0);
-      if (post.u.username) params.set("username", post.u.username);
-      window.location.href = "profile.html?" + params.toString();
+      window.openProfile(post.u);
     };
     var username = document.createElement("p");
     username.textContent = post.u.username;

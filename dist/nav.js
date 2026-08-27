@@ -1,5 +1,21 @@
 "use strict";
 
+/**
+ * Navigate to the profile page, deriving the URL params from a user object.
+ * Accepts either a user with raw `i`/`b` media ids, or pre-resolved
+ * `avatar`/`banner` values when those ids aren't available.
+ * @param {{ id?: string, i?: string, b?: string, username?: string, avatar?: string, banner?: string|number } | null | undefined} user
+ */
+window.openProfile = function (user) {
+  if (!user || !user.id) return;
+  var params = new URLSearchParams({
+    id: user.id
+  });
+  if (user.i) params.set("avatar", furzona.getProfilePictureUrl(user));else if (user.avatar) params.set("avatar", user.avatar);
+  params.set("banner", user.b ? furzona.getMediaUrl(user.b) : user.banner || 0);
+  if (user.username) params.set("username", user.username);
+  window.location.href = "profile.html?" + params.toString();
+};
 document.addEventListener("DOMContentLoaded", function () {
   var _window$navigation2;
   var navSection = function () {
@@ -30,13 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     img.src = furzona.getProfilePictureUrl(me);
     button.appendChild(img);
     button.addEventListener("click", function () {
-      var params = new URLSearchParams({
-        id: me.id
-      });
-      if (me.i) params.set("avatar", furzona.getMediaUrl(me.i));
-      params.set("banner", me.b ? furzona.getMediaUrl(me.b) : 0);
-      if (me.username) params.set("username", me.username);
-      window.location.href = "profile.html?" + params.toString();
+      window.openProfile(me);
     });
     navSection.appendChild(button);
   };
