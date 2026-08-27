@@ -3,6 +3,18 @@ const postList = document.getElementById("posts-list");
 if (postList instanceof HTMLUListElement) {
 	let isLoading = false;
 	let hasMorePosts = true;
+	const renderedIds = new Set();
+	const feedPosts = [];
+	const FEED_KEY = "furzona-feed-v1";
+	const FEED_LIMIT = 60;
+
+	const persistFeed = () => {
+		try {
+			sessionStorage.setItem(FEED_KEY, JSON.stringify(feedPosts));
+		} catch (error) {
+			console.warn("Could not persist feed:", error);
+		}
+	};
 
 	const createPostElement = (/** @type {FurzonaPost} */post) => {
 		const listItem = document.createElement("li");
@@ -68,6 +80,30 @@ const likeButton = createLikeButton(post, { liked: !!post.z });
 		return listItem;
 	};
 
+	const appendPosts = (posts) => {
+		let last = null;
+		for (const post of posts) {
+			if (!post || !post.id || renderedIds.has(post.id)) continue;
+			renderedIds.add(post.id);
+			feedPosts.push(post);
+			postList.appendChild(createPostElement(post));
+			last = post;
+		}
+		if (feedPosts.length > FEED_LIMIT) feedPosts.splice(0, feedPosts.length - FEED_LIMIT);
+		return last;
+	};
+
+	const restoreFeed = () => {
+		try {
+			const raw = sessionStorage.getItem(FEED_KEY);
+			if (!raw) return;
+			const posts = JSON.parse(raw);
+			if (Array.isArray(posts) && posts.length) appendPosts(posts);
+		} catch (error) {
+			console.warn("Could not restore feed:", error);
+		}
+	};
+
 	const loadPosts = (date) => {
 		if (isLoading || !hasMorePosts) return;
 		isLoading = true;
@@ -79,11 +115,9 @@ const likeButton = createLikeButton(post, { liked: !!post.z });
 				return;
 			}
 
-			posts.forEach(post => {
-				postList.appendChild(createPostElement(post));
-			});
+			const lastPost = appendPosts(posts);
+			persistFeed();
 
-			const lastPost = posts[posts.length - 1];
 			const lastDate = lastPost?.createdAt || lastPost?.updatedAt || null;
 			if (!lastDate) hasMorePosts = false;
 			isLoading = false;
