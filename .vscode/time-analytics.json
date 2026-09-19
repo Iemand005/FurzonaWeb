@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "project": {
+    "totalFocusTime": 2046,
+    "totalActiveTime": 1031
+  },
+  "files": {
+    ".vscode/settings.json": {
+      "pending": 1016,
+      "focus": 12724
+    },
+    ".vscode/tmstate.json": {
+      "pending": 15,
+      "focus": 15
+    }
+  }
+}
