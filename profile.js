@@ -151,6 +151,8 @@ function renderProfile(profile) {
 	const tabs = new TabScroller(main, true);
 	
 	tabs.addTab(followersList, "Followers");
+	tabs.addTab(followersList, "Following");
+	tabs.addTab(followersList, "Following");
 	tabs.addTab();
 	
 };
