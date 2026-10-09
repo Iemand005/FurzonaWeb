@@ -248,5 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("contextmenu", ev => {
-	if (ev.target && ev.target.tagName)
+	if ((ev.target instanceof HTMLElement) && (ev.target.tagName === "A" || ev.target.tagName === "BUTTON"))
+		ev.preventDefault();
 })
