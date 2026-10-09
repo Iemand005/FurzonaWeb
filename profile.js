@@ -144,7 +144,7 @@ function renderProfile(profile) {
 		}
 	}
 
-	const tabControl = new TabScroller();
+	const tabs = new TabScroller();
 };
 
 if (profileId) {
