@@ -144,9 +144,13 @@ function renderProfile(profile) {
 		}
 	}
 
+	const followersList = document.createElement("ul");
+
+
 	const main = document.querySelector("main");
 	const tabs = new TabScroller(main, true);
-	tabs.addTab();
+	
+	tabs.addTab(followersList, "Followers");
 	tabs.addTab();
 	
 };
