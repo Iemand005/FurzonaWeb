@@ -150,10 +150,10 @@ function renderProfile(profile) {
 	const main = document.querySelector("main");
 	const tabs = new TabScroller(main, true);
 	
+	tabs.addTab(followersList, "Liked");
+	tabs.addTab(followersList, "Archived");
 	tabs.addTab(followersList, "Followers");
 	tabs.addTab(followersList, "Following");
-	tabs.addTab(followersList, "Following");
-	tabs.addTab();
 	
 };
 
