@@ -143,6 +143,8 @@ function renderProfile(profile) {
 			};
 		}
 	}
+
+	const tabControl = new TabScroller();
 };
 
 if (profileId) {
