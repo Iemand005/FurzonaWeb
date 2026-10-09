@@ -246,3 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		navigator.serviceWorker.register('./sw.js').catch(() => {});
 	}
 });
+
+document.addEventListener("contextmenu", ev => {
+	if (ev.target && ev.target.tagName)
+})
