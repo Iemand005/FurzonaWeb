@@ -145,7 +145,9 @@ function renderProfile(profile) {
 	}
 
 	const main = document.querySelector("main");
-	const tabs = new TabScroller(main);
+	const tabs = new TabScroller(main, true);
+	tabs.addTab();
+	tabs.addTab();
 	
 };
 
