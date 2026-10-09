@@ -24,10 +24,10 @@ html, body {
 html, body { background-color: #16181D; }
 html, body, button, input, select { color: #f3f6fb; }
 
-button, a.login-link, .profile-row .pfp, .avatar { background: #2d3240; }
+button, a, .profile-row .pfp, .avatar { background: #2d3240; }
 button:disabled, button:disabled:hover { background: #22262f; color: #7a8094; }
 
-header, button, a.login-link, .stat, .banner, .avatar, .comment, input, .card, #post-comments {
+header, button, a, .stat, .banner, .avatar, .comment, input, .card, #post-comments {
 	border: 1px solid rgba(255,255,255,.08);
 }
 
@@ -153,7 +153,7 @@ img, a, .banner, .profile, button, .stat, input, select, textarea, .comment {
 /* ============================================================
    Buttons & links
    ============================================================ */
-button, a.login-link {
+button, a {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -163,8 +163,8 @@ button, a.login-link {
 	text-decoration: none;
 	transition: transform .2s ease, background .2s ease;
 }
-button:hover, a.login-link:hover { background: #3a4154; transform: translateY(-1px); }
-button > *:not(:first-child), a.login-link > *:not(:first-child) { margin-left: 6px; }
+button:hover, a:hover { background: #3a4154; transform: translateY(-1px); }
+button > *:not(:first-child), a > *:not(:first-child) { margin-left: 6px; }
 button:disabled { cursor: not-allowed; transform: none; }
 button:disabled:hover { transform: none; }
 
