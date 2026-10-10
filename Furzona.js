@@ -466,10 +466,3 @@ class FurzonaProber extends Furzona {
 
 const furzona = new Furzona;
 const furzonaProber = new FurzonaProber;
-
-module.exports = {
-    furzona,
-    furzonaProber,
-	Furzona,
-	FurzonaProber
-};

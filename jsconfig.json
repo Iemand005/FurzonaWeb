@@ -8,8 +8,7 @@
 		"typeRoots": [
 			"./Types",
 			"./node_modules/@types"
-		],
-		"types": ["w3c-web-hid"]
+		]
 	},
 	"ignoreDeprecations": "6.0",
 	"include": [
