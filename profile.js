@@ -157,6 +157,7 @@ function renderProfile(profile) {
 
 		if (user.b) {
 			const image = new Image();
+			image.className = "banner";
 			image.src = furzona.getMediaUrl(user.b);
 			return image;
 			card.appendChild(image);
