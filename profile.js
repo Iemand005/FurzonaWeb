@@ -144,12 +144,7 @@ function renderProfile(profile) {
 		}
 	}
 
-	const createUsersList = (/** @type {FurzonaUserBase[]} */users) => {
-		users.forEach(follower => {
-			const followerItem = document.createElement("li");
-			followerItem.innerText = follower.username;
-			followersList.appendChild(followerItem);
-		});
+	const createUsersList = (/** @type {(userId?: string | undefined) => Promise<FurzonaUserBase[]>} */users) => {
 	};
 
 	const followersList = document.createElement("ul");
