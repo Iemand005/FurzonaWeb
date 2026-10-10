@@ -144,7 +144,8 @@ function renderProfile(profile) {
 		}
 	}
 
-	const createUsersList = (/** @type {(userId: string) => Promise<FurzonaUserBase[]>} */getter) => {
+	/** @param {(userId: string) => Promise<FurzonaUserBase[]>} getter */
+	const createUsersList = getter => {
 		const followersList = document.createElement("ul");
 		getter(profile.user.id).then(f => f.forEach(follower => {
 			const followerItem = document.createElement("li");
