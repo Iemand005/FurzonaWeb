@@ -144,15 +144,18 @@ function renderProfile(profile) {
 		}
 	}
 
-	const createUsersList = (/** @type {(userId?: string | undefined) => Promise<FurzonaUserBase[]>} */users) => {
+	const createUsersList = (/** @type {(userId: string) => Promise<FurzonaUserBase[]>} */users) => {
+		const followersList = document.createElement("ul");
+		users(profile.user.id).then(f => f.forEach(follower => {
+			const followerItem = document.createElement("li");
+			followerItem.innerText = follower.username;
+			followersList.appendChild(followerItem);
+		}));
 	};
 
-	const followersList = document.createElement("ul");
-	furzona.getFollowers(profile.user.id).then(f => f.forEach(follower => {
-		const followerItem = document.createElement("li");
-		followerItem.innerText = follower.username;
-		followersList.appendChild(followerItem);
-	}));
+	const followersList = createUsersList(furzona.getFollowers);
+	const followingList = createUsersList(furzona.getFollowing);
+
 
 
 
