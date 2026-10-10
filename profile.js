@@ -144,12 +144,21 @@ function renderProfile(profile) {
 		}
 	}
 
+	const createUsersList = (/** @type {FurzonaUserBase[]} */users) => {
+		users.forEach(follower => {
+			const followerItem = document.createElement("li");
+			followerItem.innerText = follower.username;
+			followersList.appendChild(followerItem);
+		});
+	};
+
 	const followersList = document.createElement("ul");
 	furzona.getFollowers(profile.user.id).then(f => f.forEach(follower => {
 		const followerItem = document.createElement("li");
 		followerItem.innerText = follower.username;
 		followersList.appendChild(followerItem);
 	}))
+
 
 
 	const main = document.querySelector("main");
