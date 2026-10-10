@@ -147,11 +147,14 @@ function renderProfile(profile) {
 	/** @param {FurzonaUserBase} user */
 	const createUserCard = user => {
 		const card = document.createElement("div");
-		const pfp = document.createElement("img");
+		const pfp = new Image();
 		if (user.i) pfp.src = user.i;
 
-		const banner  = document.createElement("img");
+		const banner  = new Image();
 		if (user.b) banner.src = user.b;
+		card.appendChild(pfp);
+		card.appendChild(banner);
+		
 		return card;
 	};
 
