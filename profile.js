@@ -155,7 +155,12 @@ function renderProfile(profile) {
 	const createUserCard = user => {
 		const card = document.createElement("div");
 		
-		if (user.i) card.appendChild(createImage(user.i));
+		if (user.i) {
+			const image = new Image();
+			image.className = "avatar";
+			image.src = furzona.getProfilePictureUrl(user);
+			card.appendChild(image);
+		}
 
 		if (user.b) card.appendChild(createImage(user.b));
 		
