@@ -152,6 +152,7 @@ function renderProfile(profile) {
 			item.innerText = user.username;
 			list.appendChild(item);
 		}));
+		return list;
 	};
 
 	const followersList = createUsersList(furzona.getFollowers.bind(furzona));
