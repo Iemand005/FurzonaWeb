@@ -144,17 +144,23 @@ function renderProfile(profile) {
 		}
 	}
 
+	/** @param {string} path */
+	const createImage = path => {
+		const image = new Image();
+		image.src = furzona.getMediaUrl(path);
+		return image;
+	}
+
 	/** @param {FurzonaUserBase} user */
 	const createUserCard = user => {
 		const card = document.createElement("div");
-		const pfp = new Image();
-		if (user.i) pfp.src = user.i;
-
-		const banner  = new Image();
-		if (user.b) banner.src = user.b;
-		card.appendChild(pfp);
-		card.appendChild(banner);
 		
+		if (user.i) card.appendChild(createImage(user.i));
+
+		if (user.b) card.appendChild(createImage(user.b));
+		
+		
+
 		return card;
 	};
 
