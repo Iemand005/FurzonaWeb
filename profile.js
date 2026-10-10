@@ -144,9 +144,9 @@ function renderProfile(profile) {
 		}
 	}
 
-	const createUsersList = (/** @type {(userId: string) => Promise<FurzonaUserBase[]>} */users) => {
+	const createUsersList = (/** @type {(userId: string) => Promise<FurzonaUserBase[]>} */getter) => {
 		const followersList = document.createElement("ul");
-		users(profile.user.id).then(f => f.forEach(follower => {
+		getter(profile.user.id).then(f => f.forEach(follower => {
 			const followerItem = document.createElement("li");
 			followerItem.innerText = follower.username;
 			followersList.appendChild(followerItem);
@@ -165,7 +165,7 @@ function renderProfile(profile) {
 	tabs.addTab(followersList, "Liked");
 	tabs.addTab(followersList, "Archived");
 	tabs.addTab(followersList, "Followers");
-	tabs.addTab(followersList, "Following");
+	tabs.addTab(followingList, "Following");
 	
 };
 
