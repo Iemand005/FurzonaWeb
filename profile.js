@@ -144,10 +144,14 @@ function renderProfile(profile) {
 		}
 	}
 
-	/** @patarm */
+	/** @param {FurzonaUserBase} user */
 	const createUserCard = user => {
 		const card = document.createElement("div");
+		const pfp = document.createElement("img");
+		if (user.i) pfp.src = user.i;
 
+		const banner  = document.createElement("img");
+		if (user.b) banner.src = user.b;
 		return card;
 	};
 
@@ -156,7 +160,7 @@ function renderProfile(profile) {
 		const list = document.createElement("ul");
 		getter(profile.user.id).then(f => f.forEach(user => {
 			const item = document.createElement("li");
-			item.innerText = user.username;
+			item.appendChild(createUserCard(user));
 			list.appendChild(item);
 		}));
 		return list;
