@@ -145,7 +145,9 @@ function renderProfile(profile) {
 	}
 
 	const followersList = document.createElement("ul");
-	furzona.getFollowers("xepJFCRkZz").
+	furzona.getFollowers("xepJFCRkZz").then(followers => followers.forEach(follower => {
+		
+	}))
 
 
 	const main = document.querySelector("main");
