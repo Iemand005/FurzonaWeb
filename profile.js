@@ -157,7 +157,7 @@ function renderProfile(profile) {
 		const followerItem = document.createElement("li");
 		followerItem.innerText = follower.username;
 		followersList.appendChild(followerItem);
-	}))
+	}));
 
 
 
