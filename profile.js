@@ -154,8 +154,8 @@ function renderProfile(profile) {
 		}));
 	};
 
-	const followersList = createUsersList(furzona.getFollowers);
-	const followingList = createUsersList(furzona.getFollowing);
+	const followersList = createUsersList(furzona.getFollowers.bind(furzona));
+	const followingList = createUsersList(furzona.getFollowing.bind(furzona));
 
 
 
