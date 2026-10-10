@@ -144,6 +144,13 @@ function renderProfile(profile) {
 		}
 	}
 
+	/** @patarm */
+	const createUserCard = user => {
+		const card = document.createElement("div");
+
+		return card;
+	};
+
 	/** @param {(userId: string) => Promise<FurzonaUserBase[]>} getter */
 	const createUsersList = getter => {
 		const list = document.createElement("ul");
